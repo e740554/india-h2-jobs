@@ -2,7 +2,7 @@
   "dataset_version": "1.0",
   "last_updated": "2026-03-18",
   "total_occupations": 1802,
-  "scored_occupations": 1503,
+  "scored_occupations": 1802,
   "summary": {
     "h2_ready_occupations": 5,
     "workforce_gap_2030": 2500000,
@@ -8615,8 +8615,11 @@
         "scarcity_risk": 2.5
       },
       "upskill_paths": [
-        "NCS-2421.0101",
-        "NCS-2512.0701"
+        "NCS-2511.0104",
+        "NCS-3323.0601",
+        "NCS-2120.0501",
+        "NCS-2523.0200",
+        "NCS-2522.0100"
       ]
     },
     {
@@ -8641,8 +8644,11 @@
         "scarcity_risk": 2.5
       },
       "upskill_paths": [
-        "NCS-2511.0105",
-        "NCS-2512.0701"
+        "NCS-2511.0104",
+        "NCS-3323.0601",
+        "NCS-2120.0501",
+        "NCS-2523.0200",
+        "NCS-2522.0100"
       ]
     },
     {
@@ -8667,8 +8673,11 @@
         "scarcity_risk": 2.0
       },
       "upskill_paths": [
-        "NCS-2511.0105",
-        "NCS-2421.0101"
+        "NCS-2511.0104",
+        "NCS-3323.0601",
+        "NCS-2120.0501",
+        "NCS-2523.0200",
+        "NCS-2522.0100"
       ]
     },
     {
@@ -8684,11 +8693,20 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
+      "scores": {
+        "h2_adjacency": 2.0,
+        "transition_demand": 3.5,
+        "skill_transferability": 4.5,
+        "digital_automation_exposure": 7.0,
+        "formalization_rate": 8.5,
+        "scarcity_risk": 3.0
+      },
       "upskill_paths": [
-        "NCS-2511.0105",
-        "NCS-2421.0101",
-        "NCS-2512.0701"
+        "NCS-2511.0104",
+        "NCS-3323.0601",
+        "NCS-2523.0200",
+        "NCS-2522.0100",
+        "NCS-3512.0100"
       ]
     },
     {
@@ -8704,11 +8722,20 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 1.5,
+        "skill_transferability": 2.0,
+        "digital_automation_exposure": 8.0,
+        "formalization_rate": 8.5,
+        "scarcity_risk": 1.5
+      },
       "upskill_paths": [
-        "NCS-2511.0105",
-        "NCS-2421.0101",
-        "NCS-2512.0701"
+        "NCS-2511.0104",
+        "NCS-3323.0601",
+        "NCS-2120.0501",
+        "NCS-2523.0200",
+        "NCS-2522.0100"
       ]
     },
     {
@@ -8724,11 +8751,20 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 1.5,
+        "skill_transferability": 2.0,
+        "digital_automation_exposure": 8.0,
+        "formalization_rate": 8.5,
+        "scarcity_risk": 1.5
+      },
       "upskill_paths": [
-        "NCS-2511.0105",
-        "NCS-2421.0101",
-        "NCS-2512.0701"
+        "NCS-2511.0104",
+        "NCS-3323.0601",
+        "NCS-2120.0501",
+        "NCS-2523.0200",
+        "NCS-2522.0100"
       ]
     },
     {
@@ -8744,11 +8780,20 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 1.0,
+        "skill_transferability": 1.5,
+        "digital_automation_exposure": 8.0,
+        "formalization_rate": 8.5,
+        "scarcity_risk": 1.5
+      },
       "upskill_paths": [
-        "NCS-2511.0105",
-        "NCS-2421.0101",
-        "NCS-2512.0701"
+        "NCS-2511.0104",
+        "NCS-3323.0601",
+        "NCS-2120.0501",
+        "NCS-2523.0200",
+        "NCS-2522.0100"
       ]
     },
     {
@@ -8764,11 +8809,20 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 2.0,
+        "skill_transferability": 2.5,
+        "digital_automation_exposure": 6.5,
+        "formalization_rate": 8.5,
+        "scarcity_risk": 2.0
+      },
       "upskill_paths": [
-        "NCS-2511.0105",
-        "NCS-2421.0101",
-        "NCS-2512.0701"
+        "NCS-2511.0104",
+        "NCS-3323.0601",
+        "NCS-2120.0501",
+        "NCS-2523.0200",
+        "NCS-2522.0100"
       ]
     },
     {
@@ -8784,11 +8838,20 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
+      "scores": {
+        "h2_adjacency": 2.5,
+        "transition_demand": 3.5,
+        "skill_transferability": 5.0,
+        "digital_automation_exposure": 6.0,
+        "formalization_rate": 8.5,
+        "scarcity_risk": 3.0
+      },
       "upskill_paths": [
-        "NCS-2511.0105",
-        "NCS-2421.0101",
-        "NCS-2512.0701"
+        "NCS-2511.0104",
+        "NCS-2120.0501",
+        "NCS-2523.0200",
+        "NCS-2522.0100",
+        "NCS-3512.0100"
       ]
     },
     {
@@ -8804,11 +8867,20 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 1.5,
+        "skill_transferability": 2.0,
+        "digital_automation_exposure": 8.0,
+        "formalization_rate": 8.5,
+        "scarcity_risk": 2.0
+      },
       "upskill_paths": [
-        "NCS-2511.0105",
-        "NCS-2421.0101",
-        "NCS-2512.0701"
+        "NCS-2511.0104",
+        "NCS-3323.0601",
+        "NCS-2120.0501",
+        "NCS-2523.0200",
+        "NCS-2522.0100"
       ]
     },
     {
@@ -8824,11 +8896,20 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
+      "scores": {
+        "h2_adjacency": 2.0,
+        "transition_demand": 2.5,
+        "skill_transferability": 4.0,
+        "digital_automation_exposure": 5.5,
+        "formalization_rate": 8.5,
+        "scarcity_risk": 3.0
+      },
       "upskill_paths": [
-        "NCS-2511.0105",
-        "NCS-2421.0101",
-        "NCS-2512.0701"
+        "NCS-2511.0104",
+        "NCS-3323.0601",
+        "NCS-2120.0501",
+        "NCS-2523.0200",
+        "NCS-2522.0100"
       ]
     },
     {
@@ -8844,11 +8925,20 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
+      "scores": {
+        "h2_adjacency": 2.0,
+        "transition_demand": 2.5,
+        "skill_transferability": 4.0,
+        "digital_automation_exposure": 5.5,
+        "formalization_rate": 8.5,
+        "scarcity_risk": 3.0
+      },
       "upskill_paths": [
-        "NCS-2511.0105",
-        "NCS-2421.0101",
-        "NCS-2512.0701"
+        "NCS-2511.0104",
+        "NCS-3323.0601",
+        "NCS-2120.0501",
+        "NCS-2523.0200",
+        "NCS-2522.0100"
       ]
     },
     {
@@ -8864,11 +8954,20 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 1.0,
+        "skill_transferability": 1.5,
+        "digital_automation_exposure": 6.0,
+        "formalization_rate": 8.5,
+        "scarcity_risk": 2.0
+      },
       "upskill_paths": [
-        "NCS-2511.0105",
-        "NCS-2421.0101",
-        "NCS-2512.0701"
+        "NCS-2511.0104",
+        "NCS-3323.0601",
+        "NCS-2120.0501",
+        "NCS-2523.0200",
+        "NCS-2522.0100"
       ]
     },
     {
@@ -8884,11 +8983,20 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 1.0,
+        "skill_transferability": 1.5,
+        "digital_automation_exposure": 7.5,
+        "formalization_rate": 8.5,
+        "scarcity_risk": 2.0
+      },
       "upskill_paths": [
-        "NCS-2511.0105",
-        "NCS-2421.0101",
-        "NCS-2512.0701"
+        "NCS-2511.0104",
+        "NCS-3323.0601",
+        "NCS-2120.0501",
+        "NCS-2523.0200",
+        "NCS-2522.0100"
       ]
     },
     {
@@ -8904,11 +9012,20 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 1.5,
+        "skill_transferability": 2.0,
+        "digital_automation_exposure": 8.0,
+        "formalization_rate": 8.5,
+        "scarcity_risk": 2.0
+      },
       "upskill_paths": [
-        "NCS-2511.0105",
-        "NCS-2421.0101",
-        "NCS-2512.0701"
+        "NCS-2511.0104",
+        "NCS-3323.0601",
+        "NCS-2120.0501",
+        "NCS-2523.0200",
+        "NCS-2522.0100"
       ]
     },
     {
@@ -8924,11 +9041,20 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 2.0,
+        "skill_transferability": 2.0,
+        "digital_automation_exposure": 7.0,
+        "formalization_rate": 8.5,
+        "scarcity_risk": 2.0
+      },
       "upskill_paths": [
-        "NCS-2511.0105",
-        "NCS-2421.0101",
-        "NCS-2512.0701"
+        "NCS-2511.0104",
+        "NCS-3323.0601",
+        "NCS-2120.0501",
+        "NCS-2523.0200",
+        "NCS-2522.0100"
       ]
     },
     {
@@ -8944,11 +9070,20 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 1.0,
+        "skill_transferability": 1.5,
+        "digital_automation_exposure": 8.5,
+        "formalization_rate": 8.5,
+        "scarcity_risk": 1.5
+      },
       "upskill_paths": [
-        "NCS-2511.0105",
-        "NCS-2421.0101",
-        "NCS-2512.0701"
+        "NCS-2511.0104",
+        "NCS-3323.0601",
+        "NCS-2120.0501",
+        "NCS-2523.0200",
+        "NCS-2522.0100"
       ]
     },
     {
@@ -8964,11 +9099,20 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 2.0,
+        "skill_transferability": 2.0,
+        "digital_automation_exposure": 7.0,
+        "formalization_rate": 8.5,
+        "scarcity_risk": 2.0
+      },
       "upskill_paths": [
-        "NCS-2511.0105",
-        "NCS-2421.0101",
-        "NCS-2512.0701"
+        "NCS-2511.0104",
+        "NCS-3323.0601",
+        "NCS-2120.0501",
+        "NCS-2523.0200",
+        "NCS-2522.0100"
       ]
     },
     {
@@ -8984,11 +9128,20 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 1.0,
+        "skill_transferability": 1.5,
+        "digital_automation_exposure": 8.5,
+        "formalization_rate": 8.5,
+        "scarcity_risk": 1.5
+      },
       "upskill_paths": [
-        "NCS-2511.0105",
-        "NCS-2421.0101",
-        "NCS-2512.0701"
+        "NCS-2511.0104",
+        "NCS-3323.0601",
+        "NCS-2120.0501",
+        "NCS-2523.0200",
+        "NCS-2522.0100"
       ]
     },
     {
@@ -9004,11 +9157,20 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 1.0,
+        "skill_transferability": 1.5,
+        "digital_automation_exposure": 8.5,
+        "formalization_rate": 8.5,
+        "scarcity_risk": 1.5
+      },
       "upskill_paths": [
-        "NCS-2511.0105",
-        "NCS-2421.0101",
-        "NCS-2512.0701"
+        "NCS-2511.0104",
+        "NCS-3323.0601",
+        "NCS-2120.0501",
+        "NCS-2523.0200",
+        "NCS-2522.0100"
       ]
     },
     {
@@ -9024,11 +9186,20 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 1.0,
+        "skill_transferability": 1.5,
+        "digital_automation_exposure": 7.5,
+        "formalization_rate": 8.5,
+        "scarcity_risk": 1.5
+      },
       "upskill_paths": [
-        "NCS-2511.0105",
-        "NCS-2421.0101",
-        "NCS-2512.0701"
+        "NCS-2511.0104",
+        "NCS-3323.0601",
+        "NCS-2120.0501",
+        "NCS-2523.0200",
+        "NCS-2522.0100"
       ]
     },
     {
@@ -9044,11 +9215,20 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 2.0,
+        "skill_transferability": 2.5,
+        "digital_automation_exposure": 6.5,
+        "formalization_rate": 8.5,
+        "scarcity_risk": 2.0
+      },
       "upskill_paths": [
-        "NCS-2511.0105",
-        "NCS-2421.0101",
-        "NCS-2512.0701"
+        "NCS-2511.0104",
+        "NCS-3323.0601",
+        "NCS-2120.0501",
+        "NCS-2523.0200",
+        "NCS-2522.0100"
       ]
     },
     {
@@ -9064,11 +9244,20 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
+      "scores": {
+        "h2_adjacency": 2.0,
+        "transition_demand": 3.0,
+        "skill_transferability": 4.0,
+        "digital_automation_exposure": 6.0,
+        "formalization_rate": 8.5,
+        "scarcity_risk": 3.0
+      },
       "upskill_paths": [
-        "NCS-2511.0105",
-        "NCS-2421.0101",
-        "NCS-2512.0701"
+        "NCS-2511.0104",
+        "NCS-3323.0601",
+        "NCS-2120.0501",
+        "NCS-2523.0200",
+        "NCS-2522.0100"
       ]
     },
     {
@@ -9084,11 +9273,20 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
+      "scores": {
+        "h2_adjacency": 1.5,
+        "transition_demand": 2.5,
+        "skill_transferability": 3.0,
+        "digital_automation_exposure": 5.0,
+        "formalization_rate": 8.5,
+        "scarcity_risk": 3.5
+      },
       "upskill_paths": [
-        "NCS-2511.0105",
-        "NCS-2421.0101",
-        "NCS-2512.0701"
+        "NCS-2511.0104",
+        "NCS-3323.0601",
+        "NCS-2120.0501",
+        "NCS-2523.0200",
+        "NCS-2522.0100"
       ]
     },
     {
@@ -9104,11 +9302,20 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
+      "scores": {
+        "h2_adjacency": 2.5,
+        "transition_demand": 3.0,
+        "skill_transferability": 5.0,
+        "digital_automation_exposure": 4.0,
+        "formalization_rate": 8.5,
+        "scarcity_risk": 3.5
+      },
       "upskill_paths": [
-        "NCS-2511.0105",
-        "NCS-2421.0101",
-        "NCS-2512.0701"
+        "NCS-2511.0104",
+        "NCS-3323.0601",
+        "NCS-2120.0501",
+        "NCS-2522.0100",
+        "NCS-3512.0100"
       ]
     },
     {
@@ -9124,11 +9331,20 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 1.5,
+        "skill_transferability": 2.0,
+        "digital_automation_exposure": 8.0,
+        "formalization_rate": 8.5,
+        "scarcity_risk": 1.5
+      },
       "upskill_paths": [
-        "NCS-2511.0105",
-        "NCS-2421.0101",
-        "NCS-2512.0701"
+        "NCS-2511.0104",
+        "NCS-3323.0601",
+        "NCS-2120.0501",
+        "NCS-2523.0200",
+        "NCS-2522.0100"
       ]
     },
     {
@@ -9144,11 +9360,20 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 1.5,
+        "skill_transferability": 2.0,
+        "digital_automation_exposure": 8.0,
+        "formalization_rate": 8.5,
+        "scarcity_risk": 1.5
+      },
       "upskill_paths": [
-        "NCS-2511.0105",
-        "NCS-2421.0101",
-        "NCS-2512.0701"
+        "NCS-2511.0104",
+        "NCS-3323.0601",
+        "NCS-2120.0501",
+        "NCS-2523.0200",
+        "NCS-2522.0100"
       ]
     },
     {
@@ -9164,11 +9389,20 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
+      "scores": {
+        "h2_adjacency": 2.0,
+        "transition_demand": 3.5,
+        "skill_transferability": 4.5,
+        "digital_automation_exposure": 7.0,
+        "formalization_rate": 8.5,
+        "scarcity_risk": 3.0
+      },
       "upskill_paths": [
-        "NCS-2511.0105",
-        "NCS-2421.0101",
-        "NCS-2512.0701"
+        "NCS-2511.0104",
+        "NCS-3323.0601",
+        "NCS-2120.0501",
+        "NCS-2523.0200",
+        "NCS-3512.0100"
       ]
     },
     {
@@ -9184,11 +9418,20 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
+      "scores": {
+        "h2_adjacency": 2.0,
+        "transition_demand": 2.5,
+        "skill_transferability": 4.0,
+        "digital_automation_exposure": 5.5,
+        "formalization_rate": 8.5,
+        "scarcity_risk": 3.0
+      },
       "upskill_paths": [
-        "NCS-2511.0105",
-        "NCS-2421.0101",
-        "NCS-2512.0701"
+        "NCS-2511.0104",
+        "NCS-3323.0601",
+        "NCS-2120.0501",
+        "NCS-2523.0200",
+        "NCS-2522.0100"
       ]
     },
     {
@@ -9204,11 +9447,20 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
+      "scores": {
+        "h2_adjacency": 2.0,
+        "transition_demand": 3.5,
+        "skill_transferability": 4.5,
+        "digital_automation_exposure": 6.5,
+        "formalization_rate": 8.5,
+        "scarcity_risk": 3.0
+      },
       "upskill_paths": [
-        "NCS-2511.0105",
-        "NCS-2421.0101",
-        "NCS-2512.0701"
+        "NCS-2511.0104",
+        "NCS-3323.0601",
+        "NCS-2120.0501",
+        "NCS-2523.0200",
+        "NCS-2522.0100"
       ]
     },
     {
@@ -9224,11 +9476,20 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
+      "scores": {
+        "h2_adjacency": 2.0,
+        "transition_demand": 3.5,
+        "skill_transferability": 4.5,
+        "digital_automation_exposure": 7.0,
+        "formalization_rate": 8.5,
+        "scarcity_risk": 3.0
+      },
       "upskill_paths": [
-        "NCS-2511.0105",
-        "NCS-2421.0101",
-        "NCS-2512.0701"
+        "NCS-2511.0104",
+        "NCS-3323.0601",
+        "NCS-2120.0501",
+        "NCS-2523.0200",
+        "NCS-2522.0100"
       ]
     },
     {
@@ -9244,11 +9505,20 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
+      "scores": {
+        "h2_adjacency": 2.0,
+        "transition_demand": 2.5,
+        "skill_transferability": 4.0,
+        "digital_automation_exposure": 6.5,
+        "formalization_rate": 8.5,
+        "scarcity_risk": 2.5
+      },
       "upskill_paths": [
-        "NCS-2511.0105",
-        "NCS-2421.0101",
-        "NCS-2512.0701"
+        "NCS-2511.0104",
+        "NCS-3323.0601",
+        "NCS-2120.0501",
+        "NCS-2523.0200",
+        "NCS-2522.0100"
       ]
     },
     {
@@ -9264,11 +9534,20 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
+      "scores": {
+        "h2_adjacency": 2.5,
+        "transition_demand": 3.0,
+        "skill_transferability": 4.5,
+        "digital_automation_exposure": 5.5,
+        "formalization_rate": 8.5,
+        "scarcity_risk": 3.0
+      },
       "upskill_paths": [
-        "NCS-2511.0105",
-        "NCS-2421.0101",
-        "NCS-2512.0701"
+        "NCS-2511.0104",
+        "NCS-3323.0601",
+        "NCS-2120.0501",
+        "NCS-2523.0200",
+        "NCS-2522.0100"
       ]
     },
     {
@@ -9284,11 +9563,20 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
+      "scores": {
+        "h2_adjacency": 2.5,
+        "transition_demand": 3.0,
+        "skill_transferability": 4.5,
+        "digital_automation_exposure": 5.5,
+        "formalization_rate": 8.5,
+        "scarcity_risk": 3.0
+      },
       "upskill_paths": [
-        "NCS-2511.0105",
-        "NCS-2421.0101",
-        "NCS-2512.0701"
+        "NCS-2511.0104",
+        "NCS-3323.0601",
+        "NCS-2120.0501",
+        "NCS-2523.0200",
+        "NCS-2522.0100"
       ]
     },
     {
@@ -9304,11 +9592,20 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
+      "scores": {
+        "h2_adjacency": 2.5,
+        "transition_demand": 3.0,
+        "skill_transferability": 4.5,
+        "digital_automation_exposure": 5.5,
+        "formalization_rate": 8.5,
+        "scarcity_risk": 3.0
+      },
       "upskill_paths": [
-        "NCS-2511.0105",
-        "NCS-2421.0101",
-        "NCS-2512.0701"
+        "NCS-2511.0104",
+        "NCS-3323.0601",
+        "NCS-2120.0501",
+        "NCS-2523.0200",
+        "NCS-2522.0100"
       ]
     },
     {
@@ -9324,11 +9621,20 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 1.0,
+        "skill_transferability": 1.5,
+        "digital_automation_exposure": 8.0,
+        "formalization_rate": 8.5,
+        "scarcity_risk": 1.5
+      },
       "upskill_paths": [
-        "NCS-2511.0105",
-        "NCS-2421.0101",
-        "NCS-2512.0701"
+        "NCS-2511.0104",
+        "NCS-3323.0601",
+        "NCS-2120.0501",
+        "NCS-2523.0200",
+        "NCS-2522.0100"
       ]
     },
     {
@@ -9344,11 +9650,20 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 1.0,
+        "skill_transferability": 1.5,
+        "digital_automation_exposure": 8.5,
+        "formalization_rate": 8.5,
+        "scarcity_risk": 1.5
+      },
       "upskill_paths": [
-        "NCS-2511.0105",
-        "NCS-2421.0101",
-        "NCS-2512.0701"
+        "NCS-2511.0104",
+        "NCS-3323.0601",
+        "NCS-2120.0501",
+        "NCS-2523.0200",
+        "NCS-2522.0100"
       ]
     },
     {
@@ -9364,11 +9679,20 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 1.0,
+        "skill_transferability": 2.0,
+        "digital_automation_exposure": 7.0,
+        "formalization_rate": 8.5,
+        "scarcity_risk": 2.0
+      },
       "upskill_paths": [
-        "NCS-2511.0105",
-        "NCS-2421.0101",
-        "NCS-2512.0701"
+        "NCS-2511.0104",
+        "NCS-3323.0601",
+        "NCS-2120.0501",
+        "NCS-2523.0200",
+        "NCS-2522.0100"
       ]
     },
     {
@@ -9384,11 +9708,20 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
+      "scores": {
+        "h2_adjacency": 1.5,
+        "transition_demand": 2.0,
+        "skill_transferability": 2.5,
+        "digital_automation_exposure": 8.5,
+        "formalization_rate": 8.5,
+        "scarcity_risk": 1.5
+      },
       "upskill_paths": [
-        "NCS-2511.0105",
-        "NCS-2421.0101",
-        "NCS-2512.0701"
+        "NCS-2511.0104",
+        "NCS-3323.0601",
+        "NCS-2120.0501",
+        "NCS-2523.0200",
+        "NCS-2522.0100"
       ]
     },
     {
@@ -9404,11 +9737,20 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
+      "scores": {
+        "h2_adjacency": 1.5,
+        "transition_demand": 2.0,
+        "skill_transferability": 3.0,
+        "digital_automation_exposure": 7.5,
+        "formalization_rate": 8.5,
+        "scarcity_risk": 2.0
+      },
       "upskill_paths": [
-        "NCS-2511.0105",
-        "NCS-2421.0101",
-        "NCS-2512.0701"
+        "NCS-2511.0104",
+        "NCS-3323.0601",
+        "NCS-2120.0501",
+        "NCS-2523.0200",
+        "NCS-2522.0100"
       ]
     },
     {
@@ -9424,11 +9766,20 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
+      "scores": {
+        "h2_adjacency": 3.0,
+        "transition_demand": 3.5,
+        "skill_transferability": 5.5,
+        "digital_automation_exposure": 5.0,
+        "formalization_rate": 8.5,
+        "scarcity_risk": 3.5
+      },
       "upskill_paths": [
-        "NCS-2511.0105",
-        "NCS-2421.0101",
-        "NCS-2512.0701"
+        "NCS-3323.0601",
+        "NCS-2120.0501",
+        "NCS-2523.0200",
+        "NCS-2522.0100",
+        "NCS-3512.0100"
       ]
     },
     {
@@ -9444,11 +9795,20 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
+      "scores": {
+        "h2_adjacency": 1.5,
+        "transition_demand": 2.5,
+        "skill_transferability": 4.0,
+        "digital_automation_exposure": 6.0,
+        "formalization_rate": 8.0,
+        "scarcity_risk": 2.0
+      },
       "upskill_paths": [
-        "NCS-2511.0105",
-        "NCS-2421.0101",
-        "NCS-2512.0701"
+        "NCS-2511.0104",
+        "NCS-3323.0601",
+        "NCS-2120.0501",
+        "NCS-2523.0200",
+        "NCS-2522.0100"
       ]
     },
     {
@@ -9464,11 +9824,20 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
+      "scores": {
+        "h2_adjacency": 1.5,
+        "transition_demand": 2.5,
+        "skill_transferability": 4.0,
+        "digital_automation_exposure": 6.0,
+        "formalization_rate": 8.0,
+        "scarcity_risk": 2.0
+      },
       "upskill_paths": [
-        "NCS-2511.0105",
-        "NCS-2421.0101",
-        "NCS-2512.0701"
+        "NCS-2511.0104",
+        "NCS-3323.0601",
+        "NCS-2120.0501",
+        "NCS-2523.0200",
+        "NCS-2522.0100"
       ]
     },
     {
@@ -9484,11 +9853,20 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
+      "scores": {
+        "h2_adjacency": 1.5,
+        "transition_demand": 2.0,
+        "skill_transferability": 3.0,
+        "digital_automation_exposure": 5.5,
+        "formalization_rate": 8.5,
+        "scarcity_risk": 2.0
+      },
       "upskill_paths": [
-        "NCS-2511.0105",
-        "NCS-2421.0101",
-        "NCS-2512.0701"
+        "NCS-2511.0104",
+        "NCS-3323.0601",
+        "NCS-2120.0501",
+        "NCS-2523.0200",
+        "NCS-2522.0100"
       ]
     },
     {
@@ -9504,11 +9882,20 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
+      "scores": {
+        "h2_adjacency": 2.0,
+        "transition_demand": 2.5,
+        "skill_transferability": 4.0,
+        "digital_automation_exposure": 6.0,
+        "formalization_rate": 8.5,
+        "scarcity_risk": 2.5
+      },
       "upskill_paths": [
-        "NCS-2511.0105",
-        "NCS-2421.0101",
-        "NCS-2512.0701"
+        "NCS-2511.0104",
+        "NCS-3323.0601",
+        "NCS-2120.0501",
+        "NCS-2523.0200",
+        "NCS-2522.0100"
       ]
     },
     {
@@ -9524,11 +9911,20 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
+      "scores": {
+        "h2_adjacency": 1.5,
+        "transition_demand": 2.0,
+        "skill_transferability": 3.0,
+        "digital_automation_exposure": 7.5,
+        "formalization_rate": 8.5,
+        "scarcity_risk": 2.0
+      },
       "upskill_paths": [
-        "NCS-2511.0105",
-        "NCS-2421.0101",
-        "NCS-2512.0701"
+        "NCS-2511.0104",
+        "NCS-3323.0601",
+        "NCS-2120.0501",
+        "NCS-2523.0200",
+        "NCS-2522.0100"
       ]
     },
     {
@@ -9544,11 +9940,20 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
+      "scores": {
+        "h2_adjacency": 2.5,
+        "transition_demand": 3.0,
+        "skill_transferability": 5.0,
+        "digital_automation_exposure": 4.0,
+        "formalization_rate": 8.5,
+        "scarcity_risk": 3.5
+      },
       "upskill_paths": [
-        "NCS-2511.0105",
-        "NCS-2421.0101",
-        "NCS-2512.0701"
+        "NCS-2511.0104",
+        "NCS-3323.0601",
+        "NCS-2120.0501",
+        "NCS-2523.0200",
+        "NCS-2522.0100"
       ]
     },
     {
@@ -9564,11 +9969,20 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
+      "scores": {
+        "h2_adjacency": 2.0,
+        "transition_demand": 2.5,
+        "skill_transferability": 4.0,
+        "digital_automation_exposure": 5.5,
+        "formalization_rate": 8.5,
+        "scarcity_risk": 3.0
+      },
       "upskill_paths": [
-        "NCS-2511.0105",
-        "NCS-2421.0101",
-        "NCS-2512.0701"
+        "NCS-2511.0104",
+        "NCS-3323.0601",
+        "NCS-2120.0501",
+        "NCS-2523.0200",
+        "NCS-2522.0100"
       ]
     },
     {
@@ -9584,11 +9998,20 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
+      "scores": {
+        "h2_adjacency": 2.0,
+        "transition_demand": 3.0,
+        "skill_transferability": 3.0,
+        "digital_automation_exposure": 5.0,
+        "formalization_rate": 8.5,
+        "scarcity_risk": 4.0
+      },
       "upskill_paths": [
-        "NCS-2511.0105",
-        "NCS-2421.0101",
-        "NCS-2512.0701"
+        "NCS-2511.0104",
+        "NCS-3323.0601",
+        "NCS-2120.0501",
+        "NCS-2523.0200",
+        "NCS-2522.0100"
       ]
     },
     {
@@ -9604,11 +10027,20 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
+      "scores": {
+        "h2_adjacency": 2.0,
+        "transition_demand": 3.5,
+        "skill_transferability": 4.5,
+        "digital_automation_exposure": 7.0,
+        "formalization_rate": 8.5,
+        "scarcity_risk": 3.0
+      },
       "upskill_paths": [
-        "NCS-2511.0105",
-        "NCS-2421.0101",
-        "NCS-2512.0701"
+        "NCS-2511.0104",
+        "NCS-3323.0601",
+        "NCS-2120.0501",
+        "NCS-2523.0200",
+        "NCS-2522.0100"
       ]
     },
     {
@@ -9624,8 +10056,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 2.0,
+        "skill_transferability": 1.0,
+        "digital_automation_exposure": 2.0,
+        "formalization_rate": 9.5,
+        "scarcity_risk": 3.5
+      },
+      "upskill_paths": [
+        "NCS-2612.0900",
+        "NCS-2612.1100",
+        "NCS-2612.1000",
+        "NCS-2612.0300",
+        "NCS-2612.0200"
+      ]
     },
     {
       "id": "NCS-2612.0300",
@@ -9640,8 +10085,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 1.5,
+        "skill_transferability": 1.0,
+        "digital_automation_exposure": 2.0,
+        "formalization_rate": 9.5,
+        "scarcity_risk": 3.0
+      },
+      "upskill_paths": [
+        "NCS-2612.0800",
+        "NCS-2612.0900",
+        "NCS-2612.1100",
+        "NCS-2612.1000",
+        "NCS-2612.0200"
+      ]
     },
     {
       "id": "NCS-2612.0200",
@@ -9656,8 +10114,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 1.5,
+        "skill_transferability": 1.0,
+        "digital_automation_exposure": 2.0,
+        "formalization_rate": 9.5,
+        "scarcity_risk": 3.5
+      },
+      "upskill_paths": [
+        "NCS-2612.0800",
+        "NCS-2612.0900",
+        "NCS-2612.1100",
+        "NCS-2612.1000",
+        "NCS-2612.0300"
+      ]
     },
     {
       "id": "NCS-2612.0500",
@@ -9672,8 +10143,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 1.5,
+        "skill_transferability": 1.0,
+        "digital_automation_exposure": 2.0,
+        "formalization_rate": 9.5,
+        "scarcity_risk": 3.0
+      },
+      "upskill_paths": [
+        "NCS-2612.0800",
+        "NCS-2612.0900",
+        "NCS-2612.1100",
+        "NCS-2612.1000",
+        "NCS-2612.0300"
+      ]
     },
     {
       "id": "NCS-2612.0100",
@@ -9688,8 +10172,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 1.5,
+        "skill_transferability": 1.0,
+        "digital_automation_exposure": 2.0,
+        "formalization_rate": 9.5,
+        "scarcity_risk": 4.0
+      },
+      "upskill_paths": [
+        "NCS-2612.0800",
+        "NCS-2612.0900",
+        "NCS-2612.1100",
+        "NCS-2612.1000",
+        "NCS-2612.0300"
+      ]
     },
     {
       "id": "NCS-2612.0600",
@@ -9704,8 +10201,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 1.5,
+        "skill_transferability": 1.0,
+        "digital_automation_exposure": 2.0,
+        "formalization_rate": 9.5,
+        "scarcity_risk": 3.0
+      },
+      "upskill_paths": [
+        "NCS-2612.0800",
+        "NCS-2612.0900",
+        "NCS-2612.1100",
+        "NCS-2612.1000",
+        "NCS-2612.0300"
+      ]
     },
     {
       "id": "NCS-2612.0700",
@@ -9720,8 +10230,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 1.5,
+        "skill_transferability": 1.0,
+        "digital_automation_exposure": 2.0,
+        "formalization_rate": 9.5,
+        "scarcity_risk": 3.0
+      },
+      "upskill_paths": [
+        "NCS-2612.0800",
+        "NCS-2612.0900",
+        "NCS-2612.1100",
+        "NCS-2612.1000",
+        "NCS-2612.0300"
+      ]
     },
     {
       "id": "NCS-2612.0900",
@@ -9736,8 +10259,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 2.0,
+        "skill_transferability": 1.0,
+        "digital_automation_exposure": 2.0,
+        "formalization_rate": 9.5,
+        "scarcity_risk": 3.0
+      },
+      "upskill_paths": [
+        "NCS-2612.0800",
+        "NCS-2612.1100",
+        "NCS-2612.1000",
+        "NCS-2612.0300",
+        "NCS-2612.0200"
+      ]
     },
     {
       "id": "NCS-2612.1300",
@@ -9752,8 +10288,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 1.5,
+        "skill_transferability": 1.0,
+        "digital_automation_exposure": 2.0,
+        "formalization_rate": 9.5,
+        "scarcity_risk": 3.0
+      },
+      "upskill_paths": [
+        "NCS-2612.0800",
+        "NCS-2612.0900",
+        "NCS-2612.1100",
+        "NCS-2612.1000",
+        "NCS-2612.0300"
+      ]
     },
     {
       "id": "NCS-2612.1100",
@@ -9768,8 +10317,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 2.0,
+        "skill_transferability": 1.0,
+        "digital_automation_exposure": 2.0,
+        "formalization_rate": 9.5,
+        "scarcity_risk": 3.0
+      },
+      "upskill_paths": [
+        "NCS-2612.0800",
+        "NCS-2612.0900",
+        "NCS-2612.1000",
+        "NCS-2612.0300",
+        "NCS-2612.0200"
+      ]
     },
     {
       "id": "NCS-2612.0400",
@@ -9784,8 +10346,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 1.5,
+        "skill_transferability": 1.0,
+        "digital_automation_exposure": 2.0,
+        "formalization_rate": 9.5,
+        "scarcity_risk": 3.0
+      },
+      "upskill_paths": [
+        "NCS-2612.0800",
+        "NCS-2612.0900",
+        "NCS-2612.1100",
+        "NCS-2612.1000",
+        "NCS-2612.0300"
+      ]
     },
     {
       "id": "NCS-2612.1200",
@@ -9800,8 +10375,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 1.5,
+        "skill_transferability": 1.0,
+        "digital_automation_exposure": 2.0,
+        "formalization_rate": 9.5,
+        "scarcity_risk": 3.0
+      },
+      "upskill_paths": [
+        "NCS-2612.0800",
+        "NCS-2612.0900",
+        "NCS-2612.1100",
+        "NCS-2612.1000",
+        "NCS-2612.0300"
+      ]
     },
     {
       "id": "NCS-2612.1000",
@@ -9816,8 +10404,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 2.0,
+        "skill_transferability": 1.0,
+        "digital_automation_exposure": 2.0,
+        "formalization_rate": 9.5,
+        "scarcity_risk": 3.0
+      },
+      "upskill_paths": [
+        "NCS-2612.0800",
+        "NCS-2612.0900",
+        "NCS-2612.1100",
+        "NCS-2612.0300",
+        "NCS-2612.0200"
+      ]
     },
     {
       "id": "NCS-1324.0900",
@@ -9832,8 +10433,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 2.5,
+        "transition_demand": 3.5,
+        "skill_transferability": 3.5,
+        "digital_automation_exposure": 4.0,
+        "formalization_rate": 8.0,
+        "scarcity_risk": 3.5
+      },
+      "upskill_paths": [
+        "NCS-1120.2800",
+        "NCS-1324.2300",
+        "NCS-1324.1200",
+        "NCS-1120.2400",
+        "NCS-1324.2100"
+      ]
     },
     {
       "id": "NCS-5111.0500",
@@ -9848,8 +10462,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 2.5,
+        "transition_demand": 3.5,
+        "skill_transferability": 3.5,
+        "digital_automation_exposure": 4.0,
+        "formalization_rate": 8.0,
+        "scarcity_risk": 3.5
+      },
+      "upskill_paths": [
+        "NCS-1120.2800",
+        "NCS-1324.2300",
+        "NCS-1324.1200",
+        "NCS-1120.2400",
+        "NCS-1324.2100"
+      ]
     },
     {
       "id": "NCS-5112.1000",
@@ -9864,8 +10491,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.5,
+        "transition_demand": 2.5,
+        "skill_transferability": 2.5,
+        "digital_automation_exposure": 7.0,
+        "formalization_rate": 6.0,
+        "scarcity_risk": 2.0
+      },
+      "upskill_paths": [
+        "NCS-1120.2800",
+        "NCS-1324.2300",
+        "NCS-1324.1200",
+        "NCS-1120.2400",
+        "NCS-1324.2100"
+      ]
     },
     {
       "id": "NCS-9332.0200",
@@ -9880,8 +10520,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 1.0,
+        "skill_transferability": 1.5,
+        "digital_automation_exposure": 2.0,
+        "formalization_rate": 2.0,
+        "scarcity_risk": 1.5
+      },
+      "upskill_paths": [
+        "NCS-1120.2800",
+        "NCS-1324.2300",
+        "NCS-1324.1200",
+        "NCS-1120.2400",
+        "NCS-1324.2100"
+      ]
     },
     {
       "id": "NCS-9329.0400",
@@ -9896,8 +10549,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.5,
+        "transition_demand": 2.0,
+        "skill_transferability": 2.5,
+        "digital_automation_exposure": 6.0,
+        "formalization_rate": 3.5,
+        "scarcity_risk": 1.5
+      },
+      "upskill_paths": [
+        "NCS-1120.2800",
+        "NCS-1324.2300",
+        "NCS-1324.1200",
+        "NCS-1120.2400",
+        "NCS-1324.2100"
+      ]
     },
     {
       "id": "NCS-5244.0305",
@@ -9912,8 +10578,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.5,
+        "transition_demand": 2.5,
+        "skill_transferability": 3.0,
+        "digital_automation_exposure": 7.5,
+        "formalization_rate": 5.0,
+        "scarcity_risk": 2.0
+      },
+      "upskill_paths": [
+        "NCS-1120.2800",
+        "NCS-1324.2300",
+        "NCS-1324.1200",
+        "NCS-1120.2400",
+        "NCS-1324.2100"
+      ]
     },
     {
       "id": "NCS-4323.0601",
@@ -9928,8 +10607,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.5,
+        "transition_demand": 2.5,
+        "skill_transferability": 3.0,
+        "digital_automation_exposure": 7.5,
+        "formalization_rate": 5.0,
+        "scarcity_risk": 2.0
+      },
+      "upskill_paths": [
+        "NCS-1120.2800",
+        "NCS-1324.2300",
+        "NCS-1324.1200",
+        "NCS-1120.2400",
+        "NCS-1324.2100"
+      ]
     },
     {
       "id": "NCS-4323.0701",
@@ -9944,8 +10636,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.5,
+        "transition_demand": 2.5,
+        "skill_transferability": 3.0,
+        "digital_automation_exposure": 7.5,
+        "formalization_rate": 5.0,
+        "scarcity_risk": 2.0
+      },
+      "upskill_paths": [
+        "NCS-1120.2800",
+        "NCS-1324.2300",
+        "NCS-1324.1200",
+        "NCS-1120.2400",
+        "NCS-1324.2100"
+      ]
     },
     {
       "id": "NCS-9321.1300",
@@ -9960,8 +10665,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.5,
+        "transition_demand": 2.0,
+        "skill_transferability": 2.5,
+        "digital_automation_exposure": 6.0,
+        "formalization_rate": 3.5,
+        "scarcity_risk": 1.5
+      },
+      "upskill_paths": [
+        "NCS-1120.2800",
+        "NCS-1324.2300",
+        "NCS-1324.1200",
+        "NCS-1120.2400",
+        "NCS-1324.2100"
+      ]
     },
     {
       "id": "NCS-9321.1200",
@@ -9976,8 +10694,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.5,
+        "transition_demand": 2.0,
+        "skill_transferability": 2.5,
+        "digital_automation_exposure": 6.0,
+        "formalization_rate": 3.5,
+        "scarcity_risk": 1.5
+      },
+      "upskill_paths": [
+        "NCS-1120.2800",
+        "NCS-1324.2300",
+        "NCS-1324.1200",
+        "NCS-1120.2400",
+        "NCS-1324.2100"
+      ]
     },
     {
       "id": "NCS-5223.0107",
@@ -9992,8 +10723,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 1.5,
+        "skill_transferability": 2.0,
+        "digital_automation_exposure": 5.5,
+        "formalization_rate": 4.0,
+        "scarcity_risk": 1.5
+      },
+      "upskill_paths": [
+        "NCS-1120.2800",
+        "NCS-1324.2300",
+        "NCS-1324.1200",
+        "NCS-1120.2400",
+        "NCS-1324.2100"
+      ]
     },
     {
       "id": "NCS-3315.0601",
@@ -10008,8 +10752,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 1.0,
+        "skill_transferability": 2.0,
+        "digital_automation_exposure": 7.0,
+        "formalization_rate": 6.0,
+        "scarcity_risk": 2.0
+      },
+      "upskill_paths": [
+        "NCS-1120.2800",
+        "NCS-1324.2300",
+        "NCS-1324.1200",
+        "NCS-1120.2400",
+        "NCS-1324.2100"
+      ]
     },
     {
       "id": "NCS-9621.0802",
@@ -10024,8 +10781,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 1.5,
+        "skill_transferability": 2.0,
+        "digital_automation_exposure": 6.0,
+        "formalization_rate": 4.0,
+        "scarcity_risk": 1.5
+      },
+      "upskill_paths": [
+        "NCS-1120.2800",
+        "NCS-1324.2300",
+        "NCS-1324.1200",
+        "NCS-1120.2400",
+        "NCS-1324.2100"
+      ]
     },
     {
       "id": "NCS-5243.0601",
@@ -10040,8 +10810,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 1.5,
+        "skill_transferability": 2.0,
+        "digital_automation_exposure": 5.5,
+        "formalization_rate": 4.0,
+        "scarcity_risk": 1.5
+      },
+      "upskill_paths": [
+        "NCS-1120.2800",
+        "NCS-1324.2300",
+        "NCS-1324.1200",
+        "NCS-1120.2400",
+        "NCS-1324.2100"
+      ]
     },
     {
       "id": "NCS-9621.0702",
@@ -10056,8 +10839,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 1.5,
+        "skill_transferability": 2.0,
+        "digital_automation_exposure": 6.0,
+        "formalization_rate": 4.0,
+        "scarcity_risk": 1.5
+      },
+      "upskill_paths": [
+        "NCS-1120.2800",
+        "NCS-1324.2300",
+        "NCS-1324.1200",
+        "NCS-1120.2400",
+        "NCS-1324.2100"
+      ]
     },
     {
       "id": "NCS-9621.0902",
@@ -10072,8 +10868,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 1.5,
+        "skill_transferability": 2.0,
+        "digital_automation_exposure": 7.0,
+        "formalization_rate": 4.0,
+        "scarcity_risk": 1.5
+      },
+      "upskill_paths": [
+        "NCS-1120.2800",
+        "NCS-1324.2300",
+        "NCS-1324.1200",
+        "NCS-1120.2400",
+        "NCS-1324.2100"
+      ]
     },
     {
       "id": "NCS-4132.0404",
@@ -10088,8 +10897,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.5,
+        "transition_demand": 2.5,
+        "skill_transferability": 3.0,
+        "digital_automation_exposure": 7.5,
+        "formalization_rate": 5.0,
+        "scarcity_risk": 2.0
+      },
+      "upskill_paths": [
+        "NCS-1120.2800",
+        "NCS-1324.2300",
+        "NCS-1324.1200",
+        "NCS-1120.2400",
+        "NCS-1324.2100"
+      ]
     },
     {
       "id": "NCS-3339.0601",
@@ -10104,8 +10926,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.5,
+        "transition_demand": 2.5,
+        "skill_transferability": 3.0,
+        "digital_automation_exposure": 7.5,
+        "formalization_rate": 5.0,
+        "scarcity_risk": 2.0
+      },
+      "upskill_paths": [
+        "NCS-1120.2800",
+        "NCS-1324.2300",
+        "NCS-1324.1200",
+        "NCS-1120.2400",
+        "NCS-1324.2100"
+      ]
     },
     {
       "id": "NCS-1120.2600",
@@ -10120,8 +10955,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 2.5,
+        "transition_demand": 3.5,
+        "skill_transferability": 3.5,
+        "digital_automation_exposure": 4.0,
+        "formalization_rate": 8.0,
+        "scarcity_risk": 3.5
+      },
+      "upskill_paths": [
+        "NCS-1120.2800",
+        "NCS-1324.2300",
+        "NCS-1324.1200",
+        "NCS-1120.2400",
+        "NCS-1324.2100"
+      ]
     },
     {
       "id": "NCS-1120.2800",
@@ -10136,8 +10984,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 3.5,
+        "transition_demand": 4.5,
+        "skill_transferability": 5.0,
+        "digital_automation_exposure": 3.5,
+        "formalization_rate": 7.0,
+        "scarcity_risk": 3.0
+      },
+      "upskill_paths": [
+        "NCS-1324.2300",
+        "NCS-1324.1200",
+        "NCS-1120.2400",
+        "NCS-1324.2100",
+        "NCS-1324.1400"
+      ]
     },
     {
       "id": "NCS-1120.2400",
@@ -10152,8 +11013,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 3.0,
+        "transition_demand": 4.0,
+        "skill_transferability": 4.5,
+        "digital_automation_exposure": 3.5,
+        "formalization_rate": 7.0,
+        "scarcity_risk": 3.0
+      },
+      "upskill_paths": [
+        "NCS-1120.2800",
+        "NCS-1324.2300",
+        "NCS-1324.1200",
+        "NCS-1324.2100",
+        "NCS-1324.1400"
+      ]
     },
     {
       "id": "NCS-3341.1302",
@@ -10168,8 +11042,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.5,
+        "transition_demand": 2.5,
+        "skill_transferability": 3.0,
+        "digital_automation_exposure": 7.5,
+        "formalization_rate": 5.0,
+        "scarcity_risk": 2.0
+      },
+      "upskill_paths": [
+        "NCS-1120.2800",
+        "NCS-1324.2300",
+        "NCS-1324.1200",
+        "NCS-1120.2400",
+        "NCS-1324.2100"
+      ]
     },
     {
       "id": "NCS-9331.0100",
@@ -10184,8 +11071,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 1.0,
+        "skill_transferability": 1.5,
+        "digital_automation_exposure": 2.0,
+        "formalization_rate": 2.0,
+        "scarcity_risk": 1.5
+      },
+      "upskill_paths": [
+        "NCS-1120.2800",
+        "NCS-1324.2300",
+        "NCS-1324.1200",
+        "NCS-1120.2400",
+        "NCS-1324.2100"
+      ]
     },
     {
       "id": "NCS-1324.1000",
@@ -10200,8 +11100,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 2.5,
+        "transition_demand": 3.5,
+        "skill_transferability": 3.5,
+        "digital_automation_exposure": 4.0,
+        "formalization_rate": 8.0,
+        "scarcity_risk": 3.5
+      },
+      "upskill_paths": [
+        "NCS-1120.2800",
+        "NCS-1324.2300",
+        "NCS-1324.1200",
+        "NCS-1120.2400",
+        "NCS-1324.2100"
+      ]
     },
     {
       "id": "NCS-9611.0100",
@@ -10216,8 +11129,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 1.0,
+        "skill_transferability": 1.0,
+        "digital_automation_exposure": 3.0,
+        "formalization_rate": 2.0,
+        "scarcity_risk": 1.0
+      },
+      "upskill_paths": [
+        "NCS-1120.2800",
+        "NCS-1324.2300",
+        "NCS-1324.1200",
+        "NCS-1120.2400",
+        "NCS-1324.2100"
+      ]
     },
     {
       "id": "NCS-1324.2300",
@@ -10232,8 +11158,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 3.5,
+        "transition_demand": 4.5,
+        "skill_transferability": 5.0,
+        "digital_automation_exposure": 3.5,
+        "formalization_rate": 7.0,
+        "scarcity_risk": 3.0
+      },
+      "upskill_paths": [
+        "NCS-1120.2800",
+        "NCS-1324.1200",
+        "NCS-1120.2400",
+        "NCS-1324.2100",
+        "NCS-1324.1400"
+      ]
     },
     {
       "id": "NCS-1324.2100",
@@ -10248,8 +11187,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 3.0,
+        "transition_demand": 4.0,
+        "skill_transferability": 4.5,
+        "digital_automation_exposure": 3.5,
+        "formalization_rate": 7.0,
+        "scarcity_risk": 3.0
+      },
+      "upskill_paths": [
+        "NCS-1120.2800",
+        "NCS-1324.2300",
+        "NCS-1324.1200",
+        "NCS-1120.2400",
+        "NCS-1324.1400"
+      ]
     },
     {
       "id": "NCS-3122.4102",
@@ -10264,8 +11216,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 2.0,
+        "transition_demand": 2.5,
+        "skill_transferability": 3.5,
+        "digital_automation_exposure": 6.0,
+        "formalization_rate": 5.0,
+        "scarcity_risk": 2.0
+      },
+      "upskill_paths": [
+        "NCS-1120.2800",
+        "NCS-1324.2300",
+        "NCS-1324.1200",
+        "NCS-1120.2400",
+        "NCS-1324.2100"
+      ]
     },
     {
       "id": "NCS-1324.1400",
@@ -10280,8 +11245,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 3.0,
+        "transition_demand": 4.0,
+        "skill_transferability": 4.5,
+        "digital_automation_exposure": 4.0,
+        "formalization_rate": 6.5,
+        "scarcity_risk": 3.0
+      },
+      "upskill_paths": [
+        "NCS-1120.2800",
+        "NCS-1324.2300",
+        "NCS-1324.1200",
+        "NCS-1120.2400",
+        "NCS-1324.2100"
+      ]
     },
     {
       "id": "NCS-9331.0300",
@@ -10296,8 +11274,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 1.0,
+        "skill_transferability": 1.5,
+        "digital_automation_exposure": 2.0,
+        "formalization_rate": 2.0,
+        "scarcity_risk": 1.5
+      },
+      "upskill_paths": [
+        "NCS-1120.2800",
+        "NCS-1324.2300",
+        "NCS-1324.1200",
+        "NCS-1120.2400",
+        "NCS-1324.2100"
+      ]
     },
     {
       "id": "NCS-9322.0100",
@@ -10312,8 +11303,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 1.0,
+        "skill_transferability": 1.5,
+        "digital_automation_exposure": 2.0,
+        "formalization_rate": 2.0,
+        "scarcity_risk": 1.5
+      },
+      "upskill_paths": [
+        "NCS-1120.2800",
+        "NCS-1324.2300",
+        "NCS-1324.1200",
+        "NCS-1120.2400",
+        "NCS-1324.2100"
+      ]
     },
     {
       "id": "NCS-4321.0102",
@@ -10328,8 +11332,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 2.0,
+        "transition_demand": 3.0,
+        "skill_transferability": 3.5,
+        "digital_automation_exposure": 6.5,
+        "formalization_rate": 5.0,
+        "scarcity_risk": 2.0
+      },
+      "upskill_paths": [
+        "NCS-1120.2800",
+        "NCS-1324.2300",
+        "NCS-1324.1200",
+        "NCS-1120.2400",
+        "NCS-1324.2100"
+      ]
     },
     {
       "id": "NCS-3322.0602",
@@ -10344,8 +11361,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.5,
+        "transition_demand": 2.0,
+        "skill_transferability": 2.5,
+        "digital_automation_exposure": 5.5,
+        "formalization_rate": 5.0,
+        "scarcity_risk": 2.0
+      },
+      "upskill_paths": [
+        "NCS-1120.2800",
+        "NCS-1324.2300",
+        "NCS-1324.1200",
+        "NCS-1120.2400",
+        "NCS-1324.2100"
+      ]
     },
     {
       "id": "NCS-4321.0604",
@@ -10360,8 +11390,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 2.0,
+        "transition_demand": 3.0,
+        "skill_transferability": 3.5,
+        "digital_automation_exposure": 6.5,
+        "formalization_rate": 5.0,
+        "scarcity_risk": 2.0
+      },
+      "upskill_paths": [
+        "NCS-1120.2800",
+        "NCS-1324.2300",
+        "NCS-1324.1200",
+        "NCS-1120.2400",
+        "NCS-1324.2100"
+      ]
     },
     {
       "id": "NCS-3122.4103",
@@ -10376,8 +11419,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 1.5,
+        "skill_transferability": 2.0,
+        "digital_automation_exposure": 5.5,
+        "formalization_rate": 4.0,
+        "scarcity_risk": 1.5
+      },
+      "upskill_paths": [
+        "NCS-1120.2800",
+        "NCS-1324.2300",
+        "NCS-1324.1200",
+        "NCS-1120.2400",
+        "NCS-1324.2100"
+      ]
     },
     {
       "id": "NCS-9333.0100",
@@ -10392,8 +11448,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.5,
+        "transition_demand": 2.0,
+        "skill_transferability": 2.5,
+        "digital_automation_exposure": 5.5,
+        "formalization_rate": 2.5,
+        "scarcity_risk": 1.5
+      },
+      "upskill_paths": [
+        "NCS-1120.2800",
+        "NCS-1324.2300",
+        "NCS-1324.1200",
+        "NCS-1120.2400",
+        "NCS-1324.2100"
+      ]
     },
     {
       "id": "NCS-9333.0202",
@@ -10408,8 +11477,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.5,
+        "transition_demand": 2.0,
+        "skill_transferability": 2.5,
+        "digital_automation_exposure": 5.5,
+        "formalization_rate": 2.5,
+        "scarcity_risk": 1.5
+      },
+      "upskill_paths": [
+        "NCS-1120.2800",
+        "NCS-1324.2300",
+        "NCS-1324.1200",
+        "NCS-1120.2400",
+        "NCS-1324.2100"
+      ]
     },
     {
       "id": "NCS-1324.1202",
@@ -10424,8 +11506,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 2.5,
+        "transition_demand": 3.5,
+        "skill_transferability": 4.0,
+        "digital_automation_exposure": 3.5,
+        "formalization_rate": 6.5,
+        "scarcity_risk": 3.0
+      },
+      "upskill_paths": [
+        "NCS-1120.2800",
+        "NCS-1324.2300",
+        "NCS-1324.1200",
+        "NCS-1120.2400",
+        "NCS-1324.2100"
+      ]
     },
     {
       "id": "NCS-9322.0200",
@@ -10440,8 +11535,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 1.0,
+        "skill_transferability": 1.5,
+        "digital_automation_exposure": 2.0,
+        "formalization_rate": 2.0,
+        "scarcity_risk": 1.5
+      },
+      "upskill_paths": [
+        "NCS-1120.2800",
+        "NCS-1324.2300",
+        "NCS-1324.1200",
+        "NCS-1120.2400",
+        "NCS-1324.2100"
+      ]
     },
     {
       "id": "NCS-9333.0106",
@@ -10456,8 +11564,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.5,
+        "transition_demand": 2.0,
+        "skill_transferability": 2.5,
+        "digital_automation_exposure": 5.5,
+        "formalization_rate": 2.5,
+        "scarcity_risk": 1.5
+      },
+      "upskill_paths": [
+        "NCS-1120.2800",
+        "NCS-1324.2300",
+        "NCS-1324.1200",
+        "NCS-1120.2400",
+        "NCS-1324.2100"
+      ]
     },
     {
       "id": "NCS-1324.0800",
@@ -10472,8 +11593,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 2.5,
+        "transition_demand": 3.5,
+        "skill_transferability": 3.5,
+        "digital_automation_exposure": 4.0,
+        "formalization_rate": 8.0,
+        "scarcity_risk": 3.5
+      },
+      "upskill_paths": [
+        "NCS-1120.2800",
+        "NCS-1324.2300",
+        "NCS-1324.1200",
+        "NCS-1120.2400",
+        "NCS-1324.2100"
+      ]
     },
     {
       "id": "NCS-1324.1200",
@@ -10488,8 +11622,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 3.5,
+        "transition_demand": 4.5,
+        "skill_transferability": 5.0,
+        "digital_automation_exposure": 3.5,
+        "formalization_rate": 7.0,
+        "scarcity_risk": 3.0
+      },
+      "upskill_paths": [
+        "NCS-1120.2800",
+        "NCS-1324.2300",
+        "NCS-1120.2400",
+        "NCS-1324.2100",
+        "NCS-1324.1400"
+      ]
     },
     {
       "id": "NCS-1324.0500",
@@ -10504,8 +11651,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 3.0,
+        "transition_demand": 4.0,
+        "skill_transferability": 4.5,
+        "digital_automation_exposure": 4.0,
+        "formalization_rate": 6.5,
+        "scarcity_risk": 3.0
+      },
+      "upskill_paths": [
+        "NCS-1120.2800",
+        "NCS-1324.2300",
+        "NCS-1324.1200",
+        "NCS-1120.2400",
+        "NCS-1324.2100"
+      ]
     },
     {
       "id": "NCS-1324.0200",
@@ -10520,8 +11680,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 3.0,
+        "transition_demand": 4.0,
+        "skill_transferability": 4.5,
+        "digital_automation_exposure": 4.0,
+        "formalization_rate": 6.5,
+        "scarcity_risk": 3.0
+      },
+      "upskill_paths": [
+        "NCS-1120.2800",
+        "NCS-1324.2300",
+        "NCS-1324.1200",
+        "NCS-1120.2400",
+        "NCS-1324.2100"
+      ]
     },
     {
       "id": "NCS-7231.0601",
@@ -10536,8 +11709,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 3.0,
+        "transition_demand": 4.0,
+        "skill_transferability": 5.5,
+        "digital_automation_exposure": 3.5,
+        "formalization_rate": 5.5,
+        "scarcity_risk": 3.5
+      },
+      "upskill_paths": [
+        "NCS-1120.2800",
+        "NCS-1324.2300",
+        "NCS-1324.1200",
+        "NCS-1120.2400",
+        "NCS-1324.2100"
+      ]
     },
     {
       "id": "NCS-9332.0400",
@@ -10552,8 +11738,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 1.0,
+        "skill_transferability": 1.5,
+        "digital_automation_exposure": 2.0,
+        "formalization_rate": 2.0,
+        "scarcity_risk": 1.5
+      },
+      "upskill_paths": [
+        "NCS-1120.2800",
+        "NCS-1324.2300",
+        "NCS-1324.1200",
+        "NCS-1120.2400",
+        "NCS-1324.2100"
+      ]
     },
     {
       "id": "NCS-8344.0102",
@@ -10568,8 +11767,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 2.5,
+        "transition_demand": 3.5,
+        "skill_transferability": 4.5,
+        "digital_automation_exposure": 5.5,
+        "formalization_rate": 5.0,
+        "scarcity_risk": 2.5
+      },
+      "upskill_paths": [
+        "NCS-1120.2800",
+        "NCS-1324.2300",
+        "NCS-1324.1200",
+        "NCS-1120.2400",
+        "NCS-1324.2100"
+      ]
     },
     {
       "id": "NCS-4321.0303",
@@ -10584,8 +11796,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 2.0,
+        "transition_demand": 3.0,
+        "skill_transferability": 3.5,
+        "digital_automation_exposure": 6.5,
+        "formalization_rate": 5.0,
+        "scarcity_risk": 2.0
+      },
+      "upskill_paths": [
+        "NCS-1120.2800",
+        "NCS-1324.2300",
+        "NCS-1324.1200",
+        "NCS-1120.2400",
+        "NCS-1324.2100"
+      ]
     },
     {
       "id": "NCS-9333.0107",
@@ -10600,8 +11825,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.5,
+        "transition_demand": 2.0,
+        "skill_transferability": 2.5,
+        "digital_automation_exposure": 5.5,
+        "formalization_rate": 2.5,
+        "scarcity_risk": 1.5
+      },
+      "upskill_paths": [
+        "NCS-1120.2800",
+        "NCS-1324.2300",
+        "NCS-1324.1200",
+        "NCS-1120.2400",
+        "NCS-1324.2100"
+      ]
     },
     {
       "id": "NCS-4132.0403",
@@ -10616,8 +11854,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.5,
+        "transition_demand": 2.5,
+        "skill_transferability": 3.0,
+        "digital_automation_exposure": 7.5,
+        "formalization_rate": 5.0,
+        "scarcity_risk": 2.0
+      },
+      "upskill_paths": [
+        "NCS-1120.2800",
+        "NCS-1324.2300",
+        "NCS-1324.1200",
+        "NCS-1120.2400",
+        "NCS-1324.2100"
+      ]
     },
     {
       "id": "NCS-9112.0200",
@@ -10632,8 +11883,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 1.0,
+        "skill_transferability": 1.0,
+        "digital_automation_exposure": 3.0,
+        "formalization_rate": 2.5,
+        "scarcity_risk": 1.0
+      },
+      "upskill_paths": [
+        "NCS-2424.0200",
+        "NCS-2424.0300",
+        "NCS-2424.0100",
+        "NCS-3341.0900",
+        "NCS-3341.0800"
+      ]
     },
     {
       "id": "NCS-4419.0600",
@@ -10648,8 +11912,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 1.0,
+        "skill_transferability": 1.5,
+        "digital_automation_exposure": 6.0,
+        "formalization_rate": 4.0,
+        "scarcity_risk": 1.0
+      },
+      "upskill_paths": [
+        "NCS-2424.0200",
+        "NCS-2424.0300",
+        "NCS-2424.0100",
+        "NCS-3341.0900",
+        "NCS-3341.0800"
+      ]
     },
     {
       "id": "NCS-9112.0100",
@@ -10664,8 +11941,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 1.0,
+        "skill_transferability": 1.0,
+        "digital_automation_exposure": 3.0,
+        "formalization_rate": 2.5,
+        "scarcity_risk": 1.0
+      },
+      "upskill_paths": [
+        "NCS-2424.0200",
+        "NCS-2424.0300",
+        "NCS-2424.0100",
+        "NCS-3341.0900",
+        "NCS-3341.0800"
+      ]
     },
     {
       "id": "NCS-2424.0200",
@@ -10680,8 +11970,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 2.5,
+        "skill_transferability": 2.0,
+        "digital_automation_exposure": 6.0,
+        "formalization_rate": 7.5,
+        "scarcity_risk": 2.5
+      },
+      "upskill_paths": [
+        "NCS-2424.0300",
+        "NCS-2424.0100",
+        "NCS-3341.0900",
+        "NCS-3341.0800",
+        "NCS-3341.1000"
+      ]
     },
     {
       "id": "NCS-2424.0300",
@@ -10696,8 +11999,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 2.5,
+        "skill_transferability": 2.0,
+        "digital_automation_exposure": 6.0,
+        "formalization_rate": 7.5,
+        "scarcity_risk": 2.5
+      },
+      "upskill_paths": [
+        "NCS-2424.0200",
+        "NCS-2424.0100",
+        "NCS-3341.0900",
+        "NCS-3341.0800",
+        "NCS-3341.1000"
+      ]
     },
     {
       "id": "NCS-3341.0900",
@@ -10712,8 +12028,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 2.0,
+        "skill_transferability": 2.5,
+        "digital_automation_exposure": 4.5,
+        "formalization_rate": 8.0,
+        "scarcity_risk": 2.5
+      },
+      "upskill_paths": [
+        "NCS-2424.0200",
+        "NCS-2424.0300",
+        "NCS-2424.0100",
+        "NCS-3341.0800",
+        "NCS-3341.1000"
+      ]
     },
     {
       "id": "NCS-2424.0100",
@@ -10728,8 +12057,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 2.5,
+        "skill_transferability": 2.0,
+        "digital_automation_exposure": 6.0,
+        "formalization_rate": 7.5,
+        "scarcity_risk": 2.5
+      },
+      "upskill_paths": [
+        "NCS-2424.0200",
+        "NCS-2424.0300",
+        "NCS-3341.0900",
+        "NCS-3341.0800",
+        "NCS-3341.1000"
+      ]
     },
     {
       "id": "NCS-3341.1000",
@@ -10744,8 +12086,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 1.5,
+        "skill_transferability": 2.0,
+        "digital_automation_exposure": 7.0,
+        "formalization_rate": 6.0,
+        "scarcity_risk": 2.0
+      },
+      "upskill_paths": [
+        "NCS-2424.0200",
+        "NCS-2424.0300",
+        "NCS-2424.0100",
+        "NCS-3341.0900",
+        "NCS-3341.0800"
+      ]
     },
     {
       "id": "NCS-4419.0500",
@@ -10760,8 +12115,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 1.0,
+        "skill_transferability": 1.5,
+        "digital_automation_exposure": 6.0,
+        "formalization_rate": 4.0,
+        "scarcity_risk": 1.0
+      },
+      "upskill_paths": [
+        "NCS-2424.0200",
+        "NCS-2424.0300",
+        "NCS-2424.0100",
+        "NCS-3341.0900",
+        "NCS-3341.0800"
+      ]
     },
     {
       "id": "NCS-4131.0100",
@@ -10776,8 +12144,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 1.5,
+        "skill_transferability": 2.0,
+        "digital_automation_exposure": 7.0,
+        "formalization_rate": 6.0,
+        "scarcity_risk": 2.0
+      },
+      "upskill_paths": [
+        "NCS-2424.0200",
+        "NCS-2424.0300",
+        "NCS-2424.0100",
+        "NCS-3341.0900",
+        "NCS-3341.0800"
+      ]
     },
     {
       "id": "NCS-3341.0800",
@@ -10792,8 +12173,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 2.0,
+        "skill_transferability": 2.5,
+        "digital_automation_exposure": 4.5,
+        "formalization_rate": 8.0,
+        "scarcity_risk": 2.5
+      },
+      "upskill_paths": [
+        "NCS-2424.0200",
+        "NCS-2424.0300",
+        "NCS-2424.0100",
+        "NCS-3341.0900",
+        "NCS-3341.1000"
+      ]
     },
     {
       "id": "NCS-3119.1100",
@@ -10808,8 +12202,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 2.0,
+        "transition_demand": 2.0,
+        "skill_transferability": 4.0,
+        "digital_automation_exposure": 4.0,
+        "formalization_rate": 5.0,
+        "scarcity_risk": 4.0
+      },
+      "upskill_paths": [
+        "NCS-7311.0800",
+        "NCS-7315.1500",
+        "NCS-7315.1200",
+        "NCS-7315.1400",
+        "NCS-7315.1100"
+      ]
     },
     {
       "id": "NCS-7315.1500",
@@ -10824,8 +12231,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 1.0,
+        "skill_transferability": 2.5,
+        "digital_automation_exposure": 4.5,
+        "formalization_rate": 5.0,
+        "scarcity_risk": 3.0
+      },
+      "upskill_paths": [
+        "NCS-3119.1100",
+        "NCS-7311.0800",
+        "NCS-7315.1200",
+        "NCS-7315.1400",
+        "NCS-7315.1100"
+      ]
     },
     {
       "id": "NCS-7315.1200",
@@ -10840,8 +12260,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 1.0,
+        "skill_transferability": 2.5,
+        "digital_automation_exposure": 4.5,
+        "formalization_rate": 5.0,
+        "scarcity_risk": 3.0
+      },
+      "upskill_paths": [
+        "NCS-3119.1100",
+        "NCS-7311.0800",
+        "NCS-7315.1500",
+        "NCS-7315.1400",
+        "NCS-7315.1100"
+      ]
     },
     {
       "id": "NCS-7315.1400",
@@ -10856,8 +12289,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 1.0,
+        "skill_transferability": 2.5,
+        "digital_automation_exposure": 4.5,
+        "formalization_rate": 5.0,
+        "scarcity_risk": 3.0
+      },
+      "upskill_paths": [
+        "NCS-3119.1100",
+        "NCS-7311.0800",
+        "NCS-7315.1500",
+        "NCS-7315.1200",
+        "NCS-7315.1100"
+      ]
     },
     {
       "id": "NCS-7311.0800",
@@ -10872,8 +12318,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.5,
+        "transition_demand": 1.5,
+        "skill_transferability": 3.5,
+        "digital_automation_exposure": 3.5,
+        "formalization_rate": 5.0,
+        "scarcity_risk": 3.5
+      },
+      "upskill_paths": [
+        "NCS-3119.1100",
+        "NCS-7315.1500",
+        "NCS-7315.1200",
+        "NCS-7315.1400",
+        "NCS-7315.1100"
+      ]
     },
     {
       "id": "NCS-7315.1100",
@@ -10888,8 +12347,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 1.0,
+        "skill_transferability": 2.5,
+        "digital_automation_exposure": 4.5,
+        "formalization_rate": 5.0,
+        "scarcity_risk": 3.0
+      },
+      "upskill_paths": [
+        "NCS-3119.1100",
+        "NCS-7311.0800",
+        "NCS-7315.1500",
+        "NCS-7315.1200",
+        "NCS-7315.1400"
+      ]
     },
     {
       "id": "NCS-5211.0100",
@@ -10904,8 +12376,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 1.0,
+        "skill_transferability": 1.5,
+        "digital_automation_exposure": 7.0,
+        "formalization_rate": 5.0,
+        "scarcity_risk": 1.5
+      },
+      "upskill_paths": [
+        "NCS-3323.0100",
+        "NCS-1420.0300",
+        "NCS-3323.0200",
+        "NCS-1120.2200",
+        "NCS-1120.2100"
+      ]
     },
     {
       "id": "NCS-3323.0100",
@@ -10920,8 +12405,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.5,
+        "transition_demand": 2.0,
+        "skill_transferability": 3.0,
+        "digital_automation_exposure": 5.5,
+        "formalization_rate": 6.0,
+        "scarcity_risk": 2.0
+      },
+      "upskill_paths": [
+        "NCS-1420.0300",
+        "NCS-3323.0200",
+        "NCS-1120.2200",
+        "NCS-1120.2100",
+        "NCS-1420.0500"
+      ]
     },
     {
       "id": "NCS-3322.0300",
@@ -10936,8 +12434,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 1.0,
+        "skill_transferability": 1.5,
+        "digital_automation_exposure": 6.0,
+        "formalization_rate": 4.5,
+        "scarcity_risk": 1.5
+      },
+      "upskill_paths": [
+        "NCS-3323.0100",
+        "NCS-1420.0300",
+        "NCS-3323.0200",
+        "NCS-1120.2200",
+        "NCS-1120.2100"
+      ]
     },
     {
       "id": "NCS-4211.0301",
@@ -10952,8 +12463,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 1.0,
+        "skill_transferability": 1.5,
+        "digital_automation_exposure": 8.5,
+        "formalization_rate": 4.5,
+        "scarcity_risk": 1.0
+      },
+      "upskill_paths": [
+        "NCS-3323.0100",
+        "NCS-1420.0300",
+        "NCS-3323.0200",
+        "NCS-1120.2200",
+        "NCS-1120.2100"
+      ]
     },
     {
       "id": "NCS-4211.0100",
@@ -10968,8 +12492,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 1.0,
+        "skill_transferability": 1.5,
+        "digital_automation_exposure": 8.5,
+        "formalization_rate": 4.5,
+        "scarcity_risk": 1.0
+      },
+      "upskill_paths": [
+        "NCS-3323.0100",
+        "NCS-1420.0300",
+        "NCS-3323.0200",
+        "NCS-1120.2200",
+        "NCS-1120.2100"
+      ]
     },
     {
       "id": "NCS-9623.0200",
@@ -10984,8 +12521,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 1.0,
+        "skill_transferability": 1.0,
+        "digital_automation_exposure": 8.0,
+        "formalization_rate": 3.0,
+        "scarcity_risk": 1.0
+      },
+      "upskill_paths": [
+        "NCS-3323.0100",
+        "NCS-1420.0300",
+        "NCS-3323.0200",
+        "NCS-1120.2200",
+        "NCS-1120.2100"
+      ]
     },
     {
       "id": "NCS-3322.0200",
@@ -11000,8 +12550,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 1.0,
+        "skill_transferability": 1.5,
+        "digital_automation_exposure": 6.0,
+        "formalization_rate": 4.5,
+        "scarcity_risk": 1.5
+      },
+      "upskill_paths": [
+        "NCS-3323.0100",
+        "NCS-1420.0300",
+        "NCS-3323.0200",
+        "NCS-1120.2200",
+        "NCS-1120.2100"
+      ]
     },
     {
       "id": "NCS-4225.0100",
@@ -11016,8 +12579,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 1.0,
+        "skill_transferability": 1.5,
+        "digital_automation_exposure": 7.5,
+        "formalization_rate": 5.0,
+        "scarcity_risk": 1.5
+      },
+      "upskill_paths": [
+        "NCS-3323.0100",
+        "NCS-1420.0300",
+        "NCS-3323.0200",
+        "NCS-1120.2200",
+        "NCS-1120.2100"
+      ]
     },
     {
       "id": "NCS-5211.0402",
@@ -11032,8 +12608,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 1.0,
+        "skill_transferability": 2.0,
+        "digital_automation_exposure": 8.0,
+        "formalization_rate": 5.0,
+        "scarcity_risk": 1.5
+      },
+      "upskill_paths": [
+        "NCS-3323.0100",
+        "NCS-1420.0300",
+        "NCS-3323.0200",
+        "NCS-1120.2200",
+        "NCS-1120.2100"
+      ]
     },
     {
       "id": "NCS-1120.2200",
@@ -11048,8 +12637,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 1.5,
+        "skill_transferability": 2.0,
+        "digital_automation_exposure": 4.0,
+        "formalization_rate": 7.0,
+        "scarcity_risk": 2.0
+      },
+      "upskill_paths": [
+        "NCS-3323.0100",
+        "NCS-1420.0300",
+        "NCS-3323.0200",
+        "NCS-1120.2100",
+        "NCS-1420.0500"
+      ]
     },
     {
       "id": "NCS-1120.2100",
@@ -11064,8 +12666,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 1.5,
+        "skill_transferability": 2.0,
+        "digital_automation_exposure": 4.0,
+        "formalization_rate": 7.0,
+        "scarcity_risk": 2.0
+      },
+      "upskill_paths": [
+        "NCS-3323.0100",
+        "NCS-1420.0300",
+        "NCS-3323.0200",
+        "NCS-1120.2200",
+        "NCS-1420.0500"
+      ]
     },
     {
       "id": "NCS-1420.0500",
@@ -11080,8 +12695,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 1.5,
+        "skill_transferability": 2.0,
+        "digital_automation_exposure": 4.0,
+        "formalization_rate": 7.0,
+        "scarcity_risk": 2.0
+      },
+      "upskill_paths": [
+        "NCS-3323.0100",
+        "NCS-1420.0300",
+        "NCS-3323.0200",
+        "NCS-1120.2200",
+        "NCS-1120.2100"
+      ]
     },
     {
       "id": "NCS-1420.0400",
@@ -11096,8 +12724,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 1.5,
+        "skill_transferability": 2.0,
+        "digital_automation_exposure": 4.0,
+        "formalization_rate": 7.0,
+        "scarcity_risk": 2.0
+      },
+      "upskill_paths": [
+        "NCS-3323.0100",
+        "NCS-1420.0300",
+        "NCS-3323.0200",
+        "NCS-1120.2200",
+        "NCS-1120.2100"
+      ]
     },
     {
       "id": "NCS-5243.0300",
@@ -11112,8 +12753,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 1.0,
+        "skill_transferability": 1.5,
+        "digital_automation_exposure": 5.5,
+        "formalization_rate": 2.5,
+        "scarcity_risk": 1.0
+      },
+      "upskill_paths": [
+        "NCS-3323.0100",
+        "NCS-1420.0300",
+        "NCS-3323.0200",
+        "NCS-1120.2200",
+        "NCS-1120.2100"
+      ]
     },
     {
       "id": "NCS-1420.0300",
@@ -11128,8 +12782,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 2.5,
+        "skill_transferability": 2.5,
+        "digital_automation_exposure": 4.0,
+        "formalization_rate": 7.0,
+        "scarcity_risk": 2.5
+      },
+      "upskill_paths": [
+        "NCS-3323.0100",
+        "NCS-3323.0200",
+        "NCS-1120.2200",
+        "NCS-1120.2100",
+        "NCS-1420.0500"
+      ]
     },
     {
       "id": "NCS-1420.0200",
@@ -11144,8 +12811,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 1.5,
+        "skill_transferability": 2.0,
+        "digital_automation_exposure": 4.0,
+        "formalization_rate": 7.0,
+        "scarcity_risk": 2.0
+      },
+      "upskill_paths": [
+        "NCS-3323.0100",
+        "NCS-1420.0300",
+        "NCS-3323.0200",
+        "NCS-1120.2200",
+        "NCS-1120.2100"
+      ]
     },
     {
       "id": "NCS-1420.0100",
@@ -11160,8 +12840,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 1.5,
+        "skill_transferability": 2.0,
+        "digital_automation_exposure": 4.0,
+        "formalization_rate": 7.0,
+        "scarcity_risk": 2.0
+      },
+      "upskill_paths": [
+        "NCS-3323.0100",
+        "NCS-1420.0300",
+        "NCS-3323.0200",
+        "NCS-1120.2200",
+        "NCS-1120.2100"
+      ]
     },
     {
       "id": "NCS-5212.0100",
@@ -11176,8 +12869,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 1.0,
+        "skill_transferability": 1.5,
+        "digital_automation_exposure": 5.5,
+        "formalization_rate": 2.5,
+        "scarcity_risk": 1.0
+      },
+      "upskill_paths": [
+        "NCS-3323.0100",
+        "NCS-1420.0300",
+        "NCS-3323.0200",
+        "NCS-1120.2200",
+        "NCS-1120.2100"
+      ]
     },
     {
       "id": "NCS-5243.0100",
@@ -11192,8 +12898,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 1.0,
+        "skill_transferability": 1.5,
+        "digital_automation_exposure": 5.5,
+        "formalization_rate": 2.5,
+        "scarcity_risk": 1.0
+      },
+      "upskill_paths": [
+        "NCS-3323.0100",
+        "NCS-1420.0300",
+        "NCS-3323.0200",
+        "NCS-1120.2200",
+        "NCS-1120.2100"
+      ]
     },
     {
       "id": "NCS-5243.0200",
@@ -11208,8 +12927,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 1.0,
+        "skill_transferability": 1.5,
+        "digital_automation_exposure": 5.5,
+        "formalization_rate": 2.5,
+        "scarcity_risk": 1.0
+      },
+      "upskill_paths": [
+        "NCS-3323.0100",
+        "NCS-1420.0300",
+        "NCS-3323.0200",
+        "NCS-1120.2200",
+        "NCS-1120.2100"
+      ]
     },
     {
       "id": "NCS-3322.1400",
@@ -11224,8 +12956,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 1.0,
+        "skill_transferability": 1.5,
+        "digital_automation_exposure": 6.0,
+        "formalization_rate": 4.5,
+        "scarcity_risk": 1.5
+      },
+      "upskill_paths": [
+        "NCS-3323.0100",
+        "NCS-1420.0300",
+        "NCS-3323.0200",
+        "NCS-1120.2200",
+        "NCS-1120.2100"
+      ]
     },
     {
       "id": "NCS-3323.0200",
@@ -11240,8 +12985,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.5,
+        "transition_demand": 2.0,
+        "skill_transferability": 3.0,
+        "digital_automation_exposure": 5.5,
+        "formalization_rate": 6.0,
+        "scarcity_risk": 2.0
+      },
+      "upskill_paths": [
+        "NCS-3323.0100",
+        "NCS-1420.0300",
+        "NCS-1120.2200",
+        "NCS-1120.2100",
+        "NCS-1420.0500"
+      ]
     },
     {
       "id": "NCS-5242.0102",
@@ -11256,8 +13014,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 1.0,
+        "skill_transferability": 1.5,
+        "digital_automation_exposure": 6.5,
+        "formalization_rate": 4.0,
+        "scarcity_risk": 1.0
+      },
+      "upskill_paths": [
+        "NCS-3323.0100",
+        "NCS-1420.0300",
+        "NCS-3323.0200",
+        "NCS-1120.2200",
+        "NCS-1120.2100"
+      ]
     },
     {
       "id": "NCS-1221.0200",
@@ -11272,8 +13043,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 1.5,
+        "skill_transferability": 2.0,
+        "digital_automation_exposure": 4.0,
+        "formalization_rate": 7.0,
+        "scarcity_risk": 2.0
+      },
+      "upskill_paths": [
+        "NCS-3323.0100",
+        "NCS-1420.0300",
+        "NCS-3323.0200",
+        "NCS-1120.2200",
+        "NCS-1120.2100"
+      ]
     },
     {
       "id": "NCS-1221.0100",
@@ -11288,8 +13072,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 1.5,
+        "skill_transferability": 2.0,
+        "digital_automation_exposure": 4.0,
+        "formalization_rate": 7.0,
+        "scarcity_risk": 2.0
+      },
+      "upskill_paths": [
+        "NCS-3323.0100",
+        "NCS-1420.0300",
+        "NCS-3323.0200",
+        "NCS-1120.2200",
+        "NCS-1120.2100"
+      ]
     },
     {
       "id": "NCS-3322.0500",
@@ -11304,8 +13101,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 1.0,
+        "skill_transferability": 1.5,
+        "digital_automation_exposure": 6.0,
+        "formalization_rate": 4.5,
+        "scarcity_risk": 1.5
+      },
+      "upskill_paths": [
+        "NCS-3323.0100",
+        "NCS-1420.0300",
+        "NCS-3323.0200",
+        "NCS-1120.2200",
+        "NCS-1120.2100"
+      ]
     },
     {
       "id": "NCS-5223.0100",
@@ -11320,8 +13130,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 1.0,
+        "skill_transferability": 1.5,
+        "digital_automation_exposure": 6.5,
+        "formalization_rate": 4.0,
+        "scarcity_risk": 1.0
+      },
+      "upskill_paths": [
+        "NCS-3323.0100",
+        "NCS-1420.0300",
+        "NCS-3323.0200",
+        "NCS-1120.2200",
+        "NCS-1120.2100"
+      ]
     },
     {
       "id": "NCS-5211.0200",
@@ -11336,8 +13159,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 1.0,
+        "skill_transferability": 1.5,
+        "digital_automation_exposure": 6.5,
+        "formalization_rate": 4.0,
+        "scarcity_risk": 1.0
+      },
+      "upskill_paths": [
+        "NCS-3323.0100",
+        "NCS-1420.0300",
+        "NCS-3323.0200",
+        "NCS-1120.2200",
+        "NCS-1120.2100"
+      ]
     },
     {
       "id": "NCS-4321.0501",
@@ -11352,8 +13188,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 1.0,
+        "skill_transferability": 1.5,
+        "digital_automation_exposure": 6.5,
+        "formalization_rate": 4.0,
+        "scarcity_risk": 1.0
+      },
+      "upskill_paths": [
+        "NCS-3323.0100",
+        "NCS-1420.0300",
+        "NCS-3323.0200",
+        "NCS-1120.2200",
+        "NCS-1120.2100"
+      ]
     },
     {
       "id": "NCS-5211.0300",
@@ -11368,8 +13217,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 1.0,
+        "skill_transferability": 1.5,
+        "digital_automation_exposure": 8.5,
+        "formalization_rate": 4.0,
+        "scarcity_risk": 1.0
+      },
+      "upskill_paths": [
+        "NCS-3323.0100",
+        "NCS-1420.0300",
+        "NCS-3323.0200",
+        "NCS-1120.2200",
+        "NCS-1120.2100"
+      ]
     },
     {
       "id": "NCS-5223.0105",
@@ -11384,8 +13246,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 1.0,
+        "skill_transferability": 1.5,
+        "digital_automation_exposure": 6.5,
+        "formalization_rate": 4.0,
+        "scarcity_risk": 1.0
+      },
+      "upskill_paths": [
+        "NCS-3323.0100",
+        "NCS-1420.0300",
+        "NCS-3323.0200",
+        "NCS-1120.2200",
+        "NCS-1120.2100"
+      ]
     },
     {
       "id": "NCS-9623.0100",
@@ -11400,8 +13275,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 1.0,
+        "skill_transferability": 1.0,
+        "digital_automation_exposure": 8.0,
+        "formalization_rate": 3.0,
+        "scarcity_risk": 1.0
+      },
+      "upskill_paths": [
+        "NCS-3323.0100",
+        "NCS-1420.0300",
+        "NCS-3323.0200",
+        "NCS-1120.2200",
+        "NCS-1120.2100"
+      ]
     },
     {
       "id": "NCS-1120.2000",
@@ -11416,8 +13304,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 1.5,
+        "skill_transferability": 2.0,
+        "digital_automation_exposure": 4.0,
+        "formalization_rate": 7.0,
+        "scarcity_risk": 2.0
+      },
+      "upskill_paths": [
+        "NCS-3323.0100",
+        "NCS-1420.0300",
+        "NCS-3323.0200",
+        "NCS-1120.2200",
+        "NCS-1120.2100"
+      ]
     },
     {
       "id": "NCS-1120.1900",
@@ -11432,8 +13333,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 1.5,
+        "skill_transferability": 2.0,
+        "digital_automation_exposure": 4.0,
+        "formalization_rate": 7.0,
+        "scarcity_risk": 2.0
+      },
+      "upskill_paths": [
+        "NCS-3323.0100",
+        "NCS-1420.0300",
+        "NCS-3323.0200",
+        "NCS-1120.2200",
+        "NCS-1120.2100"
+      ]
     },
     {
       "id": "NCS-8122.7200",
@@ -11448,8 +13362,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 1.0,
+        "skill_transferability": 2.5,
+        "digital_automation_exposure": 5.5,
+        "formalization_rate": 5.0,
+        "scarcity_risk": 2.0
+      },
+      "upskill_paths": [
+        "NCS-8171.0900",
+        "NCS-8171.0800",
+        "NCS-3139.0100",
+        "NCS-8171.0600",
+        "NCS-8171.0700"
+      ]
     },
     {
       "id": "NCS-8171.1100",
@@ -11464,8 +13391,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 1.0,
+        "skill_transferability": 2.5,
+        "digital_automation_exposure": 5.5,
+        "formalization_rate": 4.0,
+        "scarcity_risk": 1.5
+      },
+      "upskill_paths": [
+        "NCS-8171.0900",
+        "NCS-8171.0800",
+        "NCS-3139.0100",
+        "NCS-8171.0600",
+        "NCS-8171.0700"
+      ]
     },
     {
       "id": "NCS-3139.0200",
@@ -11480,8 +13420,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 1.0,
+        "skill_transferability": 2.5,
+        "digital_automation_exposure": 5.0,
+        "formalization_rate": 4.5,
+        "scarcity_risk": 2.0
+      },
+      "upskill_paths": [
+        "NCS-8171.0900",
+        "NCS-8171.0800",
+        "NCS-3139.0100",
+        "NCS-8171.0600",
+        "NCS-8171.0700"
+      ]
     },
     {
       "id": "NCS-8122.7400",
@@ -11496,8 +13449,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 1.0,
+        "skill_transferability": 2.5,
+        "digital_automation_exposure": 5.5,
+        "formalization_rate": 5.0,
+        "scarcity_risk": 2.0
+      },
+      "upskill_paths": [
+        "NCS-8171.0900",
+        "NCS-8171.0800",
+        "NCS-3139.0100",
+        "NCS-8171.0600",
+        "NCS-8171.0700"
+      ]
     },
     {
       "id": "NCS-8171.0900",
@@ -11512,8 +13478,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 2.0,
+        "transition_demand": 1.5,
+        "skill_transferability": 4.0,
+        "digital_automation_exposure": 4.5,
+        "formalization_rate": 5.0,
+        "scarcity_risk": 2.5
+      },
+      "upskill_paths": [
+        "NCS-8171.0800",
+        "NCS-3139.0100",
+        "NCS-8171.0600",
+        "NCS-8171.0700",
+        "NCS-3122.2600"
+      ]
     },
     {
       "id": "NCS-8171.2400",
@@ -11528,8 +13507,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 1.0,
+        "skill_transferability": 1.5,
+        "digital_automation_exposure": 2.0,
+        "formalization_rate": 2.0,
+        "scarcity_risk": 2.0
+      },
+      "upskill_paths": [
+        "NCS-8171.0900",
+        "NCS-8171.0800",
+        "NCS-3139.0100",
+        "NCS-8171.0600",
+        "NCS-8171.0700"
+      ]
     },
     {
       "id": "NCS-3139.0500",
@@ -11544,8 +13536,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 1.0,
+        "skill_transferability": 2.5,
+        "digital_automation_exposure": 5.5,
+        "formalization_rate": 4.5,
+        "scarcity_risk": 2.0
+      },
+      "upskill_paths": [
+        "NCS-8171.0900",
+        "NCS-8171.0800",
+        "NCS-3139.0100",
+        "NCS-8171.0600",
+        "NCS-8171.0700"
+      ]
     },
     {
       "id": "NCS-8143.0100",
@@ -11560,8 +13565,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 1.0,
+        "skill_transferability": 2.0,
+        "digital_automation_exposure": 6.0,
+        "formalization_rate": 3.5,
+        "scarcity_risk": 1.5
+      },
+      "upskill_paths": [
+        "NCS-8171.0900",
+        "NCS-8171.0800",
+        "NCS-3139.0100",
+        "NCS-8171.0600",
+        "NCS-8171.0700"
+      ]
     },
     {
       "id": "NCS-8171.0800",
@@ -11576,8 +13594,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 2.0,
+        "transition_demand": 1.5,
+        "skill_transferability": 4.0,
+        "digital_automation_exposure": 4.5,
+        "formalization_rate": 5.0,
+        "scarcity_risk": 2.5
+      },
+      "upskill_paths": [
+        "NCS-8171.0900",
+        "NCS-3139.0100",
+        "NCS-8171.0600",
+        "NCS-8171.0700",
+        "NCS-3122.2600"
+      ]
     },
     {
       "id": "NCS-8143.0300",
@@ -11592,8 +13623,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 1.0,
+        "skill_transferability": 2.0,
+        "digital_automation_exposure": 6.0,
+        "formalization_rate": 3.5,
+        "scarcity_risk": 1.5
+      },
+      "upskill_paths": [
+        "NCS-8171.0900",
+        "NCS-8171.0800",
+        "NCS-3139.0100",
+        "NCS-8171.0600",
+        "NCS-8171.0700"
+      ]
     },
     {
       "id": "NCS-8171.0100",
@@ -11608,8 +13652,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 1.0,
+        "skill_transferability": 2.5,
+        "digital_automation_exposure": 5.5,
+        "formalization_rate": 4.0,
+        "scarcity_risk": 1.5
+      },
+      "upskill_paths": [
+        "NCS-8171.0900",
+        "NCS-8171.0800",
+        "NCS-3139.0100",
+        "NCS-8171.0600",
+        "NCS-8171.0700"
+      ]
     },
     {
       "id": "NCS-8171.2500",
@@ -11624,8 +13681,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 1.0,
+        "skill_transferability": 2.5,
+        "digital_automation_exposure": 5.5,
+        "formalization_rate": 4.5,
+        "scarcity_risk": 2.0
+      },
+      "upskill_paths": [
+        "NCS-8171.0900",
+        "NCS-8171.0800",
+        "NCS-3139.0100",
+        "NCS-8171.0600",
+        "NCS-8171.0700"
+      ]
     },
     {
       "id": "NCS-8171.1600",
@@ -11640,8 +13710,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 1.0,
+        "skill_transferability": 2.5,
+        "digital_automation_exposure": 5.5,
+        "formalization_rate": 4.0,
+        "scarcity_risk": 1.5
+      },
+      "upskill_paths": [
+        "NCS-8171.0900",
+        "NCS-8171.0800",
+        "NCS-3139.0100",
+        "NCS-8171.0600",
+        "NCS-8171.0700"
+      ]
     },
     {
       "id": "NCS-8171.0500",
@@ -11656,8 +13739,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 1.0,
+        "skill_transferability": 2.5,
+        "digital_automation_exposure": 5.5,
+        "formalization_rate": 4.0,
+        "scarcity_risk": 1.5
+      },
+      "upskill_paths": [
+        "NCS-8171.0900",
+        "NCS-8171.0800",
+        "NCS-3139.0100",
+        "NCS-8171.0600",
+        "NCS-8171.0700"
+      ]
     },
     {
       "id": "NCS-3139.0100",
@@ -11672,8 +13768,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 2.0,
+        "transition_demand": 1.5,
+        "skill_transferability": 4.0,
+        "digital_automation_exposure": 4.5,
+        "formalization_rate": 5.0,
+        "scarcity_risk": 2.5
+      },
+      "upskill_paths": [
+        "NCS-8171.0900",
+        "NCS-8171.0800",
+        "NCS-8171.0600",
+        "NCS-8171.0700",
+        "NCS-3122.2600"
+      ]
     },
     {
       "id": "NCS-8171.2100",
@@ -11688,8 +13797,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 1.0,
+        "skill_transferability": 1.5,
+        "digital_automation_exposure": 2.0,
+        "formalization_rate": 2.0,
+        "scarcity_risk": 2.0
+      },
+      "upskill_paths": [
+        "NCS-8171.0900",
+        "NCS-8171.0800",
+        "NCS-3139.0100",
+        "NCS-8171.0600",
+        "NCS-8171.0700"
+      ]
     },
     {
       "id": "NCS-8143.0200",
@@ -11704,8 +13826,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 1.0,
+        "skill_transferability": 2.0,
+        "digital_automation_exposure": 6.0,
+        "formalization_rate": 3.5,
+        "scarcity_risk": 1.5
+      },
+      "upskill_paths": [
+        "NCS-8171.0900",
+        "NCS-8171.0800",
+        "NCS-3139.0100",
+        "NCS-8171.0600",
+        "NCS-8171.0700"
+      ]
     },
     {
       "id": "NCS-8171.1700",
@@ -11720,8 +13855,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 1.0,
+        "skill_transferability": 2.5,
+        "digital_automation_exposure": 5.5,
+        "formalization_rate": 4.5,
+        "scarcity_risk": 2.0
+      },
+      "upskill_paths": [
+        "NCS-8171.0900",
+        "NCS-8171.0800",
+        "NCS-3139.0100",
+        "NCS-8171.0600",
+        "NCS-8171.0700"
+      ]
     },
     {
       "id": "NCS-8143.0400",
@@ -11736,8 +13884,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 1.0,
+        "skill_transferability": 2.0,
+        "digital_automation_exposure": 6.0,
+        "formalization_rate": 3.5,
+        "scarcity_risk": 1.5
+      },
+      "upskill_paths": [
+        "NCS-8171.0900",
+        "NCS-8171.0800",
+        "NCS-3139.0100",
+        "NCS-8171.0600",
+        "NCS-8171.0700"
+      ]
     },
     {
       "id": "NCS-8171.0200",
@@ -11752,8 +13913,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 1.0,
+        "skill_transferability": 2.5,
+        "digital_automation_exposure": 5.5,
+        "formalization_rate": 4.0,
+        "scarcity_risk": 1.5
+      },
+      "upskill_paths": [
+        "NCS-8171.0900",
+        "NCS-8171.0800",
+        "NCS-3139.0100",
+        "NCS-8171.0600",
+        "NCS-8171.0700"
+      ]
     },
     {
       "id": "NCS-8171.0600",
@@ -11768,8 +13942,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 2.0,
+        "transition_demand": 1.5,
+        "skill_transferability": 4.0,
+        "digital_automation_exposure": 4.5,
+        "formalization_rate": 5.0,
+        "scarcity_risk": 2.5
+      },
+      "upskill_paths": [
+        "NCS-8171.0900",
+        "NCS-8171.0800",
+        "NCS-3139.0100",
+        "NCS-8171.0700",
+        "NCS-3122.2600"
+      ]
     },
     {
       "id": "NCS-8171.1200",
@@ -11784,8 +13971,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.5,
+        "transition_demand": 1.0,
+        "skill_transferability": 3.0,
+        "digital_automation_exposure": 5.5,
+        "formalization_rate": 5.0,
+        "scarcity_risk": 2.0
+      },
+      "upskill_paths": [
+        "NCS-8171.0900",
+        "NCS-8171.0800",
+        "NCS-3139.0100",
+        "NCS-8171.0600",
+        "NCS-8171.0700"
+      ]
     },
     {
       "id": "NCS-3139.0400",
@@ -11800,8 +14000,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.5,
+        "transition_demand": 1.0,
+        "skill_transferability": 3.0,
+        "digital_automation_exposure": 5.5,
+        "formalization_rate": 5.0,
+        "scarcity_risk": 2.0
+      },
+      "upskill_paths": [
+        "NCS-8171.0900",
+        "NCS-8171.0800",
+        "NCS-3139.0100",
+        "NCS-8171.0600",
+        "NCS-8171.0700"
+      ]
     },
     {
       "id": "NCS-3139.0300",
@@ -11816,8 +14029,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.5,
+        "transition_demand": 1.0,
+        "skill_transferability": 3.0,
+        "digital_automation_exposure": 5.5,
+        "formalization_rate": 5.0,
+        "scarcity_risk": 2.0
+      },
+      "upskill_paths": [
+        "NCS-8171.0900",
+        "NCS-8171.0800",
+        "NCS-3139.0100",
+        "NCS-8171.0600",
+        "NCS-8171.0700"
+      ]
     },
     {
       "id": "NCS-7522.2100",
@@ -11832,8 +14058,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 1.0,
+        "skill_transferability": 2.5,
+        "digital_automation_exposure": 5.0,
+        "formalization_rate": 4.0,
+        "scarcity_risk": 2.0
+      },
+      "upskill_paths": [
+        "NCS-8171.0900",
+        "NCS-8171.0800",
+        "NCS-3139.0100",
+        "NCS-8171.0600",
+        "NCS-8171.0700"
+      ]
     },
     {
       "id": "NCS-8143.0500",
@@ -11848,8 +14087,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 1.0,
+        "skill_transferability": 2.0,
+        "digital_automation_exposure": 2.5,
+        "formalization_rate": 2.0,
+        "scarcity_risk": 2.0
+      },
+      "upskill_paths": [
+        "NCS-8171.0900",
+        "NCS-8171.0800",
+        "NCS-3139.0100",
+        "NCS-8171.0600",
+        "NCS-8171.0700"
+      ]
     },
     {
       "id": "NCS-8132.0900",
@@ -11864,8 +14116,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 1.0,
+        "skill_transferability": 2.0,
+        "digital_automation_exposure": 6.0,
+        "formalization_rate": 5.0,
+        "scarcity_risk": 2.0
+      },
+      "upskill_paths": [
+        "NCS-8171.0900",
+        "NCS-8171.0800",
+        "NCS-3139.0100",
+        "NCS-8171.0600",
+        "NCS-8171.0700"
+      ]
     },
     {
       "id": "NCS-8171.2200",
@@ -11880,8 +14145,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 1.0,
+        "skill_transferability": 1.5,
+        "digital_automation_exposure": 2.0,
+        "formalization_rate": 2.0,
+        "scarcity_risk": 2.0
+      },
+      "upskill_paths": [
+        "NCS-8171.0900",
+        "NCS-8171.0800",
+        "NCS-3139.0100",
+        "NCS-8171.0600",
+        "NCS-8171.0700"
+      ]
     },
     {
       "id": "NCS-2621.0600",
@@ -11896,8 +14174,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 1.0,
+        "skill_transferability": 1.5,
+        "digital_automation_exposure": 2.5,
+        "formalization_rate": 5.0,
+        "scarcity_risk": 3.5
+      },
+      "upskill_paths": [
+        "NCS-8171.0900",
+        "NCS-8171.0800",
+        "NCS-3139.0100",
+        "NCS-8171.0600",
+        "NCS-8171.0700"
+      ]
     },
     {
       "id": "NCS-8122.7500",
@@ -11912,8 +14203,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 1.0,
+        "skill_transferability": 2.5,
+        "digital_automation_exposure": 5.5,
+        "formalization_rate": 5.0,
+        "scarcity_risk": 2.0
+      },
+      "upskill_paths": [
+        "NCS-8171.0900",
+        "NCS-8171.0800",
+        "NCS-3139.0100",
+        "NCS-8171.0600",
+        "NCS-8171.0700"
+      ]
     },
     {
       "id": "NCS-8122.7100",
@@ -11928,8 +14232,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 1.0,
+        "skill_transferability": 2.5,
+        "digital_automation_exposure": 5.5,
+        "formalization_rate": 5.0,
+        "scarcity_risk": 2.0
+      },
+      "upskill_paths": [
+        "NCS-8171.0900",
+        "NCS-8171.0800",
+        "NCS-3139.0100",
+        "NCS-8171.0600",
+        "NCS-8171.0700"
+      ]
     },
     {
       "id": "NCS-8122.7300",
@@ -11944,8 +14261,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 1.0,
+        "skill_transferability": 2.5,
+        "digital_automation_exposure": 5.5,
+        "formalization_rate": 5.0,
+        "scarcity_risk": 2.0
+      },
+      "upskill_paths": [
+        "NCS-8171.0900",
+        "NCS-8171.0800",
+        "NCS-3139.0100",
+        "NCS-8171.0600",
+        "NCS-8171.0700"
+      ]
     },
     {
       "id": "NCS-8171.0400",
@@ -11960,8 +14290,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 1.0,
+        "skill_transferability": 2.5,
+        "digital_automation_exposure": 5.5,
+        "formalization_rate": 4.0,
+        "scarcity_risk": 1.5
+      },
+      "upskill_paths": [
+        "NCS-8171.0900",
+        "NCS-8171.0800",
+        "NCS-3139.0100",
+        "NCS-8171.0600",
+        "NCS-8171.0700"
+      ]
     },
     {
       "id": "NCS-3122.2600",
@@ -11976,8 +14319,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.5,
+        "transition_demand": 1.5,
+        "skill_transferability": 3.5,
+        "digital_automation_exposure": 3.5,
+        "formalization_rate": 6.5,
+        "scarcity_risk": 2.5
+      },
+      "upskill_paths": [
+        "NCS-8171.0900",
+        "NCS-8171.0800",
+        "NCS-3139.0100",
+        "NCS-8171.0600",
+        "NCS-8171.0700"
+      ]
     },
     {
       "id": "NCS-3122.1100",
@@ -11992,8 +14348,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.5,
+        "transition_demand": 1.5,
+        "skill_transferability": 3.5,
+        "digital_automation_exposure": 3.5,
+        "formalization_rate": 6.5,
+        "scarcity_risk": 2.5
+      },
+      "upskill_paths": [
+        "NCS-8171.0900",
+        "NCS-8171.0800",
+        "NCS-3139.0100",
+        "NCS-8171.0600",
+        "NCS-8171.0700"
+      ]
     },
     {
       "id": "NCS-3122.1000",
@@ -12008,8 +14377,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.5,
+        "transition_demand": 1.5,
+        "skill_transferability": 3.5,
+        "digital_automation_exposure": 3.5,
+        "formalization_rate": 6.5,
+        "scarcity_risk": 2.5
+      },
+      "upskill_paths": [
+        "NCS-8171.0900",
+        "NCS-8171.0800",
+        "NCS-3139.0100",
+        "NCS-8171.0600",
+        "NCS-8171.0700"
+      ]
     },
     {
       "id": "NCS-8171.1900",
@@ -12024,8 +14406,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 1.0,
+        "skill_transferability": 1.5,
+        "digital_automation_exposure": 2.0,
+        "formalization_rate": 2.0,
+        "scarcity_risk": 2.0
+      },
+      "upskill_paths": [
+        "NCS-8171.0900",
+        "NCS-8171.0800",
+        "NCS-3139.0100",
+        "NCS-8171.0600",
+        "NCS-8171.0700"
+      ]
     },
     {
       "id": "NCS-8171.2000",
@@ -12040,8 +14435,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 1.0,
+        "skill_transferability": 1.5,
+        "digital_automation_exposure": 2.0,
+        "formalization_rate": 2.0,
+        "scarcity_risk": 2.0
+      },
+      "upskill_paths": [
+        "NCS-8171.0900",
+        "NCS-8171.0800",
+        "NCS-3139.0100",
+        "NCS-8171.0600",
+        "NCS-8171.0700"
+      ]
     },
     {
       "id": "NCS-8171.0700",
@@ -12056,8 +14464,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 2.0,
+        "transition_demand": 1.5,
+        "skill_transferability": 4.0,
+        "digital_automation_exposure": 4.5,
+        "formalization_rate": 5.0,
+        "scarcity_risk": 2.5
+      },
+      "upskill_paths": [
+        "NCS-8171.0900",
+        "NCS-8171.0800",
+        "NCS-3139.0100",
+        "NCS-8171.0600",
+        "NCS-3122.2600"
+      ]
     },
     {
       "id": "NCS-8171.1800",
@@ -12072,8 +14493,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 1.0,
+        "skill_transferability": 1.5,
+        "digital_automation_exposure": 2.0,
+        "formalization_rate": 2.0,
+        "scarcity_risk": 2.0
+      },
+      "upskill_paths": [
+        "NCS-8171.0900",
+        "NCS-8171.0800",
+        "NCS-3139.0100",
+        "NCS-8171.0600",
+        "NCS-8171.0700"
+      ]
     },
     {
       "id": "NCS-8171.1400",
@@ -12088,8 +14522,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 1.0,
+        "skill_transferability": 2.5,
+        "digital_automation_exposure": 5.5,
+        "formalization_rate": 4.5,
+        "scarcity_risk": 2.0
+      },
+      "upskill_paths": [
+        "NCS-8171.0900",
+        "NCS-8171.0800",
+        "NCS-3139.0100",
+        "NCS-8171.0600",
+        "NCS-8171.0700"
+      ]
     },
     {
       "id": "NCS-3432.0501",
@@ -12104,8 +14551,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 1.0,
+        "skill_transferability": 2.0,
+        "digital_automation_exposure": 4.0,
+        "formalization_rate": 4.0,
+        "scarcity_risk": 2.0
+      },
+      "upskill_paths": [
+        "NCS-2142.0501",
+        "NCS-7126.0201",
+        "NCS-7233.1301",
+        "NCS-7212.0101",
+        "NCS-2142.0301"
+      ]
     },
     {
       "id": "NCS-3123.0400",
@@ -12120,8 +14580,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 4.5,
+        "transition_demand": 5.0,
+        "skill_transferability": 5.5,
+        "digital_automation_exposure": 3.0,
+        "formalization_rate": 4.5,
+        "scarcity_risk": 4.5
+      },
+      "upskill_paths": [
+        "NCS-2142.0501",
+        "NCS-7126.0201",
+        "NCS-7233.1301",
+        "NCS-7212.0101",
+        "NCS-2142.0301"
+      ]
     },
     {
       "id": "NCS-2142.0501",
@@ -12136,8 +14609,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 5.5,
+        "transition_demand": 6.0,
+        "skill_transferability": 6.0,
+        "digital_automation_exposure": 3.0,
+        "formalization_rate": 7.5,
+        "scarcity_risk": 6.0
+      },
+      "upskill_paths": [
+        "NCS-7126.0201",
+        "NCS-7233.1301",
+        "NCS-7212.0101",
+        "NCS-2142.0301",
+        "NCS-3123.0400"
+      ]
     },
     {
       "id": "NCS-2142.1001",
@@ -12152,8 +14638,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 3.0,
+        "transition_demand": 3.5,
+        "skill_transferability": 4.5,
+        "digital_automation_exposure": 3.5,
+        "formalization_rate": 7.5,
+        "scarcity_risk": 4.5
+      },
+      "upskill_paths": [
+        "NCS-2142.0501",
+        "NCS-7126.0201",
+        "NCS-7233.1301",
+        "NCS-7212.0101",
+        "NCS-2142.0301"
+      ]
     },
     {
       "id": "NCS-9621.0301",
@@ -12168,8 +14667,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 2.0,
+        "transition_demand": 2.5,
+        "skill_transferability": 3.5,
+        "digital_automation_exposure": 3.5,
+        "formalization_rate": 6.0,
+        "scarcity_risk": 3.0
+      },
+      "upskill_paths": [
+        "NCS-2142.0501",
+        "NCS-7126.0201",
+        "NCS-7233.1301",
+        "NCS-7212.0101",
+        "NCS-2142.0301"
+      ]
     },
     {
       "id": "NCS-3322.5002",
@@ -12184,8 +14696,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 2.0,
+        "transition_demand": 2.5,
+        "skill_transferability": 3.5,
+        "digital_automation_exposure": 4.5,
+        "formalization_rate": 4.0,
+        "scarcity_risk": 2.5
+      },
+      "upskill_paths": [
+        "NCS-2142.0501",
+        "NCS-7126.0201",
+        "NCS-7233.1301",
+        "NCS-7212.0101",
+        "NCS-2142.0301"
+      ]
     },
     {
       "id": "NCS-7126.0101",
@@ -12200,8 +14725,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 4.0,
+        "transition_demand": 4.5,
+        "skill_transferability": 6.0,
+        "digital_automation_exposure": 2.5,
+        "formalization_rate": 3.0,
+        "scarcity_risk": 4.0
+      },
+      "upskill_paths": [
+        "NCS-2142.0501",
+        "NCS-7126.0201",
+        "NCS-7233.1301",
+        "NCS-7212.0101",
+        "NCS-2142.0301"
+      ]
     },
     {
       "id": "NCS-7126.0103",
@@ -12216,8 +14754,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 4.0,
+        "transition_demand": 4.5,
+        "skill_transferability": 6.0,
+        "digital_automation_exposure": 2.5,
+        "formalization_rate": 3.0,
+        "scarcity_risk": 4.0
+      },
+      "upskill_paths": [
+        "NCS-2142.0501",
+        "NCS-7126.0201",
+        "NCS-7233.1301",
+        "NCS-7212.0101",
+        "NCS-2142.0301"
+      ]
     },
     {
       "id": "NCS-7126.0105",
@@ -12232,8 +14783,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 3.0,
+        "transition_demand": 3.5,
+        "skill_transferability": 5.0,
+        "digital_automation_exposure": 2.5,
+        "formalization_rate": 2.5,
+        "scarcity_risk": 3.0
+      },
+      "upskill_paths": [
+        "NCS-2142.0501",
+        "NCS-7126.0201",
+        "NCS-7233.1301",
+        "NCS-7212.0101",
+        "NCS-2142.0301"
+      ]
     },
     {
       "id": "NCS-7126.0104",
@@ -12248,8 +14812,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 3.0,
+        "transition_demand": 3.5,
+        "skill_transferability": 5.0,
+        "digital_automation_exposure": 2.5,
+        "formalization_rate": 2.5,
+        "scarcity_risk": 3.0
+      },
+      "upskill_paths": [
+        "NCS-2142.0501",
+        "NCS-7126.0201",
+        "NCS-7233.1301",
+        "NCS-7212.0101",
+        "NCS-2142.0301"
+      ]
     },
     {
       "id": "NCS-7126.0107",
@@ -12264,8 +14841,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 4.5,
+        "transition_demand": 5.0,
+        "skill_transferability": 6.5,
+        "digital_automation_exposure": 2.5,
+        "formalization_rate": 3.5,
+        "scarcity_risk": 4.5
+      },
+      "upskill_paths": [
+        "NCS-2142.0501",
+        "NCS-7126.0201",
+        "NCS-7233.1301",
+        "NCS-7212.0101",
+        "NCS-2142.0301"
+      ]
     },
     {
       "id": "NCS-7126.0106",
@@ -12280,8 +14870,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 3.0,
+        "transition_demand": 3.5,
+        "skill_transferability": 5.0,
+        "digital_automation_exposure": 2.5,
+        "formalization_rate": 2.5,
+        "scarcity_risk": 3.0
+      },
+      "upskill_paths": [
+        "NCS-2142.0501",
+        "NCS-7126.0201",
+        "NCS-7233.1301",
+        "NCS-7212.0101",
+        "NCS-2142.0301"
+      ]
     },
     {
       "id": "NCS-7126.0102",
@@ -12296,8 +14899,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 4.0,
+        "transition_demand": 4.5,
+        "skill_transferability": 6.0,
+        "digital_automation_exposure": 2.5,
+        "formalization_rate": 3.0,
+        "scarcity_risk": 4.0
+      },
+      "upskill_paths": [
+        "NCS-2142.0501",
+        "NCS-7126.0201",
+        "NCS-7233.1301",
+        "NCS-7212.0101",
+        "NCS-2142.0301"
+      ]
     },
     {
       "id": "NCS-7233.1301",
@@ -12312,8 +14928,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 5.0,
+        "transition_demand": 5.5,
+        "skill_transferability": 6.5,
+        "digital_automation_exposure": 3.0,
+        "formalization_rate": 4.0,
+        "scarcity_risk": 5.0
+      },
+      "upskill_paths": [
+        "NCS-2142.0501",
+        "NCS-7126.0201",
+        "NCS-7212.0101",
+        "NCS-2142.0301",
+        "NCS-3123.0400"
+      ]
     },
     {
       "id": "NCS-7126.0301",
@@ -12328,8 +14957,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 3.0,
+        "transition_demand": 3.0,
+        "skill_transferability": 4.5,
+        "digital_automation_exposure": 2.5,
+        "formalization_rate": 3.0,
+        "scarcity_risk": 3.0
+      },
+      "upskill_paths": [
+        "NCS-2142.0501",
+        "NCS-7126.0201",
+        "NCS-7233.1301",
+        "NCS-7212.0101",
+        "NCS-2142.0301"
+      ]
     },
     {
       "id": "NCS-7212.0101",
@@ -12344,8 +14986,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 5.0,
+        "transition_demand": 5.5,
+        "skill_transferability": 6.5,
+        "digital_automation_exposure": 3.0,
+        "formalization_rate": 3.5,
+        "scarcity_risk": 5.5
+      },
+      "upskill_paths": [
+        "NCS-2142.0501",
+        "NCS-7126.0201",
+        "NCS-7233.1301",
+        "NCS-2142.0301",
+        "NCS-3123.0400"
+      ]
     },
     {
       "id": "NCS-7212.0102",
@@ -12360,8 +15015,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 3.5,
+        "transition_demand": 4.0,
+        "skill_transferability": 5.0,
+        "digital_automation_exposure": 3.0,
+        "formalization_rate": 3.0,
+        "scarcity_risk": 4.0
+      },
+      "upskill_paths": [
+        "NCS-2142.0501",
+        "NCS-7126.0201",
+        "NCS-7233.1301",
+        "NCS-7212.0101",
+        "NCS-2142.0301"
+      ]
     },
     {
       "id": "NCS-3123.0301",
@@ -12376,8 +15044,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 4.0,
+        "transition_demand": 4.5,
+        "skill_transferability": 5.5,
+        "digital_automation_exposure": 2.5,
+        "formalization_rate": 5.5,
+        "scarcity_risk": 4.5
+      },
+      "upskill_paths": [
+        "NCS-2142.0501",
+        "NCS-7126.0201",
+        "NCS-7233.1301",
+        "NCS-7212.0101",
+        "NCS-2142.0301"
+      ]
     },
     {
       "id": "NCS-7112.0201",
@@ -12392,8 +15073,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 3.0,
+        "transition_demand": 3.0,
+        "skill_transferability": 4.0,
+        "digital_automation_exposure": 2.5,
+        "formalization_rate": 2.5,
+        "scarcity_risk": 3.0
+      },
+      "upskill_paths": [
+        "NCS-2142.0501",
+        "NCS-7126.0201",
+        "NCS-7233.1301",
+        "NCS-7212.0101",
+        "NCS-2142.0301"
+      ]
     },
     {
       "id": "NCS-7126.0201",
@@ -12408,8 +15102,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 5.5,
+        "transition_demand": 6.0,
+        "skill_transferability": 7.0,
+        "digital_automation_exposure": 2.5,
+        "formalization_rate": 3.5,
+        "scarcity_risk": 5.0
+      },
+      "upskill_paths": [
+        "NCS-2142.0501",
+        "NCS-7233.1301",
+        "NCS-7212.0101",
+        "NCS-2142.0301",
+        "NCS-3123.0400"
+      ]
     },
     {
       "id": "NCS-3118.0201",
@@ -12424,8 +15131,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 4.0,
+        "transition_demand": 4.5,
+        "skill_transferability": 5.5,
+        "digital_automation_exposure": 6.0,
+        "formalization_rate": 5.5,
+        "scarcity_risk": 4.0
+      },
+      "upskill_paths": [
+        "NCS-2142.0501",
+        "NCS-7126.0201",
+        "NCS-7233.1301",
+        "NCS-7212.0101",
+        "NCS-2142.0301"
+      ]
     },
     {
       "id": "NCS-5223.0104",
@@ -12440,8 +15160,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.5,
+        "transition_demand": 2.0,
+        "skill_transferability": 2.0,
+        "digital_automation_exposure": 5.5,
+        "formalization_rate": 4.0,
+        "scarcity_risk": 2.0
+      },
+      "upskill_paths": [
+        "NCS-2142.0501",
+        "NCS-7126.0201",
+        "NCS-7233.1301",
+        "NCS-7212.0101",
+        "NCS-2142.0301"
+      ]
     },
     {
       "id": "NCS-3322.5003",
@@ -12456,8 +15189,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.5,
+        "transition_demand": 2.0,
+        "skill_transferability": 2.0,
+        "digital_automation_exposure": 5.5,
+        "formalization_rate": 4.0,
+        "scarcity_risk": 2.0
+      },
+      "upskill_paths": [
+        "NCS-2142.0501",
+        "NCS-7126.0201",
+        "NCS-7233.1301",
+        "NCS-7212.0101",
+        "NCS-2142.0301"
+      ]
     },
     {
       "id": "NCS-3322.5001",
@@ -12472,8 +15218,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.5,
+        "transition_demand": 2.0,
+        "skill_transferability": 2.0,
+        "digital_automation_exposure": 5.5,
+        "formalization_rate": 5.0,
+        "scarcity_risk": 2.0
+      },
+      "upskill_paths": [
+        "NCS-2142.0501",
+        "NCS-7126.0201",
+        "NCS-7233.1301",
+        "NCS-7212.0101",
+        "NCS-2142.0301"
+      ]
     },
     {
       "id": "NCS-2142.0301",
@@ -12488,8 +15247,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 5.0,
+        "transition_demand": 5.5,
+        "skill_transferability": 6.5,
+        "digital_automation_exposure": 3.0,
+        "formalization_rate": 7.0,
+        "scarcity_risk": 5.0
+      },
+      "upskill_paths": [
+        "NCS-2142.0501",
+        "NCS-7126.0201",
+        "NCS-7233.1301",
+        "NCS-7212.0101",
+        "NCS-3123.0400"
+      ]
     },
     {
       "id": "NCS-3123.0302",
@@ -12504,8 +15276,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 4.0,
+        "transition_demand": 4.5,
+        "skill_transferability": 5.5,
+        "digital_automation_exposure": 2.5,
+        "formalization_rate": 5.5,
+        "scarcity_risk": 4.5
+      },
+      "upskill_paths": [
+        "NCS-2142.0501",
+        "NCS-7126.0201",
+        "NCS-7233.1301",
+        "NCS-7212.0101",
+        "NCS-2142.0301"
+      ]
     },
     {
       "id": "NCS-7126.0600",
@@ -12520,8 +15305,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 2.5,
+        "transition_demand": 2.5,
+        "skill_transferability": 3.5,
+        "digital_automation_exposure": 4.0,
+        "formalization_rate": 3.0,
+        "scarcity_risk": 2.5
+      },
+      "upskill_paths": [
+        "NCS-2142.0501",
+        "NCS-7126.0201",
+        "NCS-7233.1301",
+        "NCS-7212.0101",
+        "NCS-2142.0301"
+      ]
     },
     {
       "id": "NCS-2142.0901",
@@ -12536,8 +15334,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 3.0,
+        "transition_demand": 3.5,
+        "skill_transferability": 4.5,
+        "digital_automation_exposure": 3.5,
+        "formalization_rate": 7.5,
+        "scarcity_risk": 4.5
+      },
+      "upskill_paths": [
+        "NCS-2142.0501",
+        "NCS-7126.0201",
+        "NCS-7233.1301",
+        "NCS-7212.0101",
+        "NCS-2142.0301"
+      ]
     },
     {
       "id": "NCS-7126.0500",
@@ -12552,8 +15363,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 2.5,
+        "transition_demand": 2.5,
+        "skill_transferability": 3.5,
+        "digital_automation_exposure": 4.0,
+        "formalization_rate": 3.0,
+        "scarcity_risk": 2.5
+      },
+      "upskill_paths": [
+        "NCS-2142.0501",
+        "NCS-7126.0201",
+        "NCS-7233.1301",
+        "NCS-7212.0101",
+        "NCS-2142.0301"
+      ]
     },
     {
       "id": "NCS-5249.0500",
@@ -12568,8 +15392,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.5,
+        "transition_demand": 2.0,
+        "skill_transferability": 2.0,
+        "digital_automation_exposure": 5.5,
+        "formalization_rate": 4.0,
+        "scarcity_risk": 2.0
+      },
+      "upskill_paths": [
+        "NCS-2142.0501",
+        "NCS-7126.0201",
+        "NCS-7233.1301",
+        "NCS-7212.0101",
+        "NCS-2142.0301"
+      ]
     },
     {
       "id": "NCS-5249.0200",
@@ -12584,8 +15421,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.5,
+        "transition_demand": 2.0,
+        "skill_transferability": 2.0,
+        "digital_automation_exposure": 5.5,
+        "formalization_rate": 4.0,
+        "scarcity_risk": 2.0
+      },
+      "upskill_paths": [
+        "NCS-2142.0501",
+        "NCS-7126.0201",
+        "NCS-7233.1301",
+        "NCS-7212.0101",
+        "NCS-2142.0301"
+      ]
     },
     {
       "id": "NCS-5249.0600",
@@ -12600,8 +15450,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.5,
+        "transition_demand": 2.0,
+        "skill_transferability": 2.0,
+        "digital_automation_exposure": 5.5,
+        "formalization_rate": 4.0,
+        "scarcity_risk": 2.0
+      },
+      "upskill_paths": [
+        "NCS-2142.0501",
+        "NCS-7126.0201",
+        "NCS-7233.1301",
+        "NCS-7212.0101",
+        "NCS-2142.0301"
+      ]
     },
     {
       "id": "NCS-5249.0700",
@@ -12616,8 +15479,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.5,
+        "transition_demand": 2.0,
+        "skill_transferability": 2.0,
+        "digital_automation_exposure": 5.5,
+        "formalization_rate": 4.0,
+        "scarcity_risk": 2.0
+      },
+      "upskill_paths": [
+        "NCS-2142.0501",
+        "NCS-7126.0201",
+        "NCS-7233.1301",
+        "NCS-7212.0101",
+        "NCS-2142.0301"
+      ]
     },
     {
       "id": "NCS-7126.0400",
@@ -12632,8 +15508,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 2.5,
+        "transition_demand": 2.5,
+        "skill_transferability": 3.5,
+        "digital_automation_exposure": 4.0,
+        "formalization_rate": 3.0,
+        "scarcity_risk": 2.5
+      },
+      "upskill_paths": [
+        "NCS-2142.0501",
+        "NCS-7126.0201",
+        "NCS-7233.1301",
+        "NCS-7212.0101",
+        "NCS-2142.0301"
+      ]
     },
     {
       "id": "NCS-3123.0300",
@@ -12648,8 +15537,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 4.0,
+        "transition_demand": 4.5,
+        "skill_transferability": 5.5,
+        "digital_automation_exposure": 2.5,
+        "formalization_rate": 5.5,
+        "scarcity_risk": 4.5
+      },
+      "upskill_paths": [
+        "NCS-2142.0501",
+        "NCS-7126.0201",
+        "NCS-7233.1301",
+        "NCS-7212.0101",
+        "NCS-2142.0301"
+      ]
     },
     {
       "id": "NCS-3123.0200",
@@ -12664,8 +15566,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 4.0,
+        "transition_demand": 4.5,
+        "skill_transferability": 5.5,
+        "digital_automation_exposure": 2.5,
+        "formalization_rate": 3.5,
+        "scarcity_risk": 4.5
+      },
+      "upskill_paths": [
+        "NCS-2142.0501",
+        "NCS-7126.0201",
+        "NCS-7233.1301",
+        "NCS-7212.0101",
+        "NCS-2142.0301"
+      ]
     },
     {
       "id": "NCS-2142.1002",
@@ -12680,8 +15595,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 3.0,
+        "transition_demand": 3.5,
+        "skill_transferability": 4.5,
+        "digital_automation_exposure": 3.5,
+        "formalization_rate": 7.5,
+        "scarcity_risk": 4.5
+      },
+      "upskill_paths": [
+        "NCS-2142.0501",
+        "NCS-7126.0201",
+        "NCS-7233.1301",
+        "NCS-7212.0101",
+        "NCS-2142.0301"
+      ]
     },
     {
       "id": "NCS-5249.0400",
@@ -12696,8 +15624,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.5,
+        "transition_demand": 2.0,
+        "skill_transferability": 2.0,
+        "digital_automation_exposure": 5.5,
+        "formalization_rate": 4.0,
+        "scarcity_risk": 2.0
+      },
+      "upskill_paths": [
+        "NCS-2142.0501",
+        "NCS-7126.0201",
+        "NCS-7233.1301",
+        "NCS-7212.0101",
+        "NCS-2142.0301"
+      ]
     },
     {
       "id": "NCS-3123.0100",
@@ -12712,8 +15653,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 3.5,
+        "transition_demand": 4.0,
+        "skill_transferability": 4.5,
+        "digital_automation_exposure": 3.0,
+        "formalization_rate": 5.0,
+        "scarcity_risk": 3.5
+      },
+      "upskill_paths": [
+        "NCS-2142.0501",
+        "NCS-7126.0201",
+        "NCS-7233.1301",
+        "NCS-7212.0101",
+        "NCS-2142.0301"
+      ]
     },
     {
       "id": "NCS-1112.0700",
@@ -12728,8 +15682,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.5,
+        "transition_demand": 3.0,
+        "skill_transferability": 2.0,
+        "digital_automation_exposure": 3.0,
+        "formalization_rate": 9.5,
+        "scarcity_risk": 2.5
+      },
+      "upskill_paths": [
+        "NCS-5411.0100",
+        "NCS-3119.1000",
+        "NCS-3119.0900",
+        "NCS-3119.0800",
+        "NCS-1114.0300"
+      ]
     },
     {
       "id": "NCS-1112.0800",
@@ -12744,8 +15711,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.5,
+        "transition_demand": 3.0,
+        "skill_transferability": 2.0,
+        "digital_automation_exposure": 3.0,
+        "formalization_rate": 9.5,
+        "scarcity_risk": 2.5
+      },
+      "upskill_paths": [
+        "NCS-5411.0100",
+        "NCS-3119.1000",
+        "NCS-3119.0900",
+        "NCS-3119.0800",
+        "NCS-1114.0300"
+      ]
     },
     {
       "id": "NCS-1112.0600",
@@ -12760,8 +15740,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.5,
+        "transition_demand": 3.0,
+        "skill_transferability": 2.0,
+        "digital_automation_exposure": 3.0,
+        "formalization_rate": 9.5,
+        "scarcity_risk": 2.5
+      },
+      "upskill_paths": [
+        "NCS-5411.0100",
+        "NCS-3119.1000",
+        "NCS-3119.0900",
+        "NCS-3119.0800",
+        "NCS-1114.0300"
+      ]
     },
     {
       "id": "NCS-1112.0400",
@@ -12776,8 +15769,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.5,
+        "transition_demand": 3.0,
+        "skill_transferability": 2.0,
+        "digital_automation_exposure": 3.0,
+        "formalization_rate": 9.5,
+        "scarcity_risk": 2.5
+      },
+      "upskill_paths": [
+        "NCS-5411.0100",
+        "NCS-3119.1000",
+        "NCS-3119.0900",
+        "NCS-3119.0800",
+        "NCS-1114.0300"
+      ]
     },
     {
       "id": "NCS-1112.0100",
@@ -12792,8 +15798,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.5,
+        "transition_demand": 3.0,
+        "skill_transferability": 2.0,
+        "digital_automation_exposure": 3.0,
+        "formalization_rate": 9.5,
+        "scarcity_risk": 2.5
+      },
+      "upskill_paths": [
+        "NCS-5411.0100",
+        "NCS-3119.1000",
+        "NCS-3119.0900",
+        "NCS-3119.0800",
+        "NCS-1114.0300"
+      ]
     },
     {
       "id": "NCS-2635.0500",
@@ -12808,8 +15827,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 1.0,
+        "skill_transferability": 1.0,
+        "digital_automation_exposure": 2.5,
+        "formalization_rate": 6.5,
+        "scarcity_risk": 2.0
+      },
+      "upskill_paths": [
+        "NCS-5411.0100",
+        "NCS-3119.1000",
+        "NCS-3119.0900",
+        "NCS-3119.0800",
+        "NCS-1114.0300"
+      ]
     },
     {
       "id": "NCS-2635.0800",
@@ -12824,8 +15856,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 1.0,
+        "skill_transferability": 1.0,
+        "digital_automation_exposure": 2.5,
+        "formalization_rate": 6.5,
+        "scarcity_risk": 2.0
+      },
+      "upskill_paths": [
+        "NCS-5411.0100",
+        "NCS-3119.1000",
+        "NCS-3119.0900",
+        "NCS-3119.0800",
+        "NCS-1114.0300"
+      ]
     },
     {
       "id": "NCS-5412.0300",
@@ -12840,8 +15885,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.5,
+        "transition_demand": 2.0,
+        "skill_transferability": 1.5,
+        "digital_automation_exposure": 4.5,
+        "formalization_rate": 9.0,
+        "scarcity_risk": 2.0
+      },
+      "upskill_paths": [
+        "NCS-5411.0100",
+        "NCS-3119.1000",
+        "NCS-3119.0900",
+        "NCS-3119.0800",
+        "NCS-1114.0300"
+      ]
     },
     {
       "id": "NCS-2619.1000",
@@ -12856,8 +15914,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 1.5,
+        "skill_transferability": 1.0,
+        "digital_automation_exposure": 3.0,
+        "formalization_rate": 9.0,
+        "scarcity_risk": 3.0
+      },
+      "upskill_paths": [
+        "NCS-5411.0100",
+        "NCS-3119.1000",
+        "NCS-3119.0900",
+        "NCS-3119.0800",
+        "NCS-1114.0300"
+      ]
     },
     {
       "id": "NCS-2635.1100",
@@ -12872,8 +15943,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 1.0,
+        "skill_transferability": 1.0,
+        "digital_automation_exposure": 2.5,
+        "formalization_rate": 6.5,
+        "scarcity_risk": 2.0
+      },
+      "upskill_paths": [
+        "NCS-5411.0100",
+        "NCS-3119.1000",
+        "NCS-3119.0900",
+        "NCS-3119.0800",
+        "NCS-1114.0300"
+      ]
     },
     {
       "id": "NCS-2619.0800",
@@ -12888,8 +15972,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 1.5,
+        "skill_transferability": 1.0,
+        "digital_automation_exposure": 3.0,
+        "formalization_rate": 9.0,
+        "scarcity_risk": 3.0
+      },
+      "upskill_paths": [
+        "NCS-5411.0100",
+        "NCS-3119.1000",
+        "NCS-3119.0900",
+        "NCS-3119.0800",
+        "NCS-1114.0300"
+      ]
     },
     {
       "id": "NCS-3355.0300",
@@ -12904,8 +16001,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 1.0,
+        "skill_transferability": 1.0,
+        "digital_automation_exposure": 2.5,
+        "formalization_rate": 8.5,
+        "scarcity_risk": 2.0
+      },
+      "upskill_paths": [
+        "NCS-5411.0100",
+        "NCS-3119.1000",
+        "NCS-3119.0900",
+        "NCS-3119.0800",
+        "NCS-1114.0300"
+      ]
     },
     {
       "id": "NCS-1112.0200",
@@ -12920,8 +16030,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.5,
+        "transition_demand": 2.5,
+        "skill_transferability": 1.5,
+        "digital_automation_exposure": 2.0,
+        "formalization_rate": 9.5,
+        "scarcity_risk": 3.5
+      },
+      "upskill_paths": [
+        "NCS-5411.0100",
+        "NCS-3119.1000",
+        "NCS-3119.0900",
+        "NCS-3119.0800",
+        "NCS-1114.0300"
+      ]
     },
     {
       "id": "NCS-1114.0300",
@@ -12936,8 +16059,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 2.5,
+        "transition_demand": 3.5,
+        "skill_transferability": 3.5,
+        "digital_automation_exposure": 2.5,
+        "formalization_rate": 9.0,
+        "scarcity_risk": 4.0
+      },
+      "upskill_paths": [
+        "NCS-5411.0100",
+        "NCS-3119.1000",
+        "NCS-3119.0900",
+        "NCS-3119.0800",
+        "NCS-3351.0100"
+      ]
     },
     {
       "id": "NCS-5163.0200",
@@ -12952,8 +16088,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 1.0,
+        "skill_transferability": 1.0,
+        "digital_automation_exposure": 2.0,
+        "formalization_rate": 3.0,
+        "scarcity_risk": 2.0
+      },
+      "upskill_paths": [
+        "NCS-5411.0100",
+        "NCS-3119.1000",
+        "NCS-3119.0900",
+        "NCS-3119.0800",
+        "NCS-1114.0300"
+      ]
     },
     {
       "id": "NCS-1112.0500",
@@ -12968,8 +16117,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.5,
+        "transition_demand": 3.0,
+        "skill_transferability": 2.0,
+        "digital_automation_exposure": 3.0,
+        "formalization_rate": 9.5,
+        "scarcity_risk": 2.5
+      },
+      "upskill_paths": [
+        "NCS-5411.0100",
+        "NCS-3119.1000",
+        "NCS-3119.0900",
+        "NCS-3119.0800",
+        "NCS-1114.0300"
+      ]
     },
     {
       "id": "NCS-1112.0300",
@@ -12984,8 +16146,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.5,
+        "transition_demand": 3.0,
+        "skill_transferability": 2.0,
+        "digital_automation_exposure": 3.0,
+        "formalization_rate": 9.5,
+        "scarcity_risk": 2.5
+      },
+      "upskill_paths": [
+        "NCS-5411.0100",
+        "NCS-3119.1000",
+        "NCS-3119.0900",
+        "NCS-3119.0800",
+        "NCS-1114.0300"
+      ]
     },
     {
       "id": "NCS-2635.0900",
@@ -13000,8 +16175,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 1.0,
+        "skill_transferability": 1.0,
+        "digital_automation_exposure": 2.5,
+        "formalization_rate": 6.5,
+        "scarcity_risk": 2.0
+      },
+      "upskill_paths": [
+        "NCS-5411.0100",
+        "NCS-3119.1000",
+        "NCS-3119.0900",
+        "NCS-3119.0800",
+        "NCS-1114.0300"
+      ]
     },
     {
       "id": "NCS-5411.0100",
@@ -13016,8 +16204,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 4.0,
+        "transition_demand": 5.0,
+        "skill_transferability": 5.0,
+        "digital_automation_exposure": 2.0,
+        "formalization_rate": 7.5,
+        "scarcity_risk": 4.5
+      },
+      "upskill_paths": [
+        "NCS-3119.1000",
+        "NCS-3119.0900",
+        "NCS-3119.0800",
+        "NCS-1114.0300",
+        "NCS-3351.0100"
+      ]
     },
     {
       "id": "NCS-3119.1000",
@@ -13032,8 +16233,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 4.0,
+        "transition_demand": 5.0,
+        "skill_transferability": 5.0,
+        "digital_automation_exposure": 2.0,
+        "formalization_rate": 7.5,
+        "scarcity_risk": 4.5
+      },
+      "upskill_paths": [
+        "NCS-5411.0100",
+        "NCS-3119.0900",
+        "NCS-3119.0800",
+        "NCS-1114.0300",
+        "NCS-3351.0100"
+      ]
     },
     {
       "id": "NCS-3119.0900",
@@ -13048,8 +16262,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 4.0,
+        "transition_demand": 5.0,
+        "skill_transferability": 5.0,
+        "digital_automation_exposure": 2.0,
+        "formalization_rate": 7.5,
+        "scarcity_risk": 4.5
+      },
+      "upskill_paths": [
+        "NCS-5411.0100",
+        "NCS-3119.1000",
+        "NCS-3119.0800",
+        "NCS-1114.0300",
+        "NCS-3351.0100"
+      ]
     },
     {
       "id": "NCS-3119.0800",
@@ -13064,8 +16291,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 4.0,
+        "transition_demand": 5.0,
+        "skill_transferability": 5.0,
+        "digital_automation_exposure": 2.0,
+        "formalization_rate": 7.5,
+        "scarcity_risk": 4.5
+      },
+      "upskill_paths": [
+        "NCS-5411.0100",
+        "NCS-3119.1000",
+        "NCS-3119.0900",
+        "NCS-1114.0300",
+        "NCS-3351.0100"
+      ]
     },
     {
       "id": "NCS-5163.0300",
@@ -13080,8 +16320,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 1.0,
+        "skill_transferability": 1.0,
+        "digital_automation_exposure": 2.0,
+        "formalization_rate": 3.0,
+        "scarcity_risk": 2.0
+      },
+      "upskill_paths": [
+        "NCS-5411.0100",
+        "NCS-3119.1000",
+        "NCS-3119.0900",
+        "NCS-3119.0800",
+        "NCS-1114.0300"
+      ]
     },
     {
       "id": "NCS-2635.0600",
@@ -13096,8 +16349,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 1.0,
+        "skill_transferability": 1.0,
+        "digital_automation_exposure": 2.5,
+        "formalization_rate": 6.5,
+        "scarcity_risk": 2.0
+      },
+      "upskill_paths": [
+        "NCS-5411.0100",
+        "NCS-3119.1000",
+        "NCS-3119.0900",
+        "NCS-3119.0800",
+        "NCS-1114.0300"
+      ]
     },
     {
       "id": "NCS-5414.0200",
@@ -13112,8 +16378,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 1.0,
+        "skill_transferability": 1.0,
+        "digital_automation_exposure": 2.5,
+        "formalization_rate": 5.0,
+        "scarcity_risk": 1.5
+      },
+      "upskill_paths": [
+        "NCS-5411.0100",
+        "NCS-3119.1000",
+        "NCS-3119.0900",
+        "NCS-3119.0800",
+        "NCS-1114.0300"
+      ]
     },
     {
       "id": "NCS-2619.0600",
@@ -13128,8 +16407,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 1.5,
+        "skill_transferability": 1.0,
+        "digital_automation_exposure": 3.0,
+        "formalization_rate": 9.0,
+        "scarcity_risk": 3.0
+      },
+      "upskill_paths": [
+        "NCS-5411.0100",
+        "NCS-3119.1000",
+        "NCS-3119.0900",
+        "NCS-3119.0800",
+        "NCS-1114.0300"
+      ]
     },
     {
       "id": "NCS-3351.0100",
@@ -13144,8 +16436,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 2.0,
+        "transition_demand": 3.0,
+        "skill_transferability": 2.0,
+        "digital_automation_exposure": 5.0,
+        "formalization_rate": 9.0,
+        "scarcity_risk": 2.5
+      },
+      "upskill_paths": [
+        "NCS-5411.0100",
+        "NCS-3119.1000",
+        "NCS-3119.0900",
+        "NCS-3119.0800",
+        "NCS-1114.0300"
+      ]
     },
     {
       "id": "NCS-3352.0100",
@@ -13160,8 +16465,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.5,
+        "transition_demand": 2.0,
+        "skill_transferability": 1.5,
+        "digital_automation_exposure": 4.5,
+        "formalization_rate": 9.0,
+        "scarcity_risk": 2.0
+      },
+      "upskill_paths": [
+        "NCS-5411.0100",
+        "NCS-3119.1000",
+        "NCS-3119.0900",
+        "NCS-3119.0800",
+        "NCS-1114.0300"
+      ]
     },
     {
       "id": "NCS-3355.0100",
@@ -13176,8 +16494,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 1.0,
+        "skill_transferability": 1.0,
+        "digital_automation_exposure": 2.5,
+        "formalization_rate": 8.5,
+        "scarcity_risk": 2.0
+      },
+      "upskill_paths": [
+        "NCS-5411.0100",
+        "NCS-3119.1000",
+        "NCS-3119.0900",
+        "NCS-3119.0800",
+        "NCS-1114.0300"
+      ]
     },
     {
       "id": "NCS-2635.0100",
@@ -13192,8 +16523,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 2.0,
+        "skill_transferability": 1.5,
+        "digital_automation_exposure": 3.0,
+        "formalization_rate": 8.0,
+        "scarcity_risk": 2.0
+      },
+      "upskill_paths": [
+        "NCS-5411.0100",
+        "NCS-3119.1000",
+        "NCS-3119.0900",
+        "NCS-3119.0800",
+        "NCS-1114.0300"
+      ]
     },
     {
       "id": "NCS-2619.0400",
@@ -13208,8 +16552,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 1.5,
+        "skill_transferability": 1.0,
+        "digital_automation_exposure": 3.0,
+        "formalization_rate": 9.0,
+        "scarcity_risk": 3.0
+      },
+      "upskill_paths": [
+        "NCS-5411.0100",
+        "NCS-3119.1000",
+        "NCS-3119.0900",
+        "NCS-3119.0800",
+        "NCS-1114.0300"
+      ]
     },
     {
       "id": "NCS-2635.0400",
@@ -13224,8 +16581,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 1.0,
+        "skill_transferability": 1.0,
+        "digital_automation_exposure": 2.5,
+        "formalization_rate": 6.5,
+        "scarcity_risk": 2.0
+      },
+      "upskill_paths": [
+        "NCS-5411.0100",
+        "NCS-3119.1000",
+        "NCS-3119.0900",
+        "NCS-3119.0800",
+        "NCS-1114.0300"
+      ]
     },
     {
       "id": "NCS-2619.0700",
@@ -13240,8 +16610,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 1.5,
+        "skill_transferability": 1.0,
+        "digital_automation_exposure": 3.0,
+        "formalization_rate": 9.0,
+        "scarcity_risk": 3.0
+      },
+      "upskill_paths": [
+        "NCS-5411.0100",
+        "NCS-3119.1000",
+        "NCS-3119.0900",
+        "NCS-3119.0800",
+        "NCS-1114.0300"
+      ]
     },
     {
       "id": "NCS-4120.0300",
@@ -13256,8 +16639,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 2.0,
+        "skill_transferability": 1.5,
+        "digital_automation_exposure": 3.0,
+        "formalization_rate": 6.0,
+        "scarcity_risk": 2.0
+      },
+      "upskill_paths": [
+        "NCS-5411.0100",
+        "NCS-3119.1000",
+        "NCS-3119.0900",
+        "NCS-3119.0800",
+        "NCS-1114.0300"
+      ]
     },
     {
       "id": "NCS-3353.0200",
@@ -13272,8 +16668,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 1.0,
+        "skill_transferability": 1.0,
+        "digital_automation_exposure": 2.5,
+        "formalization_rate": 5.0,
+        "scarcity_risk": 1.5
+      },
+      "upskill_paths": [
+        "NCS-5411.0100",
+        "NCS-3119.1000",
+        "NCS-3119.0900",
+        "NCS-3119.0800",
+        "NCS-1114.0300"
+      ]
     },
     {
       "id": "NCS-5412.0100",
@@ -13288,8 +16697,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 1.0,
+        "skill_transferability": 1.0,
+        "digital_automation_exposure": 2.5,
+        "formalization_rate": 8.5,
+        "scarcity_risk": 2.0
+      },
+      "upskill_paths": [
+        "NCS-5411.0100",
+        "NCS-3119.1000",
+        "NCS-3119.0900",
+        "NCS-3119.0800",
+        "NCS-1114.0300"
+      ]
     },
     {
       "id": "NCS-2611.0700",
@@ -13304,8 +16726,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 1.5,
+        "skill_transferability": 1.0,
+        "digital_automation_exposure": 3.0,
+        "formalization_rate": 9.0,
+        "scarcity_risk": 3.0
+      },
+      "upskill_paths": [
+        "NCS-5411.0100",
+        "NCS-3119.1000",
+        "NCS-3119.0900",
+        "NCS-3119.0800",
+        "NCS-1114.0300"
+      ]
     },
     {
       "id": "NCS-1114.0100",
@@ -13320,8 +16755,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.5,
+        "transition_demand": 2.5,
+        "skill_transferability": 1.0,
+        "digital_automation_exposure": 1.5,
+        "formalization_rate": 7.0,
+        "scarcity_risk": 2.0
+      },
+      "upskill_paths": [
+        "NCS-5411.0100",
+        "NCS-3119.1000",
+        "NCS-3119.0900",
+        "NCS-3119.0800",
+        "NCS-1114.0300"
+      ]
     },
     {
       "id": "NCS-2635.0300",
@@ -13336,8 +16784,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 1.0,
+        "skill_transferability": 1.0,
+        "digital_automation_exposure": 2.5,
+        "formalization_rate": 6.5,
+        "scarcity_risk": 2.0
+      },
+      "upskill_paths": [
+        "NCS-5411.0100",
+        "NCS-3119.1000",
+        "NCS-3119.0900",
+        "NCS-3119.0800",
+        "NCS-1114.0300"
+      ]
     },
     {
       "id": "NCS-2611.0600",
@@ -13352,8 +16813,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 1.5,
+        "skill_transferability": 1.0,
+        "digital_automation_exposure": 3.0,
+        "formalization_rate": 9.0,
+        "scarcity_risk": 3.0
+      },
+      "upskill_paths": [
+        "NCS-5411.0100",
+        "NCS-3119.1000",
+        "NCS-3119.0900",
+        "NCS-3119.0800",
+        "NCS-1114.0300"
+      ]
     },
     {
       "id": "NCS-2619.0300",
@@ -13368,8 +16842,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 1.5,
+        "skill_transferability": 1.0,
+        "digital_automation_exposure": 3.0,
+        "formalization_rate": 9.0,
+        "scarcity_risk": 3.0
+      },
+      "upskill_paths": [
+        "NCS-5411.0100",
+        "NCS-3119.1000",
+        "NCS-3119.0900",
+        "NCS-3119.0800",
+        "NCS-1114.0300"
+      ]
     },
     {
       "id": "NCS-3351.0300",
@@ -13384,8 +16871,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 1.5,
+        "skill_transferability": 1.5,
+        "digital_automation_exposure": 4.0,
+        "formalization_rate": 8.0,
+        "scarcity_risk": 1.5
+      },
+      "upskill_paths": [
+        "NCS-5411.0100",
+        "NCS-3119.1000",
+        "NCS-3119.0900",
+        "NCS-3119.0800",
+        "NCS-1114.0300"
+      ]
     },
     {
       "id": "NCS-1114.0200",
@@ -13400,8 +16900,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.5,
+        "transition_demand": 2.5,
+        "skill_transferability": 1.0,
+        "digital_automation_exposure": 1.5,
+        "formalization_rate": 7.0,
+        "scarcity_risk": 2.0
+      },
+      "upskill_paths": [
+        "NCS-5411.0100",
+        "NCS-3119.1000",
+        "NCS-3119.0900",
+        "NCS-3119.0800",
+        "NCS-1114.0300"
+      ]
     },
     {
       "id": "NCS-5412.0200",
@@ -13416,8 +16929,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 1.5,
+        "skill_transferability": 1.5,
+        "digital_automation_exposure": 4.0,
+        "formalization_rate": 8.0,
+        "scarcity_risk": 1.5
+      },
+      "upskill_paths": [
+        "NCS-5411.0100",
+        "NCS-3119.1000",
+        "NCS-3119.0900",
+        "NCS-3119.0800",
+        "NCS-1114.0300"
+      ]
     },
     {
       "id": "NCS-2619.0900",
@@ -13432,8 +16958,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 1.5,
+        "skill_transferability": 1.0,
+        "digital_automation_exposure": 3.0,
+        "formalization_rate": 9.0,
+        "scarcity_risk": 3.0
+      },
+      "upskill_paths": [
+        "NCS-5411.0100",
+        "NCS-3119.1000",
+        "NCS-3119.0900",
+        "NCS-3119.0800",
+        "NCS-1114.0300"
+      ]
     },
     {
       "id": "NCS-3355.0200",
@@ -13448,8 +16987,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 1.0,
+        "skill_transferability": 1.0,
+        "digital_automation_exposure": 2.5,
+        "formalization_rate": 8.5,
+        "scarcity_risk": 2.0
+      },
+      "upskill_paths": [
+        "NCS-5411.0100",
+        "NCS-3119.1000",
+        "NCS-3119.0900",
+        "NCS-3119.0800",
+        "NCS-1114.0300"
+      ]
     },
     {
       "id": "NCS-3351.0200",
@@ -13464,8 +17016,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 2.0,
+        "transition_demand": 3.0,
+        "skill_transferability": 2.0,
+        "digital_automation_exposure": 5.0,
+        "formalization_rate": 9.0,
+        "scarcity_risk": 2.5
+      },
+      "upskill_paths": [
+        "NCS-5411.0100",
+        "NCS-3119.1000",
+        "NCS-3119.0900",
+        "NCS-3119.0800",
+        "NCS-1114.0300"
+      ]
     },
     {
       "id": "NCS-2619.0500",
@@ -13480,8 +17045,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 1.5,
+        "skill_transferability": 1.0,
+        "digital_automation_exposure": 3.0,
+        "formalization_rate": 9.0,
+        "scarcity_risk": 3.0
+      },
+      "upskill_paths": [
+        "NCS-5411.0100",
+        "NCS-3119.1000",
+        "NCS-3119.0900",
+        "NCS-3119.0800",
+        "NCS-1114.0300"
+      ]
     },
     {
       "id": "NCS-5163.0100",
@@ -13496,8 +17074,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 1.0,
+        "skill_transferability": 1.0,
+        "digital_automation_exposure": 2.0,
+        "formalization_rate": 3.0,
+        "scarcity_risk": 2.0
+      },
+      "upskill_paths": [
+        "NCS-5411.0100",
+        "NCS-3119.1000",
+        "NCS-3119.0900",
+        "NCS-3119.0800",
+        "NCS-1114.0300"
+      ]
     },
     {
       "id": "NCS-3353.0100",
@@ -13512,8 +17103,21 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 2.0,
+        "skill_transferability": 1.5,
+        "digital_automation_exposure": 3.0,
+        "formalization_rate": 6.0,
+        "scarcity_risk": 2.0
+      },
+      "upskill_paths": [
+        "NCS-5411.0100",
+        "NCS-3119.1000",
+        "NCS-3119.0900",
+        "NCS-3119.0800",
+        "NCS-1114.0300"
+      ]
     },
     {
       "id": "NCS-3334.0200",
@@ -13528,8 +17132,17 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 1.5,
+        "skill_transferability": 1.5,
+        "digital_automation_exposure": 5.0,
+        "formalization_rate": 3.0,
+        "scarcity_risk": 1.5
+      },
+      "upskill_paths": [
+        "NCS-3334.0100"
+      ]
     },
     {
       "id": "NCS-3334.0100",
@@ -13544,8 +17157,17 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
-      "upskill_paths": []
+      "scores": {
+        "h2_adjacency": 1.0,
+        "transition_demand": 2.0,
+        "skill_transferability": 1.5,
+        "digital_automation_exposure": 5.0,
+        "formalization_rate": 3.0,
+        "scarcity_risk": 1.5
+      },
+      "upskill_paths": [
+        "NCS-3334.0200"
+      ]
     },
     {
       "id": "NCS-8131.3501",
@@ -13560,13 +17182,20 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
+      "scores": {
+        "h2_adjacency": 2.5,
+        "transition_demand": 2.5,
+        "skill_transferability": 4.5,
+        "digital_automation_exposure": 4.0,
+        "formalization_rate": 5.0,
+        "scarcity_risk": 3.0
+      },
       "upskill_paths": [
+        "NCS-8131.3502",
         "NCS-3139.6001",
         "NCS-8141.1400",
-        "NCS-3122.2021",
-        "NCS-8141.0713",
-        "NCS-4322.0201"
+        "NCS-3122.2002",
+        "NCS-3122.2021"
       ]
     },
     {
@@ -13582,13 +17211,20 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
+      "scores": {
+        "h2_adjacency": 2.5,
+        "transition_demand": 2.5,
+        "skill_transferability": 4.5,
+        "digital_automation_exposure": 4.0,
+        "formalization_rate": 5.0,
+        "scarcity_risk": 3.0
+      },
       "upskill_paths": [
+        "NCS-8131.3501",
         "NCS-3139.6001",
         "NCS-8141.1400",
-        "NCS-3122.2021",
-        "NCS-8141.0713",
-        "NCS-4322.0201"
+        "NCS-3122.2002",
+        "NCS-3122.2021"
       ]
     },
     {
@@ -13604,13 +17240,20 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
+      "scores": {
+        "h2_adjacency": 1.5,
+        "transition_demand": 1.5,
+        "skill_transferability": 2.5,
+        "digital_automation_exposure": 5.0,
+        "formalization_rate": 5.0,
+        "scarcity_risk": 2.0
+      },
       "upskill_paths": [
+        "NCS-8131.3501",
+        "NCS-8131.3502",
         "NCS-3139.6001",
         "NCS-8141.1400",
-        "NCS-3122.2021",
-        "NCS-8141.0713",
-        "NCS-4322.0201"
+        "NCS-3122.2002"
       ]
     },
     {
@@ -13626,13 +17269,20 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
+      "scores": {
+        "h2_adjacency": 1.5,
+        "transition_demand": 1.5,
+        "skill_transferability": 2.5,
+        "digital_automation_exposure": 5.0,
+        "formalization_rate": 5.0,
+        "scarcity_risk": 2.0
+      },
       "upskill_paths": [
+        "NCS-8131.3501",
+        "NCS-8131.3502",
         "NCS-3139.6001",
         "NCS-8141.1400",
-        "NCS-3122.2021",
-        "NCS-8141.0713",
-        "NCS-4322.0201"
+        "NCS-3122.2002"
       ]
     },
     {
@@ -13648,13 +17298,20 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
+      "scores": {
+        "h2_adjacency": 1.5,
+        "transition_demand": 1.5,
+        "skill_transferability": 2.5,
+        "digital_automation_exposure": 5.0,
+        "formalization_rate": 5.0,
+        "scarcity_risk": 2.0
+      },
       "upskill_paths": [
+        "NCS-8131.3501",
+        "NCS-8131.3502",
         "NCS-3139.6001",
         "NCS-8141.1400",
-        "NCS-3122.2021",
-        "NCS-8141.0713",
-        "NCS-4322.0201"
+        "NCS-3122.2002"
       ]
     },
     {
@@ -13670,13 +17327,20 @@
       "source_ncs": true,
       "source_plfs": false,
       "source_ncvet": false,
-      "scores": {},
+      "scores": {
+        "h2_adjacency": 2.0,
+        "transition_demand": 2.0,
+        "skill_transferability": 3.5,
+        "digital_automation_exposure": 4.5,
+        "formalization_rate": 5.0,
+        "scarcity_risk": 2.5
+      },
       "upskill_paths": [
+        "NCS-8131.3501",
+        "NCS-8131.3502",
         "NCS-3139.6001",
         "NCS-8141.1400",
-        "NCS-3122.2021",
-        "NCS-8141.0713",
-        "NCS-4322.0201"
+        "NCS-3122.2021"
       ]
     },
     {
@@ -13701,11 +17365,11 @@
         "scarcity_risk": 2.0
       },
       "upskill_paths": [
+        "NCS-8131.3501",
+        "NCS-8131.3502",
         "NCS-3139.6001",
         "NCS-8141.1400",
-        "NCS-3122.2021",
-        "NCS-8141.0713",
-        "NCS-4322.0201"
+        "NCS-3122.2002"
       ]
     },
     {
@@ -13730,11 +17394,11 @@
         "scarcity_risk": 2.0
       },
       "upskill_paths": [
+        "NCS-8131.3501",
+        "NCS-8131.3502",
         "NCS-3139.6001",
         "NCS-8141.1400",
-        "NCS-3122.2021",
-        "NCS-8141.0713",
-        "NCS-4322.0201"
+        "NCS-3122.2002"
       ]
     },
     {
@@ -13759,11 +17423,11 @@
         "scarcity_risk": 1.5
       },
       "upskill_paths": [
+        "NCS-8131.3501",
+        "NCS-8131.3502",
         "NCS-3139.6001",
         "NCS-8141.1400",
-        "NCS-3122.2021",
-        "NCS-8141.0713",
-        "NCS-4322.0201"
+        "NCS-3122.2002"
       ]
     },
     {
@@ -13788,11 +17452,11 @@
         "scarcity_risk": 3.0
       },
       "upskill_paths": [
+        "NCS-8131.3501",
+        "NCS-8131.3502",
         "NCS-3139.6001",
         "NCS-8141.1400",
-        "NCS-8141.0713",
-        "NCS-4322.0201",
-        "NCS-8141.1521"
+        "NCS-3122.2002"
       ]
     },
     {
@@ -13817,11 +17481,11 @@
         "scarcity_risk": 2.0
       },
       "upskill_paths": [
+        "NCS-8131.3501",
+        "NCS-8131.3502",
         "NCS-3139.6001",
         "NCS-8141.1400",
-        "NCS-3122.2021",
-        "NCS-8141.0713",
-        "NCS-4322.0201"
+        "NCS-3122.2002"
       ]
     },
     {
@@ -13846,11 +17510,11 @@
         "scarcity_risk": 4.0
       },
       "upskill_paths": [
+        "NCS-8131.3501",
+        "NCS-8131.3502",
         "NCS-8141.1400",
-        "NCS-3122.2021",
-        "NCS-8141.0713",
-        "NCS-4322.0201",
-        "NCS-8141.1521"
+        "NCS-3122.2002",
+        "NCS-3122.2021"
       ]
     },
     {
@@ -13875,11 +17539,11 @@
         "scarcity_risk": 2.0
       },
       "upskill_paths": [
+        "NCS-8131.3501",
+        "NCS-8131.3502",
         "NCS-3139.6001",
         "NCS-8141.1400",
-        "NCS-3122.2021",
-        "NCS-8141.0713",
-        "NCS-4322.0201"
+        "NCS-3122.2002"
       ]
     },
     {
@@ -13904,11 +17568,11 @@
         "scarcity_risk": 2.0
       },
       "upskill_paths": [
+        "NCS-8131.3501",
+        "NCS-8131.3502",
         "NCS-3139.6001",
         "NCS-8141.1400",
-        "NCS-3122.2021",
-        "NCS-8141.0713",
-        "NCS-4322.0201"
+        "NCS-3122.2002"
       ]
     },
     {
@@ -13933,11 +17597,11 @@
         "scarcity_risk": 3.0
       },
       "upskill_paths": [
+        "NCS-8131.3501",
+        "NCS-8131.3502",
         "NCS-3139.6001",
         "NCS-8141.1400",
-        "NCS-3122.2021",
-        "NCS-8141.0713",
-        "NCS-4322.0201"
+        "NCS-3122.2002"
       ]
     },
     {
@@ -13962,11 +17626,11 @@
         "scarcity_risk": 2.0
       },
       "upskill_paths": [
+        "NCS-8131.3501",
+        "NCS-8131.3502",
         "NCS-3139.6001",
         "NCS-8141.1400",
-        "NCS-3122.2021",
-        "NCS-8141.0713",
-        "NCS-4322.0201"
+        "NCS-3122.2002"
       ]
     },
     {
@@ -13991,11 +17655,11 @@
         "scarcity_risk": 2.0
       },
       "upskill_paths": [
+        "NCS-8131.3501",
+        "NCS-8131.3502",
         "NCS-3139.6001",
         "NCS-8141.1400",
-        "NCS-3122.2021",
-        "NCS-8141.0713",
-        "NCS-4322.0201"
+        "NCS-3122.2002"
       ]
     },
     {
@@ -14020,11 +17684,11 @@
         "scarcity_risk": 2.0
       },
       "upskill_paths": [
+        "NCS-8131.3501",
+        "NCS-8131.3502",
         "NCS-3139.6001",
         "NCS-8141.1400",
-        "NCS-3122.2021",
-        "NCS-8141.0713",
-        "NCS-4322.0201"
+        "NCS-3122.2002"
       ]
     },
     {
@@ -14049,11 +17713,11 @@
         "scarcity_risk": 2.0
       },
       "upskill_paths": [
+        "NCS-8131.3501",
+        "NCS-8131.3502",
         "NCS-3139.6001",
         "NCS-8141.1400",
-        "NCS-3122.2021",
-        "NCS-8141.0713",
-        "NCS-4322.0201"
+        "NCS-3122.2002"
       ]
     },
     {
@@ -14078,11 +17742,11 @@
         "scarcity_risk": 1.5
       },
       "upskill_paths": [
+        "NCS-8131.3501",
+        "NCS-8131.3502",
         "NCS-3139.6001",
         "NCS-8141.1400",
-        "NCS-3122.2021",
-        "NCS-8141.0713",
-        "NCS-4322.0201"
+        "NCS-3122.2002"
       ]
     },
     {
@@ -14107,11 +17771,11 @@
         "scarcity_risk": 2.0
       },
       "upskill_paths": [
+        "NCS-8131.3501",
+        "NCS-8131.3502",
         "NCS-3139.6001",
         "NCS-8141.1400",
-        "NCS-3122.2021",
-        "NCS-8141.0713",
-        "NCS-4322.0201"
+        "NCS-3122.2002"
       ]
     },
     {
@@ -14136,11 +17800,11 @@
         "scarcity_risk": 1.5
       },
       "upskill_paths": [
+        "NCS-8131.3501",
+        "NCS-8131.3502",
         "NCS-3139.6001",
         "NCS-8141.1400",
-        "NCS-3122.2021",
-        "NCS-8141.0713",
-        "NCS-4322.0201"
+        "NCS-3122.2002"
       ]
     },
     {
@@ -14165,11 +17829,11 @@
         "scarcity_risk": 2.5
       },
       "upskill_paths": [
+        "NCS-8131.3501",
+        "NCS-8131.3502",
         "NCS-3139.6001",
         "NCS-8141.1400",
-        "NCS-3122.2021",
-        "NCS-8141.0713",
-        "NCS-4322.0201"
+        "NCS-3122.2002"
       ]
     },
     {
@@ -14194,11 +17858,11 @@
         "scarcity_risk": 1.5
       },
       "upskill_paths": [
+        "NCS-8131.3501",
+        "NCS-8131.3502",
         "NCS-3139.6001",
         "NCS-8141.1400",
-        "NCS-3122.2021",
-        "NCS-8141.0713",
-        "NCS-4322.0201"
+        "NCS-3122.2002"
       ]
     },
     {
@@ -14223,11 +17887,11 @@
         "scarcity_risk": 2.0
       },
       "upskill_paths": [
+        "NCS-8131.3501",
+        "NCS-8131.3502",
         "NCS-3139.6001",
         "NCS-8141.1400",
-        "NCS-3122.2021",
-        "NCS-8141.0713",
-        "NCS-4322.0201"
+        "NCS-3122.2002"
       ]
     },
     {
@@ -14252,11 +17916,11 @@
         "scarcity_risk": 2.0
       },
       "upskill_paths": [
+        "NCS-8131.3501",
+        "NCS-8131.3502",
         "NCS-3139.6001",
         "NCS-8141.1400",
-        "NCS-3122.2021",
-        "NCS-8141.0713",
-        "NCS-4322.0201"
+        "NCS-3122.2002"
       ]
     },
     {
@@ -14281,11 +17945,11 @@
         "scarcity_risk": 2.0
       },
       "upskill_paths": [
+        "NCS-8131.3501",
+        "NCS-8131.3502",
         "NCS-3139.6001",
         "NCS-8141.1400",
-        "NCS-3122.2021",
-        "NCS-8141.0713",
-        "NCS-4322.0201"
+        "NCS-3122.2002"
       ]
     },
     {
@@ -14310,11 +17974,11 @@
         "scarcity_risk": 2.0
       },
       "upskill_paths": [
+        "NCS-8131.3501",
+        "NCS-8131.3502",
         "NCS-3139.6001",
         "NCS-8141.1400",
-        "NCS-3122.2021",
-        "NCS-8141.0713",
-        "NCS-4322.0201"
+        "NCS-3122.2002"
       ]
     },
     {
@@ -14339,11 +18003,11 @@
         "scarcity_risk": 3.0
       },
       "upskill_paths": [
+        "NCS-8131.3501",
+        "NCS-8131.3502",
         "NCS-3139.6001",
         "NCS-8141.1400",
-        "NCS-3122.2021",
-        "NCS-8141.0713",
-        "NCS-4322.0201"
+        "NCS-3122.2002"
       ]
     },
     {
@@ -14368,11 +18032,11 @@
         "scarcity_risk": 1.5
       },
       "upskill_paths": [
+        "NCS-8131.3501",
+        "NCS-8131.3502",
         "NCS-3139.6001",
         "NCS-8141.1400",
-        "NCS-3122.2021",
-        "NCS-8141.0713",
-        "NCS-4322.0201"
+        "NCS-3122.2002"
       ]
     },
     {
@@ -14397,11 +18061,11 @@
         "scarcity_risk": 2.0
       },
       "upskill_paths": [
+        "NCS-8131.3501",
+        "NCS-8131.3502",
         "NCS-3139.6001",
         "NCS-8141.1400",
-        "NCS-3122.2021",
-        "NCS-8141.0713",
-        "NCS-4322.0201"
+        "NCS-3122.2002"
       ]
     },
     {
@@ -14426,11 +18090,11 @@
         "scarcity_risk": 2.0
       },
       "upskill_paths": [
+        "NCS-8131.3501",
+        "NCS-8131.3502",
         "NCS-3139.6001",
         "NCS-8141.1400",
-        "NCS-3122.2021",
-        "NCS-8141.0713",
-        "NCS-4322.0201"
+        "NCS-3122.2002"
       ]
     },
     {
@@ -14455,11 +18119,11 @@
         "scarcity_risk": 2.0
       },
       "upskill_paths": [
+        "NCS-8131.3501",
+        "NCS-8131.3502",
         "NCS-3139.6001",
         "NCS-8141.1400",
-        "NCS-3122.2021",
-        "NCS-8141.0713",
-        "NCS-4322.0201"
+        "NCS-3122.2002"
       ]
     },
     {
@@ -14484,11 +18148,11 @@
         "scarcity_risk": 1.5
       },
       "upskill_paths": [
+        "NCS-8131.3501",
+        "NCS-8131.3502",
         "NCS-3139.6001",
         "NCS-8141.1400",
-        "NCS-3122.2021",
-        "NCS-8141.0713",
-        "NCS-4322.0201"
+        "NCS-3122.2002"
       ]
     },
     {
@@ -14513,11 +18177,11 @@
         "scarcity_risk": 2.0
       },
       "upskill_paths": [
+        "NCS-8131.3501",
+        "NCS-8131.3502",
         "NCS-3139.6001",
         "NCS-8141.1400",
-        "NCS-3122.2021",
-        "NCS-8141.0713",
-        "NCS-4322.0201"
+        "NCS-3122.2002"
       ]
     },
     {
@@ -14542,11 +18206,11 @@
         "scarcity_risk": 2.0
       },
       "upskill_paths": [
+        "NCS-8131.3501",
+        "NCS-8131.3502",
         "NCS-3139.6001",
         "NCS-8141.1400",
-        "NCS-3122.2021",
-        "NCS-8141.0713",
-        "NCS-4322.0201"
+        "NCS-3122.2002"
       ]
     },
     {
@@ -14571,11 +18235,11 @@
         "scarcity_risk": 2.5
       },
       "upskill_paths": [
+        "NCS-8131.3501",
+        "NCS-8131.3502",
         "NCS-3139.6001",
         "NCS-8141.1400",
-        "NCS-3122.2021",
-        "NCS-8141.0713",
-        "NCS-4322.0201"
+        "NCS-3122.2002"
       ]
     },
     {
@@ -14600,11 +18264,11 @@
         "scarcity_risk": 1.5
       },
       "upskill_paths": [
+        "NCS-8131.3501",
+        "NCS-8131.3502",
         "NCS-3139.6001",
         "NCS-8141.1400",
-        "NCS-3122.2021",
-        "NCS-8141.0713",
-        "NCS-4322.0201"
+        "NCS-3122.2002"
       ]
     },
     {
@@ -14629,11 +18293,11 @@
         "scarcity_risk": 1.5
       },
       "upskill_paths": [
+        "NCS-8131.3501",
+        "NCS-8131.3502",
         "NCS-3139.6001",
         "NCS-8141.1400",
-        "NCS-3122.2021",
-        "NCS-8141.0713",
-        "NCS-4322.0201"
+        "NCS-3122.2002"
       ]
     },
     {
@@ -14658,11 +18322,11 @@
         "scarcity_risk": 1.5
       },
       "upskill_paths": [
+        "NCS-8131.3501",
+        "NCS-8131.3502",
         "NCS-3139.6001",
         "NCS-8141.1400",
-        "NCS-3122.2021",
-        "NCS-8141.0713",
-        "NCS-4322.0201"
+        "NCS-3122.2002"
       ]
     },
     {
@@ -14687,11 +18351,11 @@
         "scarcity_risk": 2.0
       },
       "upskill_paths": [
+        "NCS-8131.3501",
+        "NCS-8131.3502",
         "NCS-3139.6001",
         "NCS-8141.1400",
-        "NCS-3122.2021",
-        "NCS-8141.0713",
-        "NCS-4322.0201"
+        "NCS-3122.2002"
       ]
     },
     {
@@ -14716,11 +18380,11 @@
         "scarcity_risk": 2.5
       },
       "upskill_paths": [
+        "NCS-8131.3501",
+        "NCS-8131.3502",
         "NCS-3139.6001",
-        "NCS-3122.2021",
-        "NCS-8141.0713",
-        "NCS-4322.0201",
-        "NCS-8141.1521"
+        "NCS-3122.2002",
+        "NCS-3122.2021"
       ]
     },
     {
@@ -14745,11 +18409,11 @@
         "scarcity_risk": 2.5
       },
       "upskill_paths": [
+        "NCS-8131.3501",
+        "NCS-8131.3502",
         "NCS-3139.6001",
         "NCS-8141.1400",
-        "NCS-3122.2021",
-        "NCS-4322.0201",
-        "NCS-8141.1521"
+        "NCS-3122.2002"
       ]
     },
     {
@@ -14774,11 +18438,11 @@
         "scarcity_risk": 2.0
       },
       "upskill_paths": [
+        "NCS-8131.3501",
+        "NCS-8131.3502",
         "NCS-3139.6001",
         "NCS-8141.1400",
-        "NCS-3122.2021",
-        "NCS-8141.0713",
-        "NCS-4322.0201"
+        "NCS-3122.2002"
       ]
     },
     {
@@ -14803,11 +18467,11 @@
         "scarcity_risk": 3.5
       },
       "upskill_paths": [
+        "NCS-8131.3501",
+        "NCS-8131.3502",
         "NCS-3139.6001",
         "NCS-8141.1400",
-        "NCS-3122.2021",
-        "NCS-8141.0713",
-        "NCS-8141.1521"
+        "NCS-3122.2002"
       ]
     },
     {
