@@ -25,16 +25,25 @@
   const NULL_COLOUR = "#374151";
 
   let data = null;
+  let filteredData = null;
+  let allData = null;
   let activeDimension = "h2_adjacency";
   let selectedOccupation = null;
+  let showingAll = false;
 
   // --- Data Loading ---
 
   async function loadData() {
-    const url = BASE_URL ? `${BASE_URL}/occupations.json` : "occupations.json";
-    const resp = await fetch(url);
+    const base = BASE_URL || "";
+    const url = base ? `${base}/occupations.json` : "occupations.json";
+    const urlAll = base ? `${base}/occupations-all.json` : "occupations-all.json";
+    const [resp, respAll] = await Promise.all([fetch(url), fetch(urlAll)]);
     if (!resp.ok) throw new Error(`Failed to load data: ${resp.status}`);
-    data = await resp.json();
+    filteredData = await resp.json();
+    data = filteredData;
+    if (respAll.ok) {
+      allData = await respAll.json();
+    }
     return data;
   }
 
@@ -57,6 +66,15 @@
     document.getElementById("metricH2Ready").textContent = s.h2_ready_occupations.toLocaleString();
     document.getElementById("metricGap").textContent = (s.workforce_gap_2030 / 1e6).toFixed(1) + "M";
     document.getElementById("metricUpskill").textContent = s.fast_upskill_paths.toLocaleString();
+
+    // Filter indicator
+    const indicator = document.getElementById("filterIndicator");
+    if (indicator) {
+      const current = data.occupations.length;
+      const total = data.total_all_occupations || current;
+      const sectors = data.total_sectors || "?";
+      indicator.textContent = `Showing ${current.toLocaleString()} of ${total.toLocaleString()} occupations across ${sectors} sectors`;
+    }
 
     // Footer
     document.getElementById("footerVersion").textContent = `Dataset v${data.dataset_version}`;
@@ -88,8 +106,14 @@
 
     const root = d3.hierarchy(hierarchy)
       .sum(d => {
-        // Leaf nodes: use employment or 1 as fallback
-        if (d.id) return d.employment || 1;
+        // Leaf nodes: composite H2 relevance score as size
+        if (d.id) {
+          const scores = d.scores || {};
+          const h2 = scores.h2_adjacency || 0;
+          const td = scores.transition_demand || 0;
+          const st = scores.skill_transferability || 0;
+          return (h2 * 2) + td + st;
+        }
         return 0;
       })
       .sort((a, b) => (b.value || 0) - (a.value || 0));
@@ -282,6 +306,27 @@
     });
   }
 
+  // --- Sector Toggle ---
+
+  function setupSectorToggle() {
+    const btn = document.getElementById("toggleSectors");
+    if (!btn || !allData) return;
+    btn.addEventListener("click", () => {
+      showingAll = !showingAll;
+      if (showingAll) {
+        data = allData;
+        btn.textContent = "Show H2-Relevant Only";
+        btn.classList.add("active");
+      } else {
+        data = filteredData;
+        btn.textContent = "Show All 49 Sectors";
+        btn.classList.remove("active");
+      }
+      updateSummary();
+      buildTreemap();
+    });
+  }
+
   // --- CSV Download ---
 
   function setupDownloads() {
@@ -340,6 +385,7 @@
       updateSummary();
       buildTreemap();
       setupDimensionPills();
+      setupSectorToggle();
       setupDownloads();
 
       // Rebuild on resize

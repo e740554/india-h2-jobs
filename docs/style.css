@@ -63,6 +63,7 @@ body {
 }
 
 .nav-left { display: flex; align-items: center; gap: 8px; }
+.nav-logo-img { height: 24px; width: auto; }
 .nav-logo {
   font-weight: 700;
   font-size: 1.1rem;
@@ -175,7 +176,27 @@ body {
   border-bottom: 1px solid var(--border);
 }
 
+.controls {
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
 .controls-label { font-size: 0.85rem; color: var(--text-muted); white-space: nowrap; font-weight: 500; }
+.controls-right { display: flex; align-items: center; gap: 12px; margin-left: auto; }
+.filter-indicator { font-size: 0.8rem; color: var(--text-muted); font-weight: 500; }
+.btn-toggle {
+  padding: 6px 14px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  font-family: inherit;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.btn-toggle:hover { border-color: var(--accent); color: var(--accent); }
+.btn-toggle.active { background: var(--color-goat); color: white; border-color: var(--color-goat); }
 
 .pills { display: flex; gap: 8px; flex-wrap: wrap; }
 

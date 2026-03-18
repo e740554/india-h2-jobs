@@ -15,7 +15,7 @@
   <!-- Nav -->
   <nav class="atlas-nav">
     <div class="nav-left">
-      <span class="nav-logo">&#x1F410; HyGOAT</span>
+      <img src="hygoat-logo.svg" alt="HyGOAT" class="nav-logo-img"><span class="nav-logo">HyGOAT</span>
       <span class="nav-sep">·</span>
       <span class="nav-title">India H2 Workforce Atlas</span>
     </div>
@@ -56,6 +56,10 @@
       <button class="pill" data-dim="digital_automation_exposure">AI Exposure</button>
       <button class="pill" data-dim="formalization_rate">Formalization</button>
       <button class="pill" data-dim="scarcity_risk">Scarcity Risk</button>
+    </div>
+    <div class="controls-right">
+      <span class="filter-indicator" id="filterIndicator"></span>
+      <button class="btn-toggle" id="toggleSectors">Show All 49 Sectors</button>
     </div>
   </div>
 
@@ -99,7 +103,7 @@
   <!-- Footer -->
   <footer class="atlas-footer">
     <span id="footerVersion">Dataset v1.0</span> · <span id="footerDate">Last updated March 2026</span> · *IEA methodology<br>
-    Built by <a href="https://hygoat.in">HyGOAT</a> · <a href="https://ekavikalp.com">Ekavikalp Pvt Ltd</a> · Data: NCS Portal, PLFS 2023-24, NCVET · Scoring: Claude AI (<a href="https://github.com/ekavikalp/india-h2-jobs">open source prompts</a>) · MIT Licence
+    Built by <a href="https://hygoat.in">HyGOAT</a> · <a href="https://ekavikalp.com">Ekavikalp Pvt Ltd</a> · Data: NCS Portal, PLFS 2023-24, NCVET · Scoring: Claude AI (<a href="https://github.com/e740554/india-h2-jobs">open source prompts</a>) · MIT Licence
   </footer>
 
   <script src="https://d3js.org/d3.v7.min.js"></script>

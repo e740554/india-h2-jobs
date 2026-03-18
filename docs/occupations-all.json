@@ -2,6 +2,9 @@
   "dataset_version": "1.0",
   "last_updated": "2026-03-18",
   "total_occupations": 1802,
+  "total_all_occupations": 1802,
+  "total_sectors": 49,
+  "total_all_sectors": 49,
   "scored_occupations": 1802,
   "summary": {
     "h2_ready_occupations": 5,

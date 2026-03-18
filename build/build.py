@@ -19,10 +19,27 @@ PROJECT_ROOT = os.path.join(os.path.dirname(__file__), "..")
 OCCUPATIONS_CSV = os.path.join(PROJECT_ROOT, "occupations.csv")
 SCORES_FILE = os.path.join(PROJECT_ROOT, "scores.json")
 OUTPUT_JSON = os.path.join(PROJECT_ROOT, "occupations.json")
+OUTPUT_JSON_ALL = os.path.join(PROJECT_ROOT, "occupations-all.json")
 OUTPUT_CSV_FULL = os.path.join(PROJECT_ROOT, "occupations.csv")
 OUTPUT_CSV_H2 = os.path.join(PROJECT_ROOT, "h2-ready-occupations.csv")
 TEMPLATE_FILE = os.path.join(PROJECT_ROOT, "web", "main.js.template")
 OUTPUT_JS = os.path.join(PROJECT_ROOT, "web", "main.js")
+
+# H2-relevant NCS sectors (12 of 49)
+H2_SECTORS = [
+    "Hydrocarbon",
+    "Chemical and Petrochemicals",
+    "Power",
+    "Iron and Steel",
+    "Mining",
+    "Capital Goods and Manufacturing",
+    "Construction",
+    "Plumbing",
+    "Environmental Science",
+    "Electronics and HW",
+    "Logistics",
+    "Shipping",
+]
 
 # Workforce gap formula inputs (spec section 3)
 NGHM_TARGET_MMT = 5
@@ -186,19 +203,47 @@ def main():
     # Count scored
     scored_count = sum(1 for occ in occupations if occ.get("scores"))
 
-    # Build output JSON
+    # Filter to H2-relevant sectors
+    h2_occupations = [
+        occ for occ in occupations
+        if occ.get("sector", "") in H2_SECTORS
+    ]
+    h2_metrics = compute_summary_metrics(h2_occupations)
+    h2_scored = sum(1 for occ in h2_occupations if occ.get("scores"))
+
+    # Build filtered output JSON (default view)
     output = {
         "dataset_version": "1.0",
         "last_updated": date.today().isoformat(),
+        "total_occupations": len(h2_occupations),
+        "total_all_occupations": len(occupations),
+        "total_sectors": len(set(occ.get("sector", "Other") for occ in h2_occupations)),
+        "total_all_sectors": len(set(occ.get("sector", "Other") for occ in occupations)),
+        "scored_occupations": h2_scored,
+        "summary": h2_metrics,
+        "occupations": h2_occupations,
+    }
+
+    with open(OUTPUT_JSON, "w", encoding="utf-8") as f:
+        json.dump(output, f, indent=2, ensure_ascii=False)
+    print(f"Written: {OUTPUT_JSON} ({len(h2_occupations)} H2-relevant occupations)")
+
+    # Build full output JSON (for "Show All" toggle)
+    output_all = {
+        "dataset_version": "1.0",
+        "last_updated": date.today().isoformat(),
         "total_occupations": len(occupations),
+        "total_all_occupations": len(occupations),
+        "total_sectors": len(set(occ.get("sector", "Other") for occ in occupations)),
+        "total_all_sectors": len(set(occ.get("sector", "Other") for occ in occupations)),
         "scored_occupations": scored_count,
         "summary": metrics,
         "occupations": occupations,
     }
 
-    with open(OUTPUT_JSON, "w", encoding="utf-8") as f:
-        json.dump(output, f, indent=2, ensure_ascii=False)
-    print(f"Written: {OUTPUT_JSON} ({len(occupations)} occupations)")
+    with open(OUTPUT_JSON_ALL, "w", encoding="utf-8") as f:
+        json.dump(output_all, f, indent=2, ensure_ascii=False)
+    print(f"Written: {OUTPUT_JSON_ALL} ({len(occupations)} all occupations)")
 
     # Summary
     print(f"\nSummary metrics:")
@@ -209,11 +254,15 @@ def main():
     # Write H2 CSV
     write_h2_csv(occupations)
 
-    # Copy occupations.json to web/ for serving
+    # Copy JSON files to web/ for serving
     import shutil
     web_json = os.path.join(PROJECT_ROOT, "web", "occupations.json")
     shutil.copy2(OUTPUT_JSON, web_json)
     print(f"Copied: {web_json}")
+
+    web_json_all = os.path.join(PROJECT_ROOT, "web", "occupations-all.json")
+    shutil.copy2(OUTPUT_JSON_ALL, web_json_all)
+    print(f"Copied: {web_json_all}")
 
     # Copy CSV exports to web/ for download
     for csv_file in [OUTPUT_CSV_H2]:
