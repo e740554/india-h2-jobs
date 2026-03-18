@@ -16,13 +16,13 @@
   ];
 
   const COLOUR_BANDS = [
-    { min: 9, max: 10, colour: "#15803d", label: "Core H2" },
-    { min: 7, max: 8.99, colour: "#22c55e", label: "Strong" },
-    { min: 5, max: 6.99, colour: "#86efac", label: "Adjacent" },
-    { min: 3, max: 4.99, colour: "#f97316", label: "Transferable" },
+    { min: 9, max: 10, colour: "#00994C", label: "Core H2" },      // HyGOAT green
+    { min: 7, max: 8.99, colour: "#50C878", label: "Strong" },      // Emerald
+    { min: 5, max: 6.99, colour: "#86efac", label: "Adjacent" },    // Light green
+    { min: 3, max: 4.99, colour: "#ff8a00", label: "Transferable" },// HyGOAT orange
     { min: 1, max: 2.99, colour: "#dc2626", label: "Low relevance" },
   ];
-  const NULL_COLOUR = "#334155";
+  const NULL_COLOUR = "#374151";
 
   let data = null;
   let activeDimension = "h2_adjacency";

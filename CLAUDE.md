@@ -47,8 +47,15 @@ Scoring is done via Claude Code subagents — no API key needed. The pipeline:
 
 See `DATASOURCES.md` for full documentation.
 
+## Deployment
+
+GitHub Pages from `web/` directory. No CI/CD — manual push.
+
+```bash
+python build/build.py --base-url ""   # builds occupations.json + web/main.js + copies to web/
+# Push to ekavikalp/india-h2-jobs, enable GitHub Pages on web/ folder
+```
+
 ## Build Modes
 
-- `--base-url ""` — local dev / root hosting
-- `--base-url "/india-h2-jobs"` — GitHub Pages
-- `--base-url "/workforce-atlas"` — HyGOAT integration
+- `--base-url ""` — GitHub Pages (root of repo's Pages site) or local dev

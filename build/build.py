@@ -209,6 +209,17 @@ def main():
     # Write H2 CSV
     write_h2_csv(occupations)
 
+    # Copy occupations.json to web/ for serving
+    import shutil
+    web_json = os.path.join(PROJECT_ROOT, "web", "occupations.json")
+    shutil.copy2(OUTPUT_JSON, web_json)
+    print(f"Copied: {web_json}")
+
+    # Copy CSV exports to web/ for download
+    for csv_file in [OUTPUT_CSV_H2]:
+        web_csv = os.path.join(PROJECT_ROOT, "web", os.path.basename(csv_file))
+        shutil.copy2(csv_file, web_csv)
+
     # Generate JS
     inject_base_url(args.base_url)
 
