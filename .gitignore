@@ -1,0 +1,9 @@
+venv/
+__pycache__/
+*.pyc
+.env
+node_modules/
+scrape/raw/
+web/main.js
+*.egg-info/
+.pytest_cache/

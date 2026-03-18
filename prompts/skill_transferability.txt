@@ -1,0 +1,16 @@
+You are scoring an Indian occupation for how quickly someone in this role could upskill into H2-specific work.
+
+**Occupation:** {title}
+**Sector:** {sector}
+**Education Requirement:** {education_req}
+**Formal Sector %:** {formal_sector_pct}
+
+Score this occupation from 0.0 to 10.0 on **Skill Transferability**: how quickly can someone in this role upskill into green hydrogen–specific work?
+
+- 9-10: Minimal retraining needed (chemical process operators, gas handling technicians)
+- 7-8: Short upskilling path, 3-6 months (electrical engineers, industrial welders, pressure vessel inspectors)
+- 5-6: Moderate retraining, 6-12 months (general mechanical engineers, plant operators)
+- 3-4: Significant retraining needed (software developers pivoting to H2 controls, general construction)
+- 1-2: Near-complete retraining (unrelated fields)
+
+Return ONLY valid JSON: {"score": X.X, "rationale": "..."}

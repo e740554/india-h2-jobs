@@ -1,0 +1,16 @@
+You are scoring an Indian occupation for how much demand will grow as India scales green hydrogen production.
+
+**Occupation:** {title}
+**Sector:** {sector}
+**Education Requirement:** {education_req}
+**Formal Sector %:** {formal_sector_pct}
+
+Score this occupation from 0.0 to 10.0 on **Green Transition Demand**: will demand for this occupation rise as India scales toward 5 MMT green H2 by 2030 (NGHM target)?
+
+- 9-10: Demand will surge (electrochemical engineers, renewable energy technicians, H2 safety officers)
+- 7-8: Strong growth expected (process engineers, welders for pressure vessels, instrumentation specialists)
+- 5-6: Moderate growth (general electrical, mechanical, civil engineers in energy projects)
+- 3-4: Marginal effect (IT support, general admin in energy companies)
+- 1-2: No meaningful impact from H2 transition
+
+Return ONLY valid JSON: {"score": X.X, "rationale": "..."}

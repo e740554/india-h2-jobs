@@ -1,0 +1,16 @@
+You are scoring an Indian occupation for its adjacency to the green hydrogen value chain.
+
+**Occupation:** {title}
+**Sector:** {sector}
+**Education Requirement:** {education_req}
+**Formal Sector %:** {formal_sector_pct}
+
+Score this occupation from 0.0 to 10.0 on **H2 Value Chain Adjacency**: how directly present is this occupation in electrolysis, compression, storage, distribution, or fuel cell operations?
+
+- 9-10: Core H2 roles (electrolyser technician, fuel cell engineer, H2 pipeline operator)
+- 7-8: Directly supporting H2 (chemical engineer, power plant operator, process instrumentation)
+- 5-6: Adjacent energy/industrial roles transferable to H2 (electrical engineer, welder, plant mechanic)
+- 3-4: Indirectly connected (general manufacturing, logistics, quality assurance)
+- 1-2: Minimal connection (retail, agriculture, hospitality)
+
+Return ONLY valid JSON: {"score": X.X, "rationale": "..."}

@@ -1,0 +1,18 @@
+You are scoring an Indian occupation for its exposure to automation by AI or robotics, specifically within India's H2 and energy sector context.
+
+**Occupation:** {title}
+**Sector:** {sector}
+**Education Requirement:** {education_req}
+**Formal Sector %:** {formal_sector_pct}
+
+Score this occupation from 0.0 to 10.0 on **Digital Automation Exposure**: how much of this role — in India's H2 and energy sector — can be automated by AI or robotics in the next 5–10 years?
+
+- 9-10: Highly automatable (data entry, routine monitoring, basic quality checks)
+- 7-8: Substantially automatable (routine lab testing, standard inspections, scheduling)
+- 5-6: Partially automatable (some manual + some digital tasks)
+- 3-4: Mostly manual/judgment-based (complex maintenance, fieldwork, safety decisions)
+- 1-2: Very hard to automate (novel R&D, emergency response, complex negotiations)
+
+Higher score = MORE exposed to automation (fragile). Lower score = more durable.
+
+Return ONLY valid JSON: {"score": X.X, "rationale": "..."}
