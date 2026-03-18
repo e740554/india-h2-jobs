@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>India H2 Workforce Atlas | HyGOAT</title>
+  <meta name="description" content="Interactive treemap of India's occupational landscape scored across 6 green hydrogen dimensions. Open-source policy tool for NGHM/MNRE.">
+  <meta property="og:title" content="India H2 Workforce Atlas">
+  <meta property="og:description" content="Map India's workforce readiness for the green hydrogen transition. 1,800+ occupations scored across 6 dimensions.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://hygoat.in/workforce-atlas">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Nav -->
+  <nav class="atlas-nav">
+    <div class="nav-left">
+      <span class="nav-logo">&#x1F410; HyGOAT</span>
+      <span class="nav-sep">·</span>
+      <span class="nav-title">India H2 Workforce Atlas</span>
+    </div>
+    <div class="nav-right">
+      <div class="download-dropdown">
+        <button class="btn-download" id="downloadBtn">&#x2B07; Download CSV &#x25BE;</button>
+        <div class="dropdown-menu" id="downloadMenu">
+          <a href="#" id="dlFull">All Occupations (CSV)</a>
+          <a href="#" id="dlH2">H2-Ready Only (CSV)</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Summary Bar -->
+  <div class="summary-bar">
+    <div class="metric">
+      <span class="metric-value" id="metricH2Ready">--</span>
+      <span class="metric-label">H2-Ready Occupations</span>
+    </div>
+    <div class="metric">
+      <span class="metric-value" id="metricGap">--</span>
+      <span class="metric-label">Workforce Gap by 2030<span class="tooltip-trigger" data-tooltip="Estimated gap = (5 MMT NGHM target x 500K jobs/MMT) - current H2-adjacent workforce. Source: IEA Global Hydrogen Review 2023. Assumes full availability of H2-adjacent talent pool.">*</span></span>
+    </div>
+    <div class="metric">
+      <span class="metric-value" id="metricUpskill">--</span>
+      <span class="metric-label">Fast Upskill Paths</span>
+    </div>
+  </div>
+
+  <!-- Controls -->
+  <div class="controls">
+    <span class="controls-label">Colour by:</span>
+    <div class="pills" id="dimensionPills">
+      <button class="pill active" data-dim="h2_adjacency">H2 Adjacency</button>
+      <button class="pill" data-dim="transition_demand">Transition Demand</button>
+      <button class="pill" data-dim="skill_transferability">Skill Transfer</button>
+      <button class="pill" data-dim="digital_automation_exposure">AI Exposure</button>
+      <button class="pill" data-dim="formalization_rate">Formalization</button>
+      <button class="pill" data-dim="scarcity_risk">Scarcity Risk</button>
+    </div>
+  </div>
+
+  <!-- Treemap + Sidebar -->
+  <div class="atlas-main">
+    <div class="treemap-container" id="treemapContainer">
+      <div id="treemap"></div>
+      <div id="tooltip" class="tooltip"></div>
+    </div>
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-empty">Click an occupation to see details</div>
+      <div class="sidebar-content" id="sidebarContent" style="display:none">
+        <h2 id="sbTitle"></h2>
+        <div class="sb-meta">
+          <span id="sbSector"></span>
+          <span id="sbNco"></span>
+          <span id="sbEdu"></span>
+        </div>
+        <div class="sb-stats">
+          <div class="sb-stat"><span class="sb-stat-label">Employment</span><span id="sbEmployment">--</span></div>
+          <div class="sb-stat"><span class="sb-stat-label">Median Wage</span><span id="sbWage">--</span></div>
+        </div>
+        <h3>Scores</h3>
+        <div class="score-bars" id="scoreBars"></div>
+        <h3>Top 5 Upskill Paths &#x2192; H2</h3>
+        <div class="upskill-list" id="upskillList"></div>
+      </div>
+    </aside>
+  </div>
+
+  <!-- Legend -->
+  <div class="legend">
+    <div class="legend-item"><span class="legend-swatch" style="background:#15803d"></span>9-10 Core H2</div>
+    <div class="legend-item"><span class="legend-swatch" style="background:#22c55e"></span>7-8 Strong</div>
+    <div class="legend-item"><span class="legend-swatch" style="background:#86efac"></span>5-6 Adjacent</div>
+    <div class="legend-item"><span class="legend-swatch" style="background:#f97316"></span>3-4 Transferable</div>
+    <div class="legend-item"><span class="legend-swatch" style="background:#dc2626"></span>1-2 Low relevance</div>
+    <div class="legend-item"><span class="legend-swatch" style="background:#334155"></span>N/A</div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="atlas-footer">
+    <span id="footerVersion">Dataset v1.0</span> · <span id="footerDate">Last updated March 2026</span> · *IEA methodology<br>
+    Built by <a href="https://hygoat.in">HyGOAT</a> · <a href="https://ekavikalp.com">Ekavikalp Pvt Ltd</a> · Data: NCS Portal, PLFS 2023-24, NCVET · Scoring: Claude AI (<a href="https://github.com/ekavikalp/india-h2-jobs">open source prompts</a>) · MIT Licence
+  </footer>
+
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>

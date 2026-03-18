@@ -1,0 +1,82 @@
+{
+  "NCS-7413.0602": {
+    "h2_adjacency": {"score": 2.5, "rationale": "GIS mapping for power distribution is a spatial/data role with minimal direct connection to H2 value chain operations"},
+    "transition_demand": {"score": 3.0, "rationale": "Some demand for mapping H2 pipeline routes and RE plant siting, but GIS is a support function not directly scaled by H2"},
+    "skill_transferability": {"score": 3.0, "rationale": "GIS skills are general-purpose; would need significant domain retraining to work on H2 infrastructure planning"},
+    "digital_automation_exposure": {"score": 7.5, "rationale": "GIS mapping is increasingly automated with AI-based spatial analysis, satellite imagery processing, and auto-digitization"},
+    "formalization_rate": {"score": 7.0, "rationale": "GIS roles in Indian power distribution companies (DISCOMs) are typically formal positions within state utilities or contracted IT firms"},
+    "scarcity_risk": {"score": 2.0, "rationale": "India has abundant GIS/geospatial talent from geography and IT programs; not a bottleneck for H2"}
+  },
+  "NCS-9623.0302": {
+    "h2_adjacency": {"score": 1.5, "rationale": "Meter reading and billing is a downstream consumer-facing utility role with no connection to H2 production or distribution"},
+    "transition_demand": {"score": 1.5, "rationale": "H2 scaling does not meaningfully increase demand for electricity meter readers; smart meters are reducing this role"},
+    "skill_transferability": {"score": 1.5, "rationale": "Meter reading and cash collection skills have almost no transferability to H2-specific technical work"},
+    "digital_automation_exposure": {"score": 9.0, "rationale": "Smart meters, digital billing, and UPI/online payments are rapidly automating this role in India already"},
+    "formalization_rate": {"score": 5.5, "rationale": "Mix of formal DISCOM employees and outsourced contractual workers; many meter readers are on temporary contracts"},
+    "scarcity_risk": {"score": 1.0, "rationale": "Abundant low-skill labor pool; this role is actually shrinking due to smart meter rollouts"}
+  },
+  "NCS-3113.0202": {
+    "h2_adjacency": {"score": 4.5, "rationale": "Cable jointing is electrical infrastructure work; H2 plants need power connections but this is general electrical not H2-specific"},
+    "transition_demand": {"score": 5.0, "rationale": "Green H2 plants need grid connections and dedicated RE power lines; cable jointers will see moderate demand from new energy infrastructure"},
+    "skill_transferability": {"score": 5.0, "rationale": "Electrical skills are transferable to H2 plant electrical systems but would need training on H2-specific safety and high-current electrolyser connections"},
+    "digital_automation_exposure": {"score": 2.5, "rationale": "Cable jointing is highly manual fieldwork requiring dexterity and site judgment; very difficult to automate"},
+    "formalization_rate": {"score": 6.0, "rationale": "Many cable jointers work for DISCOMs or large contractors formally, but a significant portion are informal subcontracted workers"},
+    "scarcity_risk": {"score": 4.0, "rationale": "Skilled cable jointers exist in reasonable numbers for current grid work; demand may tighten moderately with H2 buildout"}
+  },
+  "NCS-3111.0400": {
+    "h2_adjacency": {"score": 4.0, "rationale": "Chemical radiation technicians work in nuclear/power plants; some chemical handling overlap but radiation focus is distant from H2"},
+    "transition_demand": {"score": 2.5, "rationale": "Green H2 production does not involve radiation; this role's demand is driven by nuclear power, not H2"},
+    "skill_transferability": {"score": 5.5, "rationale": "Chemical handling, safety protocols, and process monitoring skills partially transfer to H2 chemical process environments"},
+    "digital_automation_exposure": {"score": 5.0, "rationale": "Mix of automated monitoring systems and manual inspection/sampling that still requires human judgment"},
+    "formalization_rate": {"score": 8.5, "rationale": "Radiation technicians work almost exclusively in formal settings — nuclear plants, BARC, NPCIL, or licensed facilities"},
+    "scarcity_risk": {"score": 5.0, "rationale": "Niche specialization with limited training pipeline in India; moderate scarcity but not directly relevant to H2"}
+  },
+  "NCS-7413.0401": {
+    "h2_adjacency": {"score": 2.0, "rationale": "Consumer energy metering is end-user focused; no direct role in H2 production, storage, or distribution"},
+    "transition_demand": {"score": 2.5, "rationale": "H2 scale-up may slightly increase industrial metering needs but consumer meter technicians are not significantly affected"},
+    "skill_transferability": {"score": 3.0, "rationale": "Basic electrical and instrumentation knowledge provides a foundation, but substantial retraining needed for H2 systems"},
+    "digital_automation_exposure": {"score": 8.0, "rationale": "Smart meters with remote monitoring and IoT are rapidly replacing manual meter installation and calibration work"},
+    "formalization_rate": {"score": 6.5, "rationale": "Employed by DISCOMs and metering companies, mostly formal but with a significant outsourced/contract worker segment"},
+    "scarcity_risk": {"score": 1.5, "rationale": "Large existing workforce with ITI-level training; no scarcity concern for H2 purposes"}
+  },
+  "NCS-1120.0400": {
+    "h2_adjacency": {"score": 4.0, "rationale": "Senior leadership in electricity sector; strategic decisions may touch H2 but the role itself is not in H2 operations"},
+    "transition_demand": {"score": 4.5, "rationale": "Directors overseeing electricity will increasingly need to understand H2 integration, green power procurement for electrolysis"},
+    "skill_transferability": {"score": 5.5, "rationale": "Energy sector leadership experience transfers well to H2 project oversight; domain knowledge gap is manageable at executive level"},
+    "digital_automation_exposure": {"score": 1.5, "rationale": "Executive decision-making, stakeholder management, and policy navigation are very hard to automate"},
+    "formalization_rate": {"score": 9.5, "rationale": "Director-level positions are entirely formal — government utilities, CPSUs, or large private power companies"},
+    "scarcity_risk": {"score": 4.5, "rationale": "Senior energy executives are relatively scarce but not H2-specific; existing power sector leadership can pivot"}
+  },
+  "NCS-3113.0200": {
+    "h2_adjacency": {"score": 5.5, "rationale": "HV electrical technicians work on power systems directly relevant to electrolyser power supply, transformer connections, and switchgear"},
+    "transition_demand": {"score": 5.5, "rationale": "H2 plants need HV connections for large electrolysers; demand will grow moderately as new plants commission"},
+    "skill_transferability": {"score": 6.5, "rationale": "HV electrical skills transfer well to H2 plant electrical infrastructure; needs H2 safety training and electrolyser-specific knowledge"},
+    "digital_automation_exposure": {"score": 3.0, "rationale": "HV work is hands-on, safety-critical fieldwork requiring physical presence and expert judgment; low automation potential"},
+    "formalization_rate": {"score": 7.5, "rationale": "HV technicians typically work for utilities, large EPC contractors, or power companies in formal roles with safety certifications"},
+    "scarcity_risk": {"score": 5.0, "rationale": "Moderate scarcity — India trains many electrical technicians but HV-certified specialists are fewer; demand growing across RE and H2"}
+  },
+  "NCS-3113.0300": {
+    "h2_adjacency": {"score": 5.0, "rationale": "Energy auditors assess energy efficiency; relevant to H2 plant energy optimization but not directly in H2 operations"},
+    "transition_demand": {"score": 6.0, "rationale": "H2 certification schemes (ISCC, CertifHy) require energy accounting; auditors will be needed for green H2 compliance verification"},
+    "skill_transferability": {"score": 6.5, "rationale": "Energy measurement, efficiency analysis, and regulatory compliance skills transfer directly to H2 energy accounting and certification"},
+    "digital_automation_exposure": {"score": 5.5, "rationale": "Data analysis portions are automatable but site audits, stakeholder interviews, and compliance judgment still need humans"},
+    "formalization_rate": {"score": 8.0, "rationale": "BEE-certified energy auditors in India are licensed professionals working in formal consulting or corporate roles"},
+    "scarcity_risk": {"score": 6.0, "rationale": "India has ~15,000 certified energy auditors; growing H2 certification demand will strain this pool, especially for H2-specific auditing"}
+  },
+  "NCS-2151.0302": {
+    "h2_adjacency": {"score": 5.5, "rationale": "Power distribution engineers design and manage grid infrastructure; relevant to connecting H2 plants to RE supply but not core H2"},
+    "transition_demand": {"score": 5.5, "rationale": "Green H2 needs dedicated RE power corridors and grid connections; distribution engineers will see incremental demand"},
+    "skill_transferability": {"score": 6.0, "rationale": "Electrical engineering fundamentals transfer well; needs additional training on electrolyser load profiles and H2 plant power systems"},
+    "digital_automation_exposure": {"score": 4.0, "rationale": "Design work partially aided by software but field engineering, fault analysis, and network planning need human expertise"},
+    "formalization_rate": {"score": 8.5, "rationale": "Engineers in Indian DISCOMs and power companies are formal employees, typically B.E./B.Tech qualified with structured roles"},
+    "scarcity_risk": {"score": 4.0, "rationale": "India produces many electrical engineers; power distribution is a well-supplied field, though experienced engineers are more scarce"}
+  },
+  "NCS-1321.0700": {
+    "h2_adjacency": {"score": 3.5, "rationale": "General management in electricity is administrative/strategic; indirect connection to H2 through energy sector leadership"},
+    "transition_demand": {"score": 4.0, "rationale": "Some GMs will oversee H2-integrated energy projects, but this is a general management role not specifically driven by H2 demand"},
+    "skill_transferability": {"score": 5.0, "rationale": "Management and energy sector experience transfer to H2 project management; technical H2 knowledge gap is bridgeable"},
+    "digital_automation_exposure": {"score": 2.0, "rationale": "Senior management roles involving people management, strategy, and stakeholder relations are highly resistant to automation"},
+    "formalization_rate": {"score": 9.5, "rationale": "GM-level positions in Indian power sector are entirely formal — state utilities, NTPC, Adani Power, Tata Power, etc."},
+    "scarcity_risk": {"score": 3.5, "rationale": "Experienced energy sector GMs are somewhat limited in number but not a specific H2 bottleneck; management talent is fungible"}
+  }
+}
