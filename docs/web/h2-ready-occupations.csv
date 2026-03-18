@@ -1,0 +1,6 @@
+id,slug,title,sector,nco_code,employment,median_wage_inr,education_req,formal_sector_pct,h2_adjacency,transition_demand,skill_transferability,digital_automation_exposure,formalization_rate,scarcity_risk
+NCS-8131.2100,ammonia-operator-ammonia-plant-operator,Ammonia Operator/ Ammonia Plant Operator,Chemical and Petrochemicals,8131.2100,,,,,7.5,8.0,8.0,4.0,7.0,7.0
+NCS-2145.0500,chemical-engineer-petroleum,"Chemical Engineer, Petroleum",Hydrocarbon,2145.0500,,,,,7.0,8.0,8.5,3.0,9.0,7.0
+NCS-8131.8300,gas-storage-attendant,Gas Storage Attendant,Hydrocarbon,8131.8300,,,,,7.0,8.0,7.5,4.0,7.0,7.5
+NCS-8131.5800,producer-gas-plant-operator,Producer Gas Plant Operator,Hydrocarbon,8131.5800,,,,,7.5,7.0,7.5,4.0,7.0,7.0
+NCS-2143.0100,solar-energy-system-designer,Solar Energy System Designer,Power,2143.0100,,,,,7.0,8.0,8.5,4.0,8.5,7.0
