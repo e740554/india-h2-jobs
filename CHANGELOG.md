@@ -2,6 +2,30 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.2.0.0] - 2026-03-30
+
+### Added
+- **Scenario engine (Phase 1)** — set an MT hydrogen capacity target on a slider and see
+  occupation-level workforce demand cascade across the treemap. One archetype (1 GW alkaline
+  electrolyser) with 48 occupation coefficients across construction, commissioning, and operations
+- **Atlas/Scenario mode toggle** — switch between the scored occupation atlas and the demand
+  scenario model. Scenario mode shows orange demand-intensity tiles, phase breakdown per
+  occupation, and coefficient provenance in the sidebar
+- **`model/` directory** — `archetypes.json` (asset archetypes with occupation coefficients),
+  `scenarios.json` (3 NGHM presets: 1 MT/2027, 5 MT/2030, 10 MT/2035), and `compute.py`
+  (Python validation/export engine matching JS logic)
+- **Python/JS parity tests** — verify both engines produce identical demand results for the
+  same inputs (tested at 1 MT and 5 MT)
+- **29 compute engine tests** — comprehensive pytest coverage for the 5-step model chain
+  (MT → units → demand → allocation → aggregation)
+- **Build pipeline** copies `archetypes.json` and `scenarios.json` to `docs/` and `web/`
+
+### Changed
+- **Summary bar** relabels in scenario mode: "Occupations in Demand", "Total Workforce Demand",
+  "Plant Units Needed" — restores original labels when switching back to Atlas mode
+- **Treemap sizing** uses demand headcount in scenario mode (instead of H2 relevance scores)
+- **Sector toggle** is disabled in scenario mode (demand is archetype-scoped, not sector-filtered)
+
 ## [1.1.1.0] - 2026-03-30
 
 ### Added

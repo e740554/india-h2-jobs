@@ -1,0 +1,446 @@
+[
+  {
+    "id": "alkaline_1gw",
+    "name": "1 GW Alkaline Electrolyser Plant",
+    "capacity_mw": 1000,
+    "h2_output_mt_per_year": 0.14,
+    "description": "Reference 1 GW alkaline electrolyser with associated balance-of-plant. Based on ~80% capacity factor, ~50 kWh/kg specific energy consumption.",
+    "caveats": "Covers electrolyser plant staffing only. Ammonia synthesis, storage, transport, and dedicated RE generation workforce not included.",
+    "coefficients": [
+      {
+        "nco_group": "7212",
+        "nco_group_title": "Welders and Flame Cutters",
+        "phase": "construction",
+        "headcount_per_unit": 480,
+        "source": "IRENA 2024",
+        "source_type": "modeled_estimate",
+        "notes": "Allocated from IRENA aggregate using H2 relevance weights. Pressure-vessel, piping, and structural welding during build."
+      },
+      {
+        "nco_group": "7126",
+        "nco_group_title": "Plumbers and Pipe Fitters",
+        "phase": "construction",
+        "headcount_per_unit": 540,
+        "source": "IRENA 2024",
+        "source_type": "modeled_estimate",
+        "notes": "Allocated from IRENA aggregate using H2 relevance weights. Extensive piping for demin water, cooling, H2 gas, and KOH electrolyte."
+      },
+      {
+        "nco_group": "7413",
+        "nco_group_title": "Electrical Line Installers and Repairers",
+        "phase": "construction",
+        "headcount_per_unit": 380,
+        "source": "IRENA 2024",
+        "source_type": "modeled_estimate",
+        "notes": "Allocated from IRENA aggregate using H2 relevance weights. HV/LV cabling, rectifier connections, transformer installation."
+      },
+      {
+        "nco_group": "2142",
+        "nco_group_title": "Civil Engineers",
+        "phase": "construction",
+        "headcount_per_unit": 200,
+        "source": "IRENA 2024",
+        "source_type": "modeled_estimate",
+        "notes": "Allocated from IRENA aggregate using H2 relevance weights. Foundations, buildings, roads, and civil works."
+      },
+      {
+        "nco_group": "7214",
+        "nco_group_title": "Structural Metal Workers",
+        "phase": "construction",
+        "headcount_per_unit": 480,
+        "source": "IRENA 2024",
+        "source_type": "modeled_estimate",
+        "notes": "Allocated from IRENA aggregate using H2 relevance weights. Steel structures, pipe racks, and equipment support frames."
+      },
+      {
+        "nco_group": "7223",
+        "nco_group_title": "Metal Working Machine Tool Setters and Operators",
+        "phase": "construction",
+        "headcount_per_unit": 250,
+        "source": "IRENA 2024",
+        "source_type": "modeled_estimate",
+        "notes": "Allocated from IRENA aggregate using H2 relevance weights. On-site fabrication, cutting, and forming of structural and piping components."
+      },
+      {
+        "nco_group": "8211",
+        "nco_group_title": "Mechanical Machinery Assemblers",
+        "phase": "construction",
+        "headcount_per_unit": 350,
+        "source": "IRENA 2024",
+        "source_type": "modeled_estimate",
+        "notes": "Allocated from IRENA aggregate using H2 relevance weights. Electrolyser stack assembly, skid mounting, rotating equipment installation."
+      },
+      {
+        "nco_group": "8212",
+        "nco_group_title": "Electrical and Electronic Equipment Assemblers",
+        "phase": "construction",
+        "headcount_per_unit": 250,
+        "source": "IRENA 2024",
+        "source_type": "modeled_estimate",
+        "notes": "Allocated from IRENA aggregate using H2 relevance weights. Electrical panel building, instrumentation, and control system installation."
+      },
+      {
+        "nco_group": "7233",
+        "nco_group_title": "Agricultural and Industrial Machinery Mechanics and Repairers",
+        "phase": "construction",
+        "headcount_per_unit": 180,
+        "source": "IRENA 2024",
+        "source_type": "modeled_estimate",
+        "notes": "Allocated from IRENA aggregate using H2 relevance weights. Mechanical equipment installation and alignment."
+      },
+      {
+        "nco_group": "3113",
+        "nco_group_title": "Electrical Engineering Technicians",
+        "phase": "construction",
+        "headcount_per_unit": 150,
+        "source": "IRENA 2024",
+        "source_type": "modeled_estimate",
+        "notes": "Allocated from IRENA aggregate using H2 relevance weights. E&I installation supervision and loop checking."
+      },
+      {
+        "nco_group": "8131",
+        "nco_group_title": "Chemical Products Plant and Machine Operators",
+        "phase": "construction",
+        "headcount_per_unit": 120,
+        "source": "IRENA 2024",
+        "source_type": "modeled_estimate",
+        "notes": "Allocated from IRENA aggregate using H2 relevance weights. Pre-commissioning support and early operator training."
+      },
+      {
+        "nco_group": "3132",
+        "nco_group_title": "Incinerator and Water Treatment Plant Operators",
+        "phase": "construction",
+        "headcount_per_unit": 80,
+        "source": "IRENA 2024",
+        "source_type": "modeled_estimate",
+        "notes": "Allocated from IRENA aggregate using H2 relevance weights. BOP utilities equipment installation."
+      },
+      {
+        "nco_group": "3152",
+        "nco_group_title": "Health and Safety Inspectors",
+        "phase": "construction",
+        "headcount_per_unit": 150,
+        "source": "IRENA 2024",
+        "source_type": "modeled_estimate",
+        "notes": "Allocated from IRENA aggregate using H2 relevance weights. Construction-phase HSE oversight."
+      },
+      {
+        "nco_group": "2145",
+        "nco_group_title": "Chemical Engineers",
+        "phase": "construction",
+        "headcount_per_unit": 100,
+        "source": "IRENA 2024",
+        "source_type": "modeled_estimate",
+        "notes": "Allocated from IRENA aggregate using H2 relevance weights. Process engineering, vendor oversight, and design verification."
+      },
+      {
+        "nco_group": "1120",
+        "nco_group_title": "Managing Directors and Chief Executives",
+        "phase": "construction",
+        "headcount_per_unit": 60,
+        "source": "IRENA 2024",
+        "source_type": "modeled_estimate",
+        "notes": "Allocated from IRENA aggregate using H2 relevance weights. Project directors, site managers, and senior leadership."
+      },
+      {
+        "nco_group": "1321",
+        "nco_group_title": "Manufacturing Managers",
+        "phase": "construction",
+        "headcount_per_unit": 40,
+        "source": "IRENA 2024",
+        "source_type": "modeled_estimate",
+        "notes": "Allocated from IRENA aggregate using H2 relevance weights. Construction managers and area leads."
+      },
+      {
+        "nco_group": "3257",
+        "nco_group_title": "Environmental and Occupational Health Inspectors and Associates",
+        "phase": "construction",
+        "headcount_per_unit": 50,
+        "source": "IRENA 2024",
+        "source_type": "modeled_estimate",
+        "notes": "Allocated from IRENA aggregate using H2 relevance weights. Environmental monitoring and EIA compliance."
+      },
+      {
+        "nco_group": "3122",
+        "nco_group_title": "Manufacturing Supervisors",
+        "phase": "construction",
+        "headcount_per_unit": 80,
+        "source": "IRENA 2024",
+        "source_type": "modeled_estimate",
+        "notes": "Allocated from IRENA aggregate using H2 relevance weights. Construction supervision and quality control."
+      },
+
+      {
+        "nco_group": "3134",
+        "nco_group_title": "Petroleum and Natural Gas Refining Plant Operators",
+        "phase": "commissioning",
+        "headcount_per_unit": 80,
+        "source": "IRENA 2024",
+        "source_type": "modeled_estimate",
+        "notes": "Allocated from IRENA aggregate using H2 relevance weights. Process start-up, loop tuning, and performance testing."
+      },
+      {
+        "nco_group": "8131",
+        "nco_group_title": "Chemical Products Plant and Machine Operators",
+        "phase": "commissioning",
+        "headcount_per_unit": 70,
+        "source": "IRENA 2024",
+        "source_type": "modeled_estimate",
+        "notes": "Allocated from IRENA aggregate using H2 relevance weights. Water treatment commissioning and BOP system start-up."
+      },
+      {
+        "nco_group": "3135",
+        "nco_group_title": "Metal Production Process Controllers",
+        "phase": "commissioning",
+        "headcount_per_unit": 40,
+        "source": "IRENA 2024",
+        "source_type": "modeled_estimate",
+        "notes": "Allocated from IRENA aggregate using H2 relevance weights. DCS/SCADA commissioning and control loop verification."
+      },
+      {
+        "nco_group": "3113",
+        "nco_group_title": "Electrical Engineering Technicians",
+        "phase": "commissioning",
+        "headcount_per_unit": 60,
+        "source": "IRENA 2024",
+        "source_type": "modeled_estimate",
+        "notes": "Allocated from IRENA aggregate using H2 relevance weights. Electrical system commissioning, protection relay testing."
+      },
+      {
+        "nco_group": "7233",
+        "nco_group_title": "Agricultural and Industrial Machinery Mechanics and Repairers",
+        "phase": "commissioning",
+        "headcount_per_unit": 50,
+        "source": "IRENA 2024",
+        "source_type": "modeled_estimate",
+        "notes": "Allocated from IRENA aggregate using H2 relevance weights. Mechanical run-tests, vibration analysis, and alignment verification."
+      },
+      {
+        "nco_group": "2145",
+        "nco_group_title": "Chemical Engineers",
+        "phase": "commissioning",
+        "headcount_per_unit": 60,
+        "source": "IRENA 2024",
+        "source_type": "modeled_estimate",
+        "notes": "Allocated from IRENA aggregate using H2 relevance weights. Process commissioning leadership, performance guarantee testing."
+      },
+      {
+        "nco_group": "7212",
+        "nco_group_title": "Welders and Flame Cutters",
+        "phase": "commissioning",
+        "headcount_per_unit": 30,
+        "source": "IRENA 2024",
+        "source_type": "modeled_estimate",
+        "notes": "Allocated from IRENA aggregate using H2 relevance weights. Punch-list completion and tie-in welding."
+      },
+      {
+        "nco_group": "7126",
+        "nco_group_title": "Plumbers and Pipe Fitters",
+        "phase": "commissioning",
+        "headcount_per_unit": 35,
+        "source": "IRENA 2024",
+        "source_type": "modeled_estimate",
+        "notes": "Allocated from IRENA aggregate using H2 relevance weights. Line flushing, pressure testing, and leak rectification."
+      },
+      {
+        "nco_group": "3116",
+        "nco_group_title": "Chemical Engineering Technicians",
+        "phase": "commissioning",
+        "headcount_per_unit": 30,
+        "source": "IRENA 2024",
+        "source_type": "modeled_estimate",
+        "notes": "Allocated from IRENA aggregate using H2 relevance weights. Laboratory setup, water chemistry validation, and analytical method proving."
+      },
+      {
+        "nco_group": "3152",
+        "nco_group_title": "Health and Safety Inspectors",
+        "phase": "commissioning",
+        "headcount_per_unit": 40,
+        "source": "IRENA 2024",
+        "source_type": "modeled_estimate",
+        "notes": "Allocated from IRENA aggregate using H2 relevance weights. Commissioning-phase HSE oversight, HAZOP close-out."
+      },
+      {
+        "nco_group": "3132",
+        "nco_group_title": "Incinerator and Water Treatment Plant Operators",
+        "phase": "commissioning",
+        "headcount_per_unit": 25,
+        "source": "IRENA 2024",
+        "source_type": "modeled_estimate",
+        "notes": "Allocated from IRENA aggregate using H2 relevance weights. Boiler, cooling tower, and utilities commissioning."
+      },
+      {
+        "nco_group": "1321",
+        "nco_group_title": "Manufacturing Managers",
+        "phase": "commissioning",
+        "headcount_per_unit": 20,
+        "source": "IRENA 2024",
+        "source_type": "modeled_estimate",
+        "notes": "Allocated from IRENA aggregate using H2 relevance weights. Commissioning management and handover coordination."
+      },
+      {
+        "nco_group": "3122",
+        "nco_group_title": "Manufacturing Supervisors",
+        "phase": "commissioning",
+        "headcount_per_unit": 30,
+        "source": "IRENA 2024",
+        "source_type": "modeled_estimate",
+        "notes": "Allocated from IRENA aggregate using H2 relevance weights. Commissioning supervision and system turnover."
+      },
+      {
+        "nco_group": "3257",
+        "nco_group_title": "Environmental and Occupational Health Inspectors and Associates",
+        "phase": "commissioning",
+        "headcount_per_unit": 15,
+        "source": "IRENA 2024",
+        "source_type": "modeled_estimate",
+        "notes": "Allocated from IRENA aggregate using H2 relevance weights. Stack emissions testing and environmental compliance verification."
+      },
+      {
+        "nco_group": "1120",
+        "nco_group_title": "Managing Directors and Chief Executives",
+        "phase": "commissioning",
+        "headcount_per_unit": 15,
+        "source": "IRENA 2024",
+        "source_type": "modeled_estimate",
+        "notes": "Allocated from IRENA aggregate using H2 relevance weights. Senior oversight during commissioning and handover."
+      },
+
+      {
+        "nco_group": "3134",
+        "nco_group_title": "Petroleum and Natural Gas Refining Plant Operators",
+        "phase": "operations",
+        "headcount_per_unit": 60,
+        "source": "IRENA 2024",
+        "source_type": "modeled_estimate",
+        "notes": "Allocated from IRENA aggregate using H2 relevance weights. Electrolyser panel operators on shift rotation."
+      },
+      {
+        "nco_group": "8131",
+        "nco_group_title": "Chemical Products Plant and Machine Operators",
+        "phase": "operations",
+        "headcount_per_unit": 55,
+        "source": "IRENA 2024",
+        "source_type": "modeled_estimate",
+        "notes": "Allocated from IRENA aggregate using H2 relevance weights. Water treatment, gas purification, and BOP operators."
+      },
+      {
+        "nco_group": "3135",
+        "nco_group_title": "Metal Production Process Controllers",
+        "phase": "operations",
+        "headcount_per_unit": 35,
+        "source": "IRENA 2024",
+        "source_type": "modeled_estimate",
+        "notes": "Allocated from IRENA aggregate using H2 relevance weights. DCS/SCADA control room operators on shift rotation."
+      },
+      {
+        "nco_group": "7233",
+        "nco_group_title": "Agricultural and Industrial Machinery Mechanics and Repairers",
+        "phase": "operations",
+        "headcount_per_unit": 45,
+        "source": "IRENA 2024",
+        "source_type": "modeled_estimate",
+        "notes": "Allocated from IRENA aggregate using H2 relevance weights. Preventive and corrective maintenance of compressors, pumps, and rotating equipment."
+      },
+      {
+        "nco_group": "3113",
+        "nco_group_title": "Electrical Engineering Technicians",
+        "phase": "operations",
+        "headcount_per_unit": 35,
+        "source": "IRENA 2024",
+        "source_type": "modeled_estimate",
+        "notes": "Allocated from IRENA aggregate using H2 relevance weights. E&I maintenance, rectifier upkeep, and instrument calibration."
+      },
+      {
+        "nco_group": "3116",
+        "nco_group_title": "Chemical Engineering Technicians",
+        "phase": "operations",
+        "headcount_per_unit": 20,
+        "source": "IRENA 2024",
+        "source_type": "modeled_estimate",
+        "notes": "Allocated from IRENA aggregate using H2 relevance weights. Laboratory analysts, water chemistry monitoring, and quality control."
+      },
+      {
+        "nco_group": "2145",
+        "nco_group_title": "Chemical Engineers",
+        "phase": "operations",
+        "headcount_per_unit": 25,
+        "source": "IRENA 2024",
+        "source_type": "modeled_estimate",
+        "notes": "Allocated from IRENA aggregate using H2 relevance weights. Process optimization, troubleshooting, and efficiency improvement."
+      },
+      {
+        "nco_group": "3152",
+        "nco_group_title": "Health and Safety Inspectors",
+        "phase": "operations",
+        "headcount_per_unit": 25,
+        "source": "IRENA 2024",
+        "source_type": "modeled_estimate",
+        "notes": "Allocated from IRENA aggregate using H2 relevance weights. Ongoing plant HSE and permit-to-work management."
+      },
+      {
+        "nco_group": "7212",
+        "nco_group_title": "Welders and Flame Cutters",
+        "phase": "operations",
+        "headcount_per_unit": 20,
+        "source": "IRENA 2024",
+        "source_type": "modeled_estimate",
+        "notes": "Allocated from IRENA aggregate using H2 relevance weights. Maintenance welding for piping repairs and turnaround work."
+      },
+      {
+        "nco_group": "7126",
+        "nco_group_title": "Plumbers and Pipe Fitters",
+        "phase": "operations",
+        "headcount_per_unit": 15,
+        "source": "IRENA 2024",
+        "source_type": "modeled_estimate",
+        "notes": "Allocated from IRENA aggregate using H2 relevance weights. Piping maintenance and valve servicing."
+      },
+      {
+        "nco_group": "3132",
+        "nco_group_title": "Incinerator and Water Treatment Plant Operators",
+        "phase": "operations",
+        "headcount_per_unit": 15,
+        "source": "IRENA 2024",
+        "source_type": "modeled_estimate",
+        "notes": "Allocated from IRENA aggregate using H2 relevance weights. Utilities operation including cooling, steam, and waste treatment."
+      },
+      {
+        "nco_group": "1120",
+        "nco_group_title": "Managing Directors and Chief Executives",
+        "phase": "operations",
+        "headcount_per_unit": 15,
+        "source": "IRENA 2024",
+        "source_type": "modeled_estimate",
+        "notes": "Allocated from IRENA aggregate using H2 relevance weights. Plant director and department heads."
+      },
+      {
+        "nco_group": "1321",
+        "nco_group_title": "Manufacturing Managers",
+        "phase": "operations",
+        "headcount_per_unit": 10,
+        "source": "IRENA 2024",
+        "source_type": "modeled_estimate",
+        "notes": "Allocated from IRENA aggregate using H2 relevance weights. Operations and maintenance managers."
+      },
+      {
+        "nco_group": "3257",
+        "nco_group_title": "Environmental and Occupational Health Inspectors and Associates",
+        "phase": "operations",
+        "headcount_per_unit": 10,
+        "source": "IRENA 2024",
+        "source_type": "modeled_estimate",
+        "notes": "Allocated from IRENA aggregate using H2 relevance weights. Ongoing environmental compliance and emissions monitoring."
+      },
+      {
+        "nco_group": "3122",
+        "nco_group_title": "Manufacturing Supervisors",
+        "phase": "operations",
+        "headcount_per_unit": 15,
+        "source": "IRENA 2024",
+        "source_type": "modeled_estimate",
+        "notes": "Allocated from IRENA aggregate using H2 relevance weights. Shift supervisors for operations and maintenance crews."
+      }
+    ]
+  }
+]
