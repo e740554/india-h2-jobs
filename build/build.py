@@ -14,7 +14,11 @@ import csv
 import json
 import os
 import shutil
+import sys
 from datetime import date
+
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
+from model.supply import allocate_supply, load_supply
 
 PROJECT_ROOT = os.path.join(os.path.dirname(__file__), "..")
 MODEL_DIR = os.path.join(PROJECT_ROOT, "model")
@@ -340,8 +344,17 @@ def main():
     scores = load_scores()
     print(f"Loaded {len(occupations)} occupations, {len(scores)} scored")
 
-    # Merge
+    # Merge scores
     occupations = merge_scores(occupations, scores)
+
+    # Merge PLFS supply data (if available)
+    supply_data = load_supply()
+    occupations = allocate_supply(supply_data, occupations)
+    if supply_data:
+        supply_count = sum(1 for occ in occupations if occ.get("supply_estimate") is not None)
+        print(f"PLFS supply merged: {supply_count} occupations with supply estimates")
+    else:
+        print("No PLFS supply data found (model/plfs_supply.json) — supply fields set to null")
 
     # Compute derived fields
     occupations = compute_upskill_paths(occupations)
