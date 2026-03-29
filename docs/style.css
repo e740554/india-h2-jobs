@@ -497,8 +497,39 @@ body {
 }
 
 /* Scenario legend */
-.scenario-legend {
-  display: none;
+.scenario-legend { display: none; }
+
+/* Gap legend */
+.gap-legend { display: none; }
+
+/* Scenario select */
+.scenario-select {
+  padding: 6px 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface);
+  font-family: inherit;
+  font-size: 0.85rem;
+  color: var(--text);
+  max-width: 250px;
+}
+
+/* Gap status */
+.gap-status-row {
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 4px 0;
+}
+.gap-surplus { color: var(--color-hy); font-weight: 700; }
+.gap-shortage { color: #dc2626; font-weight: 700; }
+
+/* Gap mode button disabled */
+.mode-btn-disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+.mode-btn[data-mode="gap"].active {
+  background: #dc2626;
 }
 
 /* Mobile (768px breakpoint per HyGOAT design system) */

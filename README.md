@@ -1,119 +1,192 @@
 # India H2 Workforce Atlas
 
-An open-source scored occupation atlas and scenario engine for India's green hydrogen transition. The current build contains 1,802 scored occupations from the NCS portal, with a default filtered view of 480 occupations across 12 H2-relevant sectors.
+An open-source scored occupation atlas and scenario engine for India's green hydrogen transition. Translates national hydrogen capacity targets (in megatonnes) into occupation-level workforce demand estimates using real NCS occupation data, LLM-scored relevance dimensions, and asset-level staffing coefficients.
 
-**New in v1.2:** Interactive scenario mode — set a hydrogen capacity target (1-10 MT) on a slider and see occupation-level workforce demand cascade across the treemap. One archetype (1 GW alkaline electrolyser) with 48 occupation coefficients across construction, commissioning, and operations phases.
-
-Labour-market joins are still incomplete. PLFS employment, wage, and formality fields are not yet populated, so employment-based headline metrics remain unavailable until those joins land.
-
-**Live atlas:** [hygoat.in/workforce-atlas](https://hygoat.in/workforce-atlas) (canonical)  
+**Live atlas:** [hygoat.in/workforce-atlas](https://hygoat.in/workforce-atlas) (canonical)
 **Mirror:** [e740554.github.io/india-h2-jobs](https://e740554.github.io/india-h2-jobs/)
 
-## Architecture
+## What It Does
 
-```text
-[ Data Pipeline ]     [ LLM Scoring ]     [ Scenario Engine ]     [ Frontend Atlas ]
-  Python scripts        Claude Code         model/archetypes.json   Static HTML/JS/D3
-  NCS scraper +         6 H2-centric        model/compute.py        Treemap + scenario mode
-  planned PLFS/NCVET    dimensions           MT -> demand chain      + slider + CSV download
-  -> occupations.csv    -> scores.json                               -> hygoat.in/workforce-atlas
-```
+1. **Scrapes** 1,802 occupations from India's National Career Service (NCS) portal
+2. **Scores** each occupation on 6 hydrogen-relevance dimensions (0–10) using Claude AI with open-source prompts
+3. **Filters** to 480 occupations across 12 H2-relevant sectors as the default view
+4. **Models** workforce demand: set a hydrogen capacity target (MT) on a slider → the scenario engine cascades demand through asset archetypes → per-occupation headcount estimates appear on an interactive D3 treemap
+5. **Exports** scored data as CSV for downstream analysis
 
-## Data Sources
-
-| Source | Coverage | Access |
-|--------|----------|--------|
-| **NCS Portal** (ncs.gov.in) | Current checked-in build: 1,802 scored occupations | HTTP scraper over SharePoint inline JSON |
-| **PLFS** (NSO 2023-24) | Planned employment, wage, and formalization joins | Download scaffold only in current repo |
-| **NCVET / NQR** | Planned qualification and transition-path joins | Not yet merged into checked-in build |
-
-## Scoring Dimensions (0-10)
+## Scoring Dimensions (0–10)
 
 | Dimension | What it measures |
 |-----------|-----------------|
 | H2 Value Chain Adjacency | Direct presence in electrolysis, compression, storage, distribution, or fuel cell operations |
 | Green Transition Demand | Whether demand should rise as India scales green hydrogen |
 | Skill Transferability | How quickly someone in the role can upskill into H2-specific work |
-| Digital Automation Exposure | Exposure to AI or robotics over the next 5-10 years |
+| Digital Automation Exposure | Exposure to AI or robotics over the next 5–10 years |
 | Formalization Rate | Expected formality of employment in India |
 | H2 Talent Scarcity Risk | Whether the skill is likely to bottleneck scale-up |
 
-## Repository Layout
+## Scenario Engine
 
-- `web/` - source for the static shell, styles, logo, and `main.js.template`
-- `docs/` - generated GitHub Pages output committed to git
-- `model/` - scenario engine: archetype definitions, coefficients, and Python validation engine
-- `tests/` - pytest unit tests for the pipeline and Python/JS parity
-- `occupations.csv` - checked-in source tabulation for the current build
-- `scores.json` - checked-in scoring output for the current build
+The scenario engine translates hydrogen capacity targets into occupation-level workforce demand:
 
-Generated JSON, CSV, and compiled JS do not belong in the repo root.
+```
+MT target → plant units (via archetype capacity) → per-NCO-group raw headcount
+→ allocation by (h2_adjacency + transition_demand) weights → rounded demand per occupation
+```
 
-## Quick Start
+- **Archetypes** (`model/archetypes.json`): asset definitions with per-NCO-group staffing coefficients by project phase (construction, commissioning, operations)
+- **Scenarios** (`model/scenarios.json`): NGHM preset scenarios (1 MT, 5 MT, 10 MT)
+- **Python engine** (`model/compute.py`): `compute_demand()`, `aggregate_demand()`, `export_demand_csv()` — used for validation and CSV export
+- **JS engine** (`web/main.js.template`): `computeScenarioDemand()` — runtime engine in the browser, must match Python exactly
 
-**Pre-built data ships with this repo.** If you only want to inspect the current published build:
+## Quick Start — View the Atlas Locally
+
+Pre-built data ships with this repo. No pipeline run needed.
 
 ```bash
-cd docs && python -m http.server 8080
+git clone https://github.com/e740554/india-h2-jobs.git
+cd india-h2-jobs/docs
+python -m http.server 8080
 # Open http://localhost:8080
 ```
 
-To run the test suite (see [TESTING.md](TESTING.md) for details):
+## Quick Start — Reproduce From Scratch
+
+To regenerate all data from source and rebuild the atlas:
+
+### Prerequisites
+
+- Python 3.10+
+- [Claude Code CLI](https://docs.anthropic.com/en/docs/claude-code) (for LLM scoring step only)
+
+### Steps
 
 ```bash
-python -m pytest
+# 1. Set up environment
+python -m venv venv
+source venv/bin/activate            # Windows: venv\Scripts\activate
+pip install -r requirements.txt
+playwright install chromium
+
+# 2. Scrape occupations from NCS portal
+python scrape/scrape_ncs.py         # Outputs scrape/raw/*.json (supports resume)
+
+# 3. Parse and tabulate
+python parse/parse_occupations.py   # Produces parse/parsed_occupations.json
+python tabulate/tabulate.py         # Produces occupations.csv
+
+# 4. Score occupations (requires Claude Code CLI)
+python score/score.py               # Prepares batch files in score/batches/
+# Claude Code subagents read batches and write *_results.json
+python score/merge_results.py       # Merges results → scores.json
+
+# 5. Build the atlas
+python build/build.py --base-url "" # Outputs to docs/ (publish) and web/ (dev)
+
+# 6. Preview
+cd docs && python -m http.server 8080
 ```
 
-If you are editing the frontend source and want the ignored local-dev copies that mirror the build output:
+### Scoring Details
+
+Scoring uses Claude Code subagents, not the Anthropic API directly:
+1. `score/score.py` prepares batch JSON files in `score/batches/`
+2. Claude Code subagents read each batch and produce `*_results.json` files with 0–10 scores across all 6 dimensions
+3. `score/merge_results.py` combines all results into `scores.json`
+
+To check what needs scoring without running it: `python score/score.py --dry-run`
+
+To score a single sector: `python score/score.py --sector Power`
+
+## Repository Layout
+
+```
+india-h2-jobs/
+├── scrape/                  # NCS portal scraper + PLFS download scaffold
+│   ├── scrape_ncs.py        # SharePoint inline JSON scraper with pagination + resume
+│   └── download_plfs.py     # PLFS PDF download (planned)
+├── parse/                   # Raw data → structured JSON
+│   └── parse_occupations.py
+├── tabulate/                # Structured JSON → occupations.csv
+│   └── tabulate.py
+├── score/                   # LLM scoring pipeline
+│   ├── score.py             # Batch preparation
+│   ├── merge_results.py     # Result aggregation → scores.json
+│   └── config.py            # Scoring configuration
+├── model/                   # Scenario engine
+│   ├── archetypes.json      # Asset archetypes + staffing coefficients
+│   ├── scenarios.json       # NGHM preset scenarios
+│   ├── compute.py           # Python validation engine
+│   └── supply.py            # Supply-side computation (Phase 2)
+├── build/                   # Static site builder
+│   └── build.py             # Merges data + templates → docs/ + web/
+├── web/                     # Frontend source
+│   ├── index.html           # Atlas shell
+│   ├── style.css            # Styles
+│   ├── main.js.template     # JS engine (template — build.py fills __BASE_URL__)
+│   └── hygoat-logo.svg      # Logo asset
+├── docs/                    # Generated GitHub Pages output (committed)
+├── tests/                   # Pytest suite (96 tests)
+│   ├── test_compute.py      # 29 scenario engine tests
+│   ├── test_multi_archetype.py # 18 multi-archetype demand tests
+│   ├── test_gap.py          # 12 supply-demand gap tests
+│   ├── test_supply.py       # 11 supply allocation tests
+│   ├── test_parity.py       # Python/JS parity verification
+│   └── parity_check.js      # Node.js JS engine mirror for parity tests
+├── occupations.csv          # Checked-in source tabulation
+├── scores.json              # Checked-in scoring output
+└── requirements.txt         # Python dependencies
+```
+
+## Data Sources
+
+| Source | Coverage | Access Method | Status |
+|--------|----------|---------------|--------|
+| **NCS Portal** (ncs.gov.in) | 1,802 scored occupations | HTTP scraper over SharePoint inline JSON | ✅ Current build |
+| **PLFS** (NSO 2023–24) | Employment, wage, formalization | PDF table extraction | 🔲 Planned |
+| **NCVET / NQR** (nqr.gov.in) | Qualification and transition paths | Server-rendered HTML | 🔲 Planned |
+
+See [DATASOURCES.md](DATASOURCES.md) for full documentation.
+
+## Testing
 
 ```bash
-python build/build.py --base-url ""
-cd web && python -m http.server 8080
+python -m pytest           # Run all tests
+python -m pytest -v        # Verbose output
+python -m pytest --cov     # With coverage report
 ```
 
-### Full Pipeline (maintainers only)
+See [TESTING.md](TESTING.md) for full documentation.
 
-```bash
-python -m venv venv && source venv/bin/activate  # or venv\Scripts\activate on Windows
-pip install -r requirements.txt && playwright install chromium
+## Adapting This for Another Country or Sector
 
-python scrape/scrape_ncs.py        # Scrape NCS Portal
-python scrape/download_plfs.py     # Download PLFS source PDFs
-python parse/parse_occupations.py  # Parse raw data
-python tabulate/tabulate.py        # Generate occupations.csv
-python score/score.py              # Score via Claude Code
-python build/build.py              # Merge -> docs/ publish output + web/ dev copies
-```
+The pipeline is designed to be reusable. To build a similar atlas for a different context:
 
-## Current Build Status
-
-- Scored occupation atlas: available (480 H2-relevant occupations, 1,802 total)
-- Scenario engine (Phase 1): available — 1 archetype (alkaline electrolyser), 48 coefficients, 3 NGHM presets
-- NCS sector scrape completeness: pending pagination rerun
-- PLFS joins: not populated in checked-in dataset
-- NCVET joins: not populated in checked-in dataset
+1. **Replace the scraper** — write a new `scrape/scrape_*.py` that outputs occupation data in the same JSON schema (see `parse/parsed_occupations.json` for the expected structure)
+2. **Adjust scoring prompts** — the scoring dimensions in `score/config.py` are hydrogen-specific; modify them for your sector
+3. **Define archetypes** — edit `model/archetypes.json` with your asset types and staffing coefficients per NCO occupation group
+4. **Rebuild** — run the pipeline from step 3 onward
 
 ## Roadmap
 
-- **Phase 1** (shipped v1.2.0.0): One archetype, real coefficients, interactive slider, demand treemap
-- **Phase 2** (planned): PLFS supply baseline + 3-5 more asset archetypes + actual supply gap computation
+- **Phase 1** (shipped v1.2): One archetype (alkaline electrolyser), 48 coefficients, interactive slider, demand treemap
+- **Phase 2** (shipped v1.3): 4 archetypes (alkaline, PEM, ammonia, solar+wind), multi-archetype scenarios, supply gap engine with PLFS baseline, 3-way Atlas/Scenario/Gap mode
 - **Phase 3** (planned): Geography/cluster distribution, time phasing, reskilling pathway estimates
 
-## Open Source Workflow
+## Contributing
 
 - Edit source files in `web/`, not generated files in `docs/`
 - Run `python build/build.py --base-url ""` before opening a PR
 - Commit regenerated `docs/` assets when the published atlas changes
 - Do not commit ignored local-dev files in `web/` or generated root artifacts
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) for the contributor workflow.
+See [CONTRIBUTING.md](CONTRIBUTING.md) for the full contributor workflow.
 
 ## License
 
-MIT - see [LICENSE](LICENSE).
+MIT — see [LICENSE](LICENSE).
 
 ## Credits
 
-Built by [HyGOAT](https://hygoat.in) and [Ekavikalp Pvt Ltd](https://ekavikalp.com)  
-Data: NCS Portal (current build), PLFS 2023-24 and NCVET/NQR (planned joins)  
-Scoring: Claude AI (open-source prompts in `prompts/`)
+Built by [HyGOAT](https://hygoat.in) and [Ekavikalp Pvt Ltd](https://ekavikalp.com)
+Data: NCS Portal (current build), PLFS 2023–24 and NCVET/NQR (planned joins)
+Scoring: Claude AI — [open-source prompts and pipeline](https://github.com/e740554/india-h2-jobs)
