@@ -143,12 +143,15 @@ def test_compute_workforce_gap_returns_none_when_employment_missing():
     assert compute_workforce_gap(occs) is None
 
 
-def test_compute_workforce_gap_returns_none_when_no_h2_ready_occupations():
-    # No occupations meet the h2_adjacency threshold
+def test_compute_workforce_gap_returns_full_target_when_no_eligible_occupations():
+    # No occupations meet the h2_adjacency threshold — eligible is empty.
+    # any(...for occ in []) is vacuously False, so None is NOT returned.
+    # The function returns the full 5MMT target as if the gap is 100%.
+    # NOTE: this is a known edge-case behavior. A dataset with zero H2-ready
+    # occupations would surface 2,500,000 in the UI as a real metric. In
+    # practice the production data always has scored H2-ready occupations,
+    # but this warrants a design review if the threshold changes.
     occs = [_make_employed_occ("A", 1000, 5.0)]
-    # With no eligible occupations, all() is vacuously true, so gap is computed
-    # Actually let's verify: eligible = [], any() is False, so None is NOT returned
-    # gap = (5 * 500_000) - 0 = 2_500_000
     result = compute_workforce_gap(occs)
     assert result == 2_500_000
 
