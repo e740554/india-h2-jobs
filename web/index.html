@@ -17,6 +17,10 @@
       <img src="hygoat-logo.svg" alt="HyGOAT" class="nav-logo-img"><span class="nav-logo">HyGOAT</span>
       <span class="nav-sep">&middot;</span>
       <span class="nav-title">India H2 Workforce Atlas</span>
+      <div class="mode-toggle" id="modeToggle">
+        <button class="mode-btn active" data-mode="atlas">Atlas</button>
+        <button class="mode-btn" data-mode="scenario">Scenario</button>
+      </div>
     </div>
     <div class="nav-right">
       <div class="download-dropdown">
@@ -61,6 +65,21 @@
   </div>
   <div class="data-status" id="dataStatus"></div>
 
+  <div class="scenario-bar" id="scenarioBar" style="display:none">
+    <div class="scenario-banner">
+      &#x26A1; Scenario model covers alkaline electrolyser staffing only. Ammonia synthesis, storage, and transport workforce not included.
+    </div>
+    <div class="scenario-controls">
+      <label class="scenario-label" for="mtSlider">H&#x2082; Capacity Target</label>
+      <input type="range" id="mtSlider" min="1" max="10" step="0.5" value="5" class="mt-slider">
+      <span class="mt-value" id="mtValue">5.0 MT</span>
+      <span class="mt-demand" id="mtDemand"></span>
+    </div>
+    <div class="scenario-ghost-toggle">
+      <label><input type="checkbox" id="showGhosts"> Show unmapped occupations</label>
+    </div>
+  </div>
+
   <div class="atlas-main">
     <div class="treemap-container" id="treemapContainer">
       <div id="treemap"></div>
@@ -81,19 +100,35 @@
         </div>
         <h3>Scores</h3>
         <div class="score-bars" id="scoreBars"></div>
+        <div id="scenarioDetails" style="display:none">
+          <h3>Scenario Demand</h3>
+          <div class="sb-stats">
+            <div class="sb-stat"><span class="sb-stat-label">Total Demand</span><span id="sbDemand">--</span></div>
+          </div>
+          <div id="phaseBars"></div>
+          <div id="coeffSource" class="coeff-source"></div>
+        </div>
         <h3>Top 5 Upskill Paths - H2</h3>
         <div class="upskill-list" id="upskillList"></div>
       </div>
     </aside>
   </div>
 
-  <div class="legend">
+  <div class="legend" id="atlasLegend">
     <div class="legend-item"><span class="legend-swatch" style="background:#00994C"></span>9-10 Core H2</div>
     <div class="legend-item"><span class="legend-swatch" style="background:#50C878"></span>7-8 Strong</div>
     <div class="legend-item"><span class="legend-swatch" style="background:#86efac"></span>5-6 Adjacent</div>
     <div class="legend-item"><span class="legend-swatch" style="background:#ff8a00"></span>3-4 Transferable</div>
     <div class="legend-item"><span class="legend-swatch" style="background:#dc2626"></span>1-2 Low relevance</div>
     <div class="legend-item"><span class="legend-swatch" style="background:#374151"></span>N/A</div>
+  </div>
+  <div class="legend scenario-legend" id="scenarioLegend" style="display:none">
+    <div class="legend-item"><span class="legend-swatch" style="background:#ff8a00"></span>&ge;1000 High demand</div>
+    <div class="legend-item"><span class="legend-swatch" style="background:#ffaa33"></span>500-999</div>
+    <div class="legend-item"><span class="legend-swatch" style="background:#ffcc66"></span>100-499</div>
+    <div class="legend-item"><span class="legend-swatch" style="background:#ffe599"></span>10-99</div>
+    <div class="legend-item"><span class="legend-swatch" style="background:#fff3d6"></span>1-9 Low demand</div>
+    <div class="legend-item"><span class="legend-swatch" style="background:#374151"></span>No demand</div>
   </div>
 
   <footer class="atlas-footer">
