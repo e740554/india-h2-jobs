@@ -2,6 +2,42 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.3.0.0] - 2026-03-30
+
+### Added
+- **Supply gap engine (Phase 2)** — 3-way Atlas/Scenario/Gap mode toggle. Gap mode shows
+  red (shortage) to green (surplus) treemap with per-occupation supply vs. demand breakdown
+- **3 new archetypes** — PEM electrolyser (500 MW), green ammonia synthesis (1 MTPA), and
+  dedicated solar+wind hybrid (2 GW) with full coefficient arrays across project phases
+- **Multi-archetype scenarios** — composable scenarios with production/downstream/upstream
+  chains. 4 new presets: 1 MT pilot, 5 MT mixed, 10 MT ambitious, Adani Kutch Phase 1
+- **PLFS supply baseline** — `model/supply.py` loads and allocates PLFS 2023-24 labour
+  supply estimates by NCO subdivision to individual occupations
+- **Scenario preset dropdown** — select from NGHM scenario presets, slider syncs to target
+- **67 new tests** — `test_multi_archetype.py` (18), `test_gap.py` (12), `test_supply.py` (11),
+  plus updated `test_compute.py` for backwards compatibility (96 total)
+- **Gap sidebar** — per-occupation supply, demand, gap, and percentage breakdown
+- **Archetype breakdown** — sidebar shows demand contribution from each archetype
+
+### Changed
+- Scenario mode colours use brand palette (green→red) instead of orange gradient
+- Footer shows GitHub icon+link instead of plain text attribution
+- Logo image removed from header nav
+- README rewritten as comprehensive self-explanatory guide
+- Scenario bar updated with preset dropdown and expanded MT slider range (0.5-15)
+- `build.py` merges PLFS supply data and writes explicit null supply fields
+
+### Fixed
+- `decodeEntities()` regression — HTML entities in 22 occupation titles now render correctly
+  (DOMParser-based decoder replaces broken textContent pattern)
+- JS/Python parity for NCO 9312 — unallocated demand now tracked in JS engine (was silently
+  dropped, causing ~12% under-report for RE scenarios)
+- Phase bar division-by-zero edge case when demand rounds to 0
+- Slider/scenario initial state mismatch on first mode switch
+
+### Removed
+- `CLAUDE.md` untracked from git (moved to .gitignore, local-only)
+
 ## [1.2.0.0] - 2026-03-30
 
 ### Added

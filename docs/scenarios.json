@@ -22,5 +22,71 @@
     "year": 2035,
     "archetype_id": "alkaline_1gw",
     "description": "Ambitious stretch target of 10 million tonnes per annum by 2035, requiring accelerated electrolyser deployment and workforce scale-up."
+  },
+  {
+    "id": "nghm_1mt_2027_alk",
+    "name": "1 MT Pilot (Alkaline + Ammonia + RE)",
+    "target_mt": 1,
+    "year": 2027,
+    "description": "Near-term 1 MT pilot with 100% alkaline electrolysis, 50% conversion to ammonia, and dedicated RE. Full value chain workforce estimate.",
+    "production": [
+      {"archetype_id": "alkaline_1gw", "share": 1.0}
+    ],
+    "downstream": [
+      {"archetype_id": "ammonia_1mtpa", "conversion_share": 0.50}
+    ],
+    "upstream": [
+      {"archetype_id": "solar_wind_hybrid_2gw", "re_ratio_gw_per_gw_electrolyser": 2.5}
+    ]
+  },
+  {
+    "id": "nghm_5mt_2030_mix",
+    "name": "5 MT by 2030 (Mixed)",
+    "target_mt": 5,
+    "year": 2030,
+    "description": "5 MT target with 60/40 alkaline/PEM split, 70% to ammonia, dedicated RE. Reflects India's planned technology diversification.",
+    "production": [
+      {"archetype_id": "alkaline_1gw", "share": 0.60},
+      {"archetype_id": "pem_500mw", "share": 0.40}
+    ],
+    "downstream": [
+      {"archetype_id": "ammonia_1mtpa", "conversion_share": 0.70}
+    ],
+    "upstream": [
+      {"archetype_id": "solar_wind_hybrid_2gw", "re_ratio_gw_per_gw_electrolyser": 2.5}
+    ]
+  },
+  {
+    "id": "nghm_10mt_2035_mix",
+    "name": "10 MT Ambitious (Mixed)",
+    "target_mt": 10,
+    "year": 2035,
+    "description": "Ambitious 10 MT target with 50/50 alkaline/PEM split, 70% to ammonia, and 3.0x RE overprovisioning for round-the-clock supply.",
+    "production": [
+      {"archetype_id": "alkaline_1gw", "share": 0.50},
+      {"archetype_id": "pem_500mw", "share": 0.50}
+    ],
+    "downstream": [
+      {"archetype_id": "ammonia_1mtpa", "conversion_share": 0.70}
+    ],
+    "upstream": [
+      {"archetype_id": "solar_wind_hybrid_2gw", "re_ratio_gw_per_gw_electrolyser": 3.0}
+    ]
+  },
+  {
+    "id": "adani_kutch_ph1",
+    "name": "Adani Kutch Phase 1",
+    "target_mt": 1.3,
+    "year": 2028,
+    "description": "Adani Kutch Phase 1 — 1.3 MT H2/year (~9 GW electrolyser) feeding 1 MTPA ammonia export plant. 100% alkaline, dedicated RE. Illustrative of announced project scale.",
+    "production": [
+      {"archetype_id": "alkaline_1gw", "share": 1.0}
+    ],
+    "downstream": [
+      {"archetype_id": "ammonia_1mtpa", "conversion_share": 1.0}
+    ],
+    "upstream": [
+      {"archetype_id": "solar_wind_hybrid_2gw", "re_ratio_gw_per_gw_electrolyser": 2.5}
+    ]
   }
 ]

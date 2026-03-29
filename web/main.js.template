@@ -16,10 +16,10 @@
   ];
 
   const COLOUR_BANDS = [
-    { min: 9, max: 10, colour: "#00994C", label: "Core H2" },      // HyGOAT green
-    { min: 7, max: 8.99, colour: "#50C878", label: "Strong" },      // Emerald
-    { min: 5, max: 6.99, colour: "#86efac", label: "Adjacent" },    // Light green
-    { min: 3, max: 4.99, colour: "#ff8a00", label: "Transferable" },// HyGOAT orange
+    { min: 9, max: 10, colour: "#00994C", label: "Core H2" },
+    { min: 7, max: 8.99, colour: "#50C878", label: "Strong" },
+    { min: 5, max: 6.99, colour: "#86efac", label: "Adjacent" },
+    { min: 3, max: 4.99, colour: "#ff8a00", label: "Transferable" },
     { min: 1, max: 2.99, colour: "#dc2626", label: "Low relevance" },
   ];
   const NULL_COLOUR = "#374151";
@@ -32,763 +32,640 @@
   let selectedOccupation = null;
   let showingAll = false;
 
-  // Scenario mode state
   let archetypeData = null;
+  let scenarioData = null;
+  let activeMode = "atlas";
   let scenarioMode = false;
-  let scenarioTarget = 5; // default MT
-  let demandResults = null; // computed demand per occupation
-  let savedMetricLabels = null; // original metric labels for restoring on mode switch
-
-  // --- Data Loading ---
+  let gapMode = false;
+  let scenarioTarget = 5;
+  let selectedScenarioId = null;
+  let demandResults = null;
+  let gapResults = null;
+  let savedMetricLabels = null;
 
   function getAssetUrl(filename) {
     const base = BASE_URL || "";
-    return base ? `${base}/${filename}` : filename;
+    return base ? base + "/" + filename : filename;
   }
 
   async function loadJson(filename) {
     const resp = await fetch(getAssetUrl(filename));
-    if (!resp.ok) throw new Error(`Failed to load ${filename}: ${resp.status}`);
+    if (!resp.ok) throw new Error("Failed to load " + filename + ": " + resp.status);
     return resp.json();
   }
 
-  async function loadData() {
-    filteredData = await loadJson("occupations.json");
-    data = filteredData;
-    return filteredData;
-  }
-
+  async function loadData() { filteredData = await loadJson("occupations.json"); data = filteredData; return filteredData; }
   async function loadAllData() {
     if (allData) return allData;
     if (!allDataPromise) {
-      allDataPromise = loadJson("occupations-all.json")
-        .then(json => {
-          allData = json;
-          return json;
-        })
-        .catch(err => {
-          allDataPromise = null;
-          throw err;
-        });
+      allDataPromise = loadJson("occupations-all.json").then(function(json) { allData = json; return json; }).catch(function(err) { allDataPromise = null; throw err; });
     }
     return allDataPromise;
   }
+  async function loadArchetypes() { try { archetypeData = await loadJson("archetypes.json"); } catch(e) { console.warn("Archetype data unavailable:", e.message); } }
+  async function loadScenarios() { try { scenarioData = await loadJson("scenarios.json"); } catch(e) { console.warn("Scenario data unavailable:", e.message); } }
 
-  async function loadArchetypes() {
-    try {
-      archetypeData = await loadJson("archetypes.json");
-    } catch (err) {
-      console.warn("Scenario data unavailable:", err.message);
-    }
-  }
-
-  // --- Scenario Engine ---
-
+  // --- Single-Archetype Engine ---
   function computeScenarioDemand(targetMt) {
     if (!archetypeData || archetypeData.length === 0) return null;
-    const archetype = archetypeData[0]; // alkaline_1gw
-    if (!archetype.h2_output_mt_per_year) return null; // guard against zero/missing
-    const units = targetMt / archetype.h2_output_mt_per_year;
-
-    const results = {}; // occupation_id -> { demand, phases: { construction: N, ... } }
-    // Always compute against the filtered H2-relevant dataset, not the mutable
-    // `data` global (which changes when "Show All 49 Sectors" is toggled).
-    const sourceOccs = filteredData.occupations;
-
-    for (const coeff of archetype.coefficients) {
-      const rawDemand = units * coeff.headcount_per_unit;
-
-      // Find matching occupations
-      const matching = sourceOccs.filter(
-        occ => occ.nco_code && occ.nco_code.substring(0, 4) === coeff.nco_group
-      );
-
-      if (matching.length === 0) continue; // unallocated
-
-      // Compute allocation weights
-      const weights = matching.map(occ => {
-        const scores = occ.scores || {};
-        return (scores.h2_adjacency || 0) + (scores.transition_demand || 0);
-      });
-      const totalWeight = weights.reduce((a, b) => a + b, 0);
-
-      matching.forEach((occ, i) => {
-        const normWeight = totalWeight > 0 ? weights[i] / totalWeight : 1 / matching.length;
-        const occDemand = Math.round(rawDemand * normWeight);
-
-        if (!results[occ.id]) {
-          results[occ.id] = { demand: 0, phases: {} };
-        }
-        results[occ.id].demand += occDemand;
-        results[occ.id].phases[coeff.phase] =
-          (results[occ.id].phases[coeff.phase] || 0) + occDemand;
-      });
+    var archetype = archetypeData[0];
+    if (!archetype.h2_output_mt_per_year) return null;
+    var units = targetMt / archetype.h2_output_mt_per_year;
+    var results = {};
+    var sourceOccs = filteredData.occupations;
+    for (var ci = 0; ci < archetype.coefficients.length; ci++) {
+      var coeff = archetype.coefficients[ci];
+      var rawDemand = units * coeff.headcount_per_unit;
+      var matching = sourceOccs.filter(function(occ) { return occ.nco_code && occ.nco_code.substring(0, 4) === coeff.nco_group; });
+      if (matching.length === 0) {
+        if (!results["__unallocated__"]) results["__unallocated__"] = { demand: 0, phases: {}, archetypes: {} };
+        var unalloc = Math.round(rawDemand);
+        results["__unallocated__"].demand += unalloc;
+        results["__unallocated__"].phases[coeff.phase] = (results["__unallocated__"].phases[coeff.phase] || 0) + unalloc;
+        results["__unallocated__"].archetypes[archetype.id] = (results["__unallocated__"].archetypes[archetype.id] || 0) + unalloc;
+        continue;
+      }
+      var weights = matching.map(function(occ) { var s = occ.scores || {}; return (s.h2_adjacency || 0) + (s.transition_demand || 0); });
+      var totalWeight = weights.reduce(function(a, b) { return a + b; }, 0);
+      for (var mi = 0; mi < matching.length; mi++) {
+        var normWeight = totalWeight > 0 ? weights[mi] / totalWeight : 1 / matching.length;
+        var occDemand = Math.round(rawDemand * normWeight);
+        if (!results[matching[mi].id]) results[matching[mi].id] = { demand: 0, phases: {}, archetypes: {} };
+        results[matching[mi].id].demand += occDemand;
+        results[matching[mi].id].phases[coeff.phase] = (results[matching[mi].id].phases[coeff.phase] || 0) + occDemand;
+        results[matching[mi].id].archetypes[archetype.id] = (results[matching[mi].id].archetypes[archetype.id] || 0) + occDemand;
+      }
     }
-
     return results;
   }
 
-  function demandColour(demand) {
-    if (!demand || demand === 0) return "#374151"; // gray for ghosts
-    if (demand >= 1000) return "#ff8a00"; // bright orange - high demand
-    if (demand >= 500) return "#ffaa33";
-    if (demand >= 100) return "#ffcc66";
-    if (demand >= 10) return "#ffe599";
-    return "#fff3d6"; // light - low demand
+  // --- Multi-Archetype Engine ---
+  function computeDemandForUnits(units, archetype, sourceOccs) {
+    if (units <= 0) return {};
+    var results = {};
+    for (var ci = 0; ci < archetype.coefficients.length; ci++) {
+      var coeff = archetype.coefficients[ci];
+      var rawDemand = units * coeff.headcount_per_unit;
+      var matching = sourceOccs.filter(function(occ) { return occ.nco_code && occ.nco_code.substring(0, 4) === coeff.nco_group; });
+      if (matching.length === 0) {
+        if (!results["__unallocated__"]) results["__unallocated__"] = { demand: 0, phases: {}, archetypes: {} };
+        var unalloc = Math.round(rawDemand);
+        results["__unallocated__"].demand += unalloc;
+        results["__unallocated__"].phases[coeff.phase] = (results["__unallocated__"].phases[coeff.phase] || 0) + unalloc;
+        results["__unallocated__"].archetypes[archetype.id] = (results["__unallocated__"].archetypes[archetype.id] || 0) + unalloc;
+        continue;
+      }
+      var weights = matching.map(function(occ) { var s = occ.scores || {}; return (s.h2_adjacency || 0) + (s.transition_demand || 0); });
+      var totalWeight = weights.reduce(function(a, b) { return a + b; }, 0);
+      for (var mi = 0; mi < matching.length; mi++) {
+        var normWeight = totalWeight > 0 ? weights[mi] / totalWeight : 1 / matching.length;
+        var occDemand = Math.round(rawDemand * normWeight);
+        if (!results[matching[mi].id]) results[matching[mi].id] = { demand: 0, phases: {}, archetypes: {} };
+        results[matching[mi].id].demand += occDemand;
+        results[matching[mi].id].phases[coeff.phase] = (results[matching[mi].id].phases[coeff.phase] || 0) + occDemand;
+        results[matching[mi].id].archetypes[archetype.id] = (results[matching[mi].id].archetypes[archetype.id] || 0) + occDemand;
+      }
+    }
+    return results;
+  }
+
+  function mergeResults(target, source) {
+    var ids = Object.keys(source);
+    for (var i = 0; i < ids.length; i++) {
+      var id = ids[i], rec = source[id];
+      if (!target[id]) target[id] = { demand: 0, phases: {}, archetypes: {} };
+      target[id].demand += rec.demand;
+      var phases = Object.keys(rec.phases);
+      for (var j = 0; j < phases.length; j++) target[id].phases[phases[j]] = (target[id].phases[phases[j]] || 0) + rec.phases[phases[j]];
+      var archs = Object.keys(rec.archetypes);
+      for (var k = 0; k < archs.length; k++) target[id].archetypes[archs[k]] = (target[id].archetypes[archs[k]] || 0) + rec.archetypes[archs[k]];
+    }
+  }
+
+  function computeMultiArchetypeDemand(scenario, targetMtOverride) {
+    if (!archetypeData || archetypeData.length === 0) return null;
+    var targetMt = targetMtOverride != null ? targetMtOverride : scenario.target_mt;
+    if (!targetMt || targetMt <= 0) return null;
+    var archLookup = {};
+    for (var ai = 0; ai < archetypeData.length; ai++) archLookup[archetypeData[ai].id] = archetypeData[ai];
+    var sourceOccs = filteredData.occupations;
+
+    if (scenario.archetype_id && !scenario.production) {
+      var arch = archLookup[scenario.archetype_id];
+      if (!arch || !arch.h2_output_mt_per_year) return null;
+      return computeDemandForUnits(targetMt / arch.h2_output_mt_per_year, arch, sourceOccs);
+    }
+
+    var combined = {};
+    var totalProductionMw = 0;
+    var production = scenario.production || [];
+    for (var pi = 0; pi < production.length; pi++) {
+      var pArch = archLookup[production[pi].archetype_id];
+      if (!pArch || !pArch.h2_output_mt_per_year) continue;
+      var pUnits = (targetMt * (production[pi].share || 0)) / pArch.h2_output_mt_per_year;
+      totalProductionMw += (pArch.capacity_mw || 0) * pUnits;
+      mergeResults(combined, computeDemandForUnits(pUnits, pArch, sourceOccs));
+    }
+    var downstream = scenario.downstream || [];
+    for (var di = 0; di < downstream.length; di++) {
+      var dArch = archLookup[downstream[di].archetype_id];
+      if (!dArch || !dArch.h2_input_mt_per_unit) continue;
+      var dUnits = (targetMt * (downstream[di].conversion_share || 0)) / dArch.h2_input_mt_per_unit;
+      mergeResults(combined, computeDemandForUnits(dUnits, dArch, sourceOccs));
+    }
+    var upstream = scenario.upstream || [];
+    for (var ui = 0; ui < upstream.length; ui++) {
+      var uArch = archLookup[upstream[ui].archetype_id];
+      if (!uArch || !uArch.capacity_mw) continue;
+      var reMw = (totalProductionMw / 1000) * (upstream[ui].re_ratio_gw_per_gw_electrolyser || 0) * 1000;
+      mergeResults(combined, computeDemandForUnits(reMw / uArch.capacity_mw, uArch, sourceOccs));
+    }
+    return Object.keys(combined).length > 0 ? combined : null;
+  }
+
+  // --- Gap Engine ---
+  function computeSupplyGap(demandByOcc) {
+    var results = {};
+    var occs = filteredData.occupations;
+    for (var i = 0; i < occs.length; i++) {
+      var occ = occs[i];
+      var demand = demandByOcc[occ.id] ? demandByOcc[occ.id].demand : 0;
+      var supply = occ.supply_estimate;
+      if (supply == null) { results[occ.id] = { supply: null, demand: demand, gap: null, gapPct: null, gapStatus: "no_data" }; continue; }
+      var gap = supply - demand;
+      var gapPct = demand > 0 ? Math.round((supply - demand) / demand * 1000) / 10 : null;
+      var gapStatus = gap > 0 ? "surplus" : gap < 0 ? "shortage" : "balanced";
+      results[occ.id] = { supply: supply, demand: demand, gap: gap, gapPct: gapPct, gapStatus: gapStatus };
+    }
+    return results;
   }
 
   // --- Colour ---
-
   function scoreColour(score) {
     if (score == null) return NULL_COLOUR;
-    for (const band of COLOUR_BANDS) {
-      if (score >= band.min && score <= band.max) return band.colour;
-    }
+    for (var i = 0; i < COLOUR_BANDS.length; i++) { var b = COLOUR_BANDS[i]; if (score >= b.min && score <= b.max) return b.colour; }
     if (score > 0 && score < 1) return "#dc2626";
     return NULL_COLOUR;
   }
+  function demandColour(demand) {
+    if (!demand || demand === 0) return "#374151";
+    if (demand >= 1000) return "#00994C";
+    if (demand >= 500) return "#50C878";
+    if (demand >= 100) return "#86efac";
+    if (demand >= 10) return "#ff8a00";
+    return "#dc2626";
+  }
+  function gapColour(gr) {
+    if (!gr || gr.gap == null) return NULL_COLOUR;
+    var gap = gr.gap;
+    if (gap === 0) return "#f3f4f6";
+    if (gap < 0) { var a = Math.abs(gap); return a >= 10000 ? "#991b1b" : a >= 5000 ? "#dc2626" : a >= 1000 ? "#ef4444" : a >= 100 ? "#f87171" : "#fca5a5"; }
+    return gap >= 100000 ? "#166534" : gap >= 50000 ? "#15803d" : gap >= 10000 ? "#22c55e" : gap >= 1000 ? "#86efac" : "#bbf7d0";
+  }
 
   // --- Summary Bar ---
-
   function updateSummary() {
     if (!data || !data.summary) return;
-    const s = data.summary;
+    var s = data.summary;
     document.getElementById("metricH2Ready").textContent = s.h2_ready_occupations.toLocaleString();
-    const gapEl = document.getElementById("metricGap");
-    if (s.workforce_gap_2030 == null) {
-      gapEl.textContent = "N/A";
-      gapEl.classList.add("metric-value-muted");
-    } else {
-      gapEl.textContent = (s.workforce_gap_2030 / 1e6).toFixed(1) + "M";
-      gapEl.classList.remove("metric-value-muted");
-    }
+    var gapEl = document.getElementById("metricGap");
+    if (s.workforce_gap_2030 == null) { gapEl.textContent = "N/A"; gapEl.classList.add("metric-value-muted"); }
+    else { gapEl.textContent = (s.workforce_gap_2030 / 1e6).toFixed(1) + "M"; gapEl.classList.remove("metric-value-muted"); }
     document.getElementById("metricUpskill").textContent = s.fast_upskill_paths.toLocaleString();
-
-    // Filter indicator
-    const indicator = document.getElementById("filterIndicator");
+    var indicator = document.getElementById("filterIndicator");
     if (indicator) {
-      const current = data.occupations.length;
-      const total = data.total_all_occupations || current;
-      const sectors = data.total_sectors || "?";
-      indicator.textContent = `Showing ${current.toLocaleString()} of ${total.toLocaleString()} occupations across ${sectors} sectors`;
+      var current = data.occupations.length, total = data.total_all_occupations || current, sectors = data.total_sectors || "?";
+      indicator.textContent = "Showing " + current.toLocaleString() + " of " + total.toLocaleString() + " occupations across " + sectors + " sectors";
     }
-
-    // Footer
-    document.getElementById("footerVersion").textContent = `Dataset v${data.dataset_version}`;
-    const d = new Date(data.last_updated);
-    document.getElementById("footerDate").textContent = `Last updated ${d.toLocaleDateString("en-US", { month: "long", year: "numeric" })}`;
-
+    document.getElementById("footerVersion").textContent = "Dataset v" + data.dataset_version;
+    var d = new Date(data.last_updated);
+    document.getElementById("footerDate").textContent = "Last updated " + d.toLocaleDateString("en-US", { month: "long", year: "numeric" });
     updateDataStatus();
   }
 
   function updateDataStatus() {
-    const status = document.getElementById("dataStatus");
+    var status = document.getElementById("dataStatus");
     if (!status) return;
-
-    const quality = data && data.data_quality;
-    if (!quality) {
-      status.textContent = "";
-      status.dataset.state = "";
-      return;
-    }
-
-    const employmentCoverage = quality.coverage && quality.coverage.employment;
-    const employmentText = employmentCoverage
-      ? `Employment coverage ${employmentCoverage.count}/${employmentCoverage.total} in this view.`
-      : "";
-    const notes = (quality.notes || []).join(" ");
-    status.textContent = [employmentText, notes].filter(Boolean).join(" ");
+    var quality = data && data.data_quality;
+    if (!quality) { status.textContent = ""; status.dataset.state = ""; return; }
+    var ec = quality.coverage && quality.coverage.employment;
+    var txt = ec ? "Employment coverage " + ec.count + "/" + ec.total + " in this view." : "";
+    var notes = (quality.notes || []).join(" ");
+    status.textContent = [txt, notes].filter(Boolean).join(" ");
     status.dataset.state = quality.labour_market_status === "complete" && quality.workforce_gap_supported ? "ok" : "warning";
   }
 
   // --- Treemap ---
-
   function buildTreemap() {
-    const container = document.getElementById("treemap");
-    container.innerHTML = "";
-
-    const width = container.clientWidth;
-    const height = container.clientHeight || 500;
-
-    // In scenario mode, filter out zero-demand occupations unless ghosts are shown
-    let displayOccs = data.occupations;
-    if (scenarioMode && demandResults) {
-      const showGhosts = document.getElementById("showGhosts")?.checked;
-      if (!showGhosts) {
-        displayOccs = data.occupations.filter(occ => demandResults[occ.id]?.demand > 0);
-      }
+    var container = document.getElementById("treemap");
+    container.textContent = "";
+    var width = container.clientWidth, height = container.clientHeight || 500;
+    var displayOccs = data.occupations;
+    if ((scenarioMode || gapMode) && demandResults) {
+      var showGhosts = document.getElementById("showGhosts") && document.getElementById("showGhosts").checked;
+      if (!showGhosts && !gapMode) displayOccs = data.occupations.filter(function(occ) { return demandResults[occ.id] && demandResults[occ.id].demand > 0; });
     }
-
-    // Build hierarchy: root -> sectors -> occupations
-    const sectors = {};
-    for (const occ of displayOccs) {
-      const s = occ.sector || "Other";
+    var sectors = {};
+    for (var i = 0; i < displayOccs.length; i++) {
+      var s = displayOccs[i].sector || "Other";
       if (!sectors[s]) sectors[s] = { name: s, children: [] };
-      sectors[s].children.push(occ);
+      sectors[s].children.push(displayOccs[i]);
     }
-
-    const hierarchy = {
-      name: "root",
-      children: Object.values(sectors),
-    };
-
-    const root = d3.hierarchy(hierarchy)
-      .sum(d => {
+    var root = d3.hierarchy({ name: "root", children: Object.values(sectors) })
+      .sum(function(d) {
         if (d.id) {
-          if (scenarioMode && demandResults) {
-            const dr = demandResults[d.id];
-            return dr ? dr.demand : 0; // demand-based sizing
+          if ((scenarioMode || gapMode) && demandResults) {
+            var dr = demandResults[d.id];
+            if (gapMode) return dr ? Math.max(dr.demand, 1) : 1;
+            return dr ? dr.demand : 0;
           }
-          // Original atlas sizing
-          const scores = d.scores || {};
-          const h2 = scores.h2_adjacency || 0;
-          const td = scores.transition_demand || 0;
-          const st = scores.skill_transferability || 0;
-          return (h2 * 2) + td + st;
+          var sc = d.scores || {};
+          return ((sc.h2_adjacency || 0) * 2) + (sc.transition_demand || 0) + (sc.skill_transferability || 0);
         }
         return 0;
       })
-      .sort((a, b) => (b.value || 0) - (a.value || 0));
+      .sort(function(a, b) { return (b.value || 0) - (a.value || 0); });
+    d3.treemap().size([width, height]).padding(1).paddingTop(14).round(true)(root);
 
-    d3.treemap()
-      .size([width, height])
-      .padding(1)
-      .paddingTop(14)
-      .round(true)(root);
+    var svg = d3.select(container).append("svg").attr("width", width).attr("height", height);
+    svg.selectAll(".sector-label").data(root.children || []).join("text")
+      .attr("class", "sector-label").attr("x", function(d) { return d.x0 + 3; }).attr("y", function(d) { return d.y0 + 11; })
+      .text(function(d) { return d.data.name; }).attr("font-size", "10px").attr("font-weight", "600").attr("fill", "#64748b")
+      .each(function(d) { if (this.getComputedTextLength() > d.x1 - d.x0 - 6) this.textContent = ""; });
 
-    const svg = d3.select(container)
-      .append("svg")
-      .attr("width", width)
-      .attr("height", height);
-
-    // Sector labels
-    const sectorNodes = root.children || [];
-    svg.selectAll(".sector-label")
-      .data(sectorNodes)
-      .join("text")
-      .attr("class", "sector-label")
-      .attr("x", d => d.x0 + 3)
-      .attr("y", d => d.y0 + 11)
-      .text(d => d.data.name)
-      .attr("font-size", "10px")
-      .attr("font-weight", "600")
-      .attr("fill", "#64748b")
-      .each(function (d) {
-        const availWidth = d.x1 - d.x0 - 6;
-        if (this.getComputedTextLength() > availWidth) {
-          this.textContent = "";
-        }
-      });
-
-    // Leaf cells (occupations)
-    const leaves = root.leaves();
-
-    const cells = svg.selectAll(".cell")
-      .data(leaves)
-      .join("g")
-      .attr("class", "cell")
-      .attr("transform", d => `translate(${d.x0},${d.y0})`);
-
+    var cells = svg.selectAll(".cell").data(root.leaves()).join("g").attr("class", "cell")
+      .attr("transform", function(d) { return "translate(" + d.x0 + "," + d.y0 + ")"; });
     cells.append("rect")
-      .attr("width", d => Math.max(0, d.x1 - d.x0))
-      .attr("height", d => Math.max(0, d.y1 - d.y0))
-      .attr("fill", d => {
-        if (scenarioMode && demandResults) {
-          const dr = demandResults[d.data.id];
-          return demandColour(dr ? dr.demand : 0);
-        }
-        const scores = d.data.scores || {};
-        return scoreColour(scores[activeDimension]);
+      .attr("width", function(d) { return Math.max(0, d.x1 - d.x0); }).attr("height", function(d) { return Math.max(0, d.y1 - d.y0); })
+      .attr("fill", function(d) {
+        if (gapMode && gapResults) return gapColour(gapResults[d.data.id]);
+        if (scenarioMode && demandResults) { var dr = demandResults[d.data.id]; return demandColour(dr ? dr.demand : 0); }
+        return scoreColour((d.data.scores || {})[activeDimension]);
       })
-      .attr("data-id", d => d.data.id)
-      .on("mouseover", onCellHover)
-      .on("mousemove", onCellMove)
-      .on("mouseout", onCellOut)
-      .on("click", (event, d) => selectOccupation(d.data));
-
-    // Text labels (only if cell is wide enough)
-    cells.append("text")
-      .attr("class", "cell-label")
-      .attr("x", 3)
-      .attr("y", 12)
-      .text(d => decodeEntities(d.data.title))
-      .each(function (d) {
-        const cellWidth = d.x1 - d.x0;
-        if (cellWidth < 40) {
-          this.textContent = "";
-          return;
-        }
-        // Truncate
-        const maxChars = Math.floor(cellWidth / 6);
-        if (this.textContent.length > maxChars) {
-          this.textContent = this.textContent.slice(0, maxChars - 1) + "\u2026";
-        }
+      .attr("data-id", function(d) { return d.data.id; })
+      .on("mouseover", onCellHover).on("mousemove", onCellMove).on("mouseout", onCellOut)
+      .on("click", function(event, d) { selectOccupation(d.data); });
+    cells.append("text").attr("class", "cell-label").attr("x", 3).attr("y", 12)
+      .text(function(d) { return decodeEntities(d.data.title); })
+      .each(function(d) {
+        var cw = d.x1 - d.x0;
+        if (cw < 40) { this.textContent = ""; return; }
+        var mc = Math.floor(cw / 6);
+        if (this.textContent.length > mc) this.textContent = this.textContent.slice(0, mc - 1) + "\u2026";
       });
   }
 
   // --- Tooltip ---
-
   function onCellHover(event, d) {
-    const tooltip = document.getElementById("tooltip");
-    if (scenarioMode && demandResults) {
-      const dr = demandResults[d.data.id];
-      const demandText = dr ? dr.demand.toLocaleString() + " workers" : "No demand";
-      tooltip.textContent = "";
-      const strong = document.createElement("strong");
-      strong.textContent = decodeEntities(d.data.title);
-      tooltip.appendChild(strong);
-      tooltip.appendChild(document.createElement("br"));
-      tooltip.appendChild(document.createTextNode("Demand: " + demandText));
+    var tooltip = document.getElementById("tooltip");
+    tooltip.textContent = "";
+    var strong = document.createElement("strong"); strong.textContent = decodeEntities(d.data.title);
+    tooltip.appendChild(strong); tooltip.appendChild(document.createElement("br"));
+    if (gapMode && gapResults) {
+      var gr = gapResults[d.data.id];
+      tooltip.appendChild(document.createTextNode(gr && gr.gap != null ? (gr.gap >= 0 ? "Surplus: " : "Shortage: ") + Math.abs(gr.gap).toLocaleString() : "Supply data unavailable"));
+    } else if (scenarioMode && demandResults) {
+      var dr = demandResults[d.data.id];
+      tooltip.appendChild(document.createTextNode("Demand: " + (dr ? dr.demand.toLocaleString() + " workers" : "No demand")));
     } else {
-      const scores = d.data.scores || {};
-      const score = scores[activeDimension];
-      const scoreText = score != null ? score.toFixed(1) : "N/A";
-      const dimLabel = DIMENSIONS.find(dim => dim.key === activeDimension)?.label || activeDimension;
-      tooltip.textContent = "";
-      const strong = document.createElement("strong");
-      strong.textContent = decodeEntities(d.data.title);
-      tooltip.appendChild(strong);
-      tooltip.appendChild(document.createElement("br"));
-      tooltip.appendChild(document.createTextNode(dimLabel + ": " + scoreText));
+      var score = (d.data.scores || {})[activeDimension];
+      var dimLabel = ""; for (var i = 0; i < DIMENSIONS.length; i++) if (DIMENSIONS[i].key === activeDimension) { dimLabel = DIMENSIONS[i].label; break; }
+      tooltip.appendChild(document.createTextNode(dimLabel + ": " + (score != null ? score.toFixed(1) : "N/A")));
     }
     tooltip.style.display = "block";
   }
-
   function onCellMove(event) {
-    const tooltip = document.getElementById("tooltip");
-    const container = document.getElementById("treemapContainer");
-    const rect = container.getBoundingClientRect();
-    tooltip.style.left = (event.clientX - rect.left + 12) + "px";
-    tooltip.style.top = (event.clientY - rect.top - 10) + "px";
+    var tooltip = document.getElementById("tooltip");
+    var rect = document.getElementById("treemapContainer").getBoundingClientRect();
+    tooltip.style.left = (event.clientX - rect.left + 12) + "px"; tooltip.style.top = (event.clientY - rect.top - 10) + "px";
   }
+  function onCellOut() { document.getElementById("tooltip").style.display = "none"; }
 
-  function onCellOut() {
-    document.getElementById("tooltip").style.display = "none";
-  }
-
-  function escapeHtml(value) {
-    return String(value)
-      .replace(/&/g, "&amp;")
-      .replace(/</g, "&lt;")
-      .replace(/>/g, "&gt;")
-      .replace(/"/g, "&quot;")
-      .replace(/'/g, "&#39;");
-  }
-
-  const entityDecoder = document.createElement("textarea");
-
+  function escapeHtml(value) { return String(value).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#39;"); }
   function decodeEntities(value) {
-    entityDecoder.innerHTML = String(value == null ? "" : value);
-    return entityDecoder.value;
+    var str = String(value == null ? "" : value);
+    if (str.indexOf("&") === -1) return str;
+    var doc = new DOMParser().parseFromString(str, "text/html");
+    return doc.body.textContent || str;
   }
 
   // --- Sidebar ---
-
   function selectOccupation(occ) {
     selectedOccupation = occ;
     document.querySelector(".sidebar-empty").style.display = "none";
     document.getElementById("sidebarContent").style.display = "block";
-
     document.getElementById("sbTitle").textContent = decodeEntities(occ.title);
     document.getElementById("sbSector").textContent = decodeEntities(occ.sector);
     document.getElementById("sbNco").textContent = occ.nco_code || "";
     document.getElementById("sbEdu").textContent = decodeEntities(occ.education_req || "");
+    document.getElementById("sbEmployment").textContent = occ.employment ? occ.employment.toLocaleString() : "N/A";
+    document.getElementById("sbWage").textContent = occ.median_wage_inr ? "\u20B9" + occ.median_wage_inr.toLocaleString() : "N/A";
 
-    document.getElementById("sbEmployment").textContent = occ.employment
-      ? occ.employment.toLocaleString()
-      : "N/A";
-    document.getElementById("sbWage").textContent = occ.median_wage_inr
-      ? "\u20B9" + occ.median_wage_inr.toLocaleString()
-      : "N/A";
-
-    // Score bars
-    const barsEl = document.getElementById("scoreBars");
-    barsEl.innerHTML = "";
-    for (const dim of DIMENSIONS) {
-      const score = (occ.scores || {})[dim.key];
-      const detail = (occ.score_details || {})[dim.key] || {};
-      const rationale = detail.rationale ? escapeHtml(detail.rationale) : "";
-      const pct = score != null ? (score / 10) * 100 : 0;
-      const colour = scoreColour(score);
-      barsEl.innerHTML += `
-        <div class="score-bar-row">
-          <span class="score-bar-label">${escapeHtml(dim.label)}</span>
-          <div class="score-bar-track">
-            <div class="score-bar-fill" style="width:${pct}%;background:${colour}"></div>
-          </div>
-          <span class="score-bar-value">${score != null ? score.toFixed(1) : "N/A"}</span>
-        </div>
-        ${rationale ? `<div class="score-rationale">${rationale}</div>` : ""}`;
+    var barsEl = document.getElementById("scoreBars"); barsEl.textContent = "";
+    for (var di = 0; di < DIMENSIONS.length; di++) {
+      var dim = DIMENSIONS[di], score = (occ.scores || {})[dim.key], detail = (occ.score_details || {})[dim.key] || {};
+      var pct = score != null ? (score / 10) * 100 : 0, colour = scoreColour(score);
+      var row = document.createElement("div"); row.className = "score-bar-row";
+      var labelEl = document.createElement("span"); labelEl.className = "score-bar-label"; labelEl.textContent = dim.label;
+      var track = document.createElement("div"); track.className = "score-bar-track";
+      var fill = document.createElement("div"); fill.className = "score-bar-fill"; fill.style.width = pct + "%"; fill.style.background = colour;
+      track.appendChild(fill);
+      var valEl = document.createElement("span"); valEl.className = "score-bar-value"; valEl.textContent = score != null ? score.toFixed(1) : "N/A";
+      row.appendChild(labelEl); row.appendChild(track); row.appendChild(valEl); barsEl.appendChild(row);
+      if (detail.rationale) { var ratEl = document.createElement("div"); ratEl.className = "score-rationale"; ratEl.textContent = detail.rationale; barsEl.appendChild(ratEl); }
     }
 
-    // Upskill paths
-    const listEl = document.getElementById("upskillList");
-    listEl.innerHTML = "";
-    const paths = occ.upskill_paths || [];
-    if (paths.length === 0) {
-      listEl.innerHTML = '<div style="color:#64748b;font-size:0.85rem">No upskill paths available</div>';
-    }
-    for (const targetId of paths) {
-      const target = data.occupations.find(o => o.id === targetId);
+    var listEl = document.getElementById("upskillList"); listEl.textContent = "";
+    var paths = occ.upskill_paths || [];
+    if (paths.length === 0) { var empty = document.createElement("div"); empty.style.cssText = "color:#64748b;font-size:0.85rem"; empty.textContent = "No upskill paths available"; listEl.appendChild(empty); }
+    for (var pi = 0; pi < paths.length; pi++) {
+      var target = null; for (var oi = 0; oi < data.occupations.length; oi++) if (data.occupations[oi].id === paths[pi]) { target = data.occupations[oi]; break; }
       if (!target) continue;
-      const h2 = (target.scores || {}).h2_adjacency || 0;
-      const td = (target.scores || {}).transition_demand || 0;
-      const combined = (h2 + td).toFixed(1);
-      const item = document.createElement("div");
-      item.className = "upskill-item";
-      const titleSpan = document.createElement("span");
-      titleSpan.textContent = decodeEntities(target.title);
-      const scoreSpan = document.createElement("span");
-      scoreSpan.className = "upskill-score";
-      scoreSpan.textContent = combined;
-      item.appendChild(titleSpan);
-      item.appendChild(scoreSpan);
-      item.addEventListener("click", () => highlightCell(targetId));
+      var combined = (((target.scores || {}).h2_adjacency || 0) + ((target.scores || {}).transition_demand || 0)).toFixed(1);
+      var item = document.createElement("div"); item.className = "upskill-item";
+      var titleSpan = document.createElement("span"); titleSpan.textContent = decodeEntities(target.title);
+      var scoreSpan = document.createElement("span"); scoreSpan.className = "upskill-score"; scoreSpan.textContent = combined;
+      item.appendChild(titleSpan); item.appendChild(scoreSpan);
+      item.addEventListener("click", (function(tid) { return function() { highlightCell(tid); }; })(paths[pi]));
       listEl.appendChild(item);
     }
 
-    // Scenario demand details in sidebar
-    const scenarioSection = document.getElementById("scenarioDetails");
-    if (scenarioMode && demandResults && scenarioSection) {
-      const dr = demandResults[occ.id];
+    var scenarioSection = document.getElementById("scenarioDetails");
+    if ((scenarioMode || gapMode) && demandResults && scenarioSection) {
+      var dr = demandResults[occ.id];
       if (dr) {
         scenarioSection.style.display = "block";
         document.getElementById("sbDemand").textContent = dr.demand.toLocaleString();
-        // Phase breakdown bars
-        const phaseBars = document.getElementById("phaseBars");
-        phaseBars.textContent = "";
-        for (const [phase, count] of Object.entries(dr.phases)) {
-          const pct = (count / dr.demand) * 100;
-          const row = document.createElement("div");
-          row.className = "score-bar-row";
-          const label = document.createElement("span");
-          label.className = "score-bar-label";
-          label.textContent = phase;
-          const track = document.createElement("div");
-          track.className = "score-bar-track";
-          const fill = document.createElement("div");
-          fill.className = "score-bar-fill";
-          fill.style.width = pct + "%";
-          fill.style.background = "var(--color-goat)";
-          track.appendChild(fill);
-          const value = document.createElement("span");
-          value.className = "score-bar-value";
-          value.textContent = count.toLocaleString();
-          row.appendChild(label);
-          row.appendChild(track);
-          row.appendChild(value);
-          phaseBars.appendChild(row);
+        var phaseBars = document.getElementById("phaseBars"); phaseBars.textContent = "";
+        var phaseKeys = Object.keys(dr.phases);
+        for (var phi = 0; phi < phaseKeys.length; phi++) {
+          var phase = phaseKeys[phi], count = dr.phases[phase], ppct = dr.demand > 0 ? (count / dr.demand) * 100 : 0;
+          var prow = document.createElement("div"); prow.className = "score-bar-row";
+          var plabel = document.createElement("span"); plabel.className = "score-bar-label"; plabel.textContent = phase;
+          var ptrack = document.createElement("div"); ptrack.className = "score-bar-track";
+          var pfill = document.createElement("div"); pfill.className = "score-bar-fill"; pfill.style.width = ppct + "%"; pfill.style.background = "var(--color-goat)";
+          ptrack.appendChild(pfill);
+          var pvalue = document.createElement("span"); pvalue.className = "score-bar-value"; pvalue.textContent = count.toLocaleString();
+          prow.appendChild(plabel); prow.appendChild(ptrack); prow.appendChild(pvalue); phaseBars.appendChild(prow);
         }
-        // Show coefficient source
-        const ncoGroup = (occ.nco_code || "").substring(0, 4);
-        const archetype = archetypeData[0];
-        const matchingCoeffs = archetype.coefficients.filter(c => c.nco_group === ncoGroup);
-        const coeffEl = document.getElementById("coeffSource");
-        coeffEl.textContent = "";
-        if (matchingCoeffs.length > 0) {
-          for (const c of matchingCoeffs) {
-            const item = document.createElement("div");
-            item.className = "coeff-item";
-            item.textContent = "Source: " + c.source + " (" + c.source_type + ")";
-            coeffEl.appendChild(item);
+        var archBreakdown = document.getElementById("archBreakdown");
+        if (archBreakdown) {
+          archBreakdown.textContent = "";
+          var archKeys = Object.keys(dr.archetypes || {});
+          if (archKeys.length > 1) {
+            for (var abi = 0; abi < archKeys.length; abi++) {
+              var archId = archKeys[abi], archCount = dr.archetypes[archId];
+              var archName = archId;
+              if (archetypeData) for (var axi = 0; axi < archetypeData.length; axi++) if (archetypeData[axi].id === archId) { archName = archetypeData[axi].name; break; }
+              var abItem = document.createElement("div"); abItem.className = "coeff-item"; abItem.textContent = archCount.toLocaleString() + " from " + archName;
+              archBreakdown.appendChild(abItem);
+            }
           }
         }
-      } else {
-        scenarioSection.style.display = "none";
-      }
-    } else if (scenarioSection) {
-      scenarioSection.style.display = "none";
-    }
+        var ncoGroup = (occ.nco_code || "").substring(0, 4);
+        var coeffEl = document.getElementById("coeffSource"); coeffEl.textContent = "";
+        if (archetypeData) {
+          var sources = [];
+          for (var aai = 0; aai < archetypeData.length; aai++) for (var cci = 0; cci < archetypeData[aai].coefficients.length; cci++) {
+            var c = archetypeData[aai].coefficients[cci];
+            if (c.nco_group === ncoGroup) { var src = c.source + " (" + c.source_type + ")"; if (sources.indexOf(src) === -1) sources.push(src); }
+          }
+          for (var si = 0; si < sources.length; si++) { var sItem = document.createElement("div"); sItem.className = "coeff-item"; sItem.textContent = "Source: " + sources[si]; coeffEl.appendChild(sItem); }
+        }
+      } else { scenarioSection.style.display = "none"; }
+    } else if (scenarioSection) { scenarioSection.style.display = "none"; }
+
+    var gapSection = document.getElementById("gapDetails");
+    if (gapMode && gapResults && gapSection) {
+      var gr = gapResults[occ.id];
+      if (gr) {
+        gapSection.style.display = "block";
+        var supplyEl = document.getElementById("sbSupply"), gapEl = document.getElementById("sbGap"), gapStatusEl = document.getElementById("sbGapStatus");
+        if (gr.supply != null) {
+          supplyEl.textContent = gr.supply.toLocaleString();
+          gapEl.textContent = (gr.gap >= 0 ? "+" : "") + gr.gap.toLocaleString();
+          gapEl.className = gr.gap >= 0 ? "gap-surplus" : "gap-shortage";
+          gapStatusEl.textContent = gr.gapStatus.charAt(0).toUpperCase() + gr.gapStatus.slice(1) + (gr.gapPct != null ? " (" + (gr.gapPct >= 0 ? "+" : "") + gr.gapPct + "%)" : "");
+        } else { supplyEl.textContent = "N/A"; gapEl.textContent = "N/A"; gapEl.className = ""; gapStatusEl.textContent = "Supply data unavailable"; }
+      } else { gapSection.style.display = "none"; }
+    } else if (gapSection) { gapSection.style.display = "none"; }
   }
 
   function highlightCell(targetId) {
-    // Remove previous highlights
     d3.selectAll(".highlight-cell").classed("highlight-cell", false);
-
-    const rect = d3.select(`rect[data-id="${targetId}"]`);
-    if (!rect.empty()) {
-      rect.classed("highlight-cell", true);
-      // Scroll into view
-      const node = rect.node();
-      if (node) node.scrollIntoView({ behavior: "smooth", block: "center" });
-    }
+    var rect = d3.select('rect[data-id="' + targetId + '"]');
+    if (!rect.empty()) { rect.classed("highlight-cell", true); var node = rect.node(); if (node) node.scrollIntoView({ behavior: "smooth", block: "center" }); }
   }
 
-  // --- Colour Toggle ---
-
   function setupDimensionPills() {
-    document.querySelectorAll(".pill").forEach(pill => {
-      pill.addEventListener("click", () => {
-        document.querySelectorAll(".pill").forEach(p => p.classList.remove("active"));
-        pill.classList.add("active");
-        activeDimension = pill.dataset.dim;
-        recolourTreemap();
+    document.querySelectorAll(".pill").forEach(function(pill) {
+      pill.addEventListener("click", function() {
+        document.querySelectorAll(".pill").forEach(function(p) { p.classList.remove("active"); });
+        pill.classList.add("active"); activeDimension = pill.dataset.dim; recolourTreemap();
       });
     });
   }
-
   function recolourTreemap() {
-    d3.selectAll("#treemap rect[data-id]").attr("fill", function () {
-      const id = this.getAttribute("data-id");
-      if (scenarioMode && demandResults) {
-        const dr = demandResults[id];
-        return demandColour(dr ? dr.demand : 0);
-      }
-      const occ = data.occupations.find(o => o.id === id);
+    d3.selectAll("#treemap rect[data-id]").attr("fill", function() {
+      var id = this.getAttribute("data-id");
+      if (gapMode && gapResults) return gapColour(gapResults[id]);
+      if (scenarioMode && demandResults) { var dr = demandResults[id]; return demandColour(dr ? dr.demand : 0); }
+      var occ = null; for (var i = 0; i < data.occupations.length; i++) if (data.occupations[i].id === id) { occ = data.occupations[i]; break; }
       if (!occ) return NULL_COLOUR;
       return scoreColour((occ.scores || {})[activeDimension]);
     });
   }
 
-  // --- Sector Toggle ---
-
   function setupSectorToggle() {
-    const btn = document.getElementById("toggleSectors");
-    if (!btn) return;
-
-    btn.addEventListener("click", async () => {
+    var btn = document.getElementById("toggleSectors"); if (!btn) return;
+    btn.addEventListener("click", async function() {
       if (!showingAll) {
-        const originalLabel = btn.textContent;
-        btn.disabled = true;
-        btn.textContent = "Loading all sectors...";
-        try {
-          data = await loadAllData();
-          showingAll = true;
-          btn.textContent = "Show H2-Relevant Only";
-          btn.classList.add("active");
-        } catch (err) {
-          console.error("Failed to load all sectors:", err);
-          btn.textContent = originalLabel;
-          const status = document.getElementById("dataStatus");
-          if (status) {
-            status.textContent = `Failed to load the full dataset: ${err.message}`;
-            status.dataset.state = "warning";
-          }
-        } finally {
-          btn.disabled = false;
-        }
-      } else {
-        showingAll = false;
-        data = filteredData;
-        btn.textContent = "Show All 49 Sectors";
-        btn.classList.remove("active");
-      }
-      updateSummary();
-      buildTreemap();
+        var origLabel = btn.textContent; btn.disabled = true; btn.textContent = "Loading all sectors...";
+        try { data = await loadAllData(); showingAll = true; btn.textContent = "Show H2-Relevant Only"; btn.classList.add("active"); }
+        catch(e) { console.error("Failed to load all sectors:", e); btn.textContent = origLabel; }
+        finally { btn.disabled = false; }
+      } else { showingAll = false; data = filteredData; btn.textContent = "Show All 49 Sectors"; btn.classList.remove("active"); }
+      updateSummary(); buildTreemap();
     });
   }
 
-  // --- CSV Download ---
-
   function setupDownloads() {
-    const btn = document.getElementById("downloadBtn");
-    const menu = document.getElementById("downloadMenu");
-
-    btn.addEventListener("click", (e) => {
-      e.stopPropagation();
-      menu.classList.toggle("open");
+    var btn = document.getElementById("downloadBtn"), menu = document.getElementById("downloadMenu");
+    btn.addEventListener("click", function(e) { e.stopPropagation(); menu.classList.toggle("open"); });
+    document.addEventListener("click", function() { menu.classList.remove("open"); });
+    document.getElementById("dlFull").addEventListener("click", async function(e) {
+      e.preventDefault(); menu.classList.remove("open");
+      var link = e.currentTarget, origLabel = link.textContent; link.textContent = "Preparing full export..."; link.classList.add("busy");
+      try { downloadCSV((await loadAllData()).occupations, "occupations.csv"); } finally { link.textContent = origLabel; link.classList.remove("busy"); }
     });
-    document.addEventListener("click", () => menu.classList.remove("open"));
-
-    document.getElementById("dlFull").addEventListener("click", async (e) => {
-      e.preventDefault();
-      menu.classList.remove("open");
-      const link = e.currentTarget;
-      const originalLabel = link.textContent;
-      link.textContent = "Preparing full export...";
-      link.classList.add("busy");
-      try {
-        const dataset = await loadAllData();
-        downloadCSV(dataset.occupations, "occupations.csv");
-      } finally {
-        link.textContent = originalLabel;
-        link.classList.remove("busy");
-      }
-    });
-
-    document.getElementById("dlH2").addEventListener("click", async (e) => {
-      e.preventDefault();
-      menu.classList.remove("open");
-      const dataset = await loadAllData();
-      const h2 = dataset.occupations.filter(o => (o.scores || {}).h2_adjacency >= 7);
+    document.getElementById("dlH2").addEventListener("click", async function(e) {
+      e.preventDefault(); menu.classList.remove("open");
+      var h2 = (await loadAllData()).occupations.filter(function(o) { return (o.scores || {}).h2_adjacency >= 7; });
       downloadCSV(h2, "h2-ready-occupations.csv");
     });
   }
-
   function downloadCSV(occupations, filename) {
-    const headers = ["id", "slug", "title", "sector", "nco_code", "employment", "median_wage_inr",
-      "education_req", "formal_sector_pct", "h2_adjacency", "transition_demand",
-      "skill_transferability", "digital_automation_exposure", "formalization_rate", "scarcity_risk"];
-
-    const rows = [headers.join(",")];
-    for (const occ of occupations) {
-      const vals = headers.map(h => {
-        if (h in (occ.scores || {})) return csvEscape(occ.scores[h] ?? "");
-        const v = occ[h];
-        return csvEscape(v);
-      });
-      rows.push(vals.join(","));
+    var headers = ["id","slug","title","sector","nco_code","employment","median_wage_inr","education_req","formal_sector_pct","h2_adjacency","transition_demand","skill_transferability","digital_automation_exposure","formalization_rate","scarcity_risk"];
+    var rows = [headers.join(",")];
+    for (var i = 0; i < occupations.length; i++) {
+      var occ = occupations[i];
+      rows.push(headers.map(function(h) { return csvEscape(h in (occ.scores || {}) ? (occ.scores[h] != null ? occ.scores[h] : "") : occ[h]); }).join(","));
     }
-
-    const blob = new Blob([rows.join("\n")], { type: "text/csv" });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = filename;
-    a.click();
-    URL.revokeObjectURL(url);
+    var blob = new Blob([rows.join("\n")], { type: "text/csv" });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement("a"); a.href = url; a.download = filename; a.click(); URL.revokeObjectURL(url);
   }
-
   function csvEscape(value) {
     if (value == null) return "";
-    const text = String(value);
-    if (/[",\n\r]/.test(text)) {
-      return `"${text.replace(/"/g, "\"\"")}"`;
-    }
-    return text;
+    var text = String(value);
+    return /[",\n\r]/.test(text) ? '"' + text.replace(/"/g, '""') + '"' : text;
   }
 
-  // --- Scenario Mode ---
-
+  // --- Mode Management ---
   function saveMetricLabels() {
-    // Use innerHTML to preserve nested elements (e.g. tooltip-trigger in gap label)
-    savedMetricLabels = {
-      h2Ready: document.querySelector("#metricH2Ready + .metric-label")?.innerHTML || "",
-      gap: document.querySelector("#metricGap + .metric-label")?.innerHTML || "",
-      upskill: document.querySelector("#metricUpskill + .metric-label")?.innerHTML || "",
-    };
+    var h2L = document.querySelector("#metricH2Ready + .metric-label");
+    var gL = document.querySelector("#metricGap + .metric-label");
+    var uL = document.querySelector("#metricUpskill + .metric-label");
+    savedMetricLabels = { h2Ready: h2L ? h2L.textContent : "", gap: gL ? gL.textContent : "", upskill: uL ? uL.textContent : "" };
   }
-
   function restoreAtlasMetrics() {
     if (!savedMetricLabels) return;
-    const h2Label = document.querySelector("#metricH2Ready + .metric-label");
-    const gapLabel = document.querySelector("#metricGap + .metric-label");
-    const upskillLabel = document.querySelector("#metricUpskill + .metric-label");
-    // Restore using innerHTML to preserve nested elements like tooltip triggers
-    if (h2Label) h2Label.innerHTML = savedMetricLabels.h2Ready;
-    if (gapLabel) gapLabel.innerHTML = savedMetricLabels.gap;
-    if (upskillLabel) upskillLabel.innerHTML = savedMetricLabels.upskill;
+    var h2L = document.querySelector("#metricH2Ready + .metric-label");
+    var gL = document.querySelector("#metricGap + .metric-label");
+    var uL = document.querySelector("#metricUpskill + .metric-label");
+    if (h2L) h2L.textContent = savedMetricLabels.h2Ready;
+    if (gL) gL.textContent = savedMetricLabels.gap;
+    if (uL) uL.textContent = savedMetricLabels.upskill;
     updateSummary();
   }
 
+  function setMode(mode) {
+    activeMode = mode; scenarioMode = (mode === "scenario" || mode === "gap"); gapMode = (mode === "gap");
+    document.querySelectorAll(".mode-btn").forEach(function(b) { b.classList.remove("active"); });
+    var activeBtn = document.querySelector('.mode-btn[data-mode="' + mode + '"]');
+    if (activeBtn) activeBtn.classList.add("active");
+    document.getElementById("scenarioBar").style.display = scenarioMode ? "block" : "none";
+    document.getElementById("atlasLegend").style.display = (mode === "atlas") ? "flex" : "none";
+    document.getElementById("scenarioLegend").style.display = (mode === "scenario") ? "flex" : "none";
+    var gapLegend = document.getElementById("gapLegend");
+    if (gapLegend) gapLegend.style.display = (mode === "gap") ? "flex" : "none";
+    var pillsContainer = document.querySelector(".controls");
+    if (pillsContainer) {
+      var pills = pillsContainer.querySelector(".pills"), cl = pillsContainer.querySelector(".controls-label");
+      if (pills) pills.style.display = (mode === "atlas") ? "flex" : "none";
+      if (cl) cl.style.display = (mode === "atlas") ? "" : "none";
+    }
+    var sectorBtn = document.getElementById("toggleSectors");
+    if (sectorBtn) { sectorBtn.disabled = scenarioMode; sectorBtn.title = scenarioMode ? "Sector toggle unavailable in scenario/gap mode" : ""; }
+    if (mode === "atlas") { demandResults = null; gapResults = null; restoreAtlasMetrics(); buildTreemap(); }
+    else { updateScenario(); }
+  }
+
   function setupScenarioMode() {
-    // Mode toggle
-    document.querySelectorAll(".mode-btn").forEach(btn => {
-      btn.addEventListener("click", () => {
-        document.querySelectorAll(".mode-btn").forEach(b => b.classList.remove("active"));
-        btn.classList.add("active");
-        const mode = btn.dataset.mode;
-        scenarioMode = (mode === "scenario");
-
-        document.getElementById("scenarioBar").style.display = scenarioMode ? "block" : "none";
-
-        // Toggle legends
-        document.getElementById("atlasLegend").style.display = scenarioMode ? "none" : "flex";
-        document.getElementById("scenarioLegend").style.display = scenarioMode ? "flex" : "none";
-
-        // Toggle dimension pills visibility in scenario mode
-        const pillsContainer = document.querySelector(".controls");
-        if (pillsContainer) {
-          const pills = pillsContainer.querySelector(".pills");
-          const controlsLabel = pillsContainer.querySelector(".controls-label");
-          if (pills) pills.style.display = scenarioMode ? "none" : "flex";
-          if (controlsLabel) controlsLabel.style.display = scenarioMode ? "none" : "";
-        }
-
-        // Disable sector toggle in scenario mode
-        const sectorBtn = document.getElementById("toggleSectors");
-        if (sectorBtn) {
-          sectorBtn.disabled = scenarioMode;
-          if (scenarioMode) sectorBtn.title = "Sector toggle unavailable in scenario mode";
-          else sectorBtn.title = "";
-        }
-
-        if (scenarioMode) {
-          updateScenario();
-        } else {
-          demandResults = null;
-          restoreAtlasMetrics();
-          buildTreemap();
-        }
+    document.querySelectorAll(".mode-btn").forEach(function(btn) { btn.addEventListener("click", function() { setMode(btn.dataset.mode); }); });
+    var presetSelect = document.getElementById("scenarioPreset");
+    if (presetSelect && scenarioData) {
+      for (var i = 0; i < scenarioData.length; i++) {
+        var opt = document.createElement("option"); opt.value = scenarioData[i].id; opt.textContent = scenarioData[i].name;
+        presetSelect.appendChild(opt);
+      }
+      presetSelect.addEventListener("change", function() {
+        selectedScenarioId = presetSelect.value;
+        var scenario = null; for (var j = 0; j < scenarioData.length; j++) if (scenarioData[j].id === selectedScenarioId) { scenario = scenarioData[j]; break; }
+        if (scenario) { scenarioTarget = scenario.target_mt; document.getElementById("mtSlider").value = scenarioTarget; document.getElementById("mtValue").textContent = scenarioTarget.toFixed(1) + " MT"; }
+        updateScenario();
       });
-    });
-
-    // MT slider with debounce
-    const slider = document.getElementById("mtSlider");
-    let sliderTimer;
-    slider.addEventListener("input", () => {
+      var multiScenario = null;
+      for (var k = 0; k < scenarioData.length; k++) if (scenarioData[k].production) { multiScenario = scenarioData[k]; break; }
+      selectedScenarioId = multiScenario ? multiScenario.id : scenarioData.length > 0 ? scenarioData[0].id : null;
+      if (selectedScenarioId) {
+        presetSelect.value = selectedScenarioId;
+        var initScenario = multiScenario || scenarioData[0];
+        if (initScenario) { scenarioTarget = initScenario.target_mt; document.getElementById("mtSlider").value = scenarioTarget; document.getElementById("mtValue").textContent = scenarioTarget.toFixed(1) + " MT"; }
+      }
+    }
+    var slider = document.getElementById("mtSlider"), sliderTimer;
+    slider.addEventListener("input", function() {
       scenarioTarget = parseFloat(slider.value);
       document.getElementById("mtValue").textContent = scenarioTarget.toFixed(1) + " MT";
-      clearTimeout(sliderTimer);
-      sliderTimer = setTimeout(updateScenario, 150);
+      clearTimeout(sliderTimer); sliderTimer = setTimeout(updateScenario, 150);
     });
+    var ghostCb = document.getElementById("showGhosts");
+    if (ghostCb) ghostCb.addEventListener("change", function() { if (scenarioMode) buildTreemap(); });
 
-    // Ghost toggle
-    document.getElementById("showGhosts")?.addEventListener("change", () => {
-      if (scenarioMode) buildTreemap();
-    });
+    var gapBtn = document.querySelector('.mode-btn[data-mode="gap"]');
+    if (gapBtn) {
+      var hasSupply = false;
+      for (var si = 0; si < filteredData.occupations.length; si++) if (filteredData.occupations[si].supply_estimate != null) { hasSupply = true; break; }
+      if (!hasSupply) { gapBtn.disabled = true; gapBtn.title = "Supply data not yet available"; gapBtn.classList.add("mode-btn-disabled"); }
+    }
+  }
+
+  function getActiveScenario() {
+    if (!scenarioData || !selectedScenarioId) return null;
+    for (var i = 0; i < scenarioData.length; i++) if (scenarioData[i].id === selectedScenarioId) return scenarioData[i];
+    return null;
   }
 
   function updateScenario() {
-    demandResults = computeScenarioDemand(scenarioTarget);
+    var scenario = getActiveScenario();
+    demandResults = scenario ? computeMultiArchetypeDemand(scenario, scenarioTarget) : computeScenarioDemand(scenarioTarget);
+    gapResults = (gapMode && demandResults) ? computeSupplyGap(demandResults) : null;
     if (demandResults) {
-      const totalDemand = Object.values(demandResults).reduce((sum, r) => sum + r.demand, 0);
+      var totalDemand = 0, occCount = 0, occKeys = Object.keys(demandResults);
+      for (var i = 0; i < occKeys.length; i++) {
+        totalDemand += demandResults[occKeys[i]].demand;
+        if (occKeys[i] !== "__unallocated__") occCount++;
+      }
       document.getElementById("mtDemand").textContent = totalDemand.toLocaleString() + " workers";
-
-      // Update summary metrics for scenario
-      const total = totalDemand;
-      document.getElementById("metricH2Ready").textContent = Object.keys(demandResults).length.toLocaleString();
-      const h2Label = document.querySelector("#metricH2Ready + .metric-label");
-      if (h2Label) h2Label.textContent = "OCCUPATIONS IN DEMAND";
-
-      const gapEl = document.getElementById("metricGap");
-      gapEl.textContent = total.toLocaleString();
-      gapEl.classList.remove("metric-value-muted");
-      const gapLabel = document.querySelector("#metricGap + .metric-label");
-      if (gapLabel) gapLabel.textContent = "TOTAL WORKFORCE DEMAND";
-
-      document.getElementById("metricUpskill").textContent =
-        Math.round(scenarioTarget / archetypeData[0].h2_output_mt_per_year).toLocaleString();
-      const upskillLabel = document.querySelector("#metricUpskill + .metric-label");
-      if (upskillLabel) upskillLabel.textContent = "PLANT UNITS NEEDED";
+      document.getElementById("metricH2Ready").textContent = occCount.toLocaleString();
+      var h2L = document.querySelector("#metricH2Ready + .metric-label"); if (h2L) h2L.textContent = "OCCUPATIONS IN DEMAND";
+      var gapEl = document.getElementById("metricGap"); gapEl.classList.remove("metric-value-muted");
+      var gapLabel = document.querySelector("#metricGap + .metric-label");
+      if (gapMode && gapResults) {
+        var shortageCount = 0, gapKeys = Object.keys(gapResults);
+        for (var gi = 0; gi < gapKeys.length; gi++) if (gapResults[gapKeys[gi]].gapStatus === "shortage") shortageCount++;
+        gapEl.textContent = shortageCount.toLocaleString();
+        if (gapLabel) gapLabel.textContent = "OCCUPATIONS IN SHORTAGE";
+        var shortages = [];
+        for (var si = 0; si < gapKeys.length; si++) { var g = gapResults[gapKeys[si]]; if (g.gap != null && g.gap < 0) shortages.push({ id: gapKeys[si], gap: g.gap }); }
+        shortages.sort(function(a, b) { return a.gap - b.gap; });
+        if (shortages.length > 0) {
+          document.getElementById("metricUpskill").textContent = Math.abs(shortages[0].gap).toLocaleString();
+          var uL = document.querySelector("#metricUpskill + .metric-label"); if (uL) uL.textContent = "LARGEST SHORTAGE";
+        }
+      } else {
+        gapEl.textContent = totalDemand.toLocaleString();
+        if (gapLabel) gapLabel.textContent = "TOTAL WORKFORCE DEMAND";
+        var upskillLabel = document.querySelector("#metricUpskill + .metric-label");
+        if (scenario && scenario.production) {
+          var archCount = (scenario.production || []).length + (scenario.downstream || []).length + (scenario.upstream || []).length;
+          document.getElementById("metricUpskill").textContent = archCount.toLocaleString();
+          if (upskillLabel) upskillLabel.textContent = "ARCHETYPES IN MIX";
+        } else if (archetypeData && archetypeData[0]) {
+          document.getElementById("metricUpskill").textContent = Math.round(scenarioTarget / archetypeData[0].h2_output_mt_per_year).toLocaleString();
+          if (upskillLabel) upskillLabel.textContent = "PLANT UNITS NEEDED";
+        }
+      }
     }
     buildTreemap();
   }
 
   // --- Init ---
-
   async function init() {
     try {
-      await Promise.all([loadData(), loadArchetypes()]);
-      updateSummary();
-      saveMetricLabels();
-      buildTreemap();
-      setupDimensionPills();
-      setupSectorToggle();
-      setupDownloads();
-
-      // Setup scenario mode if archetype data loaded
-      if (archetypeData && archetypeData.length > 0) {
-        setupScenarioMode();
-      } else {
-        document.getElementById("modeToggle").style.display = "none";
-      }
-
-      // Rebuild on resize
-      let resizeTimer;
-      window.addEventListener("resize", () => {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(buildTreemap, 250);
-      });
-    } catch (err) {
+      await Promise.all([loadData(), loadArchetypes(), loadScenarios()]);
+      updateSummary(); saveMetricLabels(); buildTreemap();
+      setupDimensionPills(); setupSectorToggle(); setupDownloads();
+      if ((archetypeData && archetypeData.length > 0) || (scenarioData && scenarioData.length > 0)) setupScenarioMode();
+      else document.getElementById("modeToggle").style.display = "none";
+      var resizeTimer;
+      window.addEventListener("resize", function() { clearTimeout(resizeTimer); resizeTimer = setTimeout(buildTreemap, 250); });
+    } catch(err) {
       console.error("Atlas init error:", err);
-      const treemap = document.getElementById("treemap");
-      treemap.textContent = "";
-      const errDiv = document.createElement("div");
-      errDiv.style.padding = "2rem";
-      errDiv.style.color = "#dc2626";
-      errDiv.textContent = "Failed to load data. " + err.message;
-      treemap.appendChild(errDiv);
+      var treemap = document.getElementById("treemap"); treemap.textContent = "";
+      var errDiv = document.createElement("div"); errDiv.style.padding = "2rem"; errDiv.style.color = "#dc2626";
+      errDiv.textContent = "Failed to load data. " + err.message; treemap.appendChild(errDiv);
     }
   }
 

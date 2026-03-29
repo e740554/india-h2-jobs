@@ -1,6 +1,7 @@
 [
   {
     "id": "alkaline_1gw",
+    "archetype_type": "production",
     "name": "1 GW Alkaline Electrolyser Plant",
     "capacity_mw": 1000,
     "h2_output_mt_per_year": 0.14,
@@ -169,7 +170,6 @@
         "source_type": "modeled_estimate",
         "notes": "Allocated from IRENA aggregate using H2 relevance weights. Construction supervision and quality control."
       },
-
       {
         "nco_group": "3134",
         "nco_group_title": "Petroleum and Natural Gas Refining Plant Operators",
@@ -305,7 +305,6 @@
         "source_type": "modeled_estimate",
         "notes": "Allocated from IRENA aggregate using H2 relevance weights. Senior oversight during commissioning and handover."
       },
-
       {
         "nco_group": "3134",
         "nco_group_title": "Petroleum and Natural Gas Refining Plant Operators",
@@ -440,6 +439,1021 @@
         "source": "IRENA 2024",
         "source_type": "modeled_estimate",
         "notes": "Allocated from IRENA aggregate using H2 relevance weights. Shift supervisors for operations and maintenance crews."
+      }
+    ]
+  },
+  {
+    "id": "pem_500mw",
+    "archetype_type": "production",
+    "name": "500 MW PEM Electrolyser Plant",
+    "capacity_mw": 500,
+    "h2_output_mt_per_year": 0.075,
+    "description": "Reference 500 MW PEM electrolyser with balance-of-plant. Based on ~80% capacity factor, ~45 kWh/kg specific energy consumption. PEM technology uses solid polymer membrane, requiring more electronics/precision assembly but less heavy welding than alkaline.",
+    "caveats": "Covers electrolyser plant staffing only. Dedicated RE generation, ammonia synthesis, storage, and transport workforce not included. PEM-specific coefficients are directional estimates; no per-occupation published data exists for PEM specifically.",
+    "coefficients": [
+      {
+        "nco_group": "8212",
+        "nco_group_title": "Electrical and Electronic Equipment Assemblers",
+        "phase": "construction",
+        "headcount_per_unit": 300,
+        "source": "IRENA 2024",
+        "source_type": "modeled_estimate",
+        "notes": "PEM stack assembly is electronics-intensive. Higher share than alkaline due to membrane electrode assembly work."
+      },
+      {
+        "nco_group": "7413",
+        "nco_group_title": "Electrical Line Installers and Repairers",
+        "phase": "construction",
+        "headcount_per_unit": 280,
+        "source": "IRENA 2024",
+        "source_type": "modeled_estimate",
+        "notes": "HV/LV cabling, rectifier connections. Higher share than alkaline due to more complex power electronics."
+      },
+      {
+        "nco_group": "7212",
+        "nco_group_title": "Welders and Flame Cutters",
+        "phase": "construction",
+        "headcount_per_unit": 180,
+        "source": "IRENA 2024",
+        "source_type": "modeled_estimate",
+        "notes": "Less welding than alkaline — smaller footprint, less high-pressure pipework."
+      },
+      {
+        "nco_group": "7126",
+        "nco_group_title": "Plumbers and Pipe Fitters",
+        "phase": "construction",
+        "headcount_per_unit": 200,
+        "source": "IRENA 2024",
+        "source_type": "modeled_estimate",
+        "notes": "Demin water, cooling, H2 gas piping. Less extensive than alkaline (no KOH electrolyte circuit)."
+      },
+      {
+        "nco_group": "8211",
+        "nco_group_title": "Mechanical Machinery Assemblers",
+        "phase": "construction",
+        "headcount_per_unit": 160,
+        "source": "IRENA 2024",
+        "source_type": "modeled_estimate",
+        "notes": "PEM stack mounting, skid assembly, precision mechanical installation."
+      },
+      {
+        "nco_group": "2142",
+        "nco_group_title": "Civil Engineers",
+        "phase": "construction",
+        "headcount_per_unit": 100,
+        "source": "IRENA 2024",
+        "source_type": "modeled_estimate",
+        "notes": "Foundations, buildings, roads. Smaller footprint than alkaline 1 GW."
+      },
+      {
+        "nco_group": "7214",
+        "nco_group_title": "Structural Metal Workers",
+        "phase": "construction",
+        "headcount_per_unit": 130,
+        "source": "IRENA 2024",
+        "source_type": "modeled_estimate",
+        "notes": "Steel structures and equipment support frames. Reduced vs alkaline due to compact design."
+      },
+      {
+        "nco_group": "7223",
+        "nco_group_title": "Metal Working Machine Tool Setters and Operators",
+        "phase": "construction",
+        "headcount_per_unit": 70,
+        "source": "IRENA 2024",
+        "source_type": "modeled_estimate",
+        "notes": "On-site fabrication and forming of structural and piping components."
+      },
+      {
+        "nco_group": "3113",
+        "nco_group_title": "Electrical Engineering Technicians",
+        "phase": "construction",
+        "headcount_per_unit": 100,
+        "source": "IRENA 2024",
+        "source_type": "modeled_estimate",
+        "notes": "E&I installation supervision, power electronics testing, loop checking."
+      },
+      {
+        "nco_group": "8131",
+        "nco_group_title": "Chemical Products Plant and Machine Operators",
+        "phase": "construction",
+        "headcount_per_unit": 50,
+        "source": "IRENA 2024",
+        "source_type": "modeled_estimate",
+        "notes": "Pre-commissioning support and early operator training."
+      },
+      {
+        "nco_group": "3132",
+        "nco_group_title": "Incinerator and Water Treatment Plant Operators",
+        "phase": "construction",
+        "headcount_per_unit": 40,
+        "source": "IRENA 2024",
+        "source_type": "modeled_estimate",
+        "notes": "BOP utilities equipment installation."
+      },
+      {
+        "nco_group": "3152",
+        "nco_group_title": "Health and Safety Inspectors",
+        "phase": "construction",
+        "headcount_per_unit": 60,
+        "source": "IRENA 2024",
+        "source_type": "modeled_estimate",
+        "notes": "Construction-phase HSE oversight."
+      },
+      {
+        "nco_group": "2145",
+        "nco_group_title": "Chemical Engineers",
+        "phase": "construction",
+        "headcount_per_unit": 40,
+        "source": "IRENA 2024",
+        "source_type": "modeled_estimate",
+        "notes": "Process engineering and vendor oversight for PEM-specific systems."
+      },
+      {
+        "nco_group": "1120",
+        "nco_group_title": "Managing Directors and Chief Executives",
+        "phase": "construction",
+        "headcount_per_unit": 25,
+        "source": "IRENA 2024",
+        "source_type": "modeled_estimate",
+        "notes": "Project directors and senior leadership."
+      },
+      {
+        "nco_group": "1321",
+        "nco_group_title": "Manufacturing Managers",
+        "phase": "construction",
+        "headcount_per_unit": 20,
+        "source": "IRENA 2024",
+        "source_type": "modeled_estimate",
+        "notes": "Construction managers and area leads."
+      },
+      {
+        "nco_group": "3257",
+        "nco_group_title": "Environmental and Occupational Health Inspectors and Associates",
+        "phase": "construction",
+        "headcount_per_unit": 20,
+        "source": "IRENA 2024",
+        "source_type": "modeled_estimate",
+        "notes": "Environmental monitoring and EIA compliance."
+      },
+      {
+        "nco_group": "3122",
+        "nco_group_title": "Manufacturing Supervisors",
+        "phase": "construction",
+        "headcount_per_unit": 40,
+        "source": "IRENA 2024",
+        "source_type": "modeled_estimate",
+        "notes": "Construction supervision and quality control."
+      },
+      {
+        "nco_group": "3113",
+        "nco_group_title": "Electrical Engineering Technicians",
+        "phase": "commissioning",
+        "headcount_per_unit": 50,
+        "source": "IRENA 2024",
+        "source_type": "modeled_estimate",
+        "notes": "Electrical system commissioning, power electronics validation, protection relay testing."
+      },
+      {
+        "nco_group": "2145",
+        "nco_group_title": "Chemical Engineers",
+        "phase": "commissioning",
+        "headcount_per_unit": 40,
+        "source": "IRENA 2024",
+        "source_type": "modeled_estimate",
+        "notes": "Process commissioning leadership, membrane conditioning, performance guarantee testing."
+      },
+      {
+        "nco_group": "3135",
+        "nco_group_title": "Metal Production Process Controllers",
+        "phase": "commissioning",
+        "headcount_per_unit": 30,
+        "source": "IRENA 2024",
+        "source_type": "modeled_estimate",
+        "notes": "DCS/SCADA commissioning and control loop verification."
+      },
+      {
+        "nco_group": "3134",
+        "nco_group_title": "Petroleum and Natural Gas Refining Plant Operators",
+        "phase": "commissioning",
+        "headcount_per_unit": 30,
+        "source": "IRENA 2024",
+        "source_type": "modeled_estimate",
+        "notes": "Process start-up, electrolyser conditioning, performance testing."
+      },
+      {
+        "nco_group": "8212",
+        "nco_group_title": "Electrical and Electronic Equipment Assemblers",
+        "phase": "commissioning",
+        "headcount_per_unit": 20,
+        "source": "IRENA 2024",
+        "source_type": "modeled_estimate",
+        "notes": "Stack electrical connections verification and final assembly QC."
+      },
+      {
+        "nco_group": "8131",
+        "nco_group_title": "Chemical Products Plant and Machine Operators",
+        "phase": "commissioning",
+        "headcount_per_unit": 20,
+        "source": "IRENA 2024",
+        "source_type": "modeled_estimate",
+        "notes": "Water treatment commissioning and BOP system start-up."
+      },
+      {
+        "nco_group": "7212",
+        "nco_group_title": "Welders and Flame Cutters",
+        "phase": "commissioning",
+        "headcount_per_unit": 10,
+        "source": "IRENA 2024",
+        "source_type": "modeled_estimate",
+        "notes": "Punch-list completion and tie-in welding."
+      },
+      {
+        "nco_group": "7126",
+        "nco_group_title": "Plumbers and Pipe Fitters",
+        "phase": "commissioning",
+        "headcount_per_unit": 10,
+        "source": "IRENA 2024",
+        "source_type": "modeled_estimate",
+        "notes": "Line flushing, pressure testing, and leak rectification."
+      },
+      {
+        "nco_group": "3116",
+        "nco_group_title": "Chemical Engineering Technicians",
+        "phase": "commissioning",
+        "headcount_per_unit": 15,
+        "source": "IRENA 2024",
+        "source_type": "modeled_estimate",
+        "notes": "Water chemistry validation and analytical method proving."
+      },
+      {
+        "nco_group": "3152",
+        "nco_group_title": "Health and Safety Inspectors",
+        "phase": "commissioning",
+        "headcount_per_unit": 15,
+        "source": "IRENA 2024",
+        "source_type": "modeled_estimate",
+        "notes": "Commissioning-phase HSE oversight."
+      },
+      {
+        "nco_group": "1321",
+        "nco_group_title": "Manufacturing Managers",
+        "phase": "commissioning",
+        "headcount_per_unit": 10,
+        "source": "IRENA 2024",
+        "source_type": "modeled_estimate",
+        "notes": "Commissioning management and handover coordination."
+      },
+      {
+        "nco_group": "3113",
+        "nco_group_title": "Electrical Engineering Technicians",
+        "phase": "operations",
+        "headcount_per_unit": 30,
+        "source": "IRENA 2024",
+        "source_type": "modeled_estimate",
+        "notes": "E&I maintenance, power electronics upkeep, instrument calibration. Highest ops share due to PEM electronics intensity."
+      },
+      {
+        "nco_group": "8131",
+        "nco_group_title": "Chemical Products Plant and Machine Operators",
+        "phase": "operations",
+        "headcount_per_unit": 25,
+        "source": "IRENA 2024",
+        "source_type": "modeled_estimate",
+        "notes": "Water treatment, gas purification, and BOP operators."
+      },
+      {
+        "nco_group": "3134",
+        "nco_group_title": "Petroleum and Natural Gas Refining Plant Operators",
+        "phase": "operations",
+        "headcount_per_unit": 20,
+        "source": "IRENA 2024",
+        "source_type": "modeled_estimate",
+        "notes": "Electrolyser panel operators on shift rotation."
+      },
+      {
+        "nco_group": "7233",
+        "nco_group_title": "Agricultural and Industrial Machinery Mechanics and Repairers",
+        "phase": "operations",
+        "headcount_per_unit": 18,
+        "source": "IRENA 2024",
+        "source_type": "modeled_estimate",
+        "notes": "Preventive and corrective maintenance of compressors, pumps, and rotating equipment."
+      },
+      {
+        "nco_group": "3135",
+        "nco_group_title": "Metal Production Process Controllers",
+        "phase": "operations",
+        "headcount_per_unit": 10,
+        "source": "IRENA 2024",
+        "source_type": "modeled_estimate",
+        "notes": "DCS/SCADA control room operators on shift rotation."
+      },
+      {
+        "nco_group": "3116",
+        "nco_group_title": "Chemical Engineering Technicians",
+        "phase": "operations",
+        "headcount_per_unit": 10,
+        "source": "IRENA 2024",
+        "source_type": "modeled_estimate",
+        "notes": "Laboratory analysts, water chemistry monitoring, and quality control."
+      },
+      {
+        "nco_group": "2145",
+        "nco_group_title": "Chemical Engineers",
+        "phase": "operations",
+        "headcount_per_unit": 10,
+        "source": "IRENA 2024",
+        "source_type": "modeled_estimate",
+        "notes": "Process optimization, membrane degradation tracking, efficiency improvement."
+      },
+      {
+        "nco_group": "3152",
+        "nco_group_title": "Health and Safety Inspectors",
+        "phase": "operations",
+        "headcount_per_unit": 8,
+        "source": "IRENA 2024",
+        "source_type": "modeled_estimate",
+        "notes": "Ongoing plant HSE and permit-to-work management."
+      },
+      {
+        "nco_group": "7212",
+        "nco_group_title": "Welders and Flame Cutters",
+        "phase": "operations",
+        "headcount_per_unit": 5,
+        "source": "IRENA 2024",
+        "source_type": "modeled_estimate",
+        "notes": "Maintenance welding for piping repairs."
+      },
+      {
+        "nco_group": "1120",
+        "nco_group_title": "Managing Directors and Chief Executives",
+        "phase": "operations",
+        "headcount_per_unit": 5,
+        "source": "IRENA 2024",
+        "source_type": "modeled_estimate",
+        "notes": "Plant director and department heads."
+      },
+      {
+        "nco_group": "1321",
+        "nco_group_title": "Manufacturing Managers",
+        "phase": "operations",
+        "headcount_per_unit": 4,
+        "source": "IRENA 2024",
+        "source_type": "modeled_estimate",
+        "notes": "Operations and maintenance managers."
+      },
+      {
+        "nco_group": "3122",
+        "nco_group_title": "Manufacturing Supervisors",
+        "phase": "operations",
+        "headcount_per_unit": 5,
+        "source": "IRENA 2024",
+        "source_type": "modeled_estimate",
+        "notes": "Shift supervisors for operations and maintenance crews."
+      }
+    ]
+  },
+  {
+    "id": "ammonia_1mtpa",
+    "archetype_type": "downstream",
+    "name": "1 MTPA Green Ammonia Synthesis Plant",
+    "capacity_mw": null,
+    "h2_input_mt_per_unit": 0.18,
+    "nh3_output_mtpa": 1.0,
+    "description": "Reference 1 million tonne per annum green ammonia synthesis plant (Haber-Bosch + ASU + H2 compression + cryogenic storage). Consumes ~0.18 MT H2/year as feedstock. Based on conventional Indian ammonia plant benchmarks scaled for green H2 input.",
+    "caveats": "Does NOT include electrolyser or RE generation workforce — those are separate archetypes. Coefficients derived from conventional Indian ammonia plant benchmarks (IFFCO, NFL, RCF); no published green ammonia plant staffing data exists. India labor intensity multiplier (1.3-1.5x IRENA global) applied.",
+    "coefficients": [
+      {
+        "nco_group": "7212",
+        "nco_group_title": "Welders and Flame Cutters",
+        "phase": "construction",
+        "headcount_per_unit": 700,
+        "source": "TERI 2023",
+        "source_type": "modeled_estimate",
+        "notes": "Pressure-vessel welding dominant. HP reactor vessels, heat exchangers, and piping for 150-300 bar operating pressure."
+      },
+      {
+        "nco_group": "7126",
+        "nco_group_title": "Plumbers and Pipe Fitters",
+        "phase": "construction",
+        "headcount_per_unit": 650,
+        "source": "TERI 2023",
+        "source_type": "modeled_estimate",
+        "notes": "Extensive high-pressure piping for H2 feed, NH3 synthesis loop, refrigeration, and utilities."
+      },
+      {
+        "nco_group": "7214",
+        "nco_group_title": "Structural Metal Workers",
+        "phase": "construction",
+        "headcount_per_unit": 500,
+        "source": "TERI 2023",
+        "source_type": "modeled_estimate",
+        "notes": "Steel structures, pipe racks, reactor support frames, and equipment foundations."
+      },
+      {
+        "nco_group": "8211",
+        "nco_group_title": "Mechanical Machinery Assemblers",
+        "phase": "construction",
+        "headcount_per_unit": 400,
+        "source": "TERI 2023",
+        "source_type": "modeled_estimate",
+        "notes": "Heavy rigging, reactor installation, compressor trains, and rotating equipment."
+      },
+      {
+        "nco_group": "7413",
+        "nco_group_title": "Electrical Line Installers and Repairers",
+        "phase": "construction",
+        "headcount_per_unit": 300,
+        "source": "TERI 2023",
+        "source_type": "modeled_estimate",
+        "notes": "HV/LV cabling, motor connections, transformer and substation installation."
+      },
+      {
+        "nco_group": "2142",
+        "nco_group_title": "Civil Engineers",
+        "phase": "construction",
+        "headcount_per_unit": 200,
+        "source": "TERI 2023",
+        "source_type": "modeled_estimate",
+        "notes": "Foundations, blast-resistant control rooms, roads, and civil works for chemical plant."
+      },
+      {
+        "nco_group": "7223",
+        "nco_group_title": "Metal Working Machine Tool Setters and Operators",
+        "phase": "construction",
+        "headcount_per_unit": 200,
+        "source": "TERI 2023",
+        "source_type": "modeled_estimate",
+        "notes": "On-site fabrication, cutting, and forming of structural and piping components."
+      },
+      {
+        "nco_group": "8212",
+        "nco_group_title": "Electrical and Electronic Equipment Assemblers",
+        "phase": "construction",
+        "headcount_per_unit": 150,
+        "source": "TERI 2023",
+        "source_type": "modeled_estimate",
+        "notes": "Electrical panel building, instrumentation, and control system installation."
+      },
+      {
+        "nco_group": "3113",
+        "nco_group_title": "Electrical Engineering Technicians",
+        "phase": "construction",
+        "headcount_per_unit": 120,
+        "source": "TERI 2023",
+        "source_type": "modeled_estimate",
+        "notes": "E&I installation supervision and loop checking."
+      },
+      {
+        "nco_group": "8131",
+        "nco_group_title": "Chemical Products Plant and Machine Operators",
+        "phase": "construction",
+        "headcount_per_unit": 100,
+        "source": "TERI 2023",
+        "source_type": "modeled_estimate",
+        "notes": "Pre-commissioning support, catalyst handling training."
+      },
+      {
+        "nco_group": "3132",
+        "nco_group_title": "Incinerator and Water Treatment Plant Operators",
+        "phase": "construction",
+        "headcount_per_unit": 80,
+        "source": "TERI 2023",
+        "source_type": "modeled_estimate",
+        "notes": "Cooling water, steam, and waste treatment system installation."
+      },
+      {
+        "nco_group": "3152",
+        "nco_group_title": "Health and Safety Inspectors",
+        "phase": "construction",
+        "headcount_per_unit": 150,
+        "source": "TERI 2023",
+        "source_type": "modeled_estimate",
+        "notes": "Construction-phase HSE oversight. Higher than electrolyser due to chemical plant hazards."
+      },
+      {
+        "nco_group": "2145",
+        "nco_group_title": "Chemical Engineers",
+        "phase": "construction",
+        "headcount_per_unit": 100,
+        "source": "TERI 2023",
+        "source_type": "modeled_estimate",
+        "notes": "Process engineering, vendor oversight, HAZOP studies, and design verification."
+      },
+      {
+        "nco_group": "1120",
+        "nco_group_title": "Managing Directors and Chief Executives",
+        "phase": "construction",
+        "headcount_per_unit": 50,
+        "source": "TERI 2023",
+        "source_type": "modeled_estimate",
+        "notes": "Project directors, site managers, and senior leadership."
+      },
+      {
+        "nco_group": "1321",
+        "nco_group_title": "Manufacturing Managers",
+        "phase": "construction",
+        "headcount_per_unit": 40,
+        "source": "TERI 2023",
+        "source_type": "modeled_estimate",
+        "notes": "Construction managers and area leads."
+      },
+      {
+        "nco_group": "3257",
+        "nco_group_title": "Environmental and Occupational Health Inspectors and Associates",
+        "phase": "construction",
+        "headcount_per_unit": 60,
+        "source": "TERI 2023",
+        "source_type": "modeled_estimate",
+        "notes": "Environmental monitoring and EIA compliance for chemical plant."
+      },
+      {
+        "nco_group": "3122",
+        "nco_group_title": "Manufacturing Supervisors",
+        "phase": "construction",
+        "headcount_per_unit": 100,
+        "source": "TERI 2023",
+        "source_type": "modeled_estimate",
+        "notes": "Construction supervision and quality control."
+      },
+      {
+        "nco_group": "2145",
+        "nco_group_title": "Chemical Engineers",
+        "phase": "commissioning",
+        "headcount_per_unit": 80,
+        "source": "TERI 2023",
+        "source_type": "modeled_estimate",
+        "notes": "Catalyst loading, reactor conditioning, performance guarantee testing. Critical phase for ammonia synthesis."
+      },
+      {
+        "nco_group": "3134",
+        "nco_group_title": "Petroleum and Natural Gas Refining Plant Operators",
+        "phase": "commissioning",
+        "headcount_per_unit": 60,
+        "source": "TERI 2023",
+        "source_type": "modeled_estimate",
+        "notes": "Process start-up, synthesis loop tuning, and operational readiness."
+      },
+      {
+        "nco_group": "3116",
+        "nco_group_title": "Chemical Engineering Technicians",
+        "phase": "commissioning",
+        "headcount_per_unit": 40,
+        "source": "TERI 2023",
+        "source_type": "modeled_estimate",
+        "notes": "Laboratory setup, ammonia/H2 analysis methods, catalyst activity verification."
+      },
+      {
+        "nco_group": "8131",
+        "nco_group_title": "Chemical Products Plant and Machine Operators",
+        "phase": "commissioning",
+        "headcount_per_unit": 50,
+        "source": "TERI 2023",
+        "source_type": "modeled_estimate",
+        "notes": "ASU commissioning, refrigeration start-up, utilities testing."
+      },
+      {
+        "nco_group": "3135",
+        "nco_group_title": "Metal Production Process Controllers",
+        "phase": "commissioning",
+        "headcount_per_unit": 30,
+        "source": "TERI 2023",
+        "source_type": "modeled_estimate",
+        "notes": "DCS/SCADA commissioning and synthesis loop control verification."
+      },
+      {
+        "nco_group": "3113",
+        "nco_group_title": "Electrical Engineering Technicians",
+        "phase": "commissioning",
+        "headcount_per_unit": 30,
+        "source": "TERI 2023",
+        "source_type": "modeled_estimate",
+        "notes": "Electrical system commissioning, motor run tests, protection verification."
+      },
+      {
+        "nco_group": "7233",
+        "nco_group_title": "Agricultural and Industrial Machinery Mechanics and Repairers",
+        "phase": "commissioning",
+        "headcount_per_unit": 30,
+        "source": "TERI 2023",
+        "source_type": "modeled_estimate",
+        "notes": "Compressor run-in, vibration analysis, and alignment verification."
+      },
+      {
+        "nco_group": "7212",
+        "nco_group_title": "Welders and Flame Cutters",
+        "phase": "commissioning",
+        "headcount_per_unit": 20,
+        "source": "TERI 2023",
+        "source_type": "modeled_estimate",
+        "notes": "Punch-list completion and tie-in welding."
+      },
+      {
+        "nco_group": "7126",
+        "nco_group_title": "Plumbers and Pipe Fitters",
+        "phase": "commissioning",
+        "headcount_per_unit": 20,
+        "source": "TERI 2023",
+        "source_type": "modeled_estimate",
+        "notes": "Line flushing, HP pressure testing, and leak rectification."
+      },
+      {
+        "nco_group": "3152",
+        "nco_group_title": "Health and Safety Inspectors",
+        "phase": "commissioning",
+        "headcount_per_unit": 20,
+        "source": "TERI 2023",
+        "source_type": "modeled_estimate",
+        "notes": "Commissioning-phase HSE, HAZOP close-out, emergency drill validation."
+      },
+      {
+        "nco_group": "1321",
+        "nco_group_title": "Manufacturing Managers",
+        "phase": "commissioning",
+        "headcount_per_unit": 10,
+        "source": "TERI 2023",
+        "source_type": "modeled_estimate",
+        "notes": "Commissioning management and plant handover coordination."
+      },
+      {
+        "nco_group": "3257",
+        "nco_group_title": "Environmental and Occupational Health Inspectors and Associates",
+        "phase": "commissioning",
+        "headcount_per_unit": 10,
+        "source": "TERI 2023",
+        "source_type": "modeled_estimate",
+        "notes": "Emissions testing and environmental compliance verification."
+      },
+      {
+        "nco_group": "8131",
+        "nco_group_title": "Chemical Products Plant and Machine Operators",
+        "phase": "operations",
+        "headcount_per_unit": 60,
+        "source": "TERI 2023",
+        "source_type": "modeled_estimate",
+        "notes": "Ammonia synthesis operators, ASU operators, refrigeration. Largest group — this is a chemical plant."
+      },
+      {
+        "nco_group": "3134",
+        "nco_group_title": "Petroleum and Natural Gas Refining Plant Operators",
+        "phase": "operations",
+        "headcount_per_unit": 50,
+        "source": "TERI 2023",
+        "source_type": "modeled_estimate",
+        "notes": "Shift operators for synthesis loop, H2 compression, and utilities."
+      },
+      {
+        "nco_group": "7233",
+        "nco_group_title": "Agricultural and Industrial Machinery Mechanics and Repairers",
+        "phase": "operations",
+        "headcount_per_unit": 40,
+        "source": "TERI 2023",
+        "source_type": "modeled_estimate",
+        "notes": "Compressor, pump, and rotating equipment maintenance. High-pressure specialist skills."
+      },
+      {
+        "nco_group": "3116",
+        "nco_group_title": "Chemical Engineering Technicians",
+        "phase": "operations",
+        "headcount_per_unit": 30,
+        "source": "TERI 2023",
+        "source_type": "modeled_estimate",
+        "notes": "Laboratory analysts, ammonia quality monitoring, catalyst activity tracking."
+      },
+      {
+        "nco_group": "3113",
+        "nco_group_title": "Electrical Engineering Technicians",
+        "phase": "operations",
+        "headcount_per_unit": 20,
+        "source": "TERI 2023",
+        "source_type": "modeled_estimate",
+        "notes": "E&I maintenance, motor upkeep, and instrument calibration."
+      },
+      {
+        "nco_group": "2145",
+        "nco_group_title": "Chemical Engineers",
+        "phase": "operations",
+        "headcount_per_unit": 20,
+        "source": "TERI 2023",
+        "source_type": "modeled_estimate",
+        "notes": "Process optimization, troubleshooting, catalyst management, and efficiency improvement."
+      },
+      {
+        "nco_group": "3135",
+        "nco_group_title": "Metal Production Process Controllers",
+        "phase": "operations",
+        "headcount_per_unit": 15,
+        "source": "TERI 2023",
+        "source_type": "modeled_estimate",
+        "notes": "DCS/SCADA control room operators on shift rotation."
+      },
+      {
+        "nco_group": "3152",
+        "nco_group_title": "Health and Safety Inspectors",
+        "phase": "operations",
+        "headcount_per_unit": 15,
+        "source": "TERI 2023",
+        "source_type": "modeled_estimate",
+        "notes": "Ongoing plant HSE, permit-to-work, and chemical safety management."
+      },
+      {
+        "nco_group": "7212",
+        "nco_group_title": "Welders and Flame Cutters",
+        "phase": "operations",
+        "headcount_per_unit": 10,
+        "source": "TERI 2023",
+        "source_type": "modeled_estimate",
+        "notes": "Maintenance welding for HP piping repairs and turnaround work."
+      },
+      {
+        "nco_group": "7126",
+        "nco_group_title": "Plumbers and Pipe Fitters",
+        "phase": "operations",
+        "headcount_per_unit": 10,
+        "source": "TERI 2023",
+        "source_type": "modeled_estimate",
+        "notes": "Piping maintenance and valve servicing."
+      },
+      {
+        "nco_group": "3132",
+        "nco_group_title": "Incinerator and Water Treatment Plant Operators",
+        "phase": "operations",
+        "headcount_per_unit": 10,
+        "source": "TERI 2023",
+        "source_type": "modeled_estimate",
+        "notes": "Cooling water, steam, and waste treatment operation."
+      },
+      {
+        "nco_group": "1120",
+        "nco_group_title": "Managing Directors and Chief Executives",
+        "phase": "operations",
+        "headcount_per_unit": 8,
+        "source": "TERI 2023",
+        "source_type": "modeled_estimate",
+        "notes": "Plant director and department heads."
+      },
+      {
+        "nco_group": "1321",
+        "nco_group_title": "Manufacturing Managers",
+        "phase": "operations",
+        "headcount_per_unit": 6,
+        "source": "TERI 2023",
+        "source_type": "modeled_estimate",
+        "notes": "Operations and maintenance managers."
+      },
+      {
+        "nco_group": "3122",
+        "nco_group_title": "Manufacturing Supervisors",
+        "phase": "operations",
+        "headcount_per_unit": 10,
+        "source": "TERI 2023",
+        "source_type": "modeled_estimate",
+        "notes": "Shift supervisors for operations and maintenance crews."
+      }
+    ]
+  },
+  {
+    "id": "solar_wind_hybrid_2gw",
+    "archetype_type": "upstream",
+    "name": "2 GW Hybrid Solar+Wind Farm (Dedicated RE)",
+    "capacity_mw": 2200,
+    "energy_output_twh_per_year": 4.5,
+    "description": "Dedicated renewable energy farm (~1.5 GW solar PV + ~0.7 GW onshore wind) sized to serve one 1 GW electrolyser. Based on MNRE Green Hydrogen Standard additionality requirements. ~4.5 TWh/year at blended ~25% capacity factor.",
+    "caveats": "RE coefficients are the highest-confidence numbers in this dataset (IRENA/CEEW India-specific, multi-year data). This archetype covers the LARGEST construction-phase headcount driver. Does not include battery storage or grid interconnection workforce.",
+    "coefficients": [
+      {
+        "nco_group": "7413",
+        "nco_group_title": "Electrical Line Installers and Repairers",
+        "phase": "construction",
+        "headcount_per_unit": 2200,
+        "source": "IRENA 2024/CEEW",
+        "source_type": "modeled_estimate",
+        "notes": "Cable laying, panel wiring, inverter connections. Dominant construction workforce for solar+wind."
+      },
+      {
+        "nco_group": "9312",
+        "nco_group_title": "Civil Engineering Labourers",
+        "phase": "construction",
+        "headcount_per_unit": 1600,
+        "source": "IRENA 2024/CEEW",
+        "source_type": "modeled_estimate",
+        "notes": "Trenching, panel mounting, foundation earthworks. Highest semi-skilled labor share."
+      },
+      {
+        "nco_group": "7214",
+        "nco_group_title": "Structural Metal Workers",
+        "phase": "construction",
+        "headcount_per_unit": 900,
+        "source": "IRENA 2024/CEEW",
+        "source_type": "modeled_estimate",
+        "notes": "Wind tower erection, solar mounting structures, substation steelwork."
+      },
+      {
+        "nco_group": "7212",
+        "nco_group_title": "Welders and Flame Cutters",
+        "phase": "construction",
+        "headcount_per_unit": 500,
+        "source": "IRENA 2024/CEEW",
+        "source_type": "modeled_estimate",
+        "notes": "Structural welding for wind towers and mounting frames."
+      },
+      {
+        "nco_group": "8212",
+        "nco_group_title": "Electrical and Electronic Equipment Assemblers",
+        "phase": "construction",
+        "headcount_per_unit": 450,
+        "source": "IRENA 2024/CEEW",
+        "source_type": "modeled_estimate",
+        "notes": "Inverter installation, transformer assembly, SCADA panel building."
+      },
+      {
+        "nco_group": "8211",
+        "nco_group_title": "Mechanical Machinery Assemblers",
+        "phase": "construction",
+        "headcount_per_unit": 350,
+        "source": "IRENA 2024/CEEW",
+        "source_type": "modeled_estimate",
+        "notes": "Wind turbine nacelle and rotor assembly, tracker mechanism installation."
+      },
+      {
+        "nco_group": "8343",
+        "nco_group_title": "Crane, Hoist and Related Plant Operators",
+        "phase": "construction",
+        "headcount_per_unit": 350,
+        "source": "IRENA 2024/CEEW",
+        "source_type": "modeled_estimate",
+        "notes": "Wind turbine tower and nacelle lifting. Specialized heavy crane operation."
+      },
+      {
+        "nco_group": "7126",
+        "nco_group_title": "Plumbers and Pipe Fitters",
+        "phase": "construction",
+        "headcount_per_unit": 300,
+        "source": "IRENA 2024/CEEW",
+        "source_type": "modeled_estimate",
+        "notes": "Cable conduit installation, cooling systems, foundation drainage."
+      },
+      {
+        "nco_group": "2142",
+        "nco_group_title": "Civil Engineers",
+        "phase": "construction",
+        "headcount_per_unit": 300,
+        "source": "IRENA 2024/CEEW",
+        "source_type": "modeled_estimate",
+        "notes": "Civil works, road construction, HV substation foundations."
+      },
+      {
+        "nco_group": "3113",
+        "nco_group_title": "Electrical Engineering Technicians",
+        "phase": "construction",
+        "headcount_per_unit": 350,
+        "source": "IRENA 2024/CEEW",
+        "source_type": "modeled_estimate",
+        "notes": "HV testing, inverter commissioning, SCADA setup."
+      },
+      {
+        "nco_group": "7223",
+        "nco_group_title": "Metal Working Machine Tool Setters and Operators",
+        "phase": "construction",
+        "headcount_per_unit": 200,
+        "source": "IRENA 2024/CEEW",
+        "source_type": "modeled_estimate",
+        "notes": "On-site fabrication of mounting structures and cable trays."
+      },
+      {
+        "nco_group": "3152",
+        "nco_group_title": "Health and Safety Inspectors",
+        "phase": "construction",
+        "headcount_per_unit": 200,
+        "source": "IRENA 2024/CEEW",
+        "source_type": "modeled_estimate",
+        "notes": "Construction-phase HSE oversight for large distributed site."
+      },
+      {
+        "nco_group": "1120",
+        "nco_group_title": "Managing Directors and Chief Executives",
+        "phase": "construction",
+        "headcount_per_unit": 80,
+        "source": "IRENA 2024/CEEW",
+        "source_type": "modeled_estimate",
+        "notes": "Project directors, site managers, and senior leadership."
+      },
+      {
+        "nco_group": "3257",
+        "nco_group_title": "Environmental and Occupational Health Inspectors and Associates",
+        "phase": "construction",
+        "headcount_per_unit": 80,
+        "source": "IRENA 2024/CEEW",
+        "source_type": "modeled_estimate",
+        "notes": "Environmental monitoring, land use compliance, wildlife impact."
+      },
+      {
+        "nco_group": "1321",
+        "nco_group_title": "Manufacturing Managers",
+        "phase": "construction",
+        "headcount_per_unit": 60,
+        "source": "IRENA 2024/CEEW",
+        "source_type": "modeled_estimate",
+        "notes": "Construction managers and area leads."
+      },
+      {
+        "nco_group": "3122",
+        "nco_group_title": "Manufacturing Supervisors",
+        "phase": "construction",
+        "headcount_per_unit": 100,
+        "source": "IRENA 2024/CEEW",
+        "source_type": "modeled_estimate",
+        "notes": "Construction supervision and quality control across distributed site."
+      },
+      {
+        "nco_group": "7413",
+        "nco_group_title": "Electrical Line Installers and Repairers",
+        "phase": "operations",
+        "headcount_per_unit": 200,
+        "source": "IRENA 2024/CEEW",
+        "source_type": "modeled_estimate",
+        "notes": "Electrical maintenance, inverter servicing, cable repair across distributed site."
+      },
+      {
+        "nco_group": "7233",
+        "nco_group_title": "Agricultural and Industrial Machinery Mechanics and Repairers",
+        "phase": "operations",
+        "headcount_per_unit": 150,
+        "source": "IRENA 2024/CEEW",
+        "source_type": "modeled_estimate",
+        "notes": "Wind turbine mechanical maintenance, gearbox servicing, blade inspection."
+      },
+      {
+        "nco_group": "9312",
+        "nco_group_title": "Civil Engineering Labourers",
+        "phase": "operations",
+        "headcount_per_unit": 150,
+        "source": "IRENA 2024/CEEW",
+        "source_type": "modeled_estimate",
+        "notes": "Solar panel cleaning crews. Labor-intensive in dusty Rajasthan/Gujarat conditions."
+      },
+      {
+        "nco_group": "3113",
+        "nco_group_title": "Electrical Engineering Technicians",
+        "phase": "operations",
+        "headcount_per_unit": 60,
+        "source": "IRENA 2024/CEEW",
+        "source_type": "modeled_estimate",
+        "notes": "SCADA monitoring, performance analysis, inverter diagnostics."
+      },
+      {
+        "nco_group": "3152",
+        "nco_group_title": "Health and Safety Inspectors",
+        "phase": "operations",
+        "headcount_per_unit": 30,
+        "source": "IRENA 2024/CEEW",
+        "source_type": "modeled_estimate",
+        "notes": "Ongoing site HSE, high-altitude work permits for wind maintenance."
+      },
+      {
+        "nco_group": "2145",
+        "nco_group_title": "Chemical Engineers",
+        "phase": "operations",
+        "headcount_per_unit": 10,
+        "source": "IRENA 2024/CEEW",
+        "source_type": "modeled_estimate",
+        "notes": "RE performance optimization and grid compliance engineering."
+      },
+      {
+        "nco_group": "1120",
+        "nco_group_title": "Managing Directors and Chief Executives",
+        "phase": "operations",
+        "headcount_per_unit": 20,
+        "source": "IRENA 2024/CEEW",
+        "source_type": "modeled_estimate",
+        "notes": "Site director and department heads."
+      },
+      {
+        "nco_group": "1321",
+        "nco_group_title": "Manufacturing Managers",
+        "phase": "operations",
+        "headcount_per_unit": 15,
+        "source": "IRENA 2024/CEEW",
+        "source_type": "modeled_estimate",
+        "notes": "O&M managers."
+      },
+      {
+        "nco_group": "3122",
+        "nco_group_title": "Manufacturing Supervisors",
+        "phase": "operations",
+        "headcount_per_unit": 30,
+        "source": "IRENA 2024/CEEW",
+        "source_type": "modeled_estimate",
+        "notes": "Shift supervisors for maintenance crews."
+      },
+      {
+        "nco_group": "3257",
+        "nco_group_title": "Environmental and Occupational Health Inspectors and Associates",
+        "phase": "operations",
+        "headcount_per_unit": 20,
+        "source": "IRENA 2024/CEEW",
+        "source_type": "modeled_estimate",
+        "notes": "Ongoing environmental compliance and wildlife monitoring."
       }
     ]
   }

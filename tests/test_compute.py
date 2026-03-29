@@ -12,6 +12,7 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 from model.compute import (
     aggregate_demand,
     compute_demand,
+    compute_demand_for_units,
     export_demand_csv,
     load_archetype,
     load_scenarios,
@@ -131,7 +132,8 @@ def test_load_scenarios_contain_required_fields():
     for s in scenarios:
         assert "id" in s
         assert "target_mt" in s
-        assert "archetype_id" in s
+        # Single-archetype scenarios have archetype_id; multi-archetype have production
+        assert "archetype_id" in s or "production" in s
 
 
 # ---------------------------------------------------------------------------

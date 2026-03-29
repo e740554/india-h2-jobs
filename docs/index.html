@@ -14,12 +14,11 @@
 <body>
   <nav class="atlas-nav">
     <div class="nav-left">
-      <img src="hygoat-logo.svg" alt="HyGOAT" class="nav-logo-img"><span class="nav-logo">HyGOAT</span>
-      <span class="nav-sep">&middot;</span>
-      <span class="nav-title">India H2 Workforce Atlas</span>
+      <span class="nav-logo">India H2 Workforce Atlas</span>
       <div class="mode-toggle" id="modeToggle">
         <button class="mode-btn active" data-mode="atlas">Atlas</button>
         <button class="mode-btn" data-mode="scenario">Scenario</button>
+        <button class="mode-btn" data-mode="gap">Gap</button>
       </div>
     </div>
     <div class="nav-right">
@@ -67,11 +66,13 @@
 
   <div class="scenario-bar" id="scenarioBar" style="display:none">
     <div class="scenario-banner">
-      &#x26A1; Scenario model covers alkaline electrolyser staffing only. Ammonia synthesis, storage, and transport workforce not included.
+      &#x26A1; Scenario model covers full H2 value chain: electrolysis, ammonia synthesis, and dedicated RE. Supply estimates are modeled from PLFS 2023-24 subdivision data.
     </div>
     <div class="scenario-controls">
-      <label class="scenario-label" for="mtSlider">H&#x2082; Capacity Target</label>
-      <input type="range" id="mtSlider" min="1" max="10" step="0.5" value="5" class="mt-slider">
+      <label class="scenario-label" for="scenarioPreset">Scenario</label>
+      <select id="scenarioPreset" class="scenario-select"></select>
+      <label class="scenario-label" for="mtSlider">H&#x2082; Target</label>
+      <input type="range" id="mtSlider" min="0.5" max="15" step="0.5" value="5" class="mt-slider">
       <span class="mt-value" id="mtValue">5.0 MT</span>
       <span class="mt-demand" id="mtDemand"></span>
     </div>
@@ -106,7 +107,16 @@
             <div class="sb-stat"><span class="sb-stat-label">Total Demand</span><span id="sbDemand">--</span></div>
           </div>
           <div id="phaseBars"></div>
+          <div id="archBreakdown" class="coeff-source"></div>
           <div id="coeffSource" class="coeff-source"></div>
+        </div>
+        <div id="gapDetails" style="display:none">
+          <h3>Supply-Demand Gap</h3>
+          <div class="sb-stats">
+            <div class="sb-stat"><span class="sb-stat-label">PLFS Supply</span><span id="sbSupply">--</span></div>
+            <div class="sb-stat"><span class="sb-stat-label">Gap</span><span id="sbGap">--</span></div>
+          </div>
+          <div class="gap-status-row"><span id="sbGapStatus"></span></div>
         </div>
         <h3>Top 5 Upskill Paths - H2</h3>
         <div class="upskill-list" id="upskillList"></div>
@@ -123,17 +133,26 @@
     <div class="legend-item"><span class="legend-swatch" style="background:#374151"></span>N/A</div>
   </div>
   <div class="legend scenario-legend" id="scenarioLegend" style="display:none">
-    <div class="legend-item"><span class="legend-swatch" style="background:#ff8a00"></span>&ge;1000 High demand</div>
-    <div class="legend-item"><span class="legend-swatch" style="background:#ffaa33"></span>500-999</div>
-    <div class="legend-item"><span class="legend-swatch" style="background:#ffcc66"></span>100-499</div>
-    <div class="legend-item"><span class="legend-swatch" style="background:#ffe599"></span>10-99</div>
-    <div class="legend-item"><span class="legend-swatch" style="background:#fff3d6"></span>1-9 Low demand</div>
+    <div class="legend-item"><span class="legend-swatch" style="background:#00994C"></span>&ge;1000 Critical</div>
+    <div class="legend-item"><span class="legend-swatch" style="background:#50C878"></span>500-999</div>
+    <div class="legend-item"><span class="legend-swatch" style="background:#86efac"></span>100-499</div>
+    <div class="legend-item"><span class="legend-swatch" style="background:#ff8a00"></span>10-99</div>
+    <div class="legend-item"><span class="legend-swatch" style="background:#dc2626"></span>1-9 Low demand</div>
     <div class="legend-item"><span class="legend-swatch" style="background:#374151"></span>No demand</div>
+  </div>
+  <div class="legend gap-legend" id="gapLegend" style="display:none">
+    <div class="legend-item"><span class="legend-swatch" style="background:#991b1b"></span>Severe shortage</div>
+    <div class="legend-item"><span class="legend-swatch" style="background:#ef4444"></span>Moderate shortage</div>
+    <div class="legend-item"><span class="legend-swatch" style="background:#fca5a5"></span>Mild shortage</div>
+    <div class="legend-item"><span class="legend-swatch" style="background:#f3f4f6"></span>Balanced</div>
+    <div class="legend-item"><span class="legend-swatch" style="background:#bbf7d0"></span>Mild surplus</div>
+    <div class="legend-item"><span class="legend-swatch" style="background:#22c55e"></span>Large surplus</div>
+    <div class="legend-item"><span class="legend-swatch" style="background:#374151"></span>No data</div>
   </div>
 
   <footer class="atlas-footer">
     <span id="footerVersion">Dataset v1.0</span> &middot; <span id="footerDate">Last updated March 2026</span> &middot; *IEA methodology<br>
-    Built by <a href="https://hygoat.in">HyGOAT</a> &middot; <a href="https://ekavikalp.com">Ekavikalp Pvt Ltd</a> &middot; Current checked-in build: 1,802 scored NCS occupations; PLFS and NCVET joins are still pending in this release &middot; Scoring: Claude AI (<a href="https://github.com/e740554/india-h2-jobs">open source prompts</a>) &middot; MIT Licence
+    Built by <a href="https://hygoat.in">HyGOAT</a> &middot; <a href="https://ekavikalp.com">Ekavikalp Pvt Ltd</a> &middot; Current checked-in build: 1,802 scored NCS occupations; PLFS and NCVET joins are still pending in this release &middot; <a href="https://github.com/e740554/india-h2-jobs" title="View source on GitHub"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="currentColor" style="vertical-align:text-bottom"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg> GitHub</a> &middot; MIT Licence
   </footer>
 
   <script src="https://d3js.org/d3.v7.min.js"></script>

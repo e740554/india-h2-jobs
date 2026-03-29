@@ -37,10 +37,29 @@ Currently covers `build/build.py` (23 tests):
 ### Scenario engine tests (`tests/test_compute.py`)
 29 tests covering `model/compute.py`:
 - `load_archetype()` / `load_scenarios()` — file loading and ID lookup
-- `compute_demand()` — 5-step model chain: zero/negative target, single/multiple occupations, equal/unequal weights, missing scores, no matching NCO group, unallocated demand, integer rounding, source field preservation, linear scaling
+- `compute_demand()` / `compute_demand_for_units()` — 5-step model chain: zero/negative target, single/multiple occupations, equal/unequal weights, missing scores, no matching NCO group, unallocated demand, integer rounding, source field preservation, linear scaling
 - `aggregate_demand()` — total/phase/group/occupation summaries, mathematical consistency
 - `export_demand_csv()` — file writing, column correctness, unallocated rows
 - Full pipeline integration with real archetype data
+
+### Multi-archetype tests (`tests/test_multi_archetype.py`)
+18 tests covering multi-archetype demand computation:
+- `compute_demand_for_units()` — basic, zero units, archetype_id in records
+- Single-archetype fallback — old format compatibility
+- Multi-archetype chain — production split, downstream conversion, upstream RE derivation, full chain
+- Edge cases — zero target, missing archetypes skipped, upstream with no production
+
+### Gap tests (`tests/test_gap.py`)
+12 tests covering `compute_gap()`:
+- Surplus, shortage, balanced, no_data status values
+- gap_pct formula and zero-demand handling
+- Multiple occupations with mixed statuses
+- Sorted output, empty inputs, zero supply
+
+### Supply tests (`tests/test_supply.py`)
+11 tests covering `model/supply.py`:
+- `load_supply()` — missing file, valid JSON
+- `allocate_supply()` — weighted distribution, equal split, missing subdivisions, conservation check, source fields, multiple subdivisions
 
 ### Parity tests (`tests/test_parity.py`)
 3 tests verifying Python `compute.py` and JavaScript `computeScenarioDemand()` produce identical results:
