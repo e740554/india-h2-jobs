@@ -61,3 +61,18 @@ Do not edit generated files in `docs/` by hand. Rebuild from source instead.
 ```bash
 python build/build.py --base-url ""
 ```
+
+## Testing
+
+```bash
+python -m pytest          # Run all tests
+python -m pytest -v       # Verbose output
+```
+
+Test directory: `tests/`. See `TESTING.md` for full documentation.
+
+- 100% test coverage is the goal — tests make vibe coding safe
+- When writing new functions, write a corresponding test
+- When fixing a bug, write a regression test
+- When adding a conditional (if/else), write tests for BOTH paths
+- Never commit code that makes existing tests fail
