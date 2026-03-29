@@ -18,6 +18,7 @@ import os
 import re
 import ssl
 import time
+import urllib.parse
 import urllib.request
 import urllib.error
 
@@ -25,6 +26,8 @@ RAW_DIR = os.path.join(os.path.dirname(__file__), "raw", "ncs")
 OUTPUT_FILE = os.path.join(RAW_DIR, "ncs_occupations.json")
 SECTORS_FILE = os.path.join(RAW_DIR, "scraped_sectors.json")
 DELAY = 1.5  # seconds between requests
+SHAREPOINT_PAGE_SIZE = 50
+MAX_PAGES_PER_SECTOR = 200
 
 BASE_URL = "https://www.ncs.gov.in/content-repository/Pages/ViewNcos.aspx"
 FILTER_PARAM = "FilterField1=Industry_x002F_Sector_x0028_s_x0&FilterValue1="
@@ -60,9 +63,20 @@ def create_ssl_context():
     return ctx
 
 
-def fetch_sector(sector: str, ssl_ctx: ssl.SSLContext) -> list[dict]:
-    """Fetch all occupations for a given sector from NCS Portal."""
-    url = f"{BASE_URL}?{FILTER_PARAM}{urllib.request.quote(sector)}"
+def build_sector_url(sector: str, last_sp_id: str | None = None) -> str:
+    """Build the SharePoint list URL for a sector page."""
+    params = {
+        "FilterField1": "Industry_x002F_Sector_x0028_s_x0",
+        "FilterValue1": sector,
+    }
+    if last_sp_id:
+        params["Paged"] = "TRUE"
+        params["p_ID"] = str(last_sp_id)
+    return f"{BASE_URL}?{urllib.parse.urlencode(params)}"
+
+
+def fetch_html(url: str, ssl_ctx: ssl.SSLContext) -> str | None:
+    """Fetch raw HTML for a SharePoint list page."""
     req = urllib.request.Request(url, headers={
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
         "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
@@ -83,15 +97,19 @@ def fetch_sector(sector: str, ssl_ctx: ssl.SSLContext) -> list[dict]:
                 data = brotli.decompress(data)
             html = data.decode("utf-8", errors="replace")
     except (urllib.error.URLError, ssl.SSLError, TimeoutError) as e:
-        print(f"  [ERROR] Failed to fetch {sector}: {e}")
-        return []
+        print(f"  [ERROR] Failed to fetch {url}: {e}")
+        return None
 
-    # Extract inline JSON
+    return html
+
+
+def extract_rows(html: str, sector: str, page_num: int) -> list[dict]:
+    """Extract raw SharePoint rows from inline JSON."""
     match = LIST_DATA_RE.search(html)
     if not match:
-        print(f"  [WARN] No WPQ2ListData found for sector: {sector}")
+        print(f"  [WARN] No WPQ2ListData found for sector: {sector} (page {page_num})")
         # Save HTML for debugging
-        debug_path = os.path.join(RAW_DIR, f"debug_{sector.replace('/', '_')}.html")
+        debug_path = os.path.join(RAW_DIR, f"debug_{sector.replace('/', '_')}_page_{page_num}.html")
         with open(debug_path, "w", encoding="utf-8") as f:
             f.write(html)
         return []
@@ -102,7 +120,11 @@ def fetch_sector(sector: str, ssl_ctx: ssl.SSLContext) -> list[dict]:
         print(f"  [ERROR] JSON parse failed for {sector}: {e}")
         return []
 
-    rows = list_data.get("Row", [])
+    return list_data.get("Row", [])
+
+
+def normalize_rows(rows: list[dict], sector: str) -> list[dict]:
+    """Normalize SharePoint rows into occupation records."""
     occupations = []
     for row in rows:
         # Extract NCO code from lookup field
@@ -136,6 +158,53 @@ def fetch_sector(sector: str, ssl_ctx: ssl.SSLContext) -> list[dict]:
             })
 
     return occupations
+
+
+def fetch_sector(sector: str, ssl_ctx: ssl.SSLContext) -> list[dict]:
+    """Fetch all occupations for a given sector, following SharePoint pagination."""
+    all_occupations = []
+    seen_row_ids = set()
+    cursor = None
+
+    for page_num in range(1, MAX_PAGES_PER_SECTOR + 1):
+        url = build_sector_url(sector, cursor)
+        html = fetch_html(url, ssl_ctx)
+        if html is None:
+            return all_occupations
+
+        rows = extract_rows(html, sector, page_num)
+        if not rows:
+            break
+
+        page_occupations = normalize_rows(rows, sector)
+        new_occupations = []
+        for occupation in page_occupations:
+            row_id = occupation.get("sp_id") or occupation.get("nco_code") or occupation.get("title")
+            if row_id in seen_row_ids:
+                continue
+            seen_row_ids.add(row_id)
+            new_occupations.append(occupation)
+
+        if not new_occupations:
+            break
+
+        all_occupations.extend(new_occupations)
+        print(f"    Page {page_num}: {len(new_occupations)} occupations")
+
+        if len(page_occupations) < SHAREPOINT_PAGE_SIZE:
+            break
+
+        next_cursor = next(
+            (occupation.get("sp_id") for occupation in reversed(page_occupations) if occupation.get("sp_id")),
+            None,
+        )
+        if not next_cursor or next_cursor == cursor:
+            break
+        cursor = next_cursor
+    else:
+        print(f"  [WARN] Reached pagination safety cap for {sector}")
+
+    return all_occupations
 
 
 def main():

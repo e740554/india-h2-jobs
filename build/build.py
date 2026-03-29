@@ -23,7 +23,11 @@ OUTPUT_JSON_ALL = os.path.join(PROJECT_ROOT, "occupations-all.json")
 OUTPUT_CSV_FULL = os.path.join(PROJECT_ROOT, "occupations.csv")
 OUTPUT_CSV_H2 = os.path.join(PROJECT_ROOT, "h2-ready-occupations.csv")
 TEMPLATE_FILE = os.path.join(PROJECT_ROOT, "web", "main.js.template")
-OUTPUT_JS = os.path.join(PROJECT_ROOT, "web", "main.js")
+PUBLIC_DIRS = [
+    os.path.join(PROJECT_ROOT, "web"),
+    os.path.join(PROJECT_ROOT, "docs"),
+]
+DATASET_VERSION = "1.1"
 
 # H2-relevant NCS sectors (12 of 49)
 H2_SECTORS = [
@@ -72,18 +76,45 @@ def load_scores() -> dict:
         return json.load(f)
 
 
+def pct(count: int, total: int) -> float:
+    """Return percentage with one decimal place."""
+    if total == 0:
+        return 0.0
+    return round((count / total) * 100, 1)
+
+
+def count_present(occupations: list[dict], field: str) -> int:
+    """Count non-null values for a field."""
+    return sum(1 for occ in occupations if occ.get(field) is not None)
+
+
+def count_true(occupations: list[dict], field: str) -> int:
+    """Count truthy boolean source flags."""
+    return sum(1 for occ in occupations if occ.get(field) is True)
+
+
 def merge_scores(occupations: list[dict], scores: dict) -> list[dict]:
-    """Merge score data into occupation records."""
+    """Merge score data into occupation records, preserving rationales."""
     for occ in occupations:
         occ_id = occ["id"]
         occ_scores = {}
+        occ_score_details = {}
         if occ_id in scores:
             for dim, data in scores[occ_id].items():
                 if isinstance(data, dict) and "score" in data:
                     occ_scores[dim] = data["score"]
+                    occ_score_details[dim] = {
+                        "score": data.get("score"),
+                        "rationale": data.get("rationale"),
+                    }
                 else:
-                    occ_scores[dim] = None
+                    occ_scores[dim] = data
+                    occ_score_details[dim] = {
+                        "score": data,
+                        "rationale": None,
+                    }
         occ["scores"] = occ_scores
+        occ["score_details"] = occ_score_details
     return occupations
 
 
@@ -111,14 +142,18 @@ def compute_upskill_paths(occupations: list[dict]) -> list[dict]:
     return occupations
 
 
-def compute_workforce_gap(occupations: list[dict]) -> int:
-    """Compute workforce gap per spec section 3 formula."""
-    h2_workforce = 0
-    for occ in occupations:
-        h2_score = occ.get("scores", {}).get("h2_adjacency")
-        emp = occ.get("employment")
-        if h2_score is not None and h2_score >= H2_ADJACENCY_THRESHOLD and emp:
-            h2_workforce += emp
+def compute_workforce_gap(occupations: list[dict]) -> int | None:
+    """Compute workforce gap only when employment coverage exists for all H2-ready occupations."""
+    eligible = [
+        occ for occ in occupations
+        if occ.get("scores", {}).get("h2_adjacency") is not None
+        and occ["scores"]["h2_adjacency"] >= H2_ADJACENCY_THRESHOLD
+    ]
+
+    if any(occ.get("employment") is None for occ in eligible):
+        return None
+
+    h2_workforce = sum((occ.get("employment") or 0) for occ in eligible)
     gap = (NGHM_TARGET_MMT * LABOUR_INTENSITY) - h2_workforce
     return max(0, gap)
 
@@ -138,10 +173,73 @@ def compute_summary_metrics(occupations: list[dict]) -> dict:
         if st is not None and td is not None and st >= 7.0 and td >= 7.0:
             fast_upskill += 1
 
+    workforce_gap = compute_workforce_gap(occupations)
     return {
         "h2_ready_occupations": h2_ready,
-        "workforce_gap_2030": compute_workforce_gap(occupations),
+        "workforce_gap_2030": workforce_gap,
+        "workforce_gap_supported": workforce_gap is not None,
         "fast_upskill_paths": fast_upskill,
+    }
+
+
+def compute_data_quality(occupations: list[dict]) -> dict:
+    """Compute data coverage and source status for the current dataset view."""
+    total = len(occupations)
+    coverage = {}
+    for field in ["employment", "median_wage_inr", "formal_sector_pct"]:
+        count = count_present(occupations, field)
+        coverage[field] = {
+            "count": count,
+            "total": total,
+            "pct": pct(count, total),
+        }
+
+    source_counts = {}
+    for source_key, source_name in [
+        ("source_ncs", "ncs"),
+        ("source_plfs", "plfs"),
+        ("source_ncvet", "ncvet"),
+    ]:
+        count = count_true(occupations, source_key)
+        source_counts[source_name] = {
+            "count": count,
+            "total": total,
+            "pct": pct(count, total),
+        }
+
+    labour_market_fields = [coverage[field]["count"] for field in ["employment", "median_wage_inr", "formal_sector_pct"]]
+    if all(count == 0 for count in labour_market_fields):
+        labour_market_status = "pending"
+    elif all(count == total for count in labour_market_fields):
+        labour_market_status = "complete"
+    else:
+        labour_market_status = "partial"
+
+    h2_ready = [
+        occ for occ in occupations
+        if occ.get("scores", {}).get("h2_adjacency") is not None
+        and occ["scores"]["h2_adjacency"] >= H2_ADJACENCY_THRESHOLD
+    ]
+    h2_ready_employment_count = count_present(h2_ready, "employment")
+    workforce_gap_supported = compute_workforce_gap(occupations) is not None
+
+    notes = []
+    if labour_market_status != "complete":
+        notes.append("Current build is a scored occupation atlas; labour-market joins are still incomplete.")
+    if not workforce_gap_supported:
+        notes.append("Workforce gap by 2030 is hidden until every H2-ready occupation has employment coverage.")
+
+    return {
+        "labour_market_status": labour_market_status,
+        "workforce_gap_supported": workforce_gap_supported,
+        "coverage": coverage,
+        "source_counts": source_counts,
+        "h2_ready_employment_coverage": {
+            "count": h2_ready_employment_count,
+            "total": len(h2_ready),
+            "pct": pct(h2_ready_employment_count, len(h2_ready)),
+        },
+        "notes": notes,
     }
 
 
@@ -171,16 +269,30 @@ def write_h2_csv(occupations: list[dict]):
 
 
 def inject_base_url(base_url: str):
-    """Generate web/main.js from template with BASE_URL injected."""
+    """Generate public main.js assets from template with BASE_URL injected."""
     if not os.path.exists(TEMPLATE_FILE):
         print(f"WARN: Template not found at {TEMPLATE_FILE}, skipping JS generation")
         return
     with open(TEMPLATE_FILE, "r", encoding="utf-8") as f:
         template = f.read()
     main_js = template.replace("__BASE_URL__", base_url)
-    with open(OUTPUT_JS, "w", encoding="utf-8") as f:
-        f.write(main_js)
-    print(f"Generated: {OUTPUT_JS} (base_url={base_url!r})")
+    for public_dir in PUBLIC_DIRS:
+        output_js = os.path.join(public_dir, "main.js")
+        with open(output_js, "w", encoding="utf-8") as f:
+            f.write(main_js)
+        print(f"Generated: {output_js} (base_url={base_url!r})")
+
+
+def copy_public_artifacts(*artifact_paths: str):
+    """Copy built artifacts to all public output directories."""
+    import shutil
+
+    for public_dir in PUBLIC_DIRS:
+        os.makedirs(public_dir, exist_ok=True)
+        for artifact_path in artifact_paths:
+            output_path = os.path.join(public_dir, os.path.basename(artifact_path))
+            shutil.copy2(artifact_path, output_path)
+            print(f"Copied: {output_path}")
 
 
 def main():
@@ -199,6 +311,7 @@ def main():
     # Compute derived fields
     occupations = compute_upskill_paths(occupations)
     metrics = compute_summary_metrics(occupations)
+    data_quality = compute_data_quality(occupations)
 
     # Count scored
     scored_count = sum(1 for occ in occupations if occ.get("scores"))
@@ -209,11 +322,12 @@ def main():
         if occ.get("sector", "") in H2_SECTORS
     ]
     h2_metrics = compute_summary_metrics(h2_occupations)
+    h2_data_quality = compute_data_quality(h2_occupations)
     h2_scored = sum(1 for occ in h2_occupations if occ.get("scores"))
 
     # Build filtered output JSON (default view)
     output = {
-        "dataset_version": "1.0",
+        "dataset_version": DATASET_VERSION,
         "last_updated": date.today().isoformat(),
         "total_occupations": len(h2_occupations),
         "total_all_occupations": len(occupations),
@@ -221,6 +335,7 @@ def main():
         "total_all_sectors": len(set(occ.get("sector", "Other") for occ in occupations)),
         "scored_occupations": h2_scored,
         "summary": h2_metrics,
+        "data_quality": h2_data_quality,
         "occupations": h2_occupations,
     }
 
@@ -230,7 +345,7 @@ def main():
 
     # Build full output JSON (for "Show All" toggle)
     output_all = {
-        "dataset_version": "1.0",
+        "dataset_version": DATASET_VERSION,
         "last_updated": date.today().isoformat(),
         "total_occupations": len(occupations),
         "total_all_occupations": len(occupations),
@@ -238,6 +353,7 @@ def main():
         "total_all_sectors": len(set(occ.get("sector", "Other") for occ in occupations)),
         "scored_occupations": scored_count,
         "summary": metrics,
+        "data_quality": data_quality,
         "occupations": occupations,
     }
 
@@ -248,26 +364,17 @@ def main():
     # Summary
     print(f"\nSummary metrics:")
     print(f"  H2-Ready Occupations: {metrics['h2_ready_occupations']}")
-    print(f"  Workforce Gap by 2030: {metrics['workforce_gap_2030']:,}")
+    if metrics["workforce_gap_2030"] is None:
+        print("  Workforce Gap by 2030: N/A (employment joins incomplete)")
+    else:
+        print(f"  Workforce Gap by 2030: {metrics['workforce_gap_2030']:,}")
     print(f"  Fast Upskill Paths: {metrics['fast_upskill_paths']}")
 
     # Write H2 CSV
     write_h2_csv(occupations)
 
-    # Copy JSON files to web/ for serving
-    import shutil
-    web_json = os.path.join(PROJECT_ROOT, "web", "occupations.json")
-    shutil.copy2(OUTPUT_JSON, web_json)
-    print(f"Copied: {web_json}")
-
-    web_json_all = os.path.join(PROJECT_ROOT, "web", "occupations-all.json")
-    shutil.copy2(OUTPUT_JSON_ALL, web_json_all)
-    print(f"Copied: {web_json_all}")
-
-    # Copy CSV exports to web/ for download
-    for csv_file in [OUTPUT_CSV_H2]:
-        web_csv = os.path.join(PROJECT_ROOT, "web", os.path.basename(csv_file))
-        shutil.copy2(csv_file, web_csv)
+    # Copy public artifacts to web/ and docs/
+    copy_public_artifacts(OUTPUT_JSON, OUTPUT_JSON_ALL, OUTPUT_CSV_H2)
 
     # Generate JS
     inject_base_url(args.base_url)

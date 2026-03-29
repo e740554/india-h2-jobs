@@ -1,42 +1,44 @@
 # India H2 Workforce Atlas
 
-An open-source data intelligence tool that maps India's entire occupational landscape through a green hydrogen lens. Visualizes 4,000+ occupations scored across 6 H2-specific dimensions.
+An open-source scored occupation atlas for India's green hydrogen transition. The current checked-in build contains 1,802 scored occupations from the NCS portal, with a default filtered view of 480 occupations across 12 H2-relevant sectors.
 
-**Live atlas:** [hygoat.in/workforce-atlas](https://hygoat.in/workforce-atlas) (canonical)
+Labour-market joins are still incomplete in this release. PLFS employment, wage, and formality fields are not populated in the checked-in dataset yet, so employment-based headline metrics should be treated as unavailable until those joins land.
+
+**Live atlas:** [hygoat.in/workforce-atlas](https://hygoat.in/workforce-atlas) (canonical)  
 **Mirror:** [ekavikalp.github.io/india-h2-jobs](https://ekavikalp.github.io/india-h2-jobs)
 
 ## Architecture
 
-```
-[ Data Pipeline ]  →  [ LLM Scoring ]  →  [ Frontend Atlas ]
-  Python scripts        Claude Code          Static HTML/JS/D3
-  NCS + PLFS +          6 H2-centric         Treemap + Summary Bar
-  NCVET scrapers        dimensions           + CSV Download
-  → occupations.csv     → scores.json        → hygoat.in/workforce-atlas
+```text
+[ Data Pipeline ]     [ LLM Scoring ]     [ Frontend Atlas ]
+  Python scripts        Claude Code         Static HTML/JS/D3
+  NCS scraper +         6 H2-centric        Treemap + summary bar
+  planned PLFS/NCVET    dimensions          + CSV download
+  -> occupations.csv    -> scores.json      -> hygoat.in/workforce-atlas
 ```
 
 ## Data Sources
 
 | Source | Coverage | Access |
 |--------|----------|--------|
-| **NCS Portal** (ncs.gov.in) | 4,000+ occupation profiles | Playwright scraper |
-| **PLFS** (NSO 2023–24) | Employment & wages by NCO-2015 | CSV download |
-| **NCVET / Skill India Digital** | National Occupational Standards | Playwright scraper |
+| **NCS Portal** (ncs.gov.in) | Current checked-in build: 1,802 scored occupations | HTTP scraper over SharePoint inline JSON |
+| **PLFS** (NSO 2023-24) | Planned employment, wage, and formalization joins | Download scaffold only in current repo |
+| **NCVET / NQR** | Planned qualification and transition-path joins | Not yet merged into checked-in build |
 
-## Scoring Dimensions (0–10)
+## Scoring Dimensions (0-10)
 
 | Dimension | What it measures |
 |-----------|-----------------|
-| H2 Value Chain Adjacency | Direct presence in electrolysis, compression, storage, distribution, fuel cells |
-| Green Transition Demand | Will demand rise as India scales toward 5 MMT H2 by 2030? |
-| Skill Transferability | How quickly can someone upskill into H2-specific work? |
-| Digital Automation Exposure | How much can AI/robotics automate this role in 5–10 years? |
-| Formalization Rate | Formal vs informal employment (affects training scalability) |
-| H2 Talent Scarcity Risk | Is this skill scarce enough to bottleneck H2 scale-up? |
+| H2 Value Chain Adjacency | Direct presence in electrolysis, compression, storage, distribution, or fuel cell operations |
+| Green Transition Demand | Whether demand should rise as India scales green hydrogen |
+| Skill Transferability | How quickly someone in the role can upskill into H2-specific work |
+| Digital Automation Exposure | Exposure to AI or robotics over the next 5-10 years |
+| Formalization Rate | Expected formality of employment in India |
+| H2 Talent Scarcity Risk | Whether the skill is likely to bottleneck scale-up |
 
 ## Quick Start
 
-**Pre-built data ships with this repo.** No scraping or scoring needed to explore:
+**Pre-built data ships with this repo.** No scraping or scoring is needed to explore the current atlas build:
 
 ```bash
 cd web && python -m http.server 8080
@@ -50,19 +52,26 @@ python -m venv venv && source venv/bin/activate  # or venv\Scripts\activate on W
 pip install -r requirements.txt && playwright install chromium
 
 python scrape/scrape_ncs.py        # Scrape NCS Portal
-python scrape/download_plfs.py     # Download PLFS CSVs
+python scrape/download_plfs.py     # Download PLFS source PDFs
 python parse/parse_occupations.py  # Parse raw data
 python tabulate/tabulate.py        # Generate occupations.csv
 python score/score.py              # Score via Claude Code
-python build/build.py              # Merge → occupations.json + web/main.js
+python build/build.py              # Merge -> occupations.json + public assets
 ```
+
+## Current Build Status
+
+- Scored occupation atlas: available
+- NCS sector scrape completeness: pending pagination rerun
+- PLFS joins: not populated in checked-in dataset
+- NCVET joins: not populated in checked-in dataset
 
 ## License
 
-MIT — see [LICENSE](LICENSE).
+MIT - see [LICENSE](LICENSE).
 
 ## Credits
 
-Built by [HyGOAT](https://hygoat.in) · [Ekavikalp Pvt Ltd](https://ekavikalp.com)
-Data: NCS Portal, PLFS 2023–24, NCVET
+Built by [HyGOAT](https://hygoat.in) and [Ekavikalp Pvt Ltd](https://ekavikalp.com)  
+Data: NCS Portal (current build), PLFS 2023-24 and NCVET/NQR (planned joins)  
 Scoring: Claude AI (open-source prompts in `prompts/`)

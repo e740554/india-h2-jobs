@@ -4,33 +4,31 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>India H2 Workforce Atlas | HyGOAT</title>
-  <meta name="description" content="Interactive treemap of India's occupational landscape scored across 6 green hydrogen dimensions. Open-source policy tool for NGHM/MNRE.">
+  <meta name="description" content="Interactive treemap of the current 1,802-occupation India H2 atlas build, with a default view of 480 roles across 12 H2-relevant sectors.">
   <meta property="og:title" content="India H2 Workforce Atlas">
-  <meta property="og:description" content="Map India's workforce readiness for the green hydrogen transition. 1,800+ occupations scored across 6 dimensions.">
+  <meta property="og:description" content="Explore the current 1,802-occupation India H2 atlas build and its 480-role default H2 sector view.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://hygoat.in/workforce-atlas">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <!-- Nav -->
   <nav class="atlas-nav">
     <div class="nav-left">
       <img src="hygoat-logo.svg" alt="HyGOAT" class="nav-logo-img"><span class="nav-logo">HyGOAT</span>
-      <span class="nav-sep">·</span>
+      <span class="nav-sep">&middot;</span>
       <span class="nav-title">India H2 Workforce Atlas</span>
     </div>
     <div class="nav-right">
       <div class="download-dropdown">
         <button class="btn-download" id="downloadBtn">&#x2B07; Download CSV &#x25BE;</button>
         <div class="dropdown-menu" id="downloadMenu">
-          <a href="#" id="dlFull">All Occupations (CSV)</a>
-          <a href="#" id="dlH2">H2-Ready Only (CSV)</a>
+          <a href="#" id="dlFull">All Scored Occupations (CSV)</a>
+          <a href="#" id="dlH2">H2-Ready Occupations (CSV)</a>
         </div>
       </div>
     </div>
   </nav>
 
-  <!-- Summary Bar -->
   <div class="summary-bar">
     <div class="metric">
       <span class="metric-value" id="metricH2Ready">--</span>
@@ -38,7 +36,7 @@
     </div>
     <div class="metric">
       <span class="metric-value" id="metricGap">--</span>
-      <span class="metric-label">Workforce Gap by 2030<span class="tooltip-trigger" data-tooltip="Estimated gap = (5 MMT NGHM target x 500K jobs/MMT) - current H2-adjacent workforce. Source: IEA Global Hydrogen Review 2023. Assumes full availability of H2-adjacent talent pool.">*</span></span>
+      <span class="metric-label">Workforce Gap by 2030<span class="tooltip-trigger" data-tooltip="Shown only when employment joins exist for every H2-ready occupation. In the current checked-in build this stays hidden because PLFS employment coverage is not populated yet.">*</span></span>
     </div>
     <div class="metric">
       <span class="metric-value" id="metricUpskill">--</span>
@@ -46,7 +44,6 @@
     </div>
   </div>
 
-  <!-- Controls -->
   <div class="controls">
     <span class="controls-label">Colour by:</span>
     <div class="pills" id="dimensionPills">
@@ -62,8 +59,8 @@
       <button class="btn-toggle" id="toggleSectors">Show All 49 Sectors</button>
     </div>
   </div>
+  <div class="data-status" id="dataStatus"></div>
 
-  <!-- Treemap + Sidebar -->
   <div class="atlas-main">
     <div class="treemap-container" id="treemapContainer">
       <div id="treemap"></div>
@@ -84,13 +81,12 @@
         </div>
         <h3>Scores</h3>
         <div class="score-bars" id="scoreBars"></div>
-        <h3>Top 5 Upskill Paths &#x2192; H2</h3>
+        <h3>Top 5 Upskill Paths - H2</h3>
         <div class="upskill-list" id="upskillList"></div>
       </div>
     </aside>
   </div>
 
-  <!-- Legend -->
   <div class="legend">
     <div class="legend-item"><span class="legend-swatch" style="background:#00994C"></span>9-10 Core H2</div>
     <div class="legend-item"><span class="legend-swatch" style="background:#50C878"></span>7-8 Strong</div>
@@ -100,10 +96,9 @@
     <div class="legend-item"><span class="legend-swatch" style="background:#374151"></span>N/A</div>
   </div>
 
-  <!-- Footer -->
   <footer class="atlas-footer">
-    <span id="footerVersion">Dataset v1.0</span> · <span id="footerDate">Last updated March 2026</span> · *IEA methodology<br>
-    Built by <a href="https://hygoat.in">HyGOAT</a> · <a href="https://ekavikalp.com">Ekavikalp Pvt Ltd</a> · Data: NCS Portal, PLFS 2023-24, NCVET · Scoring: Claude AI (<a href="https://github.com/e740554/india-h2-jobs">open source prompts</a>) · MIT Licence
+    <span id="footerVersion">Dataset v1.0</span> &middot; <span id="footerDate">Last updated March 2026</span> &middot; *IEA methodology<br>
+    Built by <a href="https://hygoat.in">HyGOAT</a> &middot; <a href="https://ekavikalp.com">Ekavikalp Pvt Ltd</a> &middot; Current checked-in build: 1,802 scored NCS occupations; PLFS and NCVET joins are still pending in this release &middot; Scoring: Claude AI (<a href="https://github.com/e740554/india-h2-jobs">open source prompts</a>) &middot; MIT Licence
   </footer>
 
   <script src="https://d3js.org/d3.v7.min.js"></script>

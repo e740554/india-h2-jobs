@@ -27,24 +27,44 @@
   let data = null;
   let filteredData = null;
   let allData = null;
+  let allDataPromise = null;
   let activeDimension = "h2_adjacency";
   let selectedOccupation = null;
   let showingAll = false;
 
   // --- Data Loading ---
 
-  async function loadData() {
+  function getAssetUrl(filename) {
     const base = BASE_URL || "";
-    const url = base ? `${base}/occupations.json` : "occupations.json";
-    const urlAll = base ? `${base}/occupations-all.json` : "occupations-all.json";
-    const [resp, respAll] = await Promise.all([fetch(url), fetch(urlAll)]);
-    if (!resp.ok) throw new Error(`Failed to load data: ${resp.status}`);
-    filteredData = await resp.json();
+    return base ? `${base}/${filename}` : filename;
+  }
+
+  async function loadJson(filename) {
+    const resp = await fetch(getAssetUrl(filename));
+    if (!resp.ok) throw new Error(`Failed to load ${filename}: ${resp.status}`);
+    return resp.json();
+  }
+
+  async function loadData() {
+    filteredData = await loadJson("occupations.json");
     data = filteredData;
-    if (respAll.ok) {
-      allData = await respAll.json();
+    return filteredData;
+  }
+
+  async function loadAllData() {
+    if (allData) return allData;
+    if (!allDataPromise) {
+      allDataPromise = loadJson("occupations-all.json")
+        .then(json => {
+          allData = json;
+          return json;
+        })
+        .catch(err => {
+          allDataPromise = null;
+          throw err;
+        });
     }
-    return data;
+    return allDataPromise;
   }
 
   // --- Colour ---
@@ -64,7 +84,14 @@
     if (!data || !data.summary) return;
     const s = data.summary;
     document.getElementById("metricH2Ready").textContent = s.h2_ready_occupations.toLocaleString();
-    document.getElementById("metricGap").textContent = (s.workforce_gap_2030 / 1e6).toFixed(1) + "M";
+    const gapEl = document.getElementById("metricGap");
+    if (s.workforce_gap_2030 == null) {
+      gapEl.textContent = "N/A";
+      gapEl.classList.add("metric-value-muted");
+    } else {
+      gapEl.textContent = (s.workforce_gap_2030 / 1e6).toFixed(1) + "M";
+      gapEl.classList.remove("metric-value-muted");
+    }
     document.getElementById("metricUpskill").textContent = s.fast_upskill_paths.toLocaleString();
 
     // Filter indicator
@@ -80,6 +107,28 @@
     document.getElementById("footerVersion").textContent = `Dataset v${data.dataset_version}`;
     const d = new Date(data.last_updated);
     document.getElementById("footerDate").textContent = `Last updated ${d.toLocaleDateString("en-US", { month: "long", year: "numeric" })}`;
+
+    updateDataStatus();
+  }
+
+  function updateDataStatus() {
+    const status = document.getElementById("dataStatus");
+    if (!status) return;
+
+    const quality = data && data.data_quality;
+    if (!quality) {
+      status.textContent = "";
+      status.dataset.state = "";
+      return;
+    }
+
+    const employmentCoverage = quality.coverage && quality.coverage.employment;
+    const employmentText = employmentCoverage
+      ? `Employment coverage ${employmentCoverage.count}/${employmentCoverage.total} in this view.`
+      : "";
+    const notes = (quality.notes || []).join(" ");
+    status.textContent = [employmentText, notes].filter(Boolean).join(" ");
+    status.dataset.state = quality.labour_market_status === "complete" && quality.workforce_gap_supported ? "ok" : "warning";
   }
 
   // --- Treemap ---
@@ -175,7 +224,7 @@
       .attr("class", "cell-label")
       .attr("x", 3)
       .attr("y", 12)
-      .text(d => d.data.title)
+      .text(d => decodeEntities(d.data.title))
       .each(function (d) {
         const cellWidth = d.x1 - d.x0;
         if (cellWidth < 40) {
@@ -198,7 +247,7 @@
     const score = scores[activeDimension];
     const scoreText = score != null ? score.toFixed(1) : "N/A";
     const dimLabel = DIMENSIONS.find(dim => dim.key === activeDimension)?.label || activeDimension;
-    tooltip.innerHTML = `<strong>${d.data.title}</strong><br>${dimLabel}: ${scoreText}`;
+    tooltip.innerHTML = `<strong>${escapeHtml(decodeEntities(d.data.title))}</strong><br>${escapeHtml(dimLabel)}: ${scoreText}`;
     tooltip.style.display = "block";
   }
 
@@ -214,6 +263,22 @@
     document.getElementById("tooltip").style.display = "none";
   }
 
+  function escapeHtml(value) {
+    return String(value)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#39;");
+  }
+
+  const entityDecoder = document.createElement("textarea");
+
+  function decodeEntities(value) {
+    entityDecoder.innerHTML = String(value == null ? "" : value);
+    return entityDecoder.value;
+  }
+
   // --- Sidebar ---
 
   function selectOccupation(occ) {
@@ -221,10 +286,10 @@
     document.querySelector(".sidebar-empty").style.display = "none";
     document.getElementById("sidebarContent").style.display = "block";
 
-    document.getElementById("sbTitle").textContent = occ.title;
-    document.getElementById("sbSector").textContent = occ.sector;
+    document.getElementById("sbTitle").textContent = decodeEntities(occ.title);
+    document.getElementById("sbSector").textContent = decodeEntities(occ.sector);
     document.getElementById("sbNco").textContent = occ.nco_code || "";
-    document.getElementById("sbEdu").textContent = occ.education_req || "";
+    document.getElementById("sbEdu").textContent = decodeEntities(occ.education_req || "");
 
     document.getElementById("sbEmployment").textContent = occ.employment
       ? occ.employment.toLocaleString()
@@ -238,16 +303,19 @@
     barsEl.innerHTML = "";
     for (const dim of DIMENSIONS) {
       const score = (occ.scores || {})[dim.key];
+      const detail = (occ.score_details || {})[dim.key] || {};
+      const rationale = detail.rationale ? escapeHtml(detail.rationale) : "";
       const pct = score != null ? (score / 10) * 100 : 0;
       const colour = scoreColour(score);
       barsEl.innerHTML += `
         <div class="score-bar-row">
-          <span class="score-bar-label">${dim.label}</span>
+          <span class="score-bar-label">${escapeHtml(dim.label)}</span>
           <div class="score-bar-track">
             <div class="score-bar-fill" style="width:${pct}%;background:${colour}"></div>
           </div>
           <span class="score-bar-value">${score != null ? score.toFixed(1) : "N/A"}</span>
-        </div>`;
+        </div>
+        ${rationale ? `<div class="score-rationale">${rationale}</div>` : ""}`;
     }
 
     // Upskill paths
@@ -265,7 +333,7 @@
       const combined = (h2 + td).toFixed(1);
       const item = document.createElement("div");
       item.className = "upskill-item";
-      item.innerHTML = `<span>${target.title}</span><span class="upskill-score">${combined}</span>`;
+      item.innerHTML = `<span>${escapeHtml(decodeEntities(target.title))}</span><span class="upskill-score">${combined}</span>`;
       item.addEventListener("click", () => highlightCell(targetId));
       listEl.appendChild(item);
     }
@@ -310,14 +378,31 @@
 
   function setupSectorToggle() {
     const btn = document.getElementById("toggleSectors");
-    if (!btn || !allData) return;
-    btn.addEventListener("click", () => {
-      showingAll = !showingAll;
-      if (showingAll) {
-        data = allData;
-        btn.textContent = "Show H2-Relevant Only";
-        btn.classList.add("active");
+    if (!btn) return;
+
+    btn.addEventListener("click", async () => {
+      if (!showingAll) {
+        const originalLabel = btn.textContent;
+        btn.disabled = true;
+        btn.textContent = "Loading all sectors...";
+        try {
+          data = await loadAllData();
+          showingAll = true;
+          btn.textContent = "Show H2-Relevant Only";
+          btn.classList.add("active");
+        } catch (err) {
+          console.error("Failed to load all sectors:", err);
+          btn.textContent = originalLabel;
+          const status = document.getElementById("dataStatus");
+          if (status) {
+            status.textContent = `Failed to load the full dataset: ${err.message}`;
+            status.dataset.state = "warning";
+          }
+        } finally {
+          btn.disabled = false;
+        }
       } else {
+        showingAll = false;
         data = filteredData;
         btn.textContent = "Show All 49 Sectors";
         btn.classList.remove("active");
@@ -339,14 +424,27 @@
     });
     document.addEventListener("click", () => menu.classList.remove("open"));
 
-    document.getElementById("dlFull").addEventListener("click", (e) => {
+    document.getElementById("dlFull").addEventListener("click", async (e) => {
       e.preventDefault();
-      downloadCSV(data.occupations, "occupations.csv");
+      menu.classList.remove("open");
+      const link = e.currentTarget;
+      const originalLabel = link.textContent;
+      link.textContent = "Preparing full export...";
+      link.classList.add("busy");
+      try {
+        const dataset = await loadAllData();
+        downloadCSV(dataset.occupations, "occupations.csv");
+      } finally {
+        link.textContent = originalLabel;
+        link.classList.remove("busy");
+      }
     });
 
-    document.getElementById("dlH2").addEventListener("click", (e) => {
+    document.getElementById("dlH2").addEventListener("click", async (e) => {
       e.preventDefault();
-      const h2 = data.occupations.filter(o => (o.scores || {}).h2_adjacency >= 7);
+      menu.classList.remove("open");
+      const dataset = await loadAllData();
+      const h2 = dataset.occupations.filter(o => (o.scores || {}).h2_adjacency >= 7);
       downloadCSV(h2, "h2-ready-occupations.csv");
     });
   }
@@ -359,11 +457,9 @@
     const rows = [headers.join(",")];
     for (const occ of occupations) {
       const vals = headers.map(h => {
-        if (h in (occ.scores || {})) return occ.scores[h] ?? "";
+        if (h in (occ.scores || {})) return csvEscape(occ.scores[h] ?? "");
         const v = occ[h];
-        if (v == null) return "";
-        if (typeof v === "string" && v.includes(",")) return `"${v}"`;
-        return v;
+        return csvEscape(v);
       });
       rows.push(vals.join(","));
     }
@@ -375,6 +471,15 @@
     a.download = filename;
     a.click();
     URL.revokeObjectURL(url);
+  }
+
+  function csvEscape(value) {
+    if (value == null) return "";
+    const text = String(value);
+    if (/[",\n\r]/.test(text)) {
+      return `"${text.replace(/"/g, "\"\"")}"`;
+    }
+    return text;
   }
 
   // --- Init ---
