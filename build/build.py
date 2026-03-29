@@ -299,6 +299,8 @@ def inject_base_url(base_url: str):
 
 def sync_model_data():
     """Copy model JSON files to docs/ and web/ for frontend access."""
+    os.makedirs(DOCS_DIR, exist_ok=True)
+    os.makedirs(WEB_DIR, exist_ok=True)
     for filename in MODEL_JSON_FILES:
         source = os.path.join(MODEL_DIR, filename)
         if not os.path.exists(source):

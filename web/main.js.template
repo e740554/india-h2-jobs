@@ -87,15 +87,19 @@
   function computeScenarioDemand(targetMt) {
     if (!archetypeData || archetypeData.length === 0) return null;
     const archetype = archetypeData[0]; // alkaline_1gw
+    if (!archetype.h2_output_mt_per_year) return null; // guard against zero/missing
     const units = targetMt / archetype.h2_output_mt_per_year;
 
     const results = {}; // occupation_id -> { demand, phases: { construction: N, ... } }
+    // Always compute against the filtered H2-relevant dataset, not the mutable
+    // `data` global (which changes when "Show All 49 Sectors" is toggled).
+    const sourceOccs = filteredData.occupations;
 
     for (const coeff of archetype.coefficients) {
       const rawDemand = units * coeff.headcount_per_unit;
 
       // Find matching occupations
-      const matching = data.occupations.filter(
+      const matching = sourceOccs.filter(
         occ => occ.nco_code && occ.nco_code.substring(0, 4) === coeff.nco_group
       );
 
@@ -764,7 +768,7 @@
       setupDownloads();
 
       // Setup scenario mode if archetype data loaded
-      if (archetypeData) {
+      if (archetypeData && archetypeData.length > 0) {
         setupScenarioMode();
       } else {
         document.getElementById("modeToggle").style.display = "none";

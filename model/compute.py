@@ -47,10 +47,12 @@ def compute_demand(target_mt: float, archetype: dict, occupations: list) -> list
       - source: str
       - source_type: str
     """
-    if target_mt == 0:
+    if target_mt <= 0:
         return []
 
-    h2_output = archetype["h2_output_mt_per_year"]
+    h2_output = archetype.get("h2_output_mt_per_year", 0)
+    if not h2_output:
+        return []
     units = target_mt / h2_output
 
     # Index occupations by 4-digit NCO group
@@ -171,6 +173,9 @@ def export_demand_csv(demand_records: list, occupations: list, output_path: str)
         "source_type",
     ]
 
+    parent = os.path.dirname(output_path)
+    if parent:
+        os.makedirs(parent, exist_ok=True)
     with open(output_path, "w", newline="") as f:
         writer = csv.DictWriter(f, fieldnames=fieldnames)
         writer.writeheader()
