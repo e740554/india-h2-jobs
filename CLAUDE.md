@@ -11,6 +11,10 @@ scrape/ -> parse/ -> tabulate/ -> score/ -> build/
 NCS Portal   normalize   occupations.csv   Claude Code   docs/ publish output
 PLFS PDF     dedupe                       6 dimensions   + JSON/CSV + main.js
 NCVET/NQR                                  scores.json   web/ ignored dev copies
+
+model/archetypes.json   (asset archetypes + occupation coefficients)
+model/scenarios.json    (NGHM scenario presets)
+model/compute.py        (Python validation + CSV export, mirrors JS engine)
 ```
 
 ## Key Commands

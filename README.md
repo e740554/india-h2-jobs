@@ -10,11 +10,11 @@ Labour-market joins are still incomplete in this release. PLFS employment, wage,
 ## Architecture
 
 ```text
-[ Data Pipeline ]     [ LLM Scoring ]     [ Frontend Atlas ]
-  Python scripts        Claude Code         Static HTML/JS/D3
-  NCS scraper +         6 H2-centric        Treemap + summary bar
-  planned PLFS/NCVET    dimensions          + CSV download
-  -> occupations.csv    -> scores.json      -> hygoat.in/workforce-atlas
+[ Data Pipeline ]     [ LLM Scoring ]     [ Scenario Engine ]     [ Frontend Atlas ]
+  Python scripts        Claude Code         model/archetypes.json   Static HTML/JS/D3
+  NCS scraper +         6 H2-centric        model/compute.py        Treemap + scenario mode
+  planned PLFS/NCVET    dimensions           MT -> demand chain      + slider + CSV download
+  -> occupations.csv    -> scores.json                               -> hygoat.in/workforce-atlas
 ```
 
 ## Data Sources
@@ -40,7 +40,8 @@ Labour-market joins are still incomplete in this release. PLFS employment, wage,
 
 - `web/` - source for the static shell, styles, logo, and `main.js.template`
 - `docs/` - generated GitHub Pages output committed to git
-- `tests/` - pytest unit tests for the pipeline
+- `model/` - scenario engine: archetype definitions, coefficients, and Python validation engine
+- `tests/` - pytest unit tests for the pipeline and Python/JS parity
 - `occupations.csv` - checked-in source tabulation for the current build
 - `scores.json` - checked-in scoring output for the current build
 
