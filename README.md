@@ -7,7 +7,7 @@ An open-source scored occupation atlas and scenario engine for India's green hyd
 Labour-market joins are still incomplete. PLFS employment, wage, and formality fields are not yet populated, so employment-based headline metrics remain unavailable until those joins land.
 
 **Live atlas:** [hygoat.in/workforce-atlas](https://hygoat.in/workforce-atlas) (canonical)  
-**Mirror:** [ekavikalp.github.io/india-h2-jobs](https://ekavikalp.github.io/india-h2-jobs)
+**Mirror:** [e740554.github.io/india-h2-jobs](https://e740554.github.io/india-h2-jobs/)
 
 ## Architecture
 
