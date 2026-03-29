@@ -1,8 +1,10 @@
 # India H2 Workforce Atlas
 
-An open-source scored occupation atlas for India's green hydrogen transition. The current checked-in build contains 1,802 scored occupations from the NCS portal, with a default filtered view of 480 occupations across 12 H2-relevant sectors.
+An open-source scored occupation atlas and scenario engine for India's green hydrogen transition. The current build contains 1,802 scored occupations from the NCS portal, with a default filtered view of 480 occupations across 12 H2-relevant sectors.
 
-Labour-market joins are still incomplete in this release. PLFS employment, wage, and formality fields are not populated in the checked-in dataset yet, so employment-based headline metrics should be treated as unavailable until those joins land.
+**New in v1.2:** Interactive scenario mode — set a hydrogen capacity target (1-10 MT) on a slider and see occupation-level workforce demand cascade across the treemap. One archetype (1 GW alkaline electrolyser) with 48 occupation coefficients across construction, commissioning, and operations phases.
+
+Labour-market joins are still incomplete. PLFS employment, wage, and formality fields are not yet populated, so employment-based headline metrics remain unavailable until those joins land.
 
 **Live atlas:** [hygoat.in/workforce-atlas](https://hygoat.in/workforce-atlas) (canonical)  
 **Mirror:** [ekavikalp.github.io/india-h2-jobs](https://ekavikalp.github.io/india-h2-jobs)
@@ -10,11 +12,11 @@ Labour-market joins are still incomplete in this release. PLFS employment, wage,
 ## Architecture
 
 ```text
-[ Data Pipeline ]     [ LLM Scoring ]     [ Frontend Atlas ]
-  Python scripts        Claude Code         Static HTML/JS/D3
-  NCS scraper +         6 H2-centric        Treemap + summary bar
-  planned PLFS/NCVET    dimensions          + CSV download
-  -> occupations.csv    -> scores.json      -> hygoat.in/workforce-atlas
+[ Data Pipeline ]     [ LLM Scoring ]     [ Scenario Engine ]     [ Frontend Atlas ]
+  Python scripts        Claude Code         model/archetypes.json   Static HTML/JS/D3
+  NCS scraper +         6 H2-centric        model/compute.py        Treemap + scenario mode
+  planned PLFS/NCVET    dimensions           MT -> demand chain      + slider + CSV download
+  -> occupations.csv    -> scores.json                               -> hygoat.in/workforce-atlas
 ```
 
 ## Data Sources
@@ -40,6 +42,8 @@ Labour-market joins are still incomplete in this release. PLFS employment, wage,
 
 - `web/` - source for the static shell, styles, logo, and `main.js.template`
 - `docs/` - generated GitHub Pages output committed to git
+- `model/` - scenario engine: archetype definitions, coefficients, and Python validation engine
+- `tests/` - pytest unit tests for the pipeline and Python/JS parity
 - `occupations.csv` - checked-in source tabulation for the current build
 - `scores.json` - checked-in scoring output for the current build
 
@@ -52,6 +56,12 @@ Generated JSON, CSV, and compiled JS do not belong in the repo root.
 ```bash
 cd docs && python -m http.server 8080
 # Open http://localhost:8080
+```
+
+To run the test suite (see [TESTING.md](TESTING.md) for details):
+
+```bash
+python -m pytest
 ```
 
 If you are editing the frontend source and want the ignored local-dev copies that mirror the build output:
@@ -77,10 +87,17 @@ python build/build.py              # Merge -> docs/ publish output + web/ dev co
 
 ## Current Build Status
 
-- Scored occupation atlas: available
+- Scored occupation atlas: available (480 H2-relevant occupations, 1,802 total)
+- Scenario engine (Phase 1): available — 1 archetype (alkaline electrolyser), 48 coefficients, 3 NGHM presets
 - NCS sector scrape completeness: pending pagination rerun
 - PLFS joins: not populated in checked-in dataset
 - NCVET joins: not populated in checked-in dataset
+
+## Roadmap
+
+- **Phase 1** (shipped v1.2.0.0): One archetype, real coefficients, interactive slider, demand treemap
+- **Phase 2** (planned): PLFS supply baseline + 3-5 more asset archetypes + actual supply gap computation
+- **Phase 3** (planned): Geography/cluster distribution, time phasing, reskilling pathway estimates
 
 ## Open Source Workflow
 

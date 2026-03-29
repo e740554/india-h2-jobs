@@ -1,0 +1,26 @@
+[
+  {
+    "id": "nghm_1mt_2027",
+    "name": "NGHM 1 MT Pilot",
+    "target_mt": 1,
+    "year": 2027,
+    "archetype_id": "alkaline_1gw",
+    "description": "Near-term pilot target of 1 million tonne per annum green hydrogen, testing domestic electrolyser manufacturing and early project delivery."
+  },
+  {
+    "id": "nghm_5mt_2030",
+    "name": "NGHM 5 MT by 2030",
+    "target_mt": 5,
+    "year": 2030,
+    "archetype_id": "alkaline_1gw",
+    "description": "National Green Hydrogen Mission target of 5 million tonnes per annum by 2030."
+  },
+  {
+    "id": "nghm_10mt_2035",
+    "name": "NGHM 10 MT Ambitious",
+    "target_mt": 10,
+    "year": 2035,
+    "archetype_id": "alkaline_1gw",
+    "description": "Ambitious stretch target of 10 million tonnes per annum by 2035, requiring accelerated electrolyser deployment and workforce scale-up."
+  }
+]

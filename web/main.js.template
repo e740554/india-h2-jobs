@@ -32,6 +32,13 @@
   let selectedOccupation = null;
   let showingAll = false;
 
+  // Scenario mode state
+  let archetypeData = null;
+  let scenarioMode = false;
+  let scenarioTarget = 5; // default MT
+  let demandResults = null; // computed demand per occupation
+  let savedMetricLabels = null; // original metric labels for restoring on mode switch
+
   // --- Data Loading ---
 
   function getAssetUrl(filename) {
@@ -65,6 +72,69 @@
         });
     }
     return allDataPromise;
+  }
+
+  async function loadArchetypes() {
+    try {
+      archetypeData = await loadJson("archetypes.json");
+    } catch (err) {
+      console.warn("Scenario data unavailable:", err.message);
+    }
+  }
+
+  // --- Scenario Engine ---
+
+  function computeScenarioDemand(targetMt) {
+    if (!archetypeData || archetypeData.length === 0) return null;
+    const archetype = archetypeData[0]; // alkaline_1gw
+    if (!archetype.h2_output_mt_per_year) return null; // guard against zero/missing
+    const units = targetMt / archetype.h2_output_mt_per_year;
+
+    const results = {}; // occupation_id -> { demand, phases: { construction: N, ... } }
+    // Always compute against the filtered H2-relevant dataset, not the mutable
+    // `data` global (which changes when "Show All 49 Sectors" is toggled).
+    const sourceOccs = filteredData.occupations;
+
+    for (const coeff of archetype.coefficients) {
+      const rawDemand = units * coeff.headcount_per_unit;
+
+      // Find matching occupations
+      const matching = sourceOccs.filter(
+        occ => occ.nco_code && occ.nco_code.substring(0, 4) === coeff.nco_group
+      );
+
+      if (matching.length === 0) continue; // unallocated
+
+      // Compute allocation weights
+      const weights = matching.map(occ => {
+        const scores = occ.scores || {};
+        return (scores.h2_adjacency || 0) + (scores.transition_demand || 0);
+      });
+      const totalWeight = weights.reduce((a, b) => a + b, 0);
+
+      matching.forEach((occ, i) => {
+        const normWeight = totalWeight > 0 ? weights[i] / totalWeight : 1 / matching.length;
+        const occDemand = Math.round(rawDemand * normWeight);
+
+        if (!results[occ.id]) {
+          results[occ.id] = { demand: 0, phases: {} };
+        }
+        results[occ.id].demand += occDemand;
+        results[occ.id].phases[coeff.phase] =
+          (results[occ.id].phases[coeff.phase] || 0) + occDemand;
+      });
+    }
+
+    return results;
+  }
+
+  function demandColour(demand) {
+    if (!demand || demand === 0) return "#374151"; // gray for ghosts
+    if (demand >= 1000) return "#ff8a00"; // bright orange - high demand
+    if (demand >= 500) return "#ffaa33";
+    if (demand >= 100) return "#ffcc66";
+    if (demand >= 10) return "#ffe599";
+    return "#fff3d6"; // light - low demand
   }
 
   // --- Colour ---
@@ -140,9 +210,18 @@
     const width = container.clientWidth;
     const height = container.clientHeight || 500;
 
+    // In scenario mode, filter out zero-demand occupations unless ghosts are shown
+    let displayOccs = data.occupations;
+    if (scenarioMode && demandResults) {
+      const showGhosts = document.getElementById("showGhosts")?.checked;
+      if (!showGhosts) {
+        displayOccs = data.occupations.filter(occ => demandResults[occ.id]?.demand > 0);
+      }
+    }
+
     // Build hierarchy: root -> sectors -> occupations
     const sectors = {};
-    for (const occ of data.occupations) {
+    for (const occ of displayOccs) {
       const s = occ.sector || "Other";
       if (!sectors[s]) sectors[s] = { name: s, children: [] };
       sectors[s].children.push(occ);
@@ -155,8 +234,12 @@
 
     const root = d3.hierarchy(hierarchy)
       .sum(d => {
-        // Leaf nodes: composite H2 relevance score as size
         if (d.id) {
+          if (scenarioMode && demandResults) {
+            const dr = demandResults[d.id];
+            return dr ? dr.demand : 0; // demand-based sizing
+          }
+          // Original atlas sizing
           const scores = d.scores || {};
           const h2 = scores.h2_adjacency || 0;
           const td = scores.transition_demand || 0;
@@ -210,6 +293,10 @@
       .attr("width", d => Math.max(0, d.x1 - d.x0))
       .attr("height", d => Math.max(0, d.y1 - d.y0))
       .attr("fill", d => {
+        if (scenarioMode && demandResults) {
+          const dr = demandResults[d.data.id];
+          return demandColour(dr ? dr.demand : 0);
+        }
         const scores = d.data.scores || {};
         return scoreColour(scores[activeDimension]);
       })
@@ -243,11 +330,27 @@
 
   function onCellHover(event, d) {
     const tooltip = document.getElementById("tooltip");
-    const scores = d.data.scores || {};
-    const score = scores[activeDimension];
-    const scoreText = score != null ? score.toFixed(1) : "N/A";
-    const dimLabel = DIMENSIONS.find(dim => dim.key === activeDimension)?.label || activeDimension;
-    tooltip.innerHTML = `<strong>${escapeHtml(decodeEntities(d.data.title))}</strong><br>${escapeHtml(dimLabel)}: ${scoreText}`;
+    if (scenarioMode && demandResults) {
+      const dr = demandResults[d.data.id];
+      const demandText = dr ? dr.demand.toLocaleString() + " workers" : "No demand";
+      tooltip.textContent = "";
+      const strong = document.createElement("strong");
+      strong.textContent = decodeEntities(d.data.title);
+      tooltip.appendChild(strong);
+      tooltip.appendChild(document.createElement("br"));
+      tooltip.appendChild(document.createTextNode("Demand: " + demandText));
+    } else {
+      const scores = d.data.scores || {};
+      const score = scores[activeDimension];
+      const scoreText = score != null ? score.toFixed(1) : "N/A";
+      const dimLabel = DIMENSIONS.find(dim => dim.key === activeDimension)?.label || activeDimension;
+      tooltip.textContent = "";
+      const strong = document.createElement("strong");
+      strong.textContent = decodeEntities(d.data.title);
+      tooltip.appendChild(strong);
+      tooltip.appendChild(document.createElement("br"));
+      tooltip.appendChild(document.createTextNode(dimLabel + ": " + scoreText));
+    }
     tooltip.style.display = "block";
   }
 
@@ -333,9 +436,68 @@
       const combined = (h2 + td).toFixed(1);
       const item = document.createElement("div");
       item.className = "upskill-item";
-      item.innerHTML = `<span>${escapeHtml(decodeEntities(target.title))}</span><span class="upskill-score">${combined}</span>`;
+      const titleSpan = document.createElement("span");
+      titleSpan.textContent = decodeEntities(target.title);
+      const scoreSpan = document.createElement("span");
+      scoreSpan.className = "upskill-score";
+      scoreSpan.textContent = combined;
+      item.appendChild(titleSpan);
+      item.appendChild(scoreSpan);
       item.addEventListener("click", () => highlightCell(targetId));
       listEl.appendChild(item);
+    }
+
+    // Scenario demand details in sidebar
+    const scenarioSection = document.getElementById("scenarioDetails");
+    if (scenarioMode && demandResults && scenarioSection) {
+      const dr = demandResults[occ.id];
+      if (dr) {
+        scenarioSection.style.display = "block";
+        document.getElementById("sbDemand").textContent = dr.demand.toLocaleString();
+        // Phase breakdown bars
+        const phaseBars = document.getElementById("phaseBars");
+        phaseBars.textContent = "";
+        for (const [phase, count] of Object.entries(dr.phases)) {
+          const pct = (count / dr.demand) * 100;
+          const row = document.createElement("div");
+          row.className = "score-bar-row";
+          const label = document.createElement("span");
+          label.className = "score-bar-label";
+          label.textContent = phase;
+          const track = document.createElement("div");
+          track.className = "score-bar-track";
+          const fill = document.createElement("div");
+          fill.className = "score-bar-fill";
+          fill.style.width = pct + "%";
+          fill.style.background = "var(--color-goat)";
+          track.appendChild(fill);
+          const value = document.createElement("span");
+          value.className = "score-bar-value";
+          value.textContent = count.toLocaleString();
+          row.appendChild(label);
+          row.appendChild(track);
+          row.appendChild(value);
+          phaseBars.appendChild(row);
+        }
+        // Show coefficient source
+        const ncoGroup = (occ.nco_code || "").substring(0, 4);
+        const archetype = archetypeData[0];
+        const matchingCoeffs = archetype.coefficients.filter(c => c.nco_group === ncoGroup);
+        const coeffEl = document.getElementById("coeffSource");
+        coeffEl.textContent = "";
+        if (matchingCoeffs.length > 0) {
+          for (const c of matchingCoeffs) {
+            const item = document.createElement("div");
+            item.className = "coeff-item";
+            item.textContent = "Source: " + c.source + " (" + c.source_type + ")";
+            coeffEl.appendChild(item);
+          }
+        }
+      } else {
+        scenarioSection.style.display = "none";
+      }
+    } else if (scenarioSection) {
+      scenarioSection.style.display = "none";
     }
   }
 
@@ -368,6 +530,10 @@
   function recolourTreemap() {
     d3.selectAll("#treemap rect[data-id]").attr("fill", function () {
       const id = this.getAttribute("data-id");
+      if (scenarioMode && demandResults) {
+        const dr = demandResults[id];
+        return demandColour(dr ? dr.demand : 0);
+      }
       const occ = data.occupations.find(o => o.id === id);
       if (!occ) return NULL_COLOUR;
       return scoreColour((occ.scores || {})[activeDimension]);
@@ -482,16 +648,131 @@
     return text;
   }
 
+  // --- Scenario Mode ---
+
+  function saveMetricLabels() {
+    // Use innerHTML to preserve nested elements (e.g. tooltip-trigger in gap label)
+    savedMetricLabels = {
+      h2Ready: document.querySelector("#metricH2Ready + .metric-label")?.innerHTML || "",
+      gap: document.querySelector("#metricGap + .metric-label")?.innerHTML || "",
+      upskill: document.querySelector("#metricUpskill + .metric-label")?.innerHTML || "",
+    };
+  }
+
+  function restoreAtlasMetrics() {
+    if (!savedMetricLabels) return;
+    const h2Label = document.querySelector("#metricH2Ready + .metric-label");
+    const gapLabel = document.querySelector("#metricGap + .metric-label");
+    const upskillLabel = document.querySelector("#metricUpskill + .metric-label");
+    // Restore using innerHTML to preserve nested elements like tooltip triggers
+    if (h2Label) h2Label.innerHTML = savedMetricLabels.h2Ready;
+    if (gapLabel) gapLabel.innerHTML = savedMetricLabels.gap;
+    if (upskillLabel) upskillLabel.innerHTML = savedMetricLabels.upskill;
+    updateSummary();
+  }
+
+  function setupScenarioMode() {
+    // Mode toggle
+    document.querySelectorAll(".mode-btn").forEach(btn => {
+      btn.addEventListener("click", () => {
+        document.querySelectorAll(".mode-btn").forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+        const mode = btn.dataset.mode;
+        scenarioMode = (mode === "scenario");
+
+        document.getElementById("scenarioBar").style.display = scenarioMode ? "block" : "none";
+
+        // Toggle legends
+        document.getElementById("atlasLegend").style.display = scenarioMode ? "none" : "flex";
+        document.getElementById("scenarioLegend").style.display = scenarioMode ? "flex" : "none";
+
+        // Toggle dimension pills visibility in scenario mode
+        const pillsContainer = document.querySelector(".controls");
+        if (pillsContainer) {
+          const pills = pillsContainer.querySelector(".pills");
+          const controlsLabel = pillsContainer.querySelector(".controls-label");
+          if (pills) pills.style.display = scenarioMode ? "none" : "flex";
+          if (controlsLabel) controlsLabel.style.display = scenarioMode ? "none" : "";
+        }
+
+        // Disable sector toggle in scenario mode
+        const sectorBtn = document.getElementById("toggleSectors");
+        if (sectorBtn) {
+          sectorBtn.disabled = scenarioMode;
+          if (scenarioMode) sectorBtn.title = "Sector toggle unavailable in scenario mode";
+          else sectorBtn.title = "";
+        }
+
+        if (scenarioMode) {
+          updateScenario();
+        } else {
+          demandResults = null;
+          restoreAtlasMetrics();
+          buildTreemap();
+        }
+      });
+    });
+
+    // MT slider with debounce
+    const slider = document.getElementById("mtSlider");
+    let sliderTimer;
+    slider.addEventListener("input", () => {
+      scenarioTarget = parseFloat(slider.value);
+      document.getElementById("mtValue").textContent = scenarioTarget.toFixed(1) + " MT";
+      clearTimeout(sliderTimer);
+      sliderTimer = setTimeout(updateScenario, 150);
+    });
+
+    // Ghost toggle
+    document.getElementById("showGhosts")?.addEventListener("change", () => {
+      if (scenarioMode) buildTreemap();
+    });
+  }
+
+  function updateScenario() {
+    demandResults = computeScenarioDemand(scenarioTarget);
+    if (demandResults) {
+      const totalDemand = Object.values(demandResults).reduce((sum, r) => sum + r.demand, 0);
+      document.getElementById("mtDemand").textContent = totalDemand.toLocaleString() + " workers";
+
+      // Update summary metrics for scenario
+      const total = totalDemand;
+      document.getElementById("metricH2Ready").textContent = Object.keys(demandResults).length.toLocaleString();
+      const h2Label = document.querySelector("#metricH2Ready + .metric-label");
+      if (h2Label) h2Label.textContent = "OCCUPATIONS IN DEMAND";
+
+      const gapEl = document.getElementById("metricGap");
+      gapEl.textContent = total.toLocaleString();
+      gapEl.classList.remove("metric-value-muted");
+      const gapLabel = document.querySelector("#metricGap + .metric-label");
+      if (gapLabel) gapLabel.textContent = "TOTAL WORKFORCE DEMAND";
+
+      document.getElementById("metricUpskill").textContent =
+        Math.round(scenarioTarget / archetypeData[0].h2_output_mt_per_year).toLocaleString();
+      const upskillLabel = document.querySelector("#metricUpskill + .metric-label");
+      if (upskillLabel) upskillLabel.textContent = "PLANT UNITS NEEDED";
+    }
+    buildTreemap();
+  }
+
   // --- Init ---
 
   async function init() {
     try {
-      await loadData();
+      await Promise.all([loadData(), loadArchetypes()]);
       updateSummary();
+      saveMetricLabels();
       buildTreemap();
       setupDimensionPills();
       setupSectorToggle();
       setupDownloads();
+
+      // Setup scenario mode if archetype data loaded
+      if (archetypeData && archetypeData.length > 0) {
+        setupScenarioMode();
+      } else {
+        document.getElementById("modeToggle").style.display = "none";
+      }
 
       // Rebuild on resize
       let resizeTimer;
@@ -501,8 +782,13 @@
       });
     } catch (err) {
       console.error("Atlas init error:", err);
-      document.getElementById("treemap").innerHTML =
-        `<div style="padding:2rem;color:#dc2626">Failed to load data. ${err.message}</div>`;
+      const treemap = document.getElementById("treemap");
+      treemap.textContent = "";
+      const errDiv = document.createElement("div");
+      errDiv.style.padding = "2rem";
+      errDiv.style.color = "#dc2626";
+      errDiv.textContent = "Failed to load data. " + err.message;
+      treemap.appendChild(errDiv);
     }
   }
 
