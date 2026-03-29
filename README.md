@@ -40,6 +40,7 @@ Labour-market joins are still incomplete in this release. PLFS employment, wage,
 
 - `web/` - source for the static shell, styles, logo, and `main.js.template`
 - `docs/` - generated GitHub Pages output committed to git
+- `tests/` - pytest unit tests for the pipeline
 - `occupations.csv` - checked-in source tabulation for the current build
 - `scores.json` - checked-in scoring output for the current build
 
@@ -52,6 +53,12 @@ Generated JSON, CSV, and compiled JS do not belong in the repo root.
 ```bash
 cd docs && python -m http.server 8080
 # Open http://localhost:8080
+```
+
+To run the test suite (see [TESTING.md](TESTING.md) for details):
+
+```bash
+python -m pytest
 ```
 
 If you are editing the frontend source and want the ignored local-dev copies that mirror the build output:

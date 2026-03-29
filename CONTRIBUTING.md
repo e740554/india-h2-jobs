@@ -22,6 +22,7 @@ cd web && python -m http.server 8080
 
 ## Before Opening A PR
 
+- Run `python -m pytest` and confirm all tests pass
 - Rebuild with `python build/build.py --base-url ""`
 - Verify the current checked-in dataset claims still match the generated output
 - Commit `docs/` changes when the published site changes
