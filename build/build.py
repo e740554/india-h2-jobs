@@ -13,19 +13,23 @@ import argparse
 import csv
 import json
 import os
+import shutil
 from datetime import date
 
 PROJECT_ROOT = os.path.join(os.path.dirname(__file__), "..")
 OCCUPATIONS_CSV = os.path.join(PROJECT_ROOT, "occupations.csv")
 SCORES_FILE = os.path.join(PROJECT_ROOT, "scores.json")
-OUTPUT_JSON = os.path.join(PROJECT_ROOT, "occupations.json")
-OUTPUT_JSON_ALL = os.path.join(PROJECT_ROOT, "occupations-all.json")
-OUTPUT_CSV_FULL = os.path.join(PROJECT_ROOT, "occupations.csv")
-OUTPUT_CSV_H2 = os.path.join(PROJECT_ROOT, "h2-ready-occupations.csv")
-TEMPLATE_FILE = os.path.join(PROJECT_ROOT, "web", "main.js.template")
-PUBLIC_DIRS = [
-    os.path.join(PROJECT_ROOT, "web"),
-    os.path.join(PROJECT_ROOT, "docs"),
+DOCS_DIR = os.path.join(PROJECT_ROOT, "docs")
+WEB_DIR = os.path.join(PROJECT_ROOT, "web")
+OUTPUT_JSON = os.path.join(DOCS_DIR, "occupations.json")
+OUTPUT_JSON_ALL = os.path.join(DOCS_DIR, "occupations-all.json")
+OUTPUT_CSV_H2 = os.path.join(DOCS_DIR, "h2-ready-occupations.csv")
+TEMPLATE_FILE = os.path.join(WEB_DIR, "main.js.template")
+STATIC_PUBLIC_FILES = [
+    ".nojekyll",
+    "index.html",
+    "style.css",
+    "hygoat-logo.svg",
 ]
 DATASET_VERSION = "1.1"
 
@@ -269,30 +273,44 @@ def write_h2_csv(occupations: list[dict]):
 
 
 def inject_base_url(base_url: str):
-    """Generate public main.js assets from template with BASE_URL injected."""
+    """Generate web/dev and docs/public JS assets from template with BASE_URL injected."""
     if not os.path.exists(TEMPLATE_FILE):
         print(f"WARN: Template not found at {TEMPLATE_FILE}, skipping JS generation")
         return
     with open(TEMPLATE_FILE, "r", encoding="utf-8") as f:
         template = f.read()
-    main_js = template.replace("__BASE_URL__", base_url)
-    for public_dir in PUBLIC_DIRS:
-        output_js = os.path.join(public_dir, "main.js")
-        with open(output_js, "w", encoding="utf-8") as f:
-            f.write(main_js)
-        print(f"Generated: {output_js} (base_url={base_url!r})")
+    os.makedirs(WEB_DIR, exist_ok=True)
+    os.makedirs(DOCS_DIR, exist_ok=True)
+
+    web_js = template.replace("__BASE_URL__", "")
+    web_output_js = os.path.join(WEB_DIR, "main.js")
+    with open(web_output_js, "w", encoding="utf-8") as f:
+        f.write(web_js)
+    print(f"Generated: {web_output_js} (base_url='')")
+
+    docs_js = template.replace("__BASE_URL__", base_url)
+    docs_output_js = os.path.join(DOCS_DIR, "main.js")
+    with open(docs_output_js, "w", encoding="utf-8") as f:
+        f.write(docs_js)
+    print(f"Generated: {docs_output_js} (base_url={base_url!r})")
 
 
-def copy_public_artifacts(*artifact_paths: str):
-    """Copy built artifacts to all public output directories."""
-    import shutil
+def sync_public_artifacts():
+    """Mirror source shell/assets into docs/ and docs data into ignored web/ dev copies."""
+    os.makedirs(WEB_DIR, exist_ok=True)
+    os.makedirs(DOCS_DIR, exist_ok=True)
 
-    for public_dir in PUBLIC_DIRS:
-        os.makedirs(public_dir, exist_ok=True)
-        for artifact_path in artifact_paths:
-            output_path = os.path.join(public_dir, os.path.basename(artifact_path))
-            shutil.copy2(artifact_path, output_path)
-            print(f"Copied: {output_path}")
+    for filename in STATIC_PUBLIC_FILES:
+        source_path = os.path.join(WEB_DIR, filename)
+        output_path = os.path.join(DOCS_DIR, filename)
+        if os.path.exists(source_path):
+            shutil.copy2(source_path, output_path)
+            print(f"Copied static asset: {output_path}")
+
+    for docs_artifact in [OUTPUT_JSON, OUTPUT_JSON_ALL, OUTPUT_CSV_H2]:
+        web_output = os.path.join(WEB_DIR, os.path.basename(docs_artifact))
+        shutil.copy2(docs_artifact, web_output)
+        print(f"Copied dev data: {web_output}")
 
 
 def main():
@@ -373,11 +391,11 @@ def main():
     # Write H2 CSV
     write_h2_csv(occupations)
 
-    # Copy public artifacts to web/ and docs/
-    copy_public_artifacts(OUTPUT_JSON, OUTPUT_JSON_ALL, OUTPUT_CSV_H2)
-
     # Generate JS
     inject_base_url(args.base_url)
+
+    # Sync static shell/assets and ignored dev data copies
+    sync_public_artifacts()
 
 
 if __name__ == "__main__":

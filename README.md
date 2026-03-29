@@ -36,13 +36,29 @@ Labour-market joins are still incomplete in this release. PLFS employment, wage,
 | Formalization Rate | Expected formality of employment in India |
 | H2 Talent Scarcity Risk | Whether the skill is likely to bottleneck scale-up |
 
+## Repository Layout
+
+- `web/` - source for the static shell, styles, logo, and `main.js.template`
+- `docs/` - generated GitHub Pages output committed to git
+- `occupations.csv` - checked-in source tabulation for the current build
+- `scores.json` - checked-in scoring output for the current build
+
+Generated JSON, CSV, and compiled JS do not belong in the repo root.
+
 ## Quick Start
 
-**Pre-built data ships with this repo.** No scraping or scoring is needed to explore the current atlas build:
+**Pre-built data ships with this repo.** If you only want to inspect the current published build:
 
 ```bash
-cd web && python -m http.server 8080
+cd docs && python -m http.server 8080
 # Open http://localhost:8080
+```
+
+If you are editing the frontend source and want the ignored local-dev copies that mirror the build output:
+
+```bash
+python build/build.py --base-url ""
+cd web && python -m http.server 8080
 ```
 
 ### Full Pipeline (maintainers only)
@@ -56,7 +72,7 @@ python scrape/download_plfs.py     # Download PLFS source PDFs
 python parse/parse_occupations.py  # Parse raw data
 python tabulate/tabulate.py        # Generate occupations.csv
 python score/score.py              # Score via Claude Code
-python build/build.py              # Merge -> occupations.json + public assets
+python build/build.py              # Merge -> docs/ publish output + web/ dev copies
 ```
 
 ## Current Build Status
@@ -65,6 +81,15 @@ python build/build.py              # Merge -> occupations.json + public assets
 - NCS sector scrape completeness: pending pagination rerun
 - PLFS joins: not populated in checked-in dataset
 - NCVET joins: not populated in checked-in dataset
+
+## Open Source Workflow
+
+- Edit source files in `web/`, not generated files in `docs/`
+- Run `python build/build.py --base-url ""` before opening a PR
+- Commit regenerated `docs/` assets when the published atlas changes
+- Do not commit ignored local-dev files in `web/` or generated root artifacts
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for the contributor workflow.
 
 ## License
 

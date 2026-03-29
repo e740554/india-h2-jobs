@@ -7,10 +7,10 @@ Open-source Python pipeline plus D3 treemap for a scored green-hydrogen occupati
 ## Architecture
 
 ```text
-scrape/ -> parse/ -> tabulate/ -> score/ -> build/ -> web/ + docs/
-NCS Portal   normalize   occupations.csv   Claude Code   occupations.json   D3 treemap
-PLFS PDF     dedupe                       6 dimensions  + main.js           + sidebar
-NCVET/NQR                                  scores.json  + CSV exports       + CSV download
+scrape/ -> parse/ -> tabulate/ -> score/ -> build/
+NCS Portal   normalize   occupations.csv   Claude Code   docs/ publish output
+PLFS PDF     dedupe                       6 dimensions   + JSON/CSV + main.js
+NCVET/NQR                                  scores.json   web/ ignored dev copies
 ```
 
 ## Key Commands
@@ -22,9 +22,12 @@ python parse/parse_occupations.py    # Parse raw data
 python tabulate/tabulate.py          # Generate occupations.csv
 python score/score.py --dry-run      # Check what needs scoring
 python score/merge_results.py        # Merge batch results into scores.json
-python build/build.py --base-url ""  # Build JSON + public assets
+python build/build.py --base-url ""  # Build docs/ publish output + web/ dev copies
 
-# Dev server
+# Published build preview
+cd docs && python -m http.server 8080
+
+# Frontend source preview after a build
 cd web && python -m http.server 8080
 
 # Scoring (via Claude Code subagents, not API)
@@ -49,7 +52,11 @@ See `DATASOURCES.md` for full documentation.
 
 ## Deployment
 
-GitHub Pages mirror from `docs/` plus local/dev assets in `web/`. No CI/CD; manual push.
+`web/` is the source tree for static assets and `main.js.template`.
+`docs/` is the committed GitHub Pages output.
+The build also writes ignored dev copies into `web/` so local preview stays simple.
+
+Do not edit generated files in `docs/` by hand. Rebuild from source instead.
 
 ```bash
 python build/build.py --base-url ""

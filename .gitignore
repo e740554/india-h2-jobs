@@ -2,6 +2,7 @@ venv/
 __pycache__/
 *.pyc
 .env
+.claude/
 node_modules/
 scrape/raw/
 score/batches/
@@ -13,6 +14,8 @@ web/main.js
 web/occupations.json
 web/occupations-all.json
 web/h2-ready-occupations.csv
-web/hygoat-logo.svg
+/occupations.json
 /occupations-all.json
+/h2-ready-occupations.csv
 parse/parsed_occupations.json
+CLAUDE.md
