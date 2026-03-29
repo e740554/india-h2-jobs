@@ -24,7 +24,7 @@ python -m pytest -v
 ### Unit tests (`tests/test_build.py`)
 Pure function tests — no file I/O, no network. Each test exercises a single function with clear inputs and meaningful assertions about what the code does.
 
-Currently covers `build/build.py`:
+Currently covers `build/build.py` (23 tests):
 - `pct()` — percentage calculation including zero-division guard
 - `count_present()` / `count_true()` — field counting with None handling
 - `merge_scores()` — score attachment with dict format, raw format, and missing occupation
@@ -32,6 +32,20 @@ Currently covers `build/build.py`:
 - `compute_workforce_gap()` — gap formula, None-return conditions, zero-clamp
 - `compute_summary_metrics()` — h2_ready and fast_upskill counts
 - `compute_data_quality()` — labour_market_status (pending/complete), notes generation
+- `sync_model_data()` — model JSON copying with missing-file warning
+
+### Scenario engine tests (`tests/test_compute.py`)
+29 tests covering `model/compute.py`:
+- `load_archetype()` / `load_scenarios()` — file loading and ID lookup
+- `compute_demand()` — 5-step model chain: zero/negative target, single/multiple occupations, equal/unequal weights, missing scores, no matching NCO group, unallocated demand, integer rounding, source field preservation, linear scaling
+- `aggregate_demand()` — total/phase/group/occupation summaries, mathematical consistency
+- `export_demand_csv()` — file writing, column correctness, unallocated rows
+- Full pipeline integration with real archetype data
+
+### Parity tests (`tests/test_parity.py`)
+3 tests verifying Python `compute.py` and JavaScript `computeScenarioDemand()` produce identical results:
+- Demand match at 1 MT and 5 MT targets
+- Total workforce demand sum consistency
 
 ### Integration tests
 Not yet implemented. Key target: full `build.py` run against a small fixture CSV + scores JSON, asserting the shape and content of `occupations.json`.

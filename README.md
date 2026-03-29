@@ -1,8 +1,10 @@
 # India H2 Workforce Atlas
 
-An open-source scored occupation atlas for India's green hydrogen transition. The current checked-in build contains 1,802 scored occupations from the NCS portal, with a default filtered view of 480 occupations across 12 H2-relevant sectors.
+An open-source scored occupation atlas and scenario engine for India's green hydrogen transition. The current build contains 1,802 scored occupations from the NCS portal, with a default filtered view of 480 occupations across 12 H2-relevant sectors.
 
-Labour-market joins are still incomplete in this release. PLFS employment, wage, and formality fields are not populated in the checked-in dataset yet, so employment-based headline metrics should be treated as unavailable until those joins land.
+**New in v1.2:** Interactive scenario mode — set a hydrogen capacity target (1-10 MT) on a slider and see occupation-level workforce demand cascade across the treemap. One archetype (1 GW alkaline electrolyser) with 48 occupation coefficients across construction, commissioning, and operations phases.
+
+Labour-market joins are still incomplete. PLFS employment, wage, and formality fields are not yet populated, so employment-based headline metrics remain unavailable until those joins land.
 
 **Live atlas:** [hygoat.in/workforce-atlas](https://hygoat.in/workforce-atlas) (canonical)  
 **Mirror:** [ekavikalp.github.io/india-h2-jobs](https://ekavikalp.github.io/india-h2-jobs)
@@ -85,10 +87,17 @@ python build/build.py              # Merge -> docs/ publish output + web/ dev co
 
 ## Current Build Status
 
-- Scored occupation atlas: available
+- Scored occupation atlas: available (480 H2-relevant occupations, 1,802 total)
+- Scenario engine (Phase 1): available — 1 archetype (alkaline electrolyser), 48 coefficients, 3 NGHM presets
 - NCS sector scrape completeness: pending pagination rerun
 - PLFS joins: not populated in checked-in dataset
 - NCVET joins: not populated in checked-in dataset
+
+## Roadmap
+
+- **Phase 1** (shipped v1.2.0.0): One archetype, real coefficients, interactive slider, demand treemap
+- **Phase 2** (planned): PLFS supply baseline + 3-5 more asset archetypes + actual supply gap computation
+- **Phase 3** (planned): Geography/cluster distribution, time phasing, reskilling pathway estimates
 
 ## Open Source Workflow
 
