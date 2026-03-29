@@ -17,6 +17,8 @@ import shutil
 from datetime import date
 
 PROJECT_ROOT = os.path.join(os.path.dirname(__file__), "..")
+MODEL_DIR = os.path.join(PROJECT_ROOT, "model")
+MODEL_JSON_FILES = ["archetypes.json", "scenarios.json"]
 OCCUPATIONS_CSV = os.path.join(PROJECT_ROOT, "occupations.csv")
 SCORES_FILE = os.path.join(PROJECT_ROOT, "scores.json")
 DOCS_DIR = os.path.join(PROJECT_ROOT, "docs")
@@ -295,6 +297,19 @@ def inject_base_url(base_url: str):
     print(f"Generated: {docs_output_js} (base_url={base_url!r})")
 
 
+def sync_model_data():
+    """Copy model JSON files to docs/ and web/ for frontend access."""
+    for filename in MODEL_JSON_FILES:
+        source = os.path.join(MODEL_DIR, filename)
+        if not os.path.exists(source):
+            print(f"WARN: Model file not found: {source}")
+            continue
+        for target_dir in [DOCS_DIR, WEB_DIR]:
+            target = os.path.join(target_dir, filename)
+            shutil.copy2(source, target)
+            print(f"Copied model data: {target}")
+
+
 def sync_public_artifacts():
     """Mirror source shell/assets into docs/ and docs data into ignored web/ dev copies."""
     os.makedirs(WEB_DIR, exist_ok=True)
@@ -396,6 +411,9 @@ def main():
 
     # Sync static shell/assets and ignored dev data copies
     sync_public_artifacts()
+
+    # Copy model JSON files to docs/ and web/
+    sync_model_data()
 
 
 if __name__ == "__main__":

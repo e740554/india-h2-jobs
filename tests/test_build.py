@@ -1,7 +1,9 @@
 """Tests for build/build.py pipeline functions."""
 
+import json
 import sys
 import os
+import tempfile
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 
@@ -14,6 +16,7 @@ from build.build import (
     compute_workforce_gap,
     compute_summary_metrics,
     compute_data_quality,
+    sync_model_data,
     H2_ADJACENCY_THRESHOLD,
 )
 
@@ -217,3 +220,65 @@ def test_compute_data_quality_notes_when_incomplete():
               "scores": {}}]
     result = compute_data_quality(occs)
     assert len(result["notes"]) > 0
+
+
+# --- sync_model_data ---
+
+def test_sync_model_data_copies_files_to_docs_and_web(monkeypatch, tmp_path):
+    """sync_model_data copies each MODEL_JSON_FILES entry from MODEL_DIR to DOCS_DIR and WEB_DIR."""
+    import build.build as build_module
+
+    model_dir = tmp_path / "model"
+    docs_dir = tmp_path / "docs"
+    web_dir = tmp_path / "web"
+    model_dir.mkdir()
+    docs_dir.mkdir()
+    web_dir.mkdir()
+
+    # Write fake model JSON files
+    sample_data = {"test": True}
+    for filename in ["archetypes.json", "scenarios.json"]:
+        (model_dir / filename).write_text(json.dumps(sample_data), encoding="utf-8")
+
+    # Patch module-level constants
+    monkeypatch.setattr(build_module, "MODEL_DIR", str(model_dir))
+    monkeypatch.setattr(build_module, "DOCS_DIR", str(docs_dir))
+    monkeypatch.setattr(build_module, "WEB_DIR", str(web_dir))
+
+    sync_model_data()
+
+    for filename in ["archetypes.json", "scenarios.json"]:
+        docs_file = docs_dir / filename
+        web_file = web_dir / filename
+        assert docs_file.exists(), f"Expected {docs_file} to exist in docs/"
+        assert web_file.exists(), f"Expected {web_file} to exist in web/"
+        assert json.loads(docs_file.read_text()) == sample_data
+        assert json.loads(web_file.read_text()) == sample_data
+
+
+def test_sync_model_data_warns_on_missing_file(monkeypatch, tmp_path, capsys):
+    """sync_model_data prints a WARN and skips files that don't exist in MODEL_DIR."""
+    import build.build as build_module
+
+    model_dir = tmp_path / "model"
+    docs_dir = tmp_path / "docs"
+    web_dir = tmp_path / "web"
+    model_dir.mkdir()
+    docs_dir.mkdir()
+    web_dir.mkdir()
+
+    # Only write archetypes.json — scenarios.json is absent
+    (model_dir / "archetypes.json").write_text(json.dumps({}), encoding="utf-8")
+
+    monkeypatch.setattr(build_module, "MODEL_DIR", str(model_dir))
+    monkeypatch.setattr(build_module, "DOCS_DIR", str(docs_dir))
+    monkeypatch.setattr(build_module, "WEB_DIR", str(web_dir))
+
+    sync_model_data()
+
+    captured = capsys.readouterr()
+    assert "WARN" in captured.out
+    assert "scenarios.json" in captured.out
+    # archetypes.json should still be copied
+    assert (docs_dir / "archetypes.json").exists()
+    assert not (docs_dir / "scenarios.json").exists()
