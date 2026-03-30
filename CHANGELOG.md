@@ -2,6 +2,35 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.4.0.0] - 2026-03-30
+
+### Added
+- **Phase 3 frontend/runtime integration** in the single-page atlas: geography filter, year slider,
+  phase recoloring, pathways tab/cards, empty states, and chunked CSV export progress
+- **Cluster distribution layer** with `model/clusters.json`, `model/clusters.py`, and synced
+  `docs/` / `web/` model data
+- **Timeline layer** with `model/timeline.py`, scenario `start_year` / `target_year`, and
+  annual workforce snapshots through `target_year + 5`
+- **Reskilling pathway layer** with `model/pathways.json`, `model/pathways.py`, and sidebar
+  pathway summaries including overlap, duration, cost, and bridging skills
+- **Extended export coverage** for current-view and full-snapshot CSV outputs with cluster, year,
+  phase, and pathway-derived fields
+- **New tests** for clusters, timeline, pathways, UI helper logic, and CSV export shape
+
+### Changed
+- `web/main.js.template` now exports a shared runtime used by both the browser SPA and the Node
+  parity harness
+- JS parity coverage now compares Python and JS cluster distribution and timeline output, not only
+  the single-archetype demand path
+- Build output now syncs `clusters.json` and `pathways.json` to `docs/` and `web/`
+- Documentation updated to reflect Phase 3 as shipped rather than planned
+
+### Fixed
+- JS rounding now matches Python's banker-style rounding for parity-sensitive timeline and cluster
+  calculations
+- Gap mode now shows the correct legend instead of inheriting the scenario legend
+- Full snapshot export and runtime helper coverage now validate the generated row set explicitly
+
 ## [1.3.0.0] - 2026-03-30
 
 ### Added

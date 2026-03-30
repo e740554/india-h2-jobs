@@ -237,7 +237,7 @@ def test_sync_model_data_copies_files_to_docs_and_web(monkeypatch, tmp_path):
 
     # Write fake model JSON files
     sample_data = {"test": True}
-    for filename in ["archetypes.json", "scenarios.json"]:
+    for filename in ["archetypes.json", "scenarios.json", "clusters.json", "pathways.json"]:
         (model_dir / filename).write_text(json.dumps(sample_data), encoding="utf-8")
 
     # Patch module-level constants
@@ -247,7 +247,7 @@ def test_sync_model_data_copies_files_to_docs_and_web(monkeypatch, tmp_path):
 
     sync_model_data()
 
-    for filename in ["archetypes.json", "scenarios.json"]:
+    for filename in ["archetypes.json", "scenarios.json", "clusters.json", "pathways.json"]:
         docs_file = docs_dir / filename
         web_file = web_dir / filename
         assert docs_file.exists(), f"Expected {docs_file} to exist in docs/"
@@ -279,6 +279,10 @@ def test_sync_model_data_warns_on_missing_file(monkeypatch, tmp_path, capsys):
     captured = capsys.readouterr()
     assert "WARN" in captured.out
     assert "scenarios.json" in captured.out
+    assert "clusters.json" in captured.out
+    assert "pathways.json" in captured.out
     # archetypes.json should still be copied
     assert (docs_dir / "archetypes.json").exists()
     assert not (docs_dir / "scenarios.json").exists()
+    assert not (docs_dir / "clusters.json").exists()
+    assert not (docs_dir / "pathways.json").exists()

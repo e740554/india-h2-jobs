@@ -25,6 +25,8 @@
       <div class="download-dropdown">
         <button class="btn-download" id="downloadBtn">&#x2B07; Download CSV &#x25BE;</button>
         <div class="dropdown-menu" id="downloadMenu">
+          <a href="#" id="dlView">Current View Snapshot (CSV)</a>
+          <a href="#" id="dlSnapshot">Full Scenario Snapshot (CSV)</a>
           <a href="#" id="dlFull">All Scored Occupations (CSV)</a>
           <a href="#" id="dlH2">H2-Ready Occupations (CSV)</a>
         </div>
@@ -76,8 +78,29 @@
       <span class="mt-value" id="mtValue">5.0 MT</span>
       <span class="mt-demand" id="mtDemand"></span>
     </div>
+    <div class="scenario-controls scenario-controls-secondary">
+      <label class="scenario-label" for="clusterSelect">Geography</label>
+      <select id="clusterSelect" class="scenario-select cluster-select"></select>
+      <label class="scenario-label" for="yearSlider">Year</label>
+      <input type="range" id="yearSlider" min="2026" max="2035" step="1" value="2030" class="mt-slider year-slider">
+      <span class="mt-value year-value" id="yearValue">2030</span>
+      <span class="mt-demand timeline-range" id="timelineRange"></span>
+      <span class="mt-demand timeline-note" id="timelineNote"></span>
+    </div>
+    <div class="scenario-context-bar" id="scenarioContext"></div>
+    <div class="scenario-context-bar sr-only" id="summaryAnnouncer" aria-live="polite"></div>
+    <div class="phase-legend">
+      <span class="phase-legend-item"><span class="legend-swatch" style="background:#3b82f6"></span>Construction</span>
+      <span class="phase-legend-item"><span class="legend-swatch" style="background:#8b5cf6"></span>Commissioning</span>
+      <span class="phase-legend-item"><span class="legend-swatch" style="background:#0d9488"></span>Operations</span>
+      <span class="phase-legend-item"><span class="legend-swatch" style="background:#6b7280"></span>Mixed</span>
+    </div>
     <div class="scenario-ghost-toggle">
       <label><input type="checkbox" id="showGhosts"> Show unmapped occupations</label>
+    </div>
+    <div class="csv-progress" id="csvProgress" hidden aria-live="assertive" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+      <div class="csv-progress-label" id="csvProgressLabel"></div>
+      <div class="csv-progress-track"><div class="csv-progress-fill" id="csvProgressFill"></div></div>
     </div>
   </div>
 
@@ -95,31 +118,46 @@
           <span id="sbNco"></span>
           <span id="sbEdu"></span>
         </div>
-        <div class="sb-stats">
-          <div class="sb-stat"><span class="sb-stat-label">Employment</span><span id="sbEmployment">--</span></div>
-          <div class="sb-stat"><span class="sb-stat-label">Median Wage</span><span id="sbWage">--</span></div>
+        <div class="sidebar-tabs" role="tablist" aria-label="Occupation details">
+          <button class="pill active" id="overviewTab" data-tab="overview" role="tab" aria-selected="true" aria-controls="overviewPanel">Overview</button>
+          <button class="pill" id="pathwaysTab" data-tab="pathways" role="tab" aria-selected="false" aria-controls="pathwaysPanel">
+            Pathways <span class="tab-badge" id="pathwaysBadge" data-state="empty">0</span>
+          </button>
         </div>
-        <h3>Scores</h3>
-        <div class="score-bars" id="scoreBars"></div>
-        <div id="scenarioDetails" style="display:none">
-          <h3>Scenario Demand</h3>
+        <div class="sidebar-panel" id="overviewPanel" data-panel="overview" role="tabpanel" aria-labelledby="overviewTab">
           <div class="sb-stats">
-            <div class="sb-stat"><span class="sb-stat-label">Total Demand</span><span id="sbDemand">--</span></div>
+            <div class="sb-stat"><span class="sb-stat-label">Employment</span><span id="sbEmployment">--</span></div>
+            <div class="sb-stat"><span class="sb-stat-label">Median Wage</span><span id="sbWage">--</span></div>
           </div>
-          <div id="phaseBars"></div>
-          <div id="archBreakdown" class="coeff-source"></div>
-          <div id="coeffSource" class="coeff-source"></div>
-        </div>
-        <div id="gapDetails" style="display:none">
-          <h3>Supply-Demand Gap</h3>
-          <div class="sb-stats">
-            <div class="sb-stat"><span class="sb-stat-label">PLFS Supply</span><span id="sbSupply">--</span></div>
-            <div class="sb-stat"><span class="sb-stat-label">Gap</span><span id="sbGap">--</span></div>
+          <h3>Scores</h3>
+          <div class="score-bars" id="scoreBars"></div>
+          <div id="scenarioDetails" style="display:none">
+            <h3>Scenario Demand</h3>
+            <div class="sb-stats">
+              <div class="sb-stat"><span class="sb-stat-label">Total Demand</span><span id="sbDemand">--</span></div>
+            </div>
+            <div id="phaseBars"></div>
+            <div id="archBreakdown" class="coeff-source"></div>
+            <div id="coeffSource" class="coeff-source"></div>
           </div>
-          <div class="gap-status-row"><span id="sbGapStatus"></span></div>
+          <div id="gapDetails" style="display:none">
+            <h3>Supply-Demand Gap</h3>
+            <div class="sb-stats">
+              <div class="sb-stat"><span class="sb-stat-label">PLFS Supply</span><span id="sbSupply">--</span></div>
+              <div class="sb-stat"><span class="sb-stat-label">Gap</span><span id="sbGap">--</span></div>
+            </div>
+            <div class="gap-status-row"><span id="sbGapStatus"></span></div>
+          </div>
+          <h3>Top 5 Upskill Paths - H2</h3>
+          <div class="upskill-list" id="upskillList"></div>
         </div>
-        <h3>Top 5 Upskill Paths - H2</h3>
-        <div class="upskill-list" id="upskillList"></div>
+        <div class="sidebar-panel" id="pathwaysPanel" data-panel="pathways" role="tabpanel" aria-labelledby="pathwaysTab" aria-live="polite" hidden>
+          <div class="pathways-summary" id="pathwaysSummary"></div>
+          <h3>Pathways In</h3>
+          <div id="pathwaysIn"></div>
+          <h3>Pathways Out</h3>
+          <div id="pathwaysOut"></div>
+        </div>
       </div>
     </aside>
   </div>
@@ -133,12 +171,10 @@
     <div class="legend-item"><span class="legend-swatch" style="background:#374151"></span>N/A</div>
   </div>
   <div class="legend scenario-legend" id="scenarioLegend" style="display:none">
-    <div class="legend-item"><span class="legend-swatch" style="background:#00994C"></span>&ge;1000 Critical</div>
-    <div class="legend-item"><span class="legend-swatch" style="background:#50C878"></span>500-999</div>
-    <div class="legend-item"><span class="legend-swatch" style="background:#86efac"></span>100-499</div>
-    <div class="legend-item"><span class="legend-swatch" style="background:#ff8a00"></span>10-99</div>
-    <div class="legend-item"><span class="legend-swatch" style="background:#dc2626"></span>1-9 Low demand</div>
-    <div class="legend-item"><span class="legend-swatch" style="background:#374151"></span>No demand</div>
+    <div class="legend-item"><span class="legend-swatch" style="background:#3b82f6"></span>Construction</div>
+    <div class="legend-item"><span class="legend-swatch" style="background:#8b5cf6"></span>Commissioning</div>
+    <div class="legend-item"><span class="legend-swatch" style="background:#0d9488"></span>Operations</div>
+    <div class="legend-item"><span class="legend-swatch" style="background:#6b7280"></span>Mixed - no dominant phase</div>
   </div>
   <div class="legend gap-legend" id="gapLegend" style="display:none">
     <div class="legend-item"><span class="legend-swatch" style="background:#991b1b"></span>Severe shortage</div>

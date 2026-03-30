@@ -14,6 +14,7 @@ from model.compute import (
     compute_demand,
     compute_demand_for_units,
     export_demand_csv,
+    load_archetypes,
     load_archetype,
     load_scenarios,
 )
@@ -108,6 +109,7 @@ def _make_demand_record(
 def test_load_archetype_returns_known_archetype():
     arch = load_archetype("alkaline_1gw")
     assert arch["id"] == "alkaline_1gw"
+    assert arch["construction_years"] == 3
     assert arch["h2_output_mt_per_year"] == 0.14
     assert len(arch["coefficients"]) > 0
 
@@ -131,9 +133,21 @@ def test_load_scenarios_contain_required_fields():
     scenarios = load_scenarios()
     for s in scenarios:
         assert "id" in s
+        assert "start_year" in s
+        assert "target_year" in s
         assert "target_mt" in s
+        assert "year" not in s
         # Single-archetype scenarios have archetype_id; multi-archetype have production
         assert "archetype_id" in s or "production" in s
+
+
+def test_load_archetypes_include_construction_years():
+    archetypes = load_archetypes()
+    construction_years = {arch["id"]: arch["construction_years"] for arch in archetypes}
+    assert construction_years["alkaline_1gw"] == 3
+    assert construction_years["pem_500mw"] == 3
+    assert construction_years["ammonia_1mtpa"] == 5
+    assert construction_years["solar_wind_hybrid_2gw"] == 2
 
 
 # ---------------------------------------------------------------------------

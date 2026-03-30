@@ -3,7 +3,59 @@
 **Date:** 2026-03-30
 **Branch:** `phase3/v1.3`
 **Version target:** 1.4.0.0
-**Status:** Design approved
+**Status:** Implemented
+
+## Implementation Update (2026-03-30)
+
+This spec is no longer design-only. The **full Phase 3 implementation is now in the codebase**, including the frontend/runtime pass:
+
+- **Implemented:** `model/clusters.json`, `model/pathways.json`, `model/clusters.py`, `model/timeline.py`, `model/pathways.py`
+- **Implemented:** `model/scenarios.json` migrated from `year` to `start_year` + `target_year`
+- **Implemented:** `model/archetypes.json` extended with archetype-level `construction_years`
+- **Implemented:** `build/build.py` now validates cluster affinities and pathway schema and syncs `clusters.json` + `pathways.json`
+- **Implemented:** frontend integration in `web/index.html`, `web/style.css`, and `web/main.js.template`, including geography filters, year slider, phase recoloring, pathway tabs/cards, chunked CSV exports, and empty states
+- **Implemented:** JS runtime mirrors for cluster distribution, timeline snapshots, pathway/export helpers, and UI-only helper logic used by the SPA
+- **Implemented:** automated coverage in `tests/test_clusters.py`, `tests/test_timeline.py`, `tests/test_pathways.py`, `tests/test_ui_logic.py`, `tests/test_csv_export.py`, plus updates to `tests/test_compute.py`, `tests/test_build.py`, and `tests/test_parity.py`
+
+### Current Scope Completed
+
+1. **Geography engine**
+   - cluster affinity dataset created
+   - build-time affinity validation added
+   - cluster distribution with largest-remainder rounding implemented
+   - cluster and state aggregation helpers implemented
+   - cluster dropdown and "By State (cluster-based)" UX implemented
+2. **Timeline engine**
+   - scenario schema migrated to `start_year` / `target_year`
+   - per-archetype `construction_years` added
+   - annual timeline computation implemented from demand records
+   - short-span clamping behavior implemented and tested
+   - year slider, dominant-phase recoloring, cache invalidation, and summary announcements implemented
+3. **Pathway engine**
+   - initial pathway dataset added
+   - pathway validation, lookup, and reskillable supply helpers implemented
+   - sidebar pathways tab/cards, overlap bars, reskillable supply summary, and empty states implemented
+4. **Export and parity**
+   - current-view and full-snapshot CSV exports include cluster/year/phase/pathway fields
+   - JS parity extended to cover cluster distribution and timeline output
+   - UI helper tests added for `dominantPhase()` and cluster suggestion logic
+
+### Remaining Follow-up
+
+- No Phase 3 implementation blockers remain in this branch
+- PLFS source-occupation supply data is still absent in the checked-in dataset, so reskillable supply stays blank where upstream labour data is unavailable
+
+### Verification
+
+- Targeted Phase 3 verification passed after the frontend/runtime pass: `15 passed`
+- Verified suite in this pass: `tests/test_parity.py`, `tests/test_ui_logic.py`, `tests/test_csv_export.py`
+- Generated assets rebuilt successfully: `web/main.js`, `docs/main.js`
+- Generated browser bundles syntax-checked successfully: `node --check web/main.js`, `node --check docs/main.js`
+
+### Implementation Notes
+
+- Phase 3 was delivered backend-first, then completed with a frontend/runtime integration pass in the same branch.
+- The document sections below still describe the intended Phase 3 design. Where minor wording differs from the checked-in code, the code is the current source of truth.
 
 ## Overview
 

@@ -1,0 +1,156 @@
+{
+  "pathways": [
+    {
+      "source_nco": "3134.0100",
+      "source_title": "Continuous Still Operator, Petroleum",
+      "target_nco": "8131.2100",
+      "target_title": "Ammonia Operator/ Ammonia Plant Operator",
+      "reskill_months": 6,
+      "reskill_cost_inr": 85000,
+      "training_type": "certification",
+      "training_provider": "NSDC / Skill India",
+      "skill_overlap": 0.78,
+      "bridging_skills": [
+        "Ammonia loop process control",
+        "High-pressure hydrogen safety",
+        "Cryogenic utilities handover"
+      ],
+      "source": "IRENA 2024 + internal HyGOAT modeling",
+      "source_type": "modeled_estimate",
+      "confidence": "medium"
+    },
+    {
+      "source_nco": "3134.0400",
+      "source_title": "Control Man (Petroleum Refining)",
+      "target_nco": "8131.2100",
+      "target_title": "Ammonia Operator/ Ammonia Plant Operator",
+      "reskill_months": 5,
+      "reskill_cost_inr": 70000,
+      "training_type": "on_the_job",
+      "training_provider": "Employer-led transition academy",
+      "skill_overlap": 0.72,
+      "bridging_skills": [
+        "Electrolyser interface procedures",
+        "Ammonia synthesis alarms",
+        "Hydrogen purity control"
+      ],
+      "source": "CEEW 2024 + internal HyGOAT modeling",
+      "source_type": "modeled_estimate",
+      "confidence": "medium"
+    },
+    {
+      "source_nco": "2145.0500",
+      "source_title": "Chemical Engineer, Petroleum",
+      "target_nco": "2145.0100",
+      "target_title": "Chemical Engineer, General",
+      "reskill_months": 4,
+      "reskill_cost_inr": 120000,
+      "training_type": "certification",
+      "training_provider": "University continuing education",
+      "skill_overlap": 0.81,
+      "bridging_skills": [
+        "Electrolyser balance-of-plant",
+        "Hydrogen hazard analysis",
+        "Green ammonia process integration"
+      ],
+      "source": "IRENA 2024 + TERI 2023",
+      "source_type": "literature",
+      "confidence": "high"
+    },
+    {
+      "source_nco": "3116.0500",
+      "source_title": "Laboratory Assistant, Petroleum and Lubricants",
+      "target_nco": "3116.0600",
+      "target_title": "Chemist, Water Purification/ Water Treatment",
+      "reskill_months": 3,
+      "reskill_cost_inr": 45000,
+      "training_type": "certification",
+      "training_provider": "ITI / state skill university",
+      "skill_overlap": 0.69,
+      "bridging_skills": [
+        "Demineralised water QA/QC",
+        "Electrolyte contamination checks",
+        "Hydrogen purity sampling"
+      ],
+      "source": "Internal HyGOAT modeling",
+      "source_type": "modeled_estimate",
+      "confidence": "medium"
+    },
+    {
+      "source_nco": "3113.0200",
+      "source_title": "Electrical Technician (High Voltage)",
+      "target_nco": "3113.0105",
+      "target_title": "Junior Engineer - Power Distribution",
+      "reskill_months": 4,
+      "reskill_cost_inr": 60000,
+      "training_type": "on_the_job",
+      "training_provider": "OEM / EPC commissioning program",
+      "skill_overlap": 0.74,
+      "bridging_skills": [
+        "Rectifier integration",
+        "Hydrogen plant interlocks",
+        "Electrolyser protection logic"
+      ],
+      "source": "Internal HyGOAT modeling",
+      "source_type": "modeled_estimate",
+      "confidence": "medium"
+    },
+    {
+      "source_nco": "7233.1201",
+      "source_title": "Power Plant Millwright Fitter",
+      "target_nco": "7233.0706",
+      "target_title": "Mechanic (Electrical Electronics Instrumentation)",
+      "reskill_months": 6,
+      "reskill_cost_inr": 90000,
+      "training_type": "diploma",
+      "training_provider": "Advanced maintenance institute",
+      "skill_overlap": 0.63,
+      "bridging_skills": [
+        "Compressor diagnostics",
+        "Hydrogen-compatible seals",
+        "Instrumentation for process skids"
+      ],
+      "source": "Internal HyGOAT modeling",
+      "source_type": "modeled_estimate",
+      "confidence": "low"
+    },
+    {
+      "source_nco": "3122.1400",
+      "source_title": "Supervisor and Foreman, Petroleum Refining and Related Activities/Operator/Engineering Assistant (Mechanical)",
+      "target_nco": "3122.5201",
+      "target_title": "Maintenance Supervisor",
+      "reskill_months": 5,
+      "reskill_cost_inr": 65000,
+      "training_type": "on_the_job",
+      "training_provider": "Employer-led transition academy",
+      "skill_overlap": 0.67,
+      "bridging_skills": [
+        "Hydrogen permit-to-work",
+        "Turnaround planning for electrolysers",
+        "Safety case documentation"
+      ],
+      "source": "Internal HyGOAT modeling",
+      "source_type": "modeled_estimate",
+      "confidence": "medium"
+    },
+    {
+      "source_nco": "2145.0600",
+      "source_title": "Chemical Engineer, Fertilizers",
+      "target_nco": "8131.2100",
+      "target_title": "Ammonia Operator/ Ammonia Plant Operator",
+      "reskill_months": 8,
+      "reskill_cost_inr": 95000,
+      "training_type": "certification",
+      "training_provider": "NSDC / sector skill council",
+      "skill_overlap": 0.58,
+      "bridging_skills": [
+        "Green hydrogen feed variability",
+        "Ammonia startup from renewable power",
+        "Electrolyser-ammonia coordination"
+      ],
+      "source": "Internal HyGOAT modeling",
+      "source_type": "modeled_estimate",
+      "confidence": "low"
+    }
+  ]
+}
