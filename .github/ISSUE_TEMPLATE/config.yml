@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Security policy
+    url: https://github.com/e740554/india-h2-jobs/security/policy
+    about: Report vulnerabilities privately according to SECURITY.md.
+  - name: Live atlas
+    url: https://hygoat.in/workforce-atlas
+    about: Check the canonical production deployment before filing mirror-only issues.

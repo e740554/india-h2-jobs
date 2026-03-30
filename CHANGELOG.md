@@ -111,3 +111,18 @@ All notable changes to this project will be documented in this file.
 - Clarified the `compute_workforce_gap` edge case when no H2-ready occupations exist:
   the function returns the full target gap (not `None`) due to vacuous evaluation on an empty
   list — documented in tests with an explanatory comment
+
+## [1.0.0.0] - 2026-03-29
+
+### Added
+- **Public atlas baseline** with 1,802 scored NCS occupations and a default filtered view of
+  480 occupations across 12 H2-relevant sectors
+- **Static D3 treemap frontend** with atlas tiles, sidebar details, summary metrics, and CSV
+  download for the public GitHub Pages mirror
+- **GitHub Pages publish output** in `docs/` and an open-source-ready source/publish repo layout
+- **Contributor-facing repo docs** for the public atlas baseline, including the first
+  `CONTRIBUTING.md` workflow guidance
+
+### Changed
+- The repository layout was aligned around `web/` as the editable frontend source of truth and
+  `docs/` as generated publish output

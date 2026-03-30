@@ -1,5 +1,8 @@
 # India H2 Workforce Atlas
 
+[![Tests](https://github.com/e740554/india-h2-jobs/actions/workflows/test.yml/badge.svg?branch=master)](https://github.com/e740554/india-h2-jobs/actions/workflows/test.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+
 An open-source occupation atlas and scenario engine for India's green hydrogen transition. It translates hydrogen production targets into occupation-level workforce demand using NCS occupation records, scored relevance dimensions, archetype staffing coefficients, cluster distribution, timeline phasing, and reskilling pathway mappings.
 
 **Live atlas:** [hygoat.in/workforce-atlas](https://hygoat.in/workforce-atlas)  
@@ -139,6 +142,29 @@ Current production data is built primarily from:
 
 PLFS and NCVET remain enrichment layers rather than fully complete upstream joins in the checked-in build. See [DATASOURCES.md](DATASOURCES.md).
 
+## Documentation
+
+- [CHANGELOG.md](CHANGELOG.md): release-by-release shipped changes
+- [CONTRIBUTING.md](CONTRIBUTING.md): contributor workflow, tests, and publish expectations
+- [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md): contributor behavior expectations
+- [SECURITY.md](SECURITY.md): how to report vulnerabilities privately
+- [TESTING.md](TESTING.md): test layers and verification commands
+- [DATASOURCES.md](DATASOURCES.md): upstream source coverage and scraping notes
+- [DESIGN.md](DESIGN.md): UI system and visual language
+- [TODOS.md](TODOS.md): current backlog and follow-up work
+
+## Release History
+
+| Version | Date | Scope |
+|---------|------|-------|
+| `v1.4.0.0` | 2026-03-30 | Phase 3: geography filters, timeline phasing, pathways, and expanded exports |
+| `v1.3.0.0` | 2026-03-30 | Phase 2: multi-archetype scenarios, supply-gap mode, PLFS baseline, and gap sidebar |
+| `v1.2.0.0` | 2026-03-30 | Phase 1: scenario engine, archetypes, parity checks, and demand-mode treemap |
+| `v1.1.1.0` | 2026-03-30 | Test framework, CI, `TESTING.md`, `TODOS.md`, and formal version/changelog tracking |
+| `v1.0.0.0` | 2026-03-29 | Public OSS atlas baseline with 1,802 scored occupations, GitHub Pages publish layout, and contributor docs |
+
+Historical note: the repo already had a `v1.1` branch marker, but the formal tagged release line starts at `v1.1.1.0`. The README and changelog now reflect that explicitly.
+
 ## Roadmap Status
 
 - **Phase 1**: shipped. Single-archetype scenario engine and treemap demand mode.
@@ -153,6 +179,8 @@ Current follow-up work is mainly dataset enrichment and UI polish rather than mi
 - Do not hand-edit generated assets in `docs/`.
 - Rebuild with `python build/build.py --base-url ""` before opening a PR when published output changes.
 - Keep README/spec/testing copy aligned with the checked-in dataset and runtime behavior.
+- Use the issue and PR templates for public contributions, and follow [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md).
+- Report security issues privately per [SECURITY.md](SECURITY.md), not through public issues.
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for the contributor workflow.
 
