@@ -440,7 +440,8 @@
         "source_type": "modeled_estimate",
         "notes": "Allocated from IRENA aggregate using H2 relevance weights. Shift supervisors for operations and maintenance crews."
       }
-    ]
+    ],
+    "construction_years": 3
   },
   {
     "id": "pem_500mw",
@@ -476,7 +477,7 @@
         "headcount_per_unit": 180,
         "source": "IRENA 2024",
         "source_type": "modeled_estimate",
-        "notes": "Less welding than alkaline — smaller footprint, less high-pressure pipework."
+        "notes": "Less welding than alkaline ï¿½ smaller footprint, less high-pressure pipework."
       },
       {
         "nco_group": "7126",
@@ -811,7 +812,8 @@
         "source_type": "modeled_estimate",
         "notes": "Shift supervisors for operations and maintenance crews."
       }
-    ]
+    ],
+    "construction_years": 3
   },
   {
     "id": "ammonia_1mtpa",
@@ -819,9 +821,9 @@
     "name": "1 MTPA Green Ammonia Synthesis Plant",
     "capacity_mw": null,
     "h2_input_mt_per_unit": 0.18,
-    "nh3_output_mtpa": 1.0,
+    "nh3_output_mtpa": 1,
     "description": "Reference 1 million tonne per annum green ammonia synthesis plant (Haber-Bosch + ASU + H2 compression + cryogenic storage). Consumes ~0.18 MT H2/year as feedstock. Based on conventional Indian ammonia plant benchmarks scaled for green H2 input.",
-    "caveats": "Does NOT include electrolyser or RE generation workforce — those are separate archetypes. Coefficients derived from conventional Indian ammonia plant benchmarks (IFFCO, NFL, RCF); no published green ammonia plant staffing data exists. India labor intensity multiplier (1.3-1.5x IRENA global) applied.",
+    "caveats": "Does NOT include electrolyser or RE generation workforce ï¿½ those are separate archetypes. Coefficients derived from conventional Indian ammonia plant benchmarks (IFFCO, NFL, RCF); no published green ammonia plant staffing data exists. India labor intensity multiplier (1.3-1.5x IRENA global) applied.",
     "coefficients": [
       {
         "nco_group": "7212",
@@ -1091,7 +1093,7 @@
         "headcount_per_unit": 60,
         "source": "TERI 2023",
         "source_type": "modeled_estimate",
-        "notes": "Ammonia synthesis operators, ASU operators, refrigeration. Largest group — this is a chemical plant."
+        "notes": "Ammonia synthesis operators, ASU operators, refrigeration. Largest group ï¿½ this is a chemical plant."
       },
       {
         "nco_group": "3134",
@@ -1210,7 +1212,8 @@
         "source_type": "modeled_estimate",
         "notes": "Shift supervisors for operations and maintenance crews."
       }
-    ]
+    ],
+    "construction_years": 5
   },
   {
     "id": "solar_wind_hybrid_2gw",
@@ -1455,6 +1458,7 @@
         "source_type": "modeled_estimate",
         "notes": "Ongoing environmental compliance and wildlife monitoring."
       }
-    ]
+    ],
+    "construction_years": 2
   }
 ]

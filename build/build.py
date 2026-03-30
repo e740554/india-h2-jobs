@@ -18,11 +18,19 @@ import sys
 from datetime import date
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
+from model.clusters import load_clusters, validate_cluster_affinities
+from model.compute import load_archetypes
+from model.pathways import load_pathways, validate_pathways
 from model.supply import allocate_supply, load_supply
 
 PROJECT_ROOT = os.path.join(os.path.dirname(__file__), "..")
 MODEL_DIR = os.path.join(PROJECT_ROOT, "model")
-MODEL_JSON_FILES = ["archetypes.json", "scenarios.json"]
+MODEL_JSON_FILES = [
+    "archetypes.json",
+    "scenarios.json",
+    "clusters.json",
+    "pathways.json",
+]
 OCCUPATIONS_CSV = os.path.join(PROJECT_ROOT, "occupations.csv")
 SCORES_FILE = os.path.join(PROJECT_ROOT, "scores.json")
 DOCS_DIR = os.path.join(PROJECT_ROOT, "docs")
@@ -37,7 +45,7 @@ STATIC_PUBLIC_FILES = [
     "style.css",
     "hygoat-logo.svg",
 ]
-DATASET_VERSION = "1.1"
+DATASET_VERSION = "1.4.0.0"
 
 # H2-relevant NCS sectors (12 of 49)
 H2_SECTORS = [
@@ -346,6 +354,10 @@ def main():
 
     # Merge scores
     occupations = merge_scores(occupations, scores)
+
+    # Validate Phase 3 model sidecars
+    validate_cluster_affinities(load_clusters(), load_archetypes())
+    validate_pathways(load_pathways(), occupations)
 
     # Merge PLFS supply data (if available)
     supply_data = load_supply()

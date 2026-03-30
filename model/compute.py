@@ -17,11 +17,16 @@ import json
 import os
 
 
+def load_archetypes() -> list:
+    """Load all archetypes from model/archetypes.json."""
+    path = os.path.join(os.path.dirname(__file__), "archetypes.json")
+    with open(path, encoding="utf-8") as f:
+        return json.load(f)
+
+
 def load_archetype(archetype_id: str) -> dict:
     """Load a specific archetype from model/archetypes.json."""
-    path = os.path.join(os.path.dirname(__file__), "archetypes.json")
-    with open(path) as f:
-        archetypes = json.load(f)
+    archetypes = load_archetypes()
     for arch in archetypes:
         if arch["id"] == archetype_id:
             return arch
@@ -31,7 +36,7 @@ def load_archetype(archetype_id: str) -> dict:
 def load_scenarios() -> list:
     """Load all scenarios from model/scenarios.json."""
     path = os.path.join(os.path.dirname(__file__), "scenarios.json")
-    with open(path) as f:
+    with open(path, encoding="utf-8") as f:
         return json.load(f)
 
 

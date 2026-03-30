@@ -1,0 +1,174 @@
+{
+  "clusters": [
+    {
+      "id": "kutch",
+      "name": "Kutch Hydrogen Valley",
+      "state": "Gujarat",
+      "type": "hydrogen_valley",
+      "archetype_affinity": {
+        "alkaline_1gw": 0.18,
+        "pem_500mw": 0.08,
+        "ammonia_1mtpa": 0.14,
+        "solar_wind_hybrid_2gw": 0.20
+      }
+    },
+    {
+      "id": "mundra",
+      "name": "Mundra Industrial Hub",
+      "state": "Gujarat",
+      "type": "industrial_hub",
+      "archetype_affinity": {
+        "alkaline_1gw": 0.16,
+        "pem_500mw": 0.10,
+        "ammonia_1mtpa": 0.10,
+        "solar_wind_hybrid_2gw": 0.10
+      }
+    },
+    {
+      "id": "jamnagar",
+      "name": "Jamnagar Refinery Hub",
+      "state": "Gujarat",
+      "type": "refinery_hub",
+      "archetype_affinity": {
+        "alkaline_1gw": 0.12,
+        "pem_500mw": 0.16,
+        "ammonia_1mtpa": 0.08,
+        "solar_wind_hybrid_2gw": 0.05
+      }
+    },
+    {
+      "id": "vizag",
+      "name": "Vizag Port and Refinery Cluster",
+      "state": "Andhra Pradesh",
+      "type": "port_refinery",
+      "archetype_affinity": {
+        "alkaline_1gw": 0.08,
+        "pem_500mw": 0.12,
+        "ammonia_1mtpa": 0.10,
+        "solar_wind_hybrid_2gw": 0.06
+      }
+    },
+    {
+      "id": "paradip",
+      "name": "Paradip Petrochemical Corridor",
+      "state": "Odisha",
+      "type": "petrochemical",
+      "archetype_affinity": {
+        "alkaline_1gw": 0.08,
+        "pem_500mw": 0.10,
+        "ammonia_1mtpa": 0.15,
+        "solar_wind_hybrid_2gw": 0.04
+      }
+    },
+    {
+      "id": "tuticorin",
+      "name": "Tuticorin Industrial Port Cluster",
+      "state": "Tamil Nadu",
+      "type": "port_industrial",
+      "archetype_affinity": {
+        "alkaline_1gw": 0.08,
+        "pem_500mw": 0.08,
+        "ammonia_1mtpa": 0.10,
+        "solar_wind_hybrid_2gw": 0.08
+      }
+    },
+    {
+      "id": "barmer_jodhpur",
+      "name": "Barmer-Jodhpur RE Corridor",
+      "state": "Rajasthan",
+      "type": "re_corridor",
+      "archetype_affinity": {
+        "alkaline_1gw": 0.14,
+        "pem_500mw": 0.08,
+        "ammonia_1mtpa": 0.05,
+        "solar_wind_hybrid_2gw": 0.32
+      }
+    },
+    {
+      "id": "haldia",
+      "name": "Haldia Petrochemical Cluster",
+      "state": "West Bengal",
+      "type": "petrochemical",
+      "archetype_affinity": {
+        "alkaline_1gw": 0.05,
+        "pem_500mw": 0.10,
+        "ammonia_1mtpa": 0.10,
+        "solar_wind_hybrid_2gw": 0.03
+      }
+    },
+    {
+      "id": "kochi",
+      "name": "Kochi Refinery Cluster",
+      "state": "Kerala",
+      "type": "refinery",
+      "archetype_affinity": {
+        "alkaline_1gw": 0.05,
+        "pem_500mw": 0.08,
+        "ammonia_1mtpa": 0.08,
+        "solar_wind_hybrid_2gw": 0.02
+      }
+    },
+    {
+      "id": "bina",
+      "name": "Bina Refinery Cluster",
+      "state": "Madhya Pradesh",
+      "type": "refinery",
+      "archetype_affinity": {
+        "alkaline_1gw": 0.06,
+        "pem_500mw": 0.10,
+        "ammonia_1mtpa": 0.10,
+        "solar_wind_hybrid_2gw": 0.10
+      }
+    }
+  ],
+  "states": [
+    {
+      "id": "GJ",
+      "name": "Gujarat",
+      "clusters": ["kutch", "mundra", "jamnagar"],
+      "plfs_state_code": "24"
+    },
+    {
+      "id": "AP",
+      "name": "Andhra Pradesh",
+      "clusters": ["vizag"],
+      "plfs_state_code": "28"
+    },
+    {
+      "id": "OD",
+      "name": "Odisha",
+      "clusters": ["paradip"],
+      "plfs_state_code": "21"
+    },
+    {
+      "id": "TN",
+      "name": "Tamil Nadu",
+      "clusters": ["tuticorin"],
+      "plfs_state_code": "33"
+    },
+    {
+      "id": "RJ",
+      "name": "Rajasthan",
+      "clusters": ["barmer_jodhpur"],
+      "plfs_state_code": "08"
+    },
+    {
+      "id": "WB",
+      "name": "West Bengal",
+      "clusters": ["haldia"],
+      "plfs_state_code": "19"
+    },
+    {
+      "id": "KL",
+      "name": "Kerala",
+      "clusters": ["kochi"],
+      "plfs_state_code": "32"
+    },
+    {
+      "id": "MP",
+      "name": "Madhya Pradesh",
+      "clusters": ["bina"],
+      "plfs_state_code": "23"
+    }
+  ]
+}
