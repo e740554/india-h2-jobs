@@ -2,17 +2,7 @@
 
 ## Frontend
 
-### Optimize recolourTreemap() O(n^2) linear scan
-
-**What:** Replace `data.occupations.find(o => o.id === id)` in `recolourTreemap()` with a pre-built `Map<id, occupation>` lookup.
-
-**Why:** Current implementation is O(n^2) — one linear scan per SVG rect. With 480 occupations this is imperceptible, but Phase 3 may render 1,802 occupations in scenario mode, where the slider triggers frequent recomputes.
-
-**Context:** The `recolourTreemap()` function at `web/main.js.template:369` iterates all `rect[data-id]` elements and calls `data.occupations.find()` for each. Building a `Map` from `id -> occupation` during data load and using `map.get(id)` would make this O(n). The same Map would benefit `selectOccupation()` and upskill path lookups.
-
-**Effort:** S
-**Priority:** P3
-**Depends on:** None
+*O(n²) recolourTreemap() fix moved to Phase 3 plan (eng decision #10) — no longer deferred.*
 
 ## Branding
 
@@ -22,7 +12,7 @@
 
 **Why:** The atlas is live on GitHub Pages but lacks favicons, Open Graph card, a branded hero section, and a polished footer. These affect credibility with the policy audience (MNRE, MSDE stakeholders).
 
-**Context:** Design doc section "HyGOAT Branding Polish" specifies: (1) favicon set from Pilot repo, (2) OG card image with brand gradient, (3) hero section above treemap, (4) footer with logo + attribution. Brand assets exist at `D:\Work\HyGOAT\Pilot\hygoat-nextjs\public\`. This is an external repo dependency — assets must be copied into this repo, not referenced.
+**Context:** Design doc section "HyGOAT Branding Polish" specifies: (1) favicon set from Pilot repo, (2) OG card image with brand gradient, (3) hero section above treemap, (4) footer with logo + attribution. Brand assets exist at `Pilot\hygoat-nextjs\public\`. This is an external repo dependency — assets must be copied into this repo, not referenced.
 
 **Effort:** M
 **Priority:** P2
@@ -30,17 +20,19 @@
 
 ## Design
 
-### Create DESIGN.md documenting the design system
+*DESIGN.md created during Phase 3 design review (2026-03-30). Covers tokens, components, responsive breakpoints, color semantics, and a11y standards.*
 
-**What:** Document the project's design system: color palette, typography scale, spacing, component patterns, responsive breakpoints, and the orange=scenario/green=atlas semantic language.
+### Evaluate icon usage for Phase 3 UI elements
 
-**Why:** The CSS custom properties in `style.css` are comprehensive but undocumented. Future contributors (and the branding PR) need a reference that explains the design decisions — not just the token values, but when to use `--color-hy` vs `--color-goat` and why.
+**What:** Assess whether cluster dropdown items, pathway cards, and phase legend benefit from lightweight icons (e.g., location pin for clusters, arrow for pathway direction, colored circles for phases).
 
-**Context:** The design review established: green (`--color-hy`) for atlas/static elements, orange (`--color-goat`) for scenario/dynamic elements. New components (segmented control, scenario panel, phase bars) extend existing patterns (`.pill`, `.btn-toggle`, `.data-status`). Documenting this prevents drift as features are added. Can be generated from the existing CSS + design review decisions.
+**Why:** The tool is currently text-only. Phase 3 adds dense UI components (pathway cards with 5+ data fields, 10-item cluster dropdown) where icons could improve scanability. The HyGOAT Pilot uses Lucide React icons throughout.
+
+**Context:** Design review flagged this as optional. Pathway cards use overlap-first visual hierarchy with text metadata. Icons could replace "Source → Target" text with a visual arrow, and cluster items could have state abbreviation badges. Evaluate during UI implementation (Phase 3, step 4). If adopted, inline SVG or a lightweight subset of Lucide/Heroicons preferred over a full icon library.
 
 **Effort:** S
 **Priority:** P3
-**Depends on:** None
+**Depends on:** Phase 3 UI integration (step 4)
 
 ## Testing
 
