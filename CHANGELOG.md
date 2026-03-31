@@ -2,6 +2,38 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.4.1.0] - 2026-03-31
+
+### Added
+- **Focus view default**: atlas opens to ~64 high-relevance occupations (H2 Adjacency ≥ 5) with a 3-state progressive disclosure toggle (focus → 480 H2-sector → 1,802 all) replacing the old 2-state boolean
+- **Client-side KPI recomputation**: summary bar H2-Ready and Fast Upskill Paths counts now update per view tier from the displayed occupation set
+- **Treemap keyboard navigation**: roving-tabindex pattern — one SVG tab stop, arrow keys traverse cells, Enter/Space activates, focus ring restored on blur
+- **Sidebar header accent**: colored left border matching the selected occupation's H2 adjacency score band
+- **Pathway CTA** on Overview tab switches directly to Pathways when pathways exist
+- **Skill pills**: bridging skills rendered as rounded badge pills instead of a plain list
+- **Source → Target directional styling** in pathway cards (muted from, orange arrow, bold to)
+- **Dark 2-row footer** matching nav bar
+- **CSS design token block**: formal spacing (`--space-1`–`--space-12`), elevation (`--shadow-sm/md/lg`), radius (`--radius-sm/md/lg/full`), transition (`--ease-out`, `--duration-fast/normal`), and `--sidebar-width`
+- **Sidebar** expanded to 360px with thin custom scrollbar and bottom fade gradient overlay
+- **Gap tab** restyled as data-gated (`.mode-btn-gated`) with "data pending" label — kept as shipped feature
+
+### Changed
+- Sector toggle hidden (not disabled) in Scenario/Gap modes and correctly restored on Atlas return
+- Full Scenario Snapshot CSV download hidden outside scenario+valid-scenario state
+- Sidebar scrollable state initialised on content show via `requestAnimationFrame`, not only on scroll
+- Scroll fade overlay moved from broken `sticky ::after` on scroll container to `position: absolute ::after` on `.atlas-main` with `:has()` selector (cross-browser reliable)
+- Nav bar depth shadow added via `--shadow-md`; mode button active/inactive contrast improved
+
+### Fixed
+- SVG roving tabindex: container restored to `tabindex="0"` on `focusout`; was leaving two sequential tab stops after first navigation
+- `querySelector(".pathway-cta")` scoped to `#overviewPanel` to prevent wrong-panel removal
+- `fastUpskillCount` null guards made consistent with `h2_adjacency` null check
+- Dead `menu-item-disabled` guard removed from snapshot download click handler
+- `scrollIntoView` uses `requestAnimationFrame` instead of bare `setTimeout(50)` for bridging skills expand
+
+### Tests
+- 6 new `tests/test_ui_logic.py` cases: focus filter count, focus filter exclusion, client-side metric recomputation, boundary (adj=5.0 passes focus but is not H2-ready), `viewTier` state cycle, mode-switch resets
+
 ## [1.4.0.0] - 2026-03-30
 
 ### Added

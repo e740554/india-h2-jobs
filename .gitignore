@@ -19,3 +19,4 @@ web/h2-ready-occupations.csv
 /h2-ready-occupations.csv
 parse/parsed_occupations.json
 
+.gstack/
