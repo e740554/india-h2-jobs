@@ -13,8 +13,8 @@ An open-source occupation atlas and scenario engine for India's green hydrogen t
 The current build ships:
 
 - 1,802 scored occupations from the National Career Service source data
-- a default atlas view of 480 occupations across 12 H2-relevant sectors
-- Atlas / Scenario / Gap modes in a single-page D3 treemap
+- a default focus view of ~64 high-relevance occupations (H2 Adjacency >= 5), expandable to the full 480 across 12 H2-relevant sectors
+- Atlas and Scenario modes in a single-page D3 treemap (Gap mode gated on PLFS supply data)
 - multi-archetype scenarios spanning production, downstream ammonia, and dedicated RE
 - geography filters across hydrogen clusters and cluster-based state rollups
 - annual timeline snapshots with phase-based recoloring

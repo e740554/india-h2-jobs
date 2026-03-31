@@ -134,20 +134,43 @@ Always use Unicode subscripts for chemical formulas: H₂, CO₂, NH₃, CH₄. 
 
 ## Spacing
 
-No formal spacing scale token set. Common values used throughout:
+Formal spacing scale via CSS custom properties:
 
-| Size | Usage |
-|------|-------|
-| 2px | Mode toggle gap, minimal separation |
-| 4px | Badge padding, tight gaps |
-| 6px | Score bar margin, metadata gap |
-| 8px | Nav gap, tooltip padding, score bar track height |
-| 12px | Control gap, nav padding vertical, control bar padding |
-| 14px | Pill horizontal padding |
-| 16px | Sidebar section margin, footer padding |
-| 20px | Sidebar padding, summary bar vertical padding |
-| 24px | Nav horizontal padding, summary bar horizontal padding |
-| 48px | Summary bar metric gap (desktop) |
+| Token | Size | Usage |
+|-------|------|-------|
+| `--space-1` | 4px | Badge padding, tight gaps, skill pill gaps |
+| `--space-2` | 8px | Nav gap, tooltip padding, nav-logo icon gap |
+| `--space-3` | 12px | Control gap, card padding, sidebar header padding |
+| `--space-4` | 16px | Sidebar section margin, sidebar header padding |
+| `--space-5` | 20px | Sidebar padding, summary bar vertical padding, footer padding |
+| `--space-6` | 24px | Nav horizontal padding, footer horizontal padding |
+| `--space-8` | 32px | Large section spacing |
+| `--space-12` | 48px | Summary bar metric gap (desktop) |
+
+### Elevation
+
+| Token | Value | Usage |
+|-------|-------|-------|
+| `--shadow-sm` | `0 1px 2px rgba(0,0,0,0.05)` | Pathway cards |
+| `--shadow-md` | `0 4px 12px rgba(0,0,0,0.08)` | Nav bar, dropdowns |
+| `--shadow-lg` | `0 8px 24px rgba(0,0,0,0.12)` | Modals (future) |
+
+### Radius
+
+| Token | Value | Usage |
+|-------|-------|-------|
+| `--radius-sm` | 6px | Metadata badges |
+| `--radius-md` | 10px | Pathway CTA button, pathway toggle |
+| `--radius-lg` | 14px | Pathway cards |
+| `--radius-full` | 999px | Pills, mode buttons, skill pills |
+
+### Transitions
+
+| Token | Value | Usage |
+|-------|-------|-------|
+| `--ease-out` | `cubic-bezier(0.16, 1, 0.3, 1)` | Entrance animations |
+| `--duration-fast` | 150ms | Button hovers, pill transitions |
+| `--duration-normal` | 250ms | Panel transitions |
 
 ---
 
@@ -161,8 +184,10 @@ No formal spacing scale token set. Common values used throughout:
 - Hover: `border-color: var(--color-goat)`, `color: var(--color-goat)`
 
 **Mode button** (`.mode-btn`): Nav-embedded toggle.
-- `padding: 4px 12px`, `border-radius: 999px`, transparent background
+- `padding: 6px 16px`, `border-radius: 999px`, transparent background
+- Inactive: `opacity: 0.45`. Active: `font-weight: 600`, `box-shadow: 0 0 0 1px rgba(255,255,255,0.2)`
 - Active color varies by mode: green (Atlas), orange (Scenario), red (Gap)
+- **Gap tab gating** (`.mode-btn-gated`): `opacity: 0.35`, `cursor: not-allowed`, `::after` pseudo-element shows "data pending" label below the button
 
 **Download button** (`.btn-download`): Transparent border style, hover fills.
 
@@ -175,10 +200,14 @@ Horizontal bar visualization for 0-10 scores:
 
 ### Sidebar
 
-- Width: `320px` (desktop), full width (mobile)
-- Padding: `20px`
+- Width: `var(--sidebar-width)` (360px desktop), full width (mobile)
+- Padding: `var(--space-5)`
+- Thin scrollbar: `scrollbar-width: thin`, `scrollbar-color: var(--gray-300) transparent`
+- Bottom fade gradient when scrollable (`data-scrollable="true"`)
 - Sections stack vertically with `16px` margin between
 - Metadata badges: `background: var(--gray-100)`, `padding: 4px 8px`, `border-radius: 6px`
+
+**Sidebar header** (`.sidebar-header`): Colored left border accent matching H2 adjacency score band via `scoreColour()`. Background: `var(--gray-50)`. Extends to sidebar edges via negative margin.
 
 **Phase 3 addition: Sidebar tabs** (`.sidebar-tabs`)
 - Uses `.pill` pattern for tab buttons
@@ -203,6 +232,7 @@ Horizontal bar visualization for 0-10 scores:
 - Labels: `fill: white`, `font-size: 10px`, `text-shadow: 0 1px 2px rgba(0,0,0,0.5)`
 - Hover: `opacity: 0.85`
 - Selected cell: pulse animation (3 iterations, 0.8s)
+- **Roving tabindex** keyboard navigation: SVG container has `tabindex="0"`, `role="grid"`. Single tab stop. Arrow keys navigate between cells (roving `tabindex` on `<rect>` elements). Focus indicator: `stroke: white`, `stroke-width: 2`. Container focus ring: `outline: 2px solid #3b82f6`. Enter/Space selects the focused cell.
 
 ### Tooltip
 
@@ -222,6 +252,40 @@ Horizontal bar visualization for 0-10 scores:
 | Cluster dropdown | `.cluster-select` | `.scenario-select` |
 | Year slider | `.year-slider` | `.mt-slider` |
 | Treemap empty state | `.treemap-empty` | New (centered, muted) |
+| Skill pills | `.skill-pills` / `.skill-pill` | New (flex-wrap, rounded pills) |
+| Pathway CTA | `.pathway-cta` | New (full-width orange button) |
+| Sidebar header | `.sidebar-header` | New (accent border, gray-50 bg) |
+
+---
+
+## Focus View Semantics
+
+The atlas default is a **focus view** showing ~64 occupations with H2 Adjacency >= 5. This is controlled by `FOCUS_THRESHOLD` (5.0) in `main.js.template`.
+
+**Two different thresholds, two different purposes:**
+
+| Constant | Value | Purpose |
+|----------|-------|---------|
+| `FOCUS_THRESHOLD` | 5.0 | Client-side view filter — removes noise from the default treemap |
+| `H2_ADJACENCY_THRESHOLD` (KPI) | 7.0 | H2-Ready definition — used in the summary bar KPI count |
+
+An occupation with h2_adjacency = 5.5 appears in the focus view but is NOT counted as "H2-Ready."
+
+### 3-State Toggle
+
+The sector toggle cycles through three states:
+
+| `viewTier` | Button text | Data shown |
+|-----------|------------|-----------|
+| `"focus"` | "Show All H2 Sectors" | ~64 occupations (H2 adj >= 5) from `filteredData` |
+| `"sector"` | "Show All 49 Sectors" | All 480 occupations from `filteredData` |
+| `"all"` | "Show Focus View" | All 1,802 occupations from `allData` (lazy-loaded) |
+
+**State transitions on mode switch:**
+- Entering scenario/gap mode: `viewTier` resets to `"sector"`, toggle hidden
+- Returning to atlas mode: `viewTier` resets to `"focus"`, toggle visible
+
+KPI metrics (H2-Ready count, Fast Upskill Paths) are recomputed client-side from `getDisplayOccupations()` on every view change. Data quality banner stays dataset-wide.
 
 ---
 
@@ -234,7 +298,7 @@ Horizontal bar visualization for 0-10 scores:
 .summary-bar        Centered metrics, light background
 .controls           Filter pills row
 .scenario-bar       Scenario/Gap mode controls (conditional)
-.atlas-main         Flex row: treemap (flex:1) + sidebar (320px)
+.atlas-main         Flex row: treemap (flex:1) + sidebar (360px)
 .legend             Color legend, centered
 .atlas-footer       Attribution
 ```
@@ -246,7 +310,7 @@ Horizontal bar visualization for 0-10 scores:
 | Property | Desktop (> 768px) | Mobile (<= 768px) |
 |----------|-------------------|-------------------|
 | `.atlas-main` | Flex row | Flex column |
-| `.sidebar` | 320px right panel | Full width below treemap, max-h: 50vh |
+| `.sidebar` | 360px right panel | Full width below treemap, max-h: 50vh |
 | `.treemap-container` | Flex: 1 | min-h: 350px, max-h: 50vh |
 | Summary bar gap | 48px | 16px |
 | Metric value size | 2rem | 1.5rem |
