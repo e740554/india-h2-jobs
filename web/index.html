@@ -4,9 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>India H2 Workforce Atlas | HyGOAT</title>
-  <meta name="description" content="Interactive treemap of the current 1,802-occupation India H2 atlas build, with a default view of 480 roles across 12 H2-relevant sectors.">
+  <meta name="description" content="Interactive treemap of the India H2 Workforce Atlas — a default focus view of ~64 high-relevance occupations, expandable to 480 H2-sector roles and the full 1,802-occupation dataset.">
   <meta property="og:title" content="India H2 Workforce Atlas">
-  <meta property="og:description" content="Explore the current 1,802-occupation India H2 atlas build and its 480-role default H2 sector view.">
+  <meta property="og:description" content="Explore the India H2 Workforce Atlas — focus on ~64 high-relevance occupations, expand to 480 H2-sector roles, or browse all 1,802 scored NCS occupations.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://hygoat.in/workforce-atlas">
   <link rel="stylesheet" href="style.css">
@@ -14,7 +14,7 @@
 <body>
   <nav class="atlas-nav">
     <div class="nav-left">
-      <span class="nav-logo">India H2 Workforce Atlas</span>
+      <span class="nav-logo"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="8" cy="12" r="3"/><circle cx="16" cy="8" r="2.5"/><circle cx="16" cy="16" r="2.5"/><line x1="11" y1="11" x2="13.5" y2="9"/><line x1="11" y1="13" x2="13.5" y2="15"/></svg> India H2 Workforce Atlas</span>
       <div class="mode-toggle" id="modeToggle">
         <button class="mode-btn active" data-mode="atlas">Atlas</button>
         <button class="mode-btn" data-mode="scenario">Scenario</button>
@@ -61,7 +61,7 @@
     </div>
     <div class="controls-right">
       <span class="filter-indicator" id="filterIndicator"></span>
-      <button class="btn-toggle" id="toggleSectors">Show All 49 Sectors</button>
+      <button class="btn-toggle" id="toggleSectors">Show All H2 Sectors</button>
     </div>
   </div>
   <div class="data-status" id="dataStatus"></div>
@@ -112,11 +112,13 @@
     <aside class="sidebar" id="sidebar">
       <div class="sidebar-empty">Click an occupation to see details</div>
       <div class="sidebar-content" id="sidebarContent" style="display:none">
-        <h2 id="sbTitle"></h2>
-        <div class="sb-meta">
-          <span id="sbSector"></span>
-          <span id="sbNco"></span>
-          <span id="sbEdu"></span>
+        <div class="sidebar-header" id="sidebarHeader">
+          <h2 id="sbTitle"></h2>
+          <div class="sb-meta">
+            <span id="sbSector"></span>
+            <span id="sbNco"></span>
+            <span id="sbEdu"></span>
+          </div>
         </div>
         <div class="sidebar-tabs" role="tablist" aria-label="Occupation details">
           <button class="pill active" id="overviewTab" data-tab="overview" role="tab" aria-selected="true" aria-controls="overviewPanel">Overview</button>
@@ -187,8 +189,8 @@
   </div>
 
   <footer class="atlas-footer">
-    <span id="footerVersion">Dataset v1.0</span> &middot; <span id="footerDate">Last updated March 2026</span> &middot; *IEA methodology<br>
-    Built by <a href="https://hygoat.in">HyGOAT</a> &middot; <a href="https://ekavikalp.com">Ekavikalp Pvt Ltd</a> &middot; Current checked-in build: 1,802 scored NCS occupations; PLFS and NCVET joins are still pending in this release &middot; <a href="https://github.com/e740554/india-h2-jobs" title="View source on GitHub"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="currentColor" style="vertical-align:text-bottom"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg> GitHub</a> &middot; MIT Licence
+    <div class="footer-row">India H2 Workforce Atlas &middot; <a href="https://hygoat.in">HyGOAT</a> &middot; <a href="https://ekavikalp.com">Ekavikalp Pvt Ltd</a> &middot; <a href="https://github.com/e740554/india-h2-jobs" title="View source on GitHub"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 16 16" fill="currentColor" style="vertical-align:text-bottom"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg> GitHub</a></div>
+    <div class="footer-row footer-row-secondary"><span id="footerVersion">Dataset v1.0</span> &middot; <span id="footerDate">Last updated March 2026</span> &middot; MIT Licence &middot; Occupation data from NCS; demand model uses IEA methodology</div>
   </footer>
 
   <script src="https://d3js.org/d3.v7.min.js"></script>

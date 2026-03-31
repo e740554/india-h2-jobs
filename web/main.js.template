@@ -14,6 +14,8 @@
     { key: "formalization_rate", label: "Formalization" },
     { key: "scarcity_risk", label: "Scarcity Risk" },
   ];
+  var FOCUS_THRESHOLD = 5.0; // H2 Adjacency score; different from H2_ADJACENCY_THRESHOLD (7.0)
+
   const COLOUR_BANDS = [
     { min: 9, max: 10, colour: "#00994C" },
     { min: 7, max: 8.99, colour: "#50C878" },
@@ -1208,7 +1210,7 @@
   let activeDimension = "h2_adjacency";
   let selectedOccupation = null;
   let activeSidebarTab = "overview";
-  let showingAll = false;
+  let viewTier = "focus";
 
   let activeMode = "atlas";
   let scenarioMode = false;
@@ -1313,10 +1315,10 @@
   }
 
   function resetSectorToggleToFiltered() {
-    if (!showingAll) {
+    if (viewTier === "sector") {
       return;
     }
-    showingAll = false;
+    viewTier = "sector";
     data = filteredData;
     refreshOccupationIndex();
     const button = document.getElementById("toggleSectors");
@@ -1434,7 +1436,15 @@
     const metricGap = document.getElementById("metricGap");
     const metricUpskill = document.getElementById("metricUpskill");
 
-    metricH2Ready.textContent = Number(summary.h2_ready_occupations || 0).toLocaleString();
+    var displayOccs = getDisplayOccupations();
+    var h2ReadyCount = 0, fastUpskillCount = 0;
+    for (var i = 0; i < displayOccs.length; i++) {
+      var s = displayOccs[i].scores || {};
+      if (s.h2_adjacency != null && s.h2_adjacency >= 7.0) h2ReadyCount++;
+      if (s.skill_transferability != null && s.skill_transferability >= 7.0 &&
+          s.transition_demand != null && s.transition_demand >= 7.0) fastUpskillCount++;
+    }
+    metricH2Ready.textContent = h2ReadyCount.toLocaleString();
     if (summary.workforce_gap_2030 == null) {
       metricGap.textContent = "N/A";
       metricGap.classList.add("metric-value-muted");
@@ -1442,16 +1452,29 @@
       metricGap.textContent = (Number(summary.workforce_gap_2030) / 1e6).toFixed(1) + "M";
       metricGap.classList.remove("metric-value-muted");
     }
-    metricUpskill.textContent = Number(summary.fast_upskill_paths || 0).toLocaleString();
+    metricUpskill.textContent = fastUpskillCount.toLocaleString();
 
     const indicator = document.getElementById("filterIndicator");
     if (indicator) {
-      const current = data.occupations.length;
-      const total = data.total_all_occupations || current;
-      const sectors = data.total_sectors || "?";
-      indicator.textContent =
-        "Showing " + current.toLocaleString() + " of " + total.toLocaleString() +
-        " occupations across " + sectors + " sectors";
+      var displayCount = displayOccs.length;
+      var sectorSet = Object.create(null);
+      for (var j = 0; j < displayOccs.length; j++) {
+        sectorSet[displayOccs[j].sector || "Other"] = true;
+      }
+      var sectorCount = Object.keys(sectorSet).length;
+      if (!scenarioMode && viewTier === "focus") {
+        indicator.textContent =
+          "Showing " + displayCount.toLocaleString() + " high-relevance occupations across " + sectorCount + " sectors";
+      } else if (!scenarioMode && viewTier === "all") {
+        indicator.textContent =
+          "Showing " + displayCount.toLocaleString() + " occupations across " + sectorCount + " sectors";
+      } else {
+        var total = data.total_all_occupations || displayCount;
+        var sectors = data.total_sectors || sectorCount;
+        indicator.textContent =
+          "Showing " + displayCount.toLocaleString() + " of " + total.toLocaleString() +
+          " occupations across " + sectors + " sectors";
+      }
     }
 
     document.getElementById("footerVersion").textContent = "Dataset v" + data.dataset_version;
@@ -1595,6 +1618,17 @@
     }
     empty.style.display = isVisible ? "none" : "block";
     content.style.display = isVisible ? "block" : "none";
+    if (isVisible) {
+      const sidebarEl = document.getElementById("sidebar");
+      if (sidebarEl) {
+        global.requestAnimationFrame(function () {
+          sidebarEl.dataset.scrollable =
+            sidebarEl.scrollHeight > sidebarEl.clientHeight &&
+            sidebarEl.scrollTop + sidebarEl.clientHeight < sidebarEl.scrollHeight - 10
+              ? "true" : "false";
+        });
+      }
+    }
   }
 
   function getActiveScenario() {
@@ -1685,9 +1719,8 @@
     if (!snapshotLink) {
       return;
     }
-    const enabled = !!scenarioMode && !!scenario;
-    snapshotLink.classList.toggle("menu-item-disabled", !enabled);
-    snapshotLink.setAttribute("aria-disabled", enabled ? "false" : "true");
+    var enabled = !!scenarioMode && !!scenario;
+    snapshotLink.style.display = enabled ? "" : "none";
   }
 
   function updateScenarioMetrics(scenario) {
@@ -1854,6 +1887,12 @@
         });
       }
     }
+    if (!scenarioMode && viewTier === "focus") {
+      occupations = occupations.filter(function (occ) {
+        var h2 = occ.scores && occ.scores.h2_adjacency;
+        return h2 != null && h2 >= FOCUS_THRESHOLD;
+      });
+    }
     return occupations;
   }
 
@@ -1905,7 +1944,10 @@
 
     const svg = d3.select(container).append("svg")
       .attr("width", width)
-      .attr("height", height);
+      .attr("height", height)
+      .attr("tabindex", "0")
+      .attr("role", "grid")
+      .attr("aria-label", "Occupation treemap");
 
     svg.selectAll(".sector-label")
       .data(root.children || [])
@@ -1962,6 +2004,59 @@
           this.textContent = this.textContent.slice(0, maxChars - 1) + "...";
         }
       });
+
+    // Roving tabindex keyboard navigation
+    var allRects = svg.node().querySelectorAll("rect[data-id]");
+    var focusedCellIndex = 0;
+
+    function setFocusedCell(index) {
+      if (index < 0 || index >= allRects.length) return;
+      if (allRects[focusedCellIndex]) {
+        allRects[focusedCellIndex].setAttribute("tabindex", "-1");
+        allRects[focusedCellIndex].removeAttribute("stroke");
+        allRects[focusedCellIndex].removeAttribute("stroke-width");
+      }
+      focusedCellIndex = index;
+      allRects[focusedCellIndex].setAttribute("tabindex", "0");
+      allRects[focusedCellIndex].setAttribute("stroke", "white");
+      allRects[focusedCellIndex].setAttribute("stroke-width", "2");
+      svg.node().setAttribute("tabindex", "-1");
+      allRects[focusedCellIndex].focus();
+    }
+
+    for (var ri = 0; ri < allRects.length; ri++) {
+      allRects[ri].setAttribute("tabindex", "-1");
+    }
+
+    svg.node().addEventListener("focus", function () {
+      if (allRects.length) setFocusedCell(focusedCellIndex);
+    });
+
+    svg.node().addEventListener("focusout", function (e) {
+      if (!svg.node().contains(e.relatedTarget)) {
+        svg.node().setAttribute("tabindex", "0");
+      }
+    });
+
+    svg.node().addEventListener("keydown", function (e) {
+      if (!allRects.length) return;
+      var handled = true;
+      if (e.key === "ArrowRight" || e.key === "ArrowDown") {
+        setFocusedCell(Math.min(focusedCellIndex + 1, allRects.length - 1));
+      } else if (e.key === "ArrowLeft" || e.key === "ArrowUp") {
+        setFocusedCell(Math.max(focusedCellIndex - 1, 0));
+      } else if (e.key === "Home") {
+        setFocusedCell(0);
+      } else if (e.key === "End") {
+        setFocusedCell(allRects.length - 1);
+      } else if (e.key === "Enter" || e.key === " ") {
+        var cellData = d3.select(allRects[focusedCellIndex].parentNode).datum();
+        if (cellData && cellData.data) selectOccupation(cellData.data, { preserveTab: false });
+      } else {
+        handled = false;
+      }
+      if (handled) e.preventDefault();
+    });
   }
 
   function onCellHover(event, node) {
@@ -2256,7 +2351,18 @@
 
       const title = document.createElement("div");
       title.className = "pathway-title";
-      title.textContent = pathway.source_title + " -> " + pathway.target_title;
+      var fromSpan = document.createElement("span");
+      fromSpan.className = "pathway-from";
+      fromSpan.textContent = pathway.source_title;
+      var arrowSpan = document.createElement("span");
+      arrowSpan.className = "pathway-arrow";
+      arrowSpan.textContent = " \u2192 ";
+      var toSpan = document.createElement("span");
+      toSpan.className = "pathway-to";
+      toSpan.textContent = pathway.target_title;
+      title.appendChild(fromSpan);
+      title.appendChild(arrowSpan);
+      title.appendChild(toSpan);
       card.appendChild(title);
 
       const meta = document.createElement("div");
@@ -2285,19 +2391,30 @@
       toggle.setAttribute("aria-expanded", "false");
       toggle.textContent = skills.length + " bridging skills";
 
-      const list = document.createElement("ul");
-      list.className = "pathway-skills";
+      const list = document.createElement("div");
+      list.className = "skill-pills";
       list.hidden = true;
       for (let s = 0; s < skills.length; s += 1) {
-        const item = document.createElement("li");
-        item.textContent = skills[s];
-        list.appendChild(item);
+        const pill = document.createElement("span");
+        pill.className = "skill-pill";
+        pill.textContent = skills[s];
+        list.appendChild(pill);
       }
 
       toggle.addEventListener("click", function () {
         const expanded = toggle.getAttribute("aria-expanded") === "true";
         toggle.setAttribute("aria-expanded", expanded ? "false" : "true");
         list.hidden = expanded;
+        if (!expanded) {
+          var prefersReducedMotion = global.matchMedia &&
+            global.matchMedia("(prefers-reduced-motion: reduce)").matches;
+          global.requestAnimationFrame(function () {
+            list.scrollIntoView({
+              behavior: prefersReducedMotion ? "auto" : "smooth",
+              block: "nearest"
+            });
+          });
+        }
       });
 
       card.appendChild(toggle);
@@ -2352,6 +2469,10 @@
       updateSidebarTabState();
     }
 
+    var sidebarHeader = document.getElementById("sidebarHeader");
+    if (sidebarHeader) {
+      sidebarHeader.style.borderLeftColor = scoreColour((occupation.scores || {}).h2_adjacency);
+    }
     document.getElementById("sbTitle").textContent = decodeEntities(occupation.title);
     document.getElementById("sbSector").textContent = decodeEntities(occupation.sector);
     document.getElementById("sbNco").textContent = occupation.nco_code || "";
@@ -2366,6 +2487,23 @@
     renderScenarioDetails(occupation);
     renderGapDetails(occupation);
     renderPathwaysPanel(occupation);
+
+    var overviewPanel = document.getElementById("overviewPanel");
+    var existingCta = overviewPanel ? overviewPanel.querySelector(".pathway-cta") : null;
+    if (existingCta) existingCta.remove();
+    var inbound = occupation.nco_code ? Runtime.getPathwaysForOccupation(occupation.nco_code, pathwayData, "in") : [];
+    var outbound = occupation.nco_code ? Runtime.getPathwaysForOccupation(occupation.nco_code, pathwayData, "out") : [];
+    var pathwayCount = inbound.length + outbound.length;
+    if (pathwayCount > 0) {
+      var cta = document.createElement("button");
+      cta.type = "button";
+      cta.className = "pathway-cta";
+      cta.textContent = "View " + pathwayCount + " pathways \u2192";
+      cta.addEventListener("click", function () {
+        setSidebarTab("pathways");
+      });
+      if (overviewPanel) overviewPanel.appendChild(cta);
+    }
   }
 
   function recolourTreemap() {
@@ -2409,15 +2547,21 @@
     if (!button) {
       return;
     }
+    button.textContent = "Show All H2 Sectors";
     button.addEventListener("click", async function () {
-      if (!showingAll) {
+      if (viewTier === "focus") {
+        viewTier = "sector";
+        data = filteredData;
+        button.textContent = "Show All 49 Sectors";
+        button.classList.remove("active");
+      } else if (viewTier === "sector") {
         const originalLabel = button.textContent;
         button.disabled = true;
         button.textContent = "Loading all sectors...";
         try {
           data = await loadAllData();
-          showingAll = true;
-          button.textContent = "Show H2-Relevant Only";
+          viewTier = "all";
+          button.textContent = "Show Focus View";
           button.classList.add("active");
         } catch (error) {
           console.error("Failed to load all sectors:", error);
@@ -2426,9 +2570,9 @@
           button.disabled = false;
         }
       } else {
-        showingAll = false;
+        viewTier = "focus";
         data = filteredData;
-        button.textContent = "Show All 49 Sectors";
+        button.textContent = "Show All H2 Sectors";
         button.classList.remove("active");
       }
       refreshOccupationIndex();
@@ -2629,9 +2773,6 @@
     document.getElementById("dlSnapshot").addEventListener("click", async function (event) {
       event.preventDefault();
       const link = event.currentTarget;
-      if (link.classList.contains("menu-item-disabled")) {
-        return;
-      }
       menu.classList.remove("open");
       const originalLabel = link.textContent;
       link.textContent = "Preparing full snapshot...";
@@ -2700,11 +2841,17 @@
 
     const sectorButton = document.getElementById("toggleSectors");
     if (sectorButton) {
-      sectorButton.disabled = scenarioMode;
-      sectorButton.title = scenarioMode ? "Sector toggle unavailable in scenario and gap mode" : "";
+      sectorButton.style.display = scenarioMode ? "none" : "";
     }
 
     if (mode === "atlas") {
+      viewTier = "focus";
+      data = filteredData;
+      refreshOccupationIndex();
+      if (sectorButton) {
+        sectorButton.textContent = "Show All H2 Sectors";
+        sectorButton.classList.remove("active");
+      }
       demandResults = null;
       gapResults = null;
       currentSnapshotSummary = {
@@ -2824,8 +2971,7 @@
       }
       if (!hasSupply) {
         gapButton.disabled = true;
-        gapButton.title = "Supply data not yet available";
-        gapButton.classList.add("mode-btn-disabled");
+        gapButton.classList.add("mode-btn-gated");
       }
     }
   }
@@ -2847,6 +2993,16 @@
       setupSidebarTabs();
       setupSectorToggle();
       setupDownloads();
+
+      var sidebarEl = document.getElementById("sidebar");
+      if (sidebarEl) {
+        sidebarEl.addEventListener("scroll", function () {
+          sidebarEl.dataset.scrollable =
+            sidebarEl.scrollHeight > sidebarEl.clientHeight &&
+            sidebarEl.scrollTop + sidebarEl.clientHeight < sidebarEl.scrollHeight - 10
+              ? "true" : "false";
+        });
+      }
 
       if ((scenarioData && scenarioData.length) || (archetypeData && archetypeData.length)) {
         setupScenarioMode();
