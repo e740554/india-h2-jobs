@@ -1,6 +1,6 @@
 {
   "dataset_version": "1.4.0.0",
-  "last_updated": "2026-03-31",
+  "last_updated": "2026-05-11",
   "total_occupations": 480,
   "total_all_occupations": 1802,
   "total_sectors": 12,
@@ -110,6 +110,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-8131.2100",
         "NCS-2145.0200",
@@ -168,6 +169,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-8131.2100",
         "NCS-2145.0200",
@@ -226,6 +228,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-8131.2100",
         "NCS-2145.0200",
@@ -284,6 +287,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-2145.0200",
         "NCS-2145.0100",
@@ -342,6 +346,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-8131.2100",
         "NCS-2145.0200",
@@ -400,6 +405,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-8131.2100",
         "NCS-2145.0200",
@@ -458,6 +464,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-8131.2100",
         "NCS-2145.0200",
@@ -516,6 +523,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-8131.2100",
         "NCS-2145.0200",
@@ -574,6 +582,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-8131.2100",
         "NCS-2145.0200",
@@ -632,6 +641,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-8131.2100",
         "NCS-2145.0200",
@@ -690,6 +700,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-8131.2100",
         "NCS-2145.0200",
@@ -748,6 +759,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-8131.2100",
         "NCS-2145.0200",
@@ -806,6 +818,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-8131.2100",
         "NCS-2145.0200",
@@ -864,6 +877,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-8131.2100",
         "NCS-2145.0200",
@@ -922,6 +936,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-8131.2100",
         "NCS-2145.0200",
@@ -980,6 +995,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-8131.2100",
         "NCS-2145.0200",
@@ -1038,6 +1054,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-8131.2100",
         "NCS-2145.0200",
@@ -1096,6 +1113,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-8131.2100",
         "NCS-2145.0200",
@@ -1154,6 +1172,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-8131.2100",
         "NCS-2145.0200",
@@ -1212,6 +1231,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-8131.2100",
         "NCS-2145.0200",
@@ -1270,6 +1290,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-8131.2100",
         "NCS-2145.0200",
@@ -1328,6 +1349,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-8131.2100",
         "NCS-2145.0200",
@@ -1386,6 +1408,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-8131.2100",
         "NCS-2145.0200",
@@ -1444,6 +1467,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-8131.2100",
         "NCS-2145.0200",
@@ -1502,6 +1526,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-8131.2100",
         "NCS-2145.0200",
@@ -1560,6 +1585,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-8131.2100",
         "NCS-2145.0200",
@@ -1618,6 +1644,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-8131.2100",
         "NCS-2145.0200",
@@ -1676,6 +1703,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-8131.2100",
         "NCS-2145.0200",
@@ -1734,6 +1762,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-8131.2100",
         "NCS-2145.0200",
@@ -1792,6 +1821,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-8131.2100",
         "NCS-2145.0200",
@@ -1850,6 +1880,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-8131.2100",
         "NCS-2145.0200",
@@ -1908,6 +1939,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-8131.2100",
         "NCS-2145.0200",
@@ -1966,6 +1998,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-8131.2100",
         "NCS-2145.0200",
@@ -2024,6 +2057,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-8131.2100",
         "NCS-2145.0200",
@@ -2082,6 +2116,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-8131.2100",
         "NCS-2145.0200",
@@ -2140,6 +2175,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-8131.2100",
         "NCS-2145.0100",
@@ -2198,6 +2234,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-8131.2100",
         "NCS-2145.0200",
@@ -2256,6 +2293,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-8131.2100",
         "NCS-2145.0200",
@@ -2314,6 +2352,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-8131.2100",
         "NCS-2145.0200",
@@ -2372,6 +2411,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-8131.2100",
         "NCS-2145.0200",
@@ -2430,6 +2470,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-8131.2100",
         "NCS-2145.0200",
@@ -2488,6 +2529,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-8131.2100",
         "NCS-2145.0200",
@@ -2546,6 +2588,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-8131.2100",
         "NCS-2145.0200",
@@ -2604,6 +2647,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-8131.2100",
         "NCS-2145.0200",
@@ -2662,6 +2706,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-8131.2100",
         "NCS-2145.0200",
@@ -2720,6 +2765,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-8131.2100",
         "NCS-2145.0200",
@@ -2778,6 +2824,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-8131.2100",
         "NCS-2145.0200",
@@ -2836,6 +2883,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-8131.2100",
         "NCS-2145.0200",
@@ -2894,6 +2942,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-8131.2100",
         "NCS-2145.0200",
@@ -2952,6 +3001,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-8131.2100",
         "NCS-2145.0200",
@@ -3010,6 +3060,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-2152.0200",
         "NCS-2152.0801",
@@ -3068,6 +3119,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-2152.0200",
         "NCS-2152.0801",
@@ -3126,6 +3178,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-2152.0200",
         "NCS-2152.0801",
@@ -3184,6 +3237,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-2152.0200",
         "NCS-2152.0801",
@@ -3242,6 +3296,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-2152.0200",
         "NCS-2152.0801",
@@ -3300,6 +3355,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-2152.0200",
         "NCS-2152.0801",
@@ -3358,6 +3414,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-2152.0200",
         "NCS-2152.0801",
@@ -3416,6 +3473,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-2152.0200",
         "NCS-2152.0801",
@@ -3474,6 +3532,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-2152.0200",
         "NCS-2152.0801",
@@ -3532,6 +3591,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-2152.0200",
         "NCS-2152.0801",
@@ -3590,6 +3650,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-2152.0200",
         "NCS-2152.0801",
@@ -3648,6 +3709,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-2152.0200",
         "NCS-2152.0801",
@@ -3706,6 +3768,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-2152.0200",
         "NCS-2152.0801",
@@ -3764,6 +3827,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-2152.0200",
         "NCS-2152.0801",
@@ -3822,6 +3886,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-2152.0200",
         "NCS-2152.0801",
@@ -3880,6 +3945,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-2152.0200",
         "NCS-2152.0801",
@@ -3938,6 +4004,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-2152.0200",
         "NCS-2152.0801",
@@ -3996,6 +4063,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-2152.0200",
         "NCS-2152.0801",
@@ -4054,6 +4122,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-2152.0200",
         "NCS-2152.0801",
@@ -4112,6 +4181,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-2152.0200",
         "NCS-2152.0801",
@@ -4170,6 +4240,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-2152.0200",
         "NCS-2152.0801",
@@ -4228,6 +4299,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-2152.0200",
         "NCS-2152.0801",
@@ -4286,6 +4358,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-2152.0200",
         "NCS-2152.0801",
@@ -4344,6 +4417,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-2152.0200",
         "NCS-2152.0801",
@@ -4402,6 +4476,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-2152.0200",
         "NCS-2152.0801",
@@ -4460,6 +4535,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-2152.0200",
         "NCS-2152.0801",
@@ -4518,6 +4594,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-2152.0200",
         "NCS-2152.0801",
@@ -4576,6 +4653,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-2152.0200",
         "NCS-2152.0801",
@@ -4634,6 +4712,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-2152.0200",
         "NCS-2152.0801",
@@ -4692,6 +4771,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-2152.0200",
         "NCS-2152.0801",
@@ -4750,6 +4830,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-2152.0200",
         "NCS-2152.0801",
@@ -4808,6 +4889,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-2152.0200",
         "NCS-2152.0801",
@@ -4866,6 +4948,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-2152.0200",
         "NCS-2152.0801",
@@ -4924,6 +5007,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-2152.0200",
         "NCS-2152.0801",
@@ -4982,6 +5066,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-2152.0200",
         "NCS-2152.0801",
@@ -5040,6 +5125,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-2152.0200",
         "NCS-2152.0801",
@@ -5098,6 +5184,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-2152.0200",
         "NCS-2152.0801",
@@ -5156,6 +5243,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-2152.0200",
         "NCS-2152.0801",
@@ -5214,6 +5302,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-2152.0200",
         "NCS-2152.0801",
@@ -5272,6 +5361,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-2152.0200",
         "NCS-2152.0801",
@@ -5330,6 +5420,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-2152.0200",
         "NCS-2152.0801",
@@ -5388,6 +5479,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-2152.0200",
         "NCS-2152.0801",
@@ -5446,6 +5538,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-2152.0200",
         "NCS-2152.0801",
@@ -5504,6 +5597,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-2152.0200",
         "NCS-2152.0801",
@@ -5562,6 +5656,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-2152.0200",
         "NCS-2152.0801",
@@ -5620,6 +5715,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-2152.0200",
         "NCS-2152.0801",
@@ -5678,6 +5774,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-2152.0801",
         "NCS-7311.1002",
@@ -5736,6 +5833,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-2152.0200",
         "NCS-7311.1002",
@@ -5794,6 +5892,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-2152.0200",
         "NCS-2152.0801",
@@ -5852,6 +5951,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-2152.0200",
         "NCS-2152.0801",
@@ -5910,6 +6010,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-2145.0500",
         "NCS-8131.8300",
@@ -5968,6 +6069,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-8131.8300",
         "NCS-8131.5800",
@@ -6026,6 +6128,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-2145.0500",
         "NCS-8131.8300",
@@ -6084,6 +6187,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-2145.0500",
         "NCS-8131.8300",
@@ -6142,6 +6246,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-2145.0500",
         "NCS-8131.8300",
@@ -6200,6 +6305,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-2145.0500",
         "NCS-8131.8300",
@@ -6258,6 +6364,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-2145.0500",
         "NCS-8131.8300",
@@ -6316,6 +6423,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-2145.0500",
         "NCS-8131.8300",
@@ -6374,6 +6482,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-2145.0500",
         "NCS-8131.5800",
@@ -6432,6 +6541,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-2145.0500",
         "NCS-8131.8300",
@@ -6490,6 +6600,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-2145.0500",
         "NCS-8131.8300",
@@ -6548,6 +6659,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-2145.0500",
         "NCS-8131.8300",
@@ -6606,6 +6718,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-2145.0500",
         "NCS-8131.8300",
@@ -6664,6 +6777,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-2145.0500",
         "NCS-8131.8300",
@@ -6722,6 +6836,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-2145.0500",
         "NCS-8131.8300",
@@ -6780,6 +6895,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-2145.0500",
         "NCS-8131.8300",
@@ -6838,6 +6954,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-2145.0500",
         "NCS-8131.8300",
@@ -6896,6 +7013,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-2145.0500",
         "NCS-8131.8300",
@@ -6954,6 +7072,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-2145.0500",
         "NCS-8131.8300",
@@ -7012,6 +7131,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-2145.0500",
         "NCS-8131.8300",
@@ -7070,6 +7190,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-2145.0500",
         "NCS-8131.8300",
@@ -7128,6 +7249,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-2145.0500",
         "NCS-8131.8300",
@@ -7186,6 +7308,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-2145.0500",
         "NCS-8131.8300",
@@ -7244,6 +7367,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-7212.0105",
         "NCS-7311.0401",
@@ -7302,6 +7426,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-7212.0105",
         "NCS-7311.0401",
@@ -7360,6 +7485,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-7212.0105",
         "NCS-7311.0401",
@@ -7418,6 +7544,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-7212.0105",
         "NCS-7311.0401",
@@ -7476,6 +7603,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-7212.0105",
         "NCS-7311.0401",
@@ -7534,6 +7662,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-7212.0105",
         "NCS-7311.0401",
@@ -7592,6 +7721,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-7212.0105",
         "NCS-7311.0401",
@@ -7650,6 +7780,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-7212.0105",
         "NCS-7311.0401",
@@ -7708,6 +7839,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-7212.0105",
         "NCS-7311.0401",
@@ -7766,6 +7898,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-7212.0105",
         "NCS-7311.0401",
@@ -7824,6 +7957,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-7212.0105",
         "NCS-7311.0401",
@@ -7882,6 +8016,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-7212.0105",
         "NCS-7311.0401",
@@ -7940,6 +8075,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-7212.0105",
         "NCS-7311.0401",
@@ -7998,6 +8134,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-7212.0105",
         "NCS-7311.0401",
@@ -8056,6 +8193,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-7212.0105",
         "NCS-7311.0401",
@@ -8114,6 +8252,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-7212.0105",
         "NCS-7311.0401",
@@ -8172,6 +8311,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-7212.0105",
         "NCS-7311.0401",
@@ -8230,6 +8370,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-7212.0105",
         "NCS-7311.0401",
@@ -8288,6 +8429,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-7212.0105",
         "NCS-7311.0401",
@@ -8346,6 +8488,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-7212.0105",
         "NCS-7311.0401",
@@ -8404,6 +8547,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-7212.0105",
         "NCS-7311.0401",
@@ -8462,6 +8606,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-7212.0105",
         "NCS-7311.0401",
@@ -8520,6 +8665,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-7212.0105",
         "NCS-7311.0401",
@@ -8578,6 +8724,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-7212.0105",
         "NCS-7311.0401",
@@ -8636,6 +8783,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-7212.0105",
         "NCS-7311.0401",
@@ -8694,6 +8842,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-7212.0105",
         "NCS-7311.0401",
@@ -8752,6 +8901,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-7212.0105",
         "NCS-7311.0401",
@@ -8810,6 +8960,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-7212.0105",
         "NCS-7311.0401",
@@ -8868,6 +9019,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-7212.0105",
         "NCS-7311.0401",
@@ -8926,6 +9078,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-7212.0105",
         "NCS-7311.0401",
@@ -8984,6 +9137,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-7212.0105",
         "NCS-7311.0401",
@@ -9042,6 +9196,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-7212.0105",
         "NCS-7311.0401",
@@ -9100,6 +9255,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-7212.0105",
         "NCS-7311.0401",
@@ -9158,6 +9314,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-7212.0105",
         "NCS-7311.0401",
@@ -9216,6 +9373,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-7212.0105",
         "NCS-7311.0401",
@@ -9274,6 +9432,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-7212.0105",
         "NCS-7311.0401",
@@ -9332,6 +9491,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-7212.0105",
         "NCS-7311.0401",
@@ -9390,6 +9550,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-7212.0105",
         "NCS-7311.0401",
@@ -9448,6 +9609,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-7311.0401",
         "NCS-7233.2901",
@@ -9506,6 +9668,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-7212.0105",
         "NCS-7311.0401",
@@ -9564,6 +9727,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-7212.0105",
         "NCS-7311.0401",
@@ -9622,6 +9786,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-7212.0105",
         "NCS-7311.0401",
@@ -9680,6 +9845,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-7212.0105",
         "NCS-7311.0401",
@@ -9738,6 +9904,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-7212.0105",
         "NCS-7311.0401",
@@ -9796,6 +9963,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-7212.0105",
         "NCS-7233.2901",
@@ -9854,6 +10022,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-7212.0105",
         "NCS-7311.0401",
@@ -9912,6 +10081,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-7212.0105",
         "NCS-7311.0401",
@@ -9970,6 +10140,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-7212.0105",
         "NCS-7311.0401",
@@ -10028,6 +10199,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-7212.0105",
         "NCS-7311.0401",
@@ -10086,6 +10258,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-7212.0105",
         "NCS-7311.0401",
@@ -10144,6 +10317,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-1120.2800",
         "NCS-1324.2300",
@@ -10202,6 +10376,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-1120.2800",
         "NCS-1324.2300",
@@ -10260,6 +10435,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-1120.2800",
         "NCS-1324.2300",
@@ -10318,6 +10494,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-1120.2800",
         "NCS-1324.2300",
@@ -10376,6 +10553,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-1120.2800",
         "NCS-1324.2300",
@@ -10434,6 +10612,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-1120.2800",
         "NCS-1324.2300",
@@ -10492,6 +10671,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-1120.2800",
         "NCS-1324.2300",
@@ -10550,6 +10730,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-1120.2800",
         "NCS-1324.2300",
@@ -10608,6 +10789,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-1120.2800",
         "NCS-1324.2300",
@@ -10666,6 +10848,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-1120.2800",
         "NCS-1324.2300",
@@ -10724,6 +10907,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-1120.2800",
         "NCS-1324.2300",
@@ -10782,6 +10966,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-1120.2800",
         "NCS-1324.2300",
@@ -10840,6 +11025,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-1120.2800",
         "NCS-1324.2300",
@@ -10898,6 +11084,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-1120.2800",
         "NCS-1324.2300",
@@ -10956,6 +11143,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-1120.2800",
         "NCS-1324.2300",
@@ -11014,6 +11202,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-1120.2800",
         "NCS-1324.2300",
@@ -11072,6 +11261,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-1120.2800",
         "NCS-1324.2300",
@@ -11130,6 +11320,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-1120.2800",
         "NCS-1324.2300",
@@ -11188,6 +11379,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-1120.2800",
         "NCS-1324.2300",
@@ -11246,6 +11438,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-1324.2300",
         "NCS-1324.1200",
@@ -11304,6 +11497,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-1120.2800",
         "NCS-1324.2300",
@@ -11362,6 +11556,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-1120.2800",
         "NCS-1324.2300",
@@ -11420,6 +11615,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-1120.2800",
         "NCS-1324.2300",
@@ -11478,6 +11674,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-1120.2800",
         "NCS-1324.2300",
@@ -11536,6 +11733,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-1120.2800",
         "NCS-1324.2300",
@@ -11594,6 +11792,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-1120.2800",
         "NCS-1324.1200",
@@ -11652,6 +11851,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-1120.2800",
         "NCS-1324.2300",
@@ -11710,6 +11910,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-1120.2800",
         "NCS-1324.2300",
@@ -11768,6 +11969,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-1120.2800",
         "NCS-1324.2300",
@@ -11826,6 +12028,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-1120.2800",
         "NCS-1324.2300",
@@ -11884,6 +12087,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-1120.2800",
         "NCS-1324.2300",
@@ -11942,6 +12146,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-1120.2800",
         "NCS-1324.2300",
@@ -12000,6 +12205,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-1120.2800",
         "NCS-1324.2300",
@@ -12058,6 +12264,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-1120.2800",
         "NCS-1324.2300",
@@ -12116,6 +12323,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-1120.2800",
         "NCS-1324.2300",
@@ -12174,6 +12382,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-1120.2800",
         "NCS-1324.2300",
@@ -12232,6 +12441,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-1120.2800",
         "NCS-1324.2300",
@@ -12290,6 +12500,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-1120.2800",
         "NCS-1324.2300",
@@ -12348,6 +12559,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-1120.2800",
         "NCS-1324.2300",
@@ -12406,6 +12618,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-1120.2800",
         "NCS-1324.2300",
@@ -12464,6 +12677,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-1120.2800",
         "NCS-1324.2300",
@@ -12522,6 +12736,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-1120.2800",
         "NCS-1324.2300",
@@ -12580,6 +12795,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-1120.2800",
         "NCS-1324.2300",
@@ -12638,6 +12854,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-1120.2800",
         "NCS-1324.2300",
@@ -12696,6 +12913,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-1120.2800",
         "NCS-1324.2300",
@@ -12754,6 +12972,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-1120.2800",
         "NCS-1324.2300",
@@ -12812,6 +13031,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-1120.2800",
         "NCS-1324.2300",
@@ -12870,6 +13090,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-1120.2800",
         "NCS-1324.2300",
@@ -12928,6 +13149,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-1120.2800",
         "NCS-1324.2300",
@@ -12986,6 +13208,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-1120.2800",
         "NCS-1324.2300",
@@ -13044,6 +13267,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-2142.0501",
         "NCS-7126.0201",
@@ -13102,6 +13326,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-2142.0501",
         "NCS-7126.0201",
@@ -13160,6 +13385,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-7126.0201",
         "NCS-7233.1301",
@@ -13218,6 +13444,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-2142.0501",
         "NCS-7126.0201",
@@ -13276,6 +13503,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-2142.0501",
         "NCS-7126.0201",
@@ -13334,6 +13562,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-2142.0501",
         "NCS-7126.0201",
@@ -13392,6 +13621,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-2142.0501",
         "NCS-7126.0201",
@@ -13450,6 +13680,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-2142.0501",
         "NCS-7126.0201",
@@ -13508,6 +13739,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-2142.0501",
         "NCS-7126.0201",
@@ -13566,6 +13798,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-2142.0501",
         "NCS-7126.0201",
@@ -13624,6 +13857,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-2142.0501",
         "NCS-7126.0201",
@@ -13682,6 +13916,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-2142.0501",
         "NCS-7126.0201",
@@ -13740,6 +13975,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-2142.0501",
         "NCS-7126.0201",
@@ -13798,6 +14034,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-2142.0501",
         "NCS-7126.0201",
@@ -13856,6 +14093,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-2142.0501",
         "NCS-7126.0201",
@@ -13914,6 +14152,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-2142.0501",
         "NCS-7126.0201",
@@ -13972,6 +14211,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-2142.0501",
         "NCS-7126.0201",
@@ -14030,6 +14270,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-2142.0501",
         "NCS-7126.0201",
@@ -14088,6 +14329,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-2142.0501",
         "NCS-7126.0201",
@@ -14146,6 +14388,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-2142.0501",
         "NCS-7233.1301",
@@ -14204,6 +14447,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-2142.0501",
         "NCS-7126.0201",
@@ -14262,6 +14506,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-2142.0501",
         "NCS-7126.0201",
@@ -14320,6 +14565,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-2142.0501",
         "NCS-7126.0201",
@@ -14378,6 +14624,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-2142.0501",
         "NCS-7126.0201",
@@ -14436,6 +14683,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-2142.0501",
         "NCS-7126.0201",
@@ -14494,6 +14742,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-2142.0501",
         "NCS-7126.0201",
@@ -14552,6 +14801,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-2142.0501",
         "NCS-7126.0201",
@@ -14610,6 +14860,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-2142.0501",
         "NCS-7126.0201",
@@ -14668,6 +14919,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-2142.0501",
         "NCS-7126.0201",
@@ -14726,6 +14978,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-2142.0501",
         "NCS-7126.0201",
@@ -14784,6 +15037,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-2142.0501",
         "NCS-7126.0201",
@@ -14842,6 +15096,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-2142.0501",
         "NCS-7126.0201",
@@ -14900,6 +15155,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-2142.0501",
         "NCS-7126.0201",
@@ -14958,6 +15214,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-2142.0501",
         "NCS-7126.0201",
@@ -15016,6 +15273,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-2142.0501",
         "NCS-7126.0201",
@@ -15074,6 +15332,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-2142.0501",
         "NCS-7126.0201",
@@ -15132,6 +15391,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-2142.0501",
         "NCS-7126.0201",
@@ -15190,6 +15450,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-2142.0501",
         "NCS-7126.0201",
@@ -15248,6 +15509,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-2142.0501",
         "NCS-7126.0201",
@@ -15306,6 +15568,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-3257.0600",
         "NCS-3257.0500",
@@ -15362,6 +15625,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-3257.0600",
         "NCS-3257.0500",
@@ -15418,6 +15682,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-3257.0600",
         "NCS-3257.0400",
@@ -15474,6 +15739,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-3257.0500",
         "NCS-3257.0400",
@@ -15530,6 +15796,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-2143.0100",
         "NCS-7126.0311",
@@ -15588,6 +15855,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-2143.0100",
         "NCS-7126.0311",
@@ -15646,6 +15914,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-2143.0100",
         "NCS-7126.0311",
@@ -15704,6 +15973,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-2143.0100",
         "NCS-7126.0311",
@@ -15762,6 +16032,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-2143.0100",
         "NCS-7126.0311",
@@ -15820,6 +16091,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-2143.0100",
         "NCS-7126.0311",
@@ -15878,6 +16150,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-2143.0100",
         "NCS-7126.0311",
@@ -15936,6 +16209,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-2143.0100",
         "NCS-7126.0311",
@@ -15994,6 +16268,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-2143.0100",
         "NCS-7126.0311",
@@ -16052,6 +16327,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-2143.0100",
         "NCS-7126.0311",
@@ -16110,6 +16386,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-2143.0100",
         "NCS-7126.0311",
@@ -16168,6 +16445,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-2143.0100",
         "NCS-7126.0311",
@@ -16226,6 +16504,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-2143.0100",
         "NCS-7126.0311",
@@ -16284,6 +16563,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-2143.0100",
         "NCS-7126.0311",
@@ -16342,6 +16622,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-2143.0100",
         "NCS-7126.0311",
@@ -16400,6 +16681,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-2143.0100",
         "NCS-7126.0311",
@@ -16458,6 +16740,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-2143.0100",
         "NCS-7126.0311",
@@ -16516,6 +16799,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-2143.0100",
         "NCS-7126.0311",
@@ -16574,6 +16858,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-2143.0100",
         "NCS-7126.0311",
@@ -16632,6 +16917,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-2143.0100",
         "NCS-7126.0311",
@@ -16690,6 +16976,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-2143.0100",
         "NCS-7126.0311",
@@ -16748,6 +17035,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-2143.0100",
         "NCS-7212.0107",
@@ -16806,6 +17094,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-2143.0100",
         "NCS-7126.0311",
@@ -16864,6 +17153,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-2143.0100",
         "NCS-7126.0311",
@@ -16922,6 +17212,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-2143.0100",
         "NCS-7126.0311",
@@ -16980,6 +17271,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-2143.0100",
         "NCS-7126.0311",
@@ -17038,6 +17330,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-2143.0100",
         "NCS-7126.0311",
@@ -17096,6 +17389,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-2143.0100",
         "NCS-7126.0311",
@@ -17154,6 +17448,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-7126.0311",
         "NCS-7212.0107",
@@ -17212,6 +17507,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-2143.0100",
         "NCS-7126.0311",
@@ -17270,6 +17566,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-2143.0100",
         "NCS-7126.0311",
@@ -17328,6 +17625,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-2143.0100",
         "NCS-7126.0311",
@@ -17386,6 +17684,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-2143.0100",
         "NCS-7126.0311",
@@ -17444,6 +17743,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-2143.0100",
         "NCS-7126.0311",
@@ -17502,6 +17802,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-2143.0100",
         "NCS-7126.0311",
@@ -17560,6 +17861,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-3151.0100",
         "NCS-3151.0200",
@@ -17618,6 +17920,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-3151.0100",
         "NCS-3151.0200",
@@ -17676,6 +17979,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-3151.0200",
         "NCS-7233.2200",
@@ -17734,6 +18038,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-3151.0100",
         "NCS-3151.0200",
@@ -17792,6 +18097,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-3151.0100",
         "NCS-3151.0200",
@@ -17850,6 +18156,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-3151.0100",
         "NCS-3151.0200",
@@ -17908,6 +18215,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-3151.0100",
         "NCS-3151.0200",
@@ -17966,6 +18274,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-3151.0100",
         "NCS-3151.0200",
@@ -18024,6 +18333,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-3151.0100",
         "NCS-3151.0200",
@@ -18082,6 +18392,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-3151.0100",
         "NCS-3151.0200",
@@ -18140,6 +18451,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-3151.0100",
         "NCS-3151.0200",
@@ -18198,6 +18510,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-3151.0100",
         "NCS-3151.0200",
@@ -18256,6 +18569,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-3151.0100",
         "NCS-3151.0200",
@@ -18314,6 +18628,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-3151.0100",
         "NCS-3151.0200",
@@ -18372,6 +18687,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-3151.0100",
         "NCS-3151.0200",
@@ -18430,6 +18746,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-3151.0100",
         "NCS-3151.0200",
@@ -18488,6 +18805,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-3151.0100",
         "NCS-3151.0200",
@@ -18546,6 +18864,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-3151.0100",
         "NCS-3151.0200",
@@ -18604,6 +18923,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-3151.0100",
         "NCS-3151.0200",
@@ -18662,6 +18982,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-3151.0100",
         "NCS-3151.0200",
@@ -18720,6 +19041,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-3151.0100",
         "NCS-7233.2200",
@@ -18778,6 +19100,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-3151.0100",
         "NCS-3151.0200",
@@ -18836,6 +19159,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-3151.0100",
         "NCS-3151.0200",
@@ -18894,6 +19218,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-3151.0100",
         "NCS-3151.0200",
@@ -18952,6 +19277,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-3151.0100",
         "NCS-3151.0200",
@@ -19010,6 +19336,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-3151.0100",
         "NCS-3151.0200",
@@ -19068,6 +19395,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-3151.0100",
         "NCS-3151.0200",
@@ -19126,6 +19454,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-3151.0100",
         "NCS-3151.0200",
@@ -19184,6 +19513,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-3151.0100",
         "NCS-3151.0200",
@@ -19242,6 +19572,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-7311.1001",
         "NCS-3132.0700",
@@ -19300,6 +19631,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-7311.1001",
         "NCS-8211.0800",
@@ -19358,6 +19690,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-7311.1001",
         "NCS-3132.0700",
@@ -19416,6 +19749,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-7311.1001",
         "NCS-3132.0700",
@@ -19474,6 +19808,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-7311.1001",
         "NCS-3132.0700",
@@ -19532,6 +19867,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-7311.1001",
         "NCS-3132.0700",
@@ -19590,6 +19926,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-7311.1001",
         "NCS-3132.0700",
@@ -19648,6 +19985,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-7311.1001",
         "NCS-3132.0700",
@@ -19706,6 +20044,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-7311.1001",
         "NCS-3132.0700",
@@ -19764,6 +20103,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-7311.1001",
         "NCS-3132.0700",
@@ -19822,6 +20162,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-7311.1001",
         "NCS-3132.0700",
@@ -19880,6 +20221,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-7311.1001",
         "NCS-3132.0700",
@@ -19938,6 +20280,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-7311.1001",
         "NCS-3132.0700",
@@ -19996,6 +20339,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-7311.1001",
         "NCS-3132.0700",
@@ -20054,6 +20398,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-7311.1001",
         "NCS-3132.0700",
@@ -20112,6 +20457,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-7311.1001",
         "NCS-3132.0700",
@@ -20170,6 +20516,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-7311.1001",
         "NCS-3132.0700",
@@ -20228,6 +20575,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-7311.1001",
         "NCS-3132.0700",
@@ -20286,6 +20634,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-7311.1001",
         "NCS-3132.0700",
@@ -20344,6 +20693,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-7311.1001",
         "NCS-3132.0700",
@@ -20402,6 +20752,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-7311.1001",
         "NCS-3132.0700",
@@ -20460,6 +20811,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-7311.1001",
         "NCS-3132.0700",
@@ -20518,6 +20870,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-7311.1001",
         "NCS-3132.0700",
@@ -20576,6 +20929,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-7311.1001",
         "NCS-3132.0700",
@@ -20634,6 +20988,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-7311.1001",
         "NCS-3132.0700",
@@ -20692,6 +21047,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-7311.1001",
         "NCS-3132.0700",
@@ -20750,6 +21106,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-7311.1001",
         "NCS-3132.0700",
@@ -20808,6 +21165,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-7311.1001",
         "NCS-3132.0700",
@@ -20866,6 +21224,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-7311.1001",
         "NCS-3132.0700",
@@ -20924,6 +21283,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-7311.1001",
         "NCS-3132.0700",
@@ -20982,6 +21342,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-7311.1001",
         "NCS-3132.0700",
@@ -21040,6 +21401,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-7311.1001",
         "NCS-3132.0700",
@@ -21098,6 +21460,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-7311.1001",
         "NCS-3132.0700",
@@ -21156,6 +21519,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-7311.1001",
         "NCS-3132.0700",
@@ -21214,6 +21578,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-7311.1001",
         "NCS-3132.0700",
@@ -21272,6 +21637,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-3132.0700",
         "NCS-8211.0800",
@@ -21330,6 +21696,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-7311.1001",
         "NCS-3132.0700",
@@ -21388,6 +21755,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-7311.1001",
         "NCS-3132.0700",
@@ -21446,6 +21814,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-7311.1001",
         "NCS-3132.0700",
@@ -21504,6 +21873,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-7311.1001",
         "NCS-3132.0700",
@@ -21562,6 +21932,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-7311.1001",
         "NCS-3132.0700",
@@ -21620,6 +21991,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-7311.1001",
         "NCS-3132.0700",
@@ -21678,6 +22050,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-7311.1001",
         "NCS-3132.0700",
@@ -21736,6 +22109,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-7311.1001",
         "NCS-3132.0700",
@@ -21794,6 +22168,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-7311.1001",
         "NCS-3132.0700",
@@ -21852,6 +22227,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-7311.1001",
         "NCS-3132.0700",
@@ -21910,6 +22286,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-7311.1001",
         "NCS-3132.0700",
@@ -21968,6 +22345,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-7311.1001",
         "NCS-3132.0700",
@@ -22026,6 +22404,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-7311.1001",
         "NCS-3132.0700",
@@ -22084,6 +22463,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-7311.1001",
         "NCS-3132.0700",
@@ -22142,6 +22522,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-3117.0401",
         "NCS-3121.0800",
@@ -22200,6 +22581,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-3117.0401",
         "NCS-3121.0800",
@@ -22258,6 +22640,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-3117.0401",
         "NCS-3121.0800",
@@ -22316,6 +22699,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-3117.0401",
         "NCS-3121.0800",
@@ -22374,6 +22758,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-3117.0401",
         "NCS-3121.0800",
@@ -22432,6 +22817,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-3117.0401",
         "NCS-3121.0800",
@@ -22490,6 +22876,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-3117.0401",
         "NCS-3121.0800",
@@ -22548,6 +22935,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-3117.0401",
         "NCS-3121.0800",
@@ -22606,6 +22994,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-3117.0401",
         "NCS-3121.0800",
@@ -22664,6 +23053,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-3117.0401",
         "NCS-3121.0800",
@@ -22722,6 +23112,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-3117.0401",
         "NCS-3121.0800",
@@ -22780,6 +23171,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-3117.0401",
         "NCS-3121.0800",
@@ -22838,6 +23230,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-3117.0401",
         "NCS-3121.0800",
@@ -22896,6 +23289,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-3117.0401",
         "NCS-3121.0800",
@@ -22954,6 +23348,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-3117.0401",
         "NCS-3121.0800",
@@ -23012,6 +23407,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-3117.0401",
         "NCS-3121.0800",
@@ -23070,6 +23466,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-3117.0401",
         "NCS-3121.0800",
@@ -23128,6 +23525,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-3117.0401",
         "NCS-3121.0800",
@@ -23186,6 +23584,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-3117.0401",
         "NCS-3121.0800",
@@ -23244,6 +23643,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-3117.0401",
         "NCS-3121.0800",
@@ -23302,6 +23702,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-3117.0401",
         "NCS-3121.0800",
@@ -23360,6 +23761,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-3117.0401",
         "NCS-3121.0800",
@@ -23418,6 +23820,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-3117.0401",
         "NCS-3121.0800",
@@ -23476,6 +23879,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-3117.0401",
         "NCS-3121.0800",
@@ -23534,6 +23938,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-3117.0401",
         "NCS-3121.0800",
@@ -23592,6 +23997,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-3117.0401",
         "NCS-3121.0800",
@@ -23650,6 +24056,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-3117.0401",
         "NCS-3121.0800",
@@ -23708,6 +24115,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-3117.0401",
         "NCS-3121.0800",
@@ -23766,6 +24174,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-3117.0401",
         "NCS-3121.0800",
@@ -23824,6 +24233,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-3117.0401",
         "NCS-3121.0800",
@@ -23882,6 +24292,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-3117.0401",
         "NCS-3121.0800",
@@ -23940,6 +24351,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-3117.0401",
         "NCS-3121.0800",
@@ -23998,6 +24410,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-3117.0401",
         "NCS-3121.0800",
@@ -24056,6 +24469,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-3117.0401",
         "NCS-3121.0800",
@@ -24114,6 +24528,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-3117.0401",
         "NCS-3121.0800",
@@ -24172,6 +24587,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-3117.0401",
         "NCS-3121.0800",
@@ -24230,6 +24646,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-3117.0401",
         "NCS-3121.0800",
@@ -24288,6 +24705,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-3117.0401",
         "NCS-3121.0800",
@@ -24346,6 +24764,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-3117.0401",
         "NCS-3121.0800",
@@ -24404,6 +24823,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-3117.0401",
         "NCS-3121.0800",
@@ -24462,6 +24882,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-3117.0401",
         "NCS-3121.0800",
@@ -24520,6 +24941,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-3117.0401",
         "NCS-3121.0800",
@@ -24578,6 +25000,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-3117.0401",
         "NCS-3121.0800",
@@ -24636,6 +25059,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-3117.0401",
         "NCS-3121.0800",
@@ -24694,6 +25118,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-3117.0401",
         "NCS-3121.0800",
@@ -24752,6 +25177,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-3121.0800",
         "NCS-7411.0200",
@@ -24810,6 +25236,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-3117.0401",
         "NCS-7411.0200",
@@ -24868,6 +25295,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-3117.0401",
         "NCS-3121.0800",
@@ -24926,6 +25354,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-3117.0401",
         "NCS-3121.0800",
@@ -24984,6 +25413,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-3117.0401",
         "NCS-3121.0800",
@@ -25042,6 +25472,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-7214.0300",
         "NCS-7214.0500",
@@ -25100,6 +25531,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-7214.0300",
         "NCS-7214.0500",
@@ -25158,6 +25590,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-7214.0300",
         "NCS-7214.0500",
@@ -25216,6 +25649,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-7214.0300",
         "NCS-7214.0500",
@@ -25274,6 +25708,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-7214.0300",
         "NCS-7214.0500",
@@ -25332,6 +25767,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-7214.0300",
         "NCS-7214.0500",
@@ -25390,6 +25826,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-7214.0300",
         "NCS-7214.0500",
@@ -25448,6 +25885,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-7214.0300",
         "NCS-7214.0500",
@@ -25506,6 +25944,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-7214.0300",
         "NCS-7214.0500",
@@ -25564,6 +26003,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-7214.0300",
         "NCS-7214.0500",
@@ -25622,6 +26062,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-7214.0300",
         "NCS-7214.0500",
@@ -25680,6 +26121,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-7214.0300",
         "NCS-7214.0500",
@@ -25738,6 +26180,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-7214.0300",
         "NCS-7214.0500",
@@ -25796,6 +26239,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-7214.0300",
         "NCS-7214.0500",
@@ -25854,6 +26298,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-7214.0500",
         "NCS-7411.0100",
@@ -25912,6 +26357,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-7214.0300",
         "NCS-7411.0100",
@@ -25970,6 +26416,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-7214.0300",
         "NCS-7214.0500",
@@ -26028,6 +26475,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-7214.0300",
         "NCS-7214.0500",
@@ -26086,6 +26534,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-7214.0300",
         "NCS-7214.0500",
@@ -26144,6 +26593,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-7214.0300",
         "NCS-7214.0500",
@@ -26202,6 +26652,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-7214.0300",
         "NCS-7214.0500",
@@ -26260,6 +26711,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-7214.0300",
         "NCS-7214.0500",
@@ -26318,6 +26770,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-7214.0300",
         "NCS-7214.0500",
@@ -26376,6 +26829,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-7214.0300",
         "NCS-7214.0500",
@@ -26434,6 +26888,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-7214.0300",
         "NCS-7214.0500",
@@ -26492,6 +26947,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-7214.0300",
         "NCS-7214.0500",
@@ -26550,6 +27006,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-7214.0300",
         "NCS-7214.0500",
@@ -26608,6 +27065,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-7214.0300",
         "NCS-7214.0500",
@@ -26666,6 +27124,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-7214.0300",
         "NCS-7214.0500",
@@ -26724,6 +27183,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-7214.0300",
         "NCS-7214.0500",
@@ -26782,6 +27242,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-7214.0300",
         "NCS-7214.0500",
@@ -26840,6 +27301,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-7214.0300",
         "NCS-7214.0500",
@@ -26898,6 +27360,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-7214.0300",
         "NCS-7214.0500",
@@ -26956,6 +27419,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-7214.0300",
         "NCS-7214.0500",
@@ -27014,6 +27478,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-7214.0300",
         "NCS-7214.0500",
@@ -27072,6 +27537,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-7214.0300",
         "NCS-7214.0500",
@@ -27130,6 +27596,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-7214.0300",
         "NCS-7214.0500",
@@ -27188,6 +27655,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-7214.0300",
         "NCS-7214.0500",
@@ -27246,6 +27714,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-7214.0300",
         "NCS-7214.0500",
@@ -27304,6 +27773,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-7214.0300",
         "NCS-7214.0500",
@@ -27362,6 +27832,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-7214.0300",
         "NCS-7214.0500",
@@ -27420,6 +27891,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-7214.0300",
         "NCS-7214.0500",
@@ -27478,6 +27950,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-7214.0300",
         "NCS-7214.0500",
@@ -27536,6 +28009,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-7214.0300",
         "NCS-7214.0500",
@@ -27594,6 +28068,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-7214.0300",
         "NCS-7214.0500",
@@ -27652,6 +28127,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-7214.0300",
         "NCS-7214.0500",
@@ -27710,6 +28186,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-7214.0300",
         "NCS-7214.0500",
@@ -27768,6 +28245,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-7214.0300",
         "NCS-7214.0500",
@@ -27826,6 +28304,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-7214.0300",
         "NCS-7214.0500",
@@ -27884,6 +28363,7 @@
       "supply_estimate": null,
       "supply_source": null,
       "supply_nco_subdivision": null,
+      "supply_sample_count": null,
       "upskill_paths": [
         "NCS-7214.0300",
         "NCS-7214.0500",
