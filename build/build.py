@@ -45,6 +45,13 @@ STATIC_PUBLIC_FILES = [
     "style.css",
     "hygoat-logo.svg",
 ]
+
+# Doc-side static pages (design-lockdown skeletons) that are authored in docs/
+# and synced to web/ for dev parity.
+DOC_STATIC_SUBDIRS = [
+    "methodology",
+    "about",
+]
 DATASET_VERSION = "1.4.0.0"
 
 # H2-relevant NCS sectors (12 of 49)
@@ -325,7 +332,11 @@ def sync_model_data():
 
 
 def sync_public_artifacts():
-    """Mirror source shell/assets into docs/ and docs data into ignored web/ dev copies."""
+    """Mirror source shell/assets into docs/ and docs data into ignored web/ dev copies.
+    Write-direction rule: web/ is canonical for hand-edited dynamic templates
+    (index.html, main.js.template, style.css); docs/methodology/ and docs/about/ are
+    canonical for the static design-lockdown skeletons. No Jinja2 — template expansion
+    is done by string replacement in inject_base_url()."""
     os.makedirs(WEB_DIR, exist_ok=True)
     os.makedirs(DOCS_DIR, exist_ok=True)
 
@@ -333,8 +344,28 @@ def sync_public_artifacts():
         source_path = os.path.join(WEB_DIR, filename)
         output_path = os.path.join(DOCS_DIR, filename)
         if os.path.exists(source_path):
+            parent = os.path.dirname(output_path)
+            if parent:
+                os.makedirs(parent, exist_ok=True)
+            if os.path.exists(output_path):
+                web_mtime = os.path.getmtime(source_path)
+                docs_mtime = os.path.getmtime(output_path)
+                if web_mtime > docs_mtime:
+                    print(f"WARN: web/{filename} is newer than docs/{filename} "
+                          f"— overwriting with web/ source (expected for dynamic templates)")
             shutil.copy2(source_path, output_path)
             print(f"Copied static asset: {output_path}")
+
+    # Sync doc-side static pages (methodology, about) to web/ for dev parity.
+    # These are authored in docs/ during design lockdown and are the source of truth.
+    for subdir in DOC_STATIC_SUBDIRS:
+        src = os.path.join(DOCS_DIR, subdir)
+        dst = os.path.join(WEB_DIR, subdir)
+        if os.path.exists(src):
+            if os.path.exists(dst):
+                shutil.rmtree(dst)
+            shutil.copytree(src, dst)
+            print(f"Synced doc page to web/: {dst}")
 
     for docs_artifact in [OUTPUT_JSON, OUTPUT_JSON_ALL, OUTPUT_CSV_H2]:
         web_output = os.path.join(WEB_DIR, os.path.basename(docs_artifact))
