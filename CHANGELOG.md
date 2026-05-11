@@ -2,6 +2,52 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.4.2.0] - 2026-05-11
+
+WHS Rotterdam 2026 launch release. Atlas augmentations plus two new static pages, packaged as a credibility instrument for the World Hydrogen Summit (Tue May 19 17:30 CEST).
+
+### Added
+- **`/methodology/` page**: single-column research document with sticky 280px TOC (desktop) / native `<select>` "Jump to section" (mobile). Six H₂ adjacency dimensions rendered as semantic `<dl>` with green left-border accents. Bordered "Caveats and limitations" callout for sample-size policy. NCO extension policy, scoring reproducibility section with inline repo link. No CTA buttons, no feature grids, no icons-in-circles
+- **`/about/` page**: minimal Contact-only page. Advisory Circle removed per founder decision; institutional grounding deferred to post-WHS TODO
+- **Shared atlas chrome across all three pages**: 3-link nav (Atlas / Methodology / About) with `aria-current` and 2px green underline active state; shared minimal footer with `mailto:ekansh@ekavikalp.com`
+- **`?lens=maritime` URL deep-link**: parses on init, preselects Maritime sector in sidebar `<select id="sectorFilter">`, renders dismissible lens-arrival banner. Banner: 3px green left accent, gray-50 bg, copy `Viewing: Maritime Occupations lens.`, 44×44 close button with `aria-label`. Dismisses on close click OR first user filter change. One-way URL→state contract: filter changes do not mutate `location.search`
+- **Sidebar inline methodology link** on every occupation entry: `How is this scored? → Methodology` in Mukta 0.75rem, `--text-muted`, plain text (not a button)
+- **`low_sample` tooltip**: gap-mode returns `low_sample` status when `supply.sample_count < 30`, regardless of demand. Renders 6px orange dot (`--color-goat`) next to the supply number; tooltip reuses DESIGN.md dark-slate pattern with copy `PLFS 2023-24 sample size <30, indicative only`. Hover, focus, and mobile tap all show
+- **Freshness badge** in summary bar (right-aligned): `Last Updated: May 2026 · PLFS 2023-24`
+- **Atlas subtitle** under summary bar: `India's 1,802 occupations scored against the H₂ economy.`
+- **Slow-load state**: muted `Loading 1,802 occupations…` line in `#treemap` area, hidden by JS once D3 paints. Chrome (nav, summary bar, controls, footer) renders immediately from static HTML
+- **`URL_FREEZE.md`**: canonical URLs snapshot with build-time guarantee. Frozen paths must not change between Fri May 15 EOD and Tue May 19 17:30 CEST without an explicit redirect entry
+- **`RUNBOOK.md`**: bus-factor recovery doc per Critical Path 8. Clone, build, deploy, hotfix, rollback, domain ownership, troubleshooting. F2 dry-run on clean machine required before launch
+- **`scripts/generate_qr.py`**: reads canonical URL from `URL_FREEZE.md` (drift-proof), outputs `assets/qr-workforce-atlas.svg` and `qr-workforce-atlas-1024.png` with error correction level Q
+- **`scripts/smoke_prod.ps1`**: PowerShell production smoke for Sun May 17 morning. Curls every URL in `URL_FREEZE.md`, asserts 200, asserts page content markers
+- **QR assets**: `assets/qr-workforce-atlas.svg` (vector) and `qr-workforce-atlas-1024.png` (1024×1024) for the one-pager designer
+
+### Changed
+- **Build pipeline** (`build/build.py`) supports nested doc subdirectories. `DOC_STATIC_SUBDIRS` constant lists `methodology` and `about`; sync creates parent dirs when copying nested paths and reverse-syncs static pages `docs/ → web/` for dev parity. Sync direction documented in a comment block; mtime check warns when a newer source would be overwritten
+- **Mobile nav (≤768px)** uses `flex-wrap` with shrunken typography (0.78rem links, 0.85rem logo) so all three nav links fit in a 375px viewport. Fixes Browser QA P1 finding where Methodology and About were off-screen
+- **Footer pattern** unified across atlas, methodology, and about
+
+### Removed
+- **Plausible analytics snippet** stripped from all pages. Telemetry deferred to post-WHS TODO; Plausible/Cloudflare built-in referrer view covers WHS week sufficiently
+- **Green Iron lens (T0.12)** cut from WHS scope per `/plan-design-review` outside-voice review. Indian-context occupation specificity too thin relative to Maritime / RFNBO; would become the most-attacked surface for a hostile economist. Move to post-WHS
+- **RFNBO lens (T0.11)** removed from URL freeze and lens whitelist pending confirmed sector mapping when `H2-RFNBO-*` occupations land
+- **Advisory Circle** section on `/about/` per founder
+
+### Tests
+- **DR-1** (`tests/test_build.py`): `<link rel="stylesheet" href="../style.css">` present in both `docs/methodology/index.html` and `docs/about/index.html`. Catches inlined-style regression
+- **DR-2** (`tests/test_build.py`): `Mukta` string present in `docs/style.css`. Catches `@import` drop on stylesheet regeneration
+- **DR-3** (`tests/test_ui_logic.py`): sector `<select>` lives inside the sidebar; `style="display:none"` in HTML source; visibility unhidden only when `activeLens` is set
+- **Freshness** (ER-15): `Last Updated` and `PLFS 2023-24` strings present in `docs/index.html` and `docs/methodology/index.html`
+- **Analytics absence**: explicit assertion that no Plausible snippet exists on any page (post-strip safety net)
+- **URL freeze** (`tests/test_url_freeze.py`, 6 tests): every canonical path in `URL_FREEZE.md` resolves under `docs/` after build
+- **QR** (`tests/test_qr.py`, 5 tests): generator produces SVG + PNG, PNG ≥ 1024×1024, SVG viewBox square
+- **Runbook** (`tests/test_runbook.py`, 2 tests): file exists, required sections present
+
+166 tests total (up from 141), all green.
+
+### Plan provenance
+Drives test plan: `74055-master-eng-review-test-plan-20260511-145750.md`. Eng review: CLEAR (PLAN), 9 issues, 3 critical gaps resolved. Design review: CLEAR (FULL), score 3/10 → 9/10, 17 decisions added. Outside voice: DeepSeek V4 Pro, 5 hard rejections all addressed. Browser QA: 5 PASS, 1 founder-call, 2 deferred — SHIP-WITH-FIXES; P1 mobile nav addressed in this release; deploy gap closed by this release's `docs/` regeneration and push.
+
 ## [1.4.1.0] - 2026-03-31
 
 ### Added
