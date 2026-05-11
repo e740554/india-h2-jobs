@@ -286,3 +286,119 @@ def test_sync_model_data_warns_on_missing_file(monkeypatch, tmp_path, capsys):
     assert not (docs_dir / "scenarios.json").exists()
     assert not (docs_dir / "clusters.json").exists()
     assert not (docs_dir / "pathways.json").exists()
+
+
+# --- Design regression tests (DR-1, DR-2) ---
+
+PROJECT_ROOT = os.path.join(os.path.dirname(__file__), "..")
+DOCS_DIR = os.path.join(PROJECT_ROOT, "docs")
+WEB_DIR = os.path.join(PROJECT_ROOT, "web")
+
+ANALYTICS_SNIPPET_MARKER = "plausible.io/js/script.js"
+
+
+def test_methodology_page_has_stylesheet_link():
+    """DR-1: methodology/index.html links to ../style.css (not inline styles)."""
+    path = os.path.join(DOCS_DIR, "methodology", "index.html")
+    assert os.path.exists(path), f"Expected {path} to exist"
+    content = open(path, "r", encoding="utf-8").read()
+    assert "<link rel=\"stylesheet\" href=\"../style.css\">" in content or \
+           "href=\"../style.css\"" in content, \
+        "methodology/index.html must link to ../style.css"
+
+
+def test_about_page_has_stylesheet_link():
+    """DR-1: about/index.html links to ../style.css (not inline styles)."""
+    path = os.path.join(DOCS_DIR, "about", "index.html")
+    assert os.path.exists(path), f"Expected {path} to exist"
+    content = open(path, "r", encoding="utf-8").read()
+    assert "<link rel=\"stylesheet\" href=\"../style.css\">" in content or \
+           "href=\"../style.css\"" in content, \
+        "about/index.html must link to ../style.css"
+
+
+def test_style_css_contains_mukta_import():
+    """DR-2: style.css must import Mukta (catches accidental regeneration dropping @import)."""
+    path = os.path.join(DOCS_DIR, "style.css")
+    assert os.path.exists(path), f"Expected {path} to exist"
+    content = open(path, "r", encoding="utf-8").read()
+    assert "Mukta" in content, "style.css must contain Mukta font import"
+
+
+def test_build_outputs_methodology_and_about_pages(tmp_path):
+    """After build, docs/methodology/index.html and docs/about/index.html are present."""
+    import build.build as build_module
+
+    docs_dir = tmp_path / "docs"
+    web_dir = tmp_path / "web"
+    docs_dir.mkdir()
+    web_dir.mkdir()
+
+    (docs_dir / "methodology").mkdir()
+    (docs_dir / "about").mkdir()
+    (docs_dir / "methodology" / "index.html").write_text(
+        '<html><link rel="stylesheet" href="../style.css"></html>', encoding="utf-8"
+    )
+    (docs_dir / "about" / "index.html").write_text(
+        '<html><link rel="stylesheet" href="../style.css"></html>', encoding="utf-8"
+    )
+
+    monkeypatch = None
+    orig_docs_dir = build_module.DOCS_DIR
+    orig_web_dir = build_module.WEB_DIR
+    try:
+        build_module.DOCS_DIR = str(docs_dir)
+        build_module.WEB_DIR = str(web_dir)
+        build_module.sync_public_artifacts()
+    finally:
+        build_module.DOCS_DIR = orig_docs_dir
+        build_module.WEB_DIR = orig_web_dir
+
+    assert (docs_dir / "methodology" / "index.html").exists()
+    assert (docs_dir / "about" / "index.html").exists()
+    assert (web_dir / "methodology" / "index.html").exists()
+    assert (web_dir / "about" / "index.html").exists()
+
+
+# --- Freshness regression tests (ER-15) ---
+
+def test_index_has_freshness_strings():
+    """ER-15: Last Updated AND PLFS 2023-24 substrings present in docs/index.html."""
+    path = os.path.join(DOCS_DIR, "index.html")
+    content = open(path, "r", encoding="utf-8").read()
+    assert "Last Updated" in content, "docs/index.html must contain 'Last Updated'"
+    assert "PLFS 2023-24" in content, "docs/index.html must contain 'PLFS 2023-24'"
+
+
+def test_methodology_has_freshness_strings():
+    """ER-15: Last Updated AND PLFS 2023-24 substrings in docs/methodology/index.html."""
+    path = os.path.join(DOCS_DIR, "methodology", "index.html")
+    content = open(path, "r", encoding="utf-8").read()
+    assert "Last Updated" in content, "docs/methodology/index.html must contain 'Last Updated'"
+    assert "PLFS 2023-24" in content, "docs/methodology/index.html must contain 'PLFS 2023-24'"
+
+
+# --- Analytics snippet removal (telemetry out of WHS scope) ---
+
+def test_no_analytics_snippet_in_index():
+    path = os.path.join(DOCS_DIR, "index.html")
+    content = open(path, "r", encoding="utf-8").read()
+    assert ANALYTICS_SNIPPET_MARKER not in content, (
+        f"docs/index.html must NOT contain analytics snippet '{ANALYTICS_SNIPPET_MARKER}'"
+    )
+
+
+def test_no_analytics_snippet_in_methodology():
+    path = os.path.join(DOCS_DIR, "methodology", "index.html")
+    content = open(path, "r", encoding="utf-8").read()
+    assert ANALYTICS_SNIPPET_MARKER not in content, (
+        f"docs/methodology/index.html must NOT contain analytics snippet '{ANALYTICS_SNIPPET_MARKER}'"
+    )
+
+
+def test_no_analytics_snippet_in_about():
+    path = os.path.join(DOCS_DIR, "about", "index.html")
+    content = open(path, "r", encoding="utf-8").read()
+    assert ANALYTICS_SNIPPET_MARKER not in content, (
+        f"docs/about/index.html must NOT contain analytics snippet '{ANALYTICS_SNIPPET_MARKER}'"
+    )
