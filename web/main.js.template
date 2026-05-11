@@ -930,7 +930,7 @@
       return lookup;
     }
 
-    function buildGapRecord(supply, demand) {
+    function buildGapRecord(supply, demand, sampleCount) {
       if (supply == null) {
         return {
           supply: null,
@@ -940,14 +940,18 @@
           gapStatus: "no_data",
         };
       }
-      const numericDemand = Number(demand || 0);
-      const gap = Number(supply) - numericDemand;
+      var numericDemand = Number(demand || 0);
+      var gap = Number(supply) - numericDemand;
+      var status = gap > 0 ? "surplus" : (gap < 0 ? "shortage" : "balanced");
+      if (sampleCount != null && Number(sampleCount) < 30) {
+        status = "low_sample";
+      }
       return {
         supply: Number(supply),
         demand: numericDemand,
         gap: gap,
         gapPct: numericDemand > 0 ? Number((((Number(supply) - numericDemand) / numericDemand) * 100).toFixed(1)) : null,
-        gapStatus: gap > 0 ? "surplus" : (gap < 0 ? "shortage" : "balanced"),
+        gapStatus: status,
       };
     }
 
@@ -1220,6 +1224,97 @@
   let selectedRegionValue = Runtime.VIEW_ALL_VALUE;
   let selectedYear = null;
 
+  // Task 1: ?lens= URL parameter handling (T0.10)
+  var LENS_WHITELIST = { maritime: "Shipping" };
+  var activeLens = null;
+  var lensBannerDismissed = false;
+
+  function parseLensParam() {
+    try {
+      var params = new URLSearchParams(window.location.search);
+      var raw = params.get("lens");
+      if (!raw) {
+        return null;
+      }
+      var sector = LENS_WHITELIST[String(raw).toLowerCase()];
+      if (!sector) {
+        return null;
+      }
+      return { lens: String(raw).toLowerCase(), sector: sector };
+    } catch (e) {
+      return null;
+    }
+  }
+
+  function applyLensFilter(lensInfo) {
+    if (!lensInfo) {
+      return;
+    }
+    activeLens = lensInfo;
+    var allOccs = (filteredData && filteredData.occupations) || [];
+    var filtered = [];
+    for (var i = 0; i < allOccs.length; i++) {
+      if (allOccs[i].sector === lensInfo.sector) {
+        filtered.push(allOccs[i]);
+      }
+    }
+    data = {
+      dataset_version: filteredData.dataset_version,
+      last_updated: filteredData.last_updated,
+      total_occupations: filtered.length,
+      total_all_occupations: filteredData.total_all_occupations,
+      total_sectors: 1,
+      total_all_sectors: filteredData.total_all_sectors,
+      scored_occupations: filteredData.scored_occupations,
+      summary: filteredData.summary,
+      data_quality: filteredData.data_quality,
+      occupations: filtered,
+    };
+    refreshOccupationIndex();
+    var select = document.getElementById("sectorFilter");
+    if (select) {
+      select.value = lensInfo.sector;
+    }
+  }
+
+  function renderLensBanner() {
+    if (!activeLens || lensBannerDismissed) {
+      return;
+    }
+    var sidebar = document.getElementById("sidebar");
+    var existing = sidebar.querySelector(".lens-banner");
+    if (existing) {
+      return;
+    }
+    var banner = document.createElement("div");
+    banner.className = "lens-banner";
+    var label = document.createElement("span");
+    label.textContent = "Viewing: " + toTitleCase(activeLens.lens) + " Occupations lens";
+    var closeBtn = document.createElement("button");
+    closeBtn.className = "lens-banner__close";
+    closeBtn.setAttribute("aria-label", "Dismiss lens banner");
+    closeBtn.innerHTML = "&#x00D7;";
+    closeBtn.addEventListener("click", dismissLensBanner);
+    banner.appendChild(label);
+    banner.appendChild(closeBtn);
+    sidebar.insertBefore(banner, sidebar.firstChild);
+  }
+
+  function dismissLensBanner() {
+    lensBannerDismissed = true;
+    var banner = document.querySelector(".lens-banner");
+    if (banner && banner.parentNode) {
+      banner.parentNode.removeChild(banner);
+    }
+  }
+
+  function dismissLensOnFilterChange() {
+    if (!activeLens || lensBannerDismissed) {
+      return;
+    }
+    dismissLensBanner();
+  }
+
   let savedMetricLabels = null;
   let demandResults = null;
   let gapResults = null;
@@ -1380,7 +1475,11 @@
     for (let i = 0; i < occupations.length; i += 1) {
       const occupation = occupations[i];
       const demand = demandByOccupation[occupation.id] ? Number(demandByOccupation[occupation.id].demand || 0) : 0;
-      results[occupation.id] = Runtime.buildGapRecord(occupation.supply_estimate, demand);
+      results[occupation.id] = Runtime.buildGapRecord(
+        occupation.supply_estimate,
+        demand,
+        occupation.supply_sample_count
+      );
     }
     return results;
   }
@@ -2301,7 +2400,29 @@
     const gap = document.getElementById("sbGap");
     const status = document.getElementById("sbGapStatus");
 
-    if (record.supply != null) {
+    var existingDot = supply.parentNode ? supply.parentNode.querySelector(".low-sample-dot") : null;
+    if (existingDot) {
+      existingDot.parentNode.removeChild(existingDot);
+    }
+
+    if (record.supply != null && record.gapStatus === "low_sample") {
+      supply.textContent = Number(record.supply).toLocaleString();
+      gap.textContent = (record.gap >= 0 ? "+" : "") + Number(record.gap).toLocaleString();
+      gap.className = record.gap >= 0 ? "gap-surplus" : "gap-shortage";
+      status.textContent = "Low sample";
+
+      var dot = document.createElement("span");
+      dot.className = "low-sample-dot";
+      dot.setAttribute("tabindex", "0");
+      dot.setAttribute("role", "tooltip");
+      dot.setAttribute("aria-label", "PLFS 2023-24 sample size <30, indicative only.");
+      supply.parentNode.insertBefore(dot, supply.nextSibling);
+
+      var tooltipDiv = document.createElement("span");
+      tooltipDiv.className = "low-sample-tooltip";
+      tooltipDiv.textContent = "PLFS 2023-24 sample size <30, indicative only.";
+      dot.appendChild(tooltipDiv);
+    } else if (record.supply != null) {
       supply.textContent = Number(record.supply).toLocaleString();
       gap.textContent = (record.gap >= 0 ? "+" : "") + Number(record.gap).toLocaleString();
       gap.className = record.gap >= 0 ? "gap-surplus" : "gap-shortage";
@@ -2483,6 +2604,18 @@
       occupation.median_wage_inr != null ? "\u20B9" + Number(occupation.median_wage_inr).toLocaleString() : "N/A";
 
     renderScoreBars(occupation);
+    var overviewPanel = document.getElementById("overviewPanel");
+    var existingMethodologyLink = overviewPanel ? overviewPanel.querySelector(".sidebar-methodology-link") : null;
+    if (!existingMethodologyLink) {
+      var methodologyLink = document.createElement("a");
+      methodologyLink.className = "sidebar-methodology-link";
+      methodologyLink.href = BASE_URL ? BASE_URL + "/methodology/" : "methodology/";
+      methodologyLink.textContent = "How is this scored? \u2192 Methodology";
+      var scoreBars = document.getElementById("scoreBars");
+      if (scoreBars && scoreBars.parentNode) {
+        scoreBars.parentNode.insertBefore(methodologyLink, scoreBars.nextSibling);
+      }
+    }
     renderUpskillPaths(occupation);
     renderScenarioDetails(occupation);
     renderGapDetails(occupation);
@@ -2529,6 +2662,7 @@
         button.classList.add("active");
         activeDimension = button.dataset.dim;
         recolourTreemap();
+        dismissLensOnFilterChange();
       });
     });
   }
@@ -2540,6 +2674,84 @@
       });
     });
     updateSidebarTabState();
+  }
+
+  function setupSectorFilter() {
+    var select = document.getElementById("sectorFilter");
+    if (!select) {
+      return;
+    }
+    select.textContent = "";
+    var defaultOption = document.createElement("option");
+    defaultOption.value = "";
+    defaultOption.textContent = "All H2 Sectors";
+    select.appendChild(defaultOption);
+
+    var sectors = Object.create(null);
+    var occs = (filteredData && filteredData.occupations) || [];
+    for (var i = 0; i < occs.length; i++) {
+      sectors[occs[i].sector] = true;
+    }
+    var sectorNames = Object.keys(sectors).sort();
+    for (var s = 0; s < sectorNames.length; s++) {
+      var option = document.createElement("option");
+      option.value = sectorNames[s];
+      option.textContent = sectorNames[s];
+      select.appendChild(option);
+    }
+
+    if (activeLens) {
+      select.value = activeLens.sector;
+      select.style.display = "";
+    }
+
+    select.addEventListener("change", function () {
+      dismissLensOnFilterChange();
+      var newSector = select.value;
+      if (!newSector) {
+        data = filteredData;
+        refreshOccupationIndex();
+        var sectorButton = document.getElementById("toggleSectors");
+        if (sectorButton) {
+          sectorButton.textContent = "Show All H2 Sectors";
+          sectorButton.classList.remove("active");
+        }
+        viewTier = "focus";
+        updateSummary();
+        buildTreemap();
+        refreshSelectedOccupation(true);
+        return;
+      }
+      var filtered = [];
+      var allOccs = (filteredData && filteredData.occupations) || [];
+      for (var j = 0; j < allOccs.length; j++) {
+        if (allOccs[j].sector === newSector) {
+          filtered.push(allOccs[j]);
+        }
+      }
+      data = {
+        dataset_version: filteredData.dataset_version,
+        last_updated: filteredData.last_updated,
+        total_occupations: filtered.length,
+        total_all_occupations: filteredData.total_all_occupations,
+        total_sectors: 1,
+        total_all_sectors: filteredData.total_all_sectors,
+        scored_occupations: filteredData.scored_occupations,
+        summary: filteredData.summary,
+        data_quality: filteredData.data_quality,
+        occupations: filtered,
+      };
+      refreshOccupationIndex();
+      viewTier = "sector";
+      var sectorButton = document.getElementById("toggleSectors");
+      if (sectorButton) {
+        sectorButton.textContent = "Show All H2 Sectors";
+        sectorButton.classList.remove("active");
+      }
+      updateSummary();
+      buildTreemap();
+      refreshSelectedOccupation(true);
+    });
   }
 
   function setupSectorToggle() {
@@ -2818,6 +3030,8 @@
     scenarioMode = mode === "scenario" || mode === "gap";
     gapMode = mode === "gap";
 
+    dismissLensOnFilterChange();
+
     document.querySelectorAll(".mode-btn").forEach(function (button) {
       button.classList.toggle("active", button.dataset.mode === mode);
     });
@@ -2986,12 +3200,29 @@
         loadPathways(),
       ]);
 
+      var lensInfo = parseLensParam();
+      if (lensInfo) {
+        applyLensFilter(lensInfo);
+        viewTier = "sector";
+        var sectorButton = document.getElementById("toggleSectors");
+        if (sectorButton) {
+          sectorButton.textContent = "Show All H2 Sectors";
+          sectorButton.classList.remove("active");
+        }
+      }
+
       updateSummary();
       saveMetricLabels();
       buildTreemap();
+
+      if (lensInfo) {
+        renderLensBanner();
+      }
+
       setupDimensionPills();
       setupSidebarTabs();
       setupSectorToggle();
+      setupSectorFilter();
       setupDownloads();
 
       var sidebarEl = document.getElementById("sidebar");
@@ -3010,7 +3241,7 @@
         document.getElementById("modeToggle").style.display = "none";
       }
 
-      let resizeTimer = null;
+      var resizeTimer = null;
       global.addEventListener("resize", function () {
         global.clearTimeout(resizeTimer);
         resizeTimer = global.setTimeout(buildTreemap, 250);

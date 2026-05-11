@@ -213,3 +213,83 @@ def test_state_resets_on_mode_switch_to_atlas():
     if mode == "atlas":
         view_tier = "focus"
     assert view_tier == "focus"
+
+
+# --- DR-3: URL parameter handling for ?lens=* ---
+
+def test_parse_lens_maritime():
+    """?lens=maritime parses to lens=maritime, sector=Shipping."""
+    import json
+    result = json.loads(subprocess.run(
+        ["node", PARITY_SCRIPT, "parse-lens", "maritime"],
+        capture_output=True, text=True, cwd=PROJECT_ROOT,
+    ).stdout)
+    assert result["lens"] == "maritime"
+    assert result["sector"] == "Shipping"
+
+
+# --- DR-3 extended: sector-select sidebar placement + visibility ---
+
+def test_dr3_sector_select_in_sidebar():
+    """DR-3: #sectorFilter is inside .sidebar, NOT .controls-right."""
+    import re
+    index_path = os.path.join(PROJECT_ROOT, "web", "index.html")
+    with open(index_path, "r", encoding="utf-8") as f:
+        html = f.read()
+    sidebar_match = re.search(r'<aside[^>]*class="sidebar"[^>]*>.*?<select[^>]*id="sectorFilter"', html, re.DOTALL)
+    assert sidebar_match is not None, (
+        "DR-3: #sectorFilter must be inside <aside class=\"sidebar\">, not .controls-right"
+    )
+
+
+def test_dr3_sector_select_display_none_in_html():
+    """DR-3: #sectorFilter has style=\"display:none\" in HTML source (hidden until lens activated)."""
+    import re
+    index_path = os.path.join(PROJECT_ROOT, "web", "index.html")
+    with open(index_path, "r", encoding="utf-8") as f:
+        html = f.read()
+    assert re.search(r'id="sectorFilter"[^>]*style="display:none"', html) is not None, (
+        "DR-3: #sectorFilter must start with display:none in HTML source"
+    )
+
+
+def test_dr3_sector_select_visible_with_lens():
+    """DR-3: JS logic shows #sectorFilter when activeLens is truthy."""
+    template_path = os.path.join(PROJECT_ROOT, "web", "main.js.template")
+    with open(template_path, "r", encoding="utf-8") as f:
+        js = f.read()
+    assert "select.style.display = \"\"" in js, (
+        "DR-3: main.js.template must contain logic to make sectorFilter visible"
+    )
+    # Verify the display="" call is inside an activeLens guard
+    assert "if (activeLens)" in js, "DR-3: sectorFilter visibility must be guarded by activeLens"
+    assert "activeLens" in js, "DR-3: activeLens variable must be referenced"
+
+
+def test_parse_lens_unknown_returns_null():
+    """?lens=rfnbo returns null (not mapped — removed from WHS scope)."""
+    result = json.loads(subprocess.run(
+        ["node", PARITY_SCRIPT, "parse-lens", "rfnbo"],
+        capture_output=True, text=True, cwd=PROJECT_ROOT,
+    ).stdout)
+    assert result is None
+
+
+def test_parse_lens_empty_returns_null():
+    """?lens= (empty string) returns null (default load)."""
+    result = json.loads(subprocess.run(
+        ["node", PARITY_SCRIPT, "parse-lens", ""],
+        capture_output=True, text=True, cwd=PROJECT_ROOT,
+    ).stdout)
+    assert result is None
+
+
+def test_parse_lens_case_insensitive():
+    """?lens=MARITIME (uppercase) still parses correctly."""
+    result = json.loads(subprocess.run(
+        ["node", PARITY_SCRIPT, "parse-lens", "MARITIME"],
+        capture_output=True, text=True, cwd=PROJECT_ROOT,
+    ).stdout)
+    assert result is not None
+    assert result["lens"] == "maritime"
+    assert result["sector"] == "Shipping"

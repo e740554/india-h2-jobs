@@ -160,6 +160,11 @@ function run() {
     );
   } else if (command === 'full-snapshot-row-count') {
     output = countFullSnapshotRows(process.argv[3], process.argv[4]);
+  } else if (command === 'parse-lens') {
+    var lensWhitelist = { maritime: 'Shipping' };
+    var raw = process.argv[3] || '';
+    var sector = raw ? lensWhitelist[String(raw).toLowerCase()] : null;
+    output = sector ? { lens: String(raw).toLowerCase(), sector: sector } : null;
   } else {
     throw new Error(`Unknown command: ${command}`);
   }

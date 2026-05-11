@@ -8,6 +8,7 @@ Output fields per occupation:
   - supply_estimate (int) — estimated current workforce headcount
   - supply_source (str) — "PLFS 2023-24"
   - supply_nco_subdivision (str) — 2-digit NCO subdivision used for allocation
+  - supply_sample_count (int or None) — PLFS sample size for this subdivision
 """
 
 import json
@@ -58,6 +59,7 @@ def allocate_supply(supply_data: dict, occupations: list) -> list:
             occ["supply_estimate"] = None
             occ["supply_source"] = None
             occ["supply_nco_subdivision"] = None
+            occ["supply_sample_count"] = None
         return occupations
 
     # Group occupations by 2-digit NCO subdivision
@@ -76,9 +78,11 @@ def allocate_supply(supply_data: dict, occupations: list) -> list:
                 occ["supply_estimate"] = None
                 occ["supply_source"] = None
                 occ["supply_nco_subdivision"] = subdiv
+                occ["supply_sample_count"] = None
             continue
 
         total_headcount = subdiv_data.get("headcount", 0)
+        sample_count = subdiv_data.get("sample_count")
 
         # Compute allocation weights (same formula as scenario engine)
         weights = []
@@ -98,6 +102,7 @@ def allocate_supply(supply_data: dict, occupations: list) -> list:
             occ["supply_estimate"] = round(total_headcount * norm_weight)
             occ["supply_source"] = "PLFS 2023-24"
             occ["supply_nco_subdivision"] = subdiv
+            occ["supply_sample_count"] = sample_count
 
     # Handle occupations without a valid NCO code
     for occ in occupations:
@@ -105,5 +110,6 @@ def allocate_supply(supply_data: dict, occupations: list) -> list:
             occ["supply_estimate"] = None
             occ["supply_source"] = None
             occ["supply_nco_subdivision"] = None
+            occ["supply_sample_count"] = None
 
     return occupations

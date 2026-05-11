@@ -14,7 +14,7 @@
 <body>
   <nav class="atlas-nav">
     <div class="nav-left">
-      <span class="nav-logo"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="8" cy="12" r="3"/><circle cx="16" cy="8" r="2.5"/><circle cx="16" cy="16" r="2.5"/><line x1="11" y1="11" x2="13.5" y2="9"/><line x1="11" y1="13" x2="13.5" y2="15"/></svg> India H2 Workforce Atlas</span>
+      <a href="./" class="nav-logo" style="color: inherit; text-decoration: none;"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="8" cy="12" r="3"/><circle cx="16" cy="8" r="2.5"/><circle cx="16" cy="16" r="2.5"/><line x1="11" y1="11" x2="13.5" y2="9"/><line x1="11" y1="13" x2="13.5" y2="15"/></svg> India H2 Workforce Atlas</a>
       <div class="mode-toggle" id="modeToggle">
         <button class="mode-btn active" data-mode="atlas">Atlas</button>
         <button class="mode-btn" data-mode="scenario">Scenario</button>
@@ -22,6 +22,11 @@
       </div>
     </div>
     <div class="nav-right">
+      <ul class="doc-nav-links">
+        <li><a href="./" aria-current="page">Atlas</a></li>
+        <li><a href="methodology/">Methodology</a></li>
+        <li><a href="about/">About</a></li>
+      </ul>
       <div class="download-dropdown">
         <button class="btn-download" id="downloadBtn">&#x2B07; Download CSV &#x25BE;</button>
         <div class="dropdown-menu" id="downloadMenu">
@@ -47,7 +52,11 @@
       <span class="metric-value" id="metricUpskill">--</span>
       <span class="metric-label">Fast Upskill Paths</span>
     </div>
+    <div class="summary-meta" style="margin-left:auto; display:flex; align-items:center; gap:var(--space-4);">
+      <span class="freshness-badge" id="freshnessBadge">Last Updated: May 2026 · PLFS 2023-24</span>
+    </div>
   </div>
+  <p class="atlas-subtitle">India's 1,802 occupations scored against the H₂ economy.</p>
 
   <div class="controls">
     <span class="controls-label">Colour by:</span>
@@ -106,10 +115,16 @@
 
   <div class="atlas-main">
     <div class="treemap-container" id="treemapContainer">
-      <div id="treemap"></div>
+      <div id="treemap">
+        <div id="slowLoad" class="treemap-empty" style="display:flex; align-items:center; justify-content:center; color:var(--text-muted);">
+          Loading 1,802 occupations…
+        </div>
+      </div>
       <div id="tooltip" class="tooltip"></div>
     </div>
     <aside class="sidebar" id="sidebar">
+      <!-- verified sidebar-aligned per plan line 12: sector-select sits in sidebar, not .controls-right -->
+      <select id="sectorFilter" class="scenario-select" style="display:none" aria-label="Filter by sector"></select>
       <div class="sidebar-empty">Click an occupation to see details</div>
       <div class="sidebar-content" id="sidebarContent" style="display:none">
         <div class="sidebar-header" id="sidebarHeader">
@@ -189,8 +204,8 @@
   </div>
 
   <footer class="atlas-footer">
-    <div class="footer-row">India H2 Workforce Atlas &middot; <a href="https://hygoat.in">HyGOAT</a> &middot; <a href="https://ekavikalp.com">Ekavikalp Pvt Ltd</a> &middot; <a href="https://github.com/e740554/india-h2-jobs" title="View source on GitHub"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 16 16" fill="currentColor" style="vertical-align:text-bottom"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg> GitHub</a></div>
-    <div class="footer-row footer-row-secondary"><span id="footerVersion">Dataset v1.0</span> &middot; <span id="footerDate">Last updated March 2026</span> &middot; MIT Licence &middot; Occupation data from NCS; demand model uses IEA methodology</div>
+    <div class="footer-row">India H₂ Workforce Atlas · Ekavikalp 2026 · <a href="mailto:ekansh@ekavikalp.com">ekansh@ekavikalp.com</a></div>
+    <div class="footer-row footer-row-secondary"><span id="footerVersion">Dataset v1.0</span> · <span id="footerDate">Last updated March 2026</span> · <a href="https://github.com/e740554/india-h2-jobs" title="View source on GitHub">GitHub</a> · MIT Licence</div>
   </footer>
 
   <script src="https://d3js.org/d3.v7.min.js"></script>
