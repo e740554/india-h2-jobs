@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.4.2.1] - 2026-05-11
+
+### Changed
+- **Build-time HTML chunk includes** (`build/build.py`): extracted shared `<nav class="atlas-nav">` and `<footer class="atlas-footer">` from 3 pages into `web/_chunks/nav.html` and `web/_chunks/footer.html`. Pages use `<!-- #include nav -->` and `<!-- #include footer -->` markers resolved at build time with `{{var}}` substitution (rel_root, aria_current per page, mode_toggle block, footer secondary). Zero new dependencies — pure Python `str.replace()`, no Jinja2. Single source of truth for chrome eliminates copy-paste drift across atlas, methodology, and about pages
+- `web/` is now fully canonical for all page templates; the old `docs/ → web/` backward sync for static pages is removed
+
+### Tests
+- `test_build_outputs_methodology_and_about_pages` updated: supplies `_chunks/` fixtures in temp dir and verifies forward-sync `web/ → docs/` via include resolution. 166/166 passing
+
 ## [1.4.2.0] - 2026-05-11
 
 WHS Rotterdam 2026 launch release. Atlas augmentations plus two new static pages, packaged as a credibility instrument for the World Hydrogen Summit (Tue May 19 17:30 CEST).
