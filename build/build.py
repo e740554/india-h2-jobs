@@ -35,23 +35,69 @@ OCCUPATIONS_CSV = os.path.join(PROJECT_ROOT, "occupations.csv")
 SCORES_FILE = os.path.join(PROJECT_ROOT, "scores.json")
 DOCS_DIR = os.path.join(PROJECT_ROOT, "docs")
 WEB_DIR = os.path.join(PROJECT_ROOT, "web")
+CHUNKS_DIR = os.path.join(WEB_DIR, "_chunks")
 OUTPUT_JSON = os.path.join(DOCS_DIR, "occupations.json")
 OUTPUT_JSON_ALL = os.path.join(DOCS_DIR, "occupations-all.json")
 OUTPUT_CSV_H2 = os.path.join(DOCS_DIR, "h2-ready-occupations.csv")
 TEMPLATE_FILE = os.path.join(WEB_DIR, "main.js.template")
 STATIC_PUBLIC_FILES = [
     ".nojekyll",
-    "index.html",
     "style.css",
     "hygoat-logo.svg",
 ]
 
-# Doc-side static pages (design-lockdown skeletons) that are authored in docs/
-# and synced to web/ for dev parity.
-DOC_STATIC_SUBDIRS = [
-    "methodology",
-    "about",
-]
+# Pre-expanded blocks used as variable values in page templates.
+# Kept as module-level constants so they are written once, not copy-pasted.
+_MODE_TOGGLE_BLOCK = """\
+      <div class="mode-toggle" id="modeToggle">
+        <button class="mode-btn active" data-mode="atlas">Atlas</button>
+        <button class="mode-btn" data-mode="scenario">Scenario</button>
+        <button class="mode-btn" data-mode="gap">Gap</button>
+      </div>"""
+
+_DOWNLOAD_BLOCK = """\
+      <div class="download-dropdown">
+        <button class="btn-download" id="downloadBtn">&#x2B07; Download CSV &#x25BE;</button>
+        <div class="dropdown-menu" id="downloadMenu">
+          <a href="#" id="dlView">Current View Snapshot (CSV)</a>
+          <a href="#" id="dlSnapshot">Full Scenario Snapshot (CSV)</a>
+          <a href="#" id="dlFull">All Scored Occupations (CSV)</a>
+          <a href="#" id="dlH2">H2-Ready Occupations (CSV)</a>
+        </div>
+      </div>"""
+
+_FOOTER_SECONDARY_ATLAS = """\
+    <div class="footer-row footer-row-secondary"><span id="footerVersion">Dataset v1.0</span> · <span id="footerDate">Last updated March 2026</span> · <a href="https://github.com/e740554/india-h2-jobs" title="View source on GitHub">GitHub</a> · MIT Licence</div>"""
+
+PAGE_VARS = {
+    "index.html": {
+        "rel_root": ".",
+        "aria_atlas": 'aria-current="page"',
+        "aria_methodology": "",
+        "aria_about": "",
+        "mode_toggle_block": _MODE_TOGGLE_BLOCK,
+        "download_block": _DOWNLOAD_BLOCK,
+        "footer_secondary": _FOOTER_SECONDARY_ATLAS,
+    },
+    "methodology/index.html": {
+        "rel_root": "..",
+        "aria_atlas": "",
+        "aria_methodology": 'aria-current="page"',
+        "aria_about": "",
+        "mode_toggle_block": "",
+        "download_block": "",
+        "footer_secondary": "",
+    },
+    "about/index.html": {
+        "rel_root": "..",
+        "aria_atlas": "",
+        "aria_methodology": "",
+        "aria_about": 'aria-current="page"',
+        "mode_toggle_block": "",
+        "download_block": "",
+        "footer_secondary": "",
+    },
+}
 DATASET_VERSION = "1.4.0.0"
 
 # H2-relevant NCS sectors (12 of 49)
@@ -331,15 +377,77 @@ def sync_model_data():
             print(f"Copied model data: {target}")
 
 
+def load_chunks():
+    """Load shared HTML chunks from web/_chunks/ into a dict of {name: content}."""
+    chunks = {}
+    if not os.path.isdir(CHUNKS_DIR):
+        return chunks
+    for filename in os.listdir(CHUNKS_DIR):
+        if filename.endswith(".html"):
+            chunk_name = filename.rsplit(".", 1)[0]
+            chunk_path = os.path.join(CHUNKS_DIR, filename)
+            with open(chunk_path, "r", encoding="utf-8") as f:
+                chunks[chunk_name] = f.read()
+            print(f"Loaded chunk: {chunk_name}")
+    return chunks
+
+
+def resolve_page_template(page_path, output_path, chunks, page_vars):
+    """Resolve <!-- #include X --> and {{var}} placeholders in an HTML page template.
+
+    Each include marker references a key in *chunks.  Variables in the chunk
+    content are resolved first, then the resolved chunk replaces the include
+    marker.  Any remaining {{var}} markers in the page are resolved afterwards.
+    """
+    with open(page_path, "r", encoding="utf-8") as f:
+        content = f.read()
+
+    for chunk_name, chunk_content in sorted(chunks.items(), key=lambda x: -len(x[0])):
+        marker = f"<!-- #include {chunk_name} -->"
+        if marker not in content:
+            continue
+        resolved = chunk_content
+        for var_name, var_value in page_vars.items():
+            resolved = resolved.replace(f"{{{{{var_name}}}}}", var_value)
+        content = content.replace(marker, resolved)
+
+    for var_name, var_value in page_vars.items():
+        content = content.replace(f"{{{{{var_name}}}}}", var_value)
+
+    parent = os.path.dirname(output_path)
+    if parent:
+        os.makedirs(parent, exist_ok=True)
+    with open(output_path, "w", encoding="utf-8") as f:
+        f.write(content)
+    print(f"Resolved template -> {output_path}")
+
+
+def resolve_all_pages(chunks):
+    """Resolve every page in PAGE_VARS from its web/ template to docs/."""
+    for page_rel, page_vars in PAGE_VARS.items():
+        source = os.path.join(WEB_DIR, page_rel)
+        target = os.path.join(DOCS_DIR, page_rel)
+        if not os.path.exists(source):
+            print(f"WARN: page template missing: {source}")
+            continue
+        resolve_page_template(source, target, chunks, page_vars)
+
+
 def sync_public_artifacts():
     """Mirror source shell/assets into docs/ and docs data into ignored web/ dev copies.
-    Write-direction rule: web/ is canonical for hand-edited dynamic templates
-    (index.html, main.js.template, style.css); docs/methodology/ and docs/about/ are
-    canonical for the static design-lockdown skeletons. No Jinja2 — template expansion
-    is done by string replacement in inject_base_url()."""
+
+    web/ is canonical for all page templates.  Templates are resolved through
+    resolve_all_pages() (chunk includes + variable substitution) before landing
+    in docs/.  No Jinja2 — all template expansion is plain str.replace()."""
     os.makedirs(WEB_DIR, exist_ok=True)
     os.makedirs(DOCS_DIR, exist_ok=True)
 
+    # Load shared chunks and resolve page templates from web/ -> docs/
+    chunks = load_chunks()
+    if chunks:
+        resolve_all_pages(chunks)
+
+    # Copy static (non-template) assets verbatim
     for filename in STATIC_PUBLIC_FILES:
         source_path = os.path.join(WEB_DIR, filename)
         output_path = os.path.join(DOCS_DIR, filename)
@@ -347,25 +455,8 @@ def sync_public_artifacts():
             parent = os.path.dirname(output_path)
             if parent:
                 os.makedirs(parent, exist_ok=True)
-            if os.path.exists(output_path):
-                web_mtime = os.path.getmtime(source_path)
-                docs_mtime = os.path.getmtime(output_path)
-                if web_mtime > docs_mtime:
-                    print(f"WARN: web/{filename} is newer than docs/{filename} "
-                          f"— overwriting with web/ source (expected for dynamic templates)")
             shutil.copy2(source_path, output_path)
             print(f"Copied static asset: {output_path}")
-
-    # Sync doc-side static pages (methodology, about) to web/ for dev parity.
-    # These are authored in docs/ during design lockdown and are the source of truth.
-    for subdir in DOC_STATIC_SUBDIRS:
-        src = os.path.join(DOCS_DIR, subdir)
-        dst = os.path.join(WEB_DIR, subdir)
-        if os.path.exists(src):
-            if os.path.exists(dst):
-                shutil.rmtree(dst)
-            shutil.copytree(src, dst)
-            print(f"Synced doc page to web/: {dst}")
 
     for docs_artifact in [OUTPUT_JSON, OUTPUT_JSON_ALL, OUTPUT_CSV_H2]:
         web_output = os.path.join(WEB_DIR, os.path.basename(docs_artifact))

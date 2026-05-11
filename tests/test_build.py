@@ -331,33 +331,46 @@ def test_build_outputs_methodology_and_about_pages(tmp_path):
 
     docs_dir = tmp_path / "docs"
     web_dir = tmp_path / "web"
+    chunks_dir = web_dir / "_chunks"
     docs_dir.mkdir()
     web_dir.mkdir()
+    chunks_dir.mkdir()
 
-    (docs_dir / "methodology").mkdir()
-    (docs_dir / "about").mkdir()
-    (docs_dir / "methodology" / "index.html").write_text(
-        '<html><link rel="stylesheet" href="../style.css"></html>', encoding="utf-8"
+    (chunks_dir / "nav.html").write_text(
+        '<nav class="atlas-nav"><a href="{{rel_root}}">Atlas</a></nav>',
+        encoding="utf-8",
     )
-    (docs_dir / "about" / "index.html").write_text(
-        '<html><link rel="stylesheet" href="../style.css"></html>', encoding="utf-8"
+    (chunks_dir / "footer.html").write_text(
+        '<footer class="atlas-footer">{{footer_secondary}}</footer>',
+        encoding="utf-8",
     )
 
-    monkeypatch = None
+    (web_dir / "methodology").mkdir()
+    (web_dir / "about").mkdir()
+    (web_dir / "methodology" / "index.html").write_text(
+        '<html><!-- #include nav --><link rel="stylesheet" href="../style.css"></html>',
+        encoding="utf-8",
+    )
+    (web_dir / "about" / "index.html").write_text(
+        '<html><!-- #include nav --><link rel="stylesheet" href="../style.css"></html>',
+        encoding="utf-8",
+    )
+
     orig_docs_dir = build_module.DOCS_DIR
     orig_web_dir = build_module.WEB_DIR
+    orig_chunks_dir = build_module.CHUNKS_DIR
     try:
         build_module.DOCS_DIR = str(docs_dir)
         build_module.WEB_DIR = str(web_dir)
+        build_module.CHUNKS_DIR = str(chunks_dir)
         build_module.sync_public_artifacts()
     finally:
         build_module.DOCS_DIR = orig_docs_dir
         build_module.WEB_DIR = orig_web_dir
+        build_module.CHUNKS_DIR = orig_chunks_dir
 
     assert (docs_dir / "methodology" / "index.html").exists()
     assert (docs_dir / "about" / "index.html").exists()
-    assert (web_dir / "methodology" / "index.html").exists()
-    assert (web_dir / "about" / "index.html").exists()
 
 
 # --- Freshness regression tests (ER-15) ---
