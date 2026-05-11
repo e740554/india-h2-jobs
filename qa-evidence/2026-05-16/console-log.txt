@@ -1,0 +1,21 @@
+=== http://localhost:8766/workforce-atlas/ ===
+No new JS errors (localhost). Stale file:// errors from earlier testing session accumulated in browse console buffer — not from localhost navigation. Data loads correctly (64 occupations in default view, 29 on maritime lens).
+
+=== http://localhost:8766/workforce-atlas/methodology/ ===
+No JS at all on this page. Zero console errors.
+
+=== http://localhost:8766/workforce-atlas/about/ ===
+No JS at all on this page. Zero console errors.
+
+=== file:///D:/Work/india-h2-jobs/docs/index.html (TESTING ARTIFACT — not production) ===
+[error] Fetch API cannot load file:///D:/workforce-atlas/occupations.json. URL scheme "file" is not supported.
+[error] Fetch API cannot load file:///D:/workforce-atlas/archetypes.json. URL scheme "file" is not supported.
+[error] Fetch API cannot load file:///D:/workforce-atlas/scenarios.json. URL scheme "file" is not supported.
+[error] Fetch API cannot load file:///D:/workforce-atlas/clusters.json. URL scheme "file" is not supported.
+[error] Fetch API cannot load file:///D:/workforce-atlas/pathways.json. URL scheme "file" is not supported.
+[warning] Archetype data unavailable: Failed to fetch
+[warning] Scenario data unavailable: Failed to fetch
+[warning] Cluster data unavailable: Failed to fetch
+[warning] Pathway data unavailable: Failed to fetch
+[error] Atlas init error: TypeError: Failed to fetch at loadJson (main.js:1340:35)
+NOTE: These errors are EXPECTED when loading via file:// — the build uses --base-url "/workforce-atlas" which creates absolute fetch paths that fail under file:// protocol. Not a production issue.

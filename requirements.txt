@@ -4,3 +4,4 @@ pandas
 python-levenshtein
 pytest
 pytest-cov
+qrcode[pil]
