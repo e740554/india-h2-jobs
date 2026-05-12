@@ -13,13 +13,15 @@ An open-source occupation atlas and scenario engine for India's green hydrogen t
 The current build ships:
 
 - 1,802 scored occupations from the National Career Service source data
-- a default focus view of ~64 high-relevance occupations (H2 Adjacency >= 5), expandable to the full 480 across 12 H2-relevant sectors
-- Atlas and Scenario modes in a single-page D3 treemap (Gap mode gated on PLFS supply data)
+- a default focus view of ~64 high-relevance occupations (H2 Adjacency >= 5), expandable to 480 H2-sector roles and the full 1,802-occupation dataset
+- Atlas, Scenario, and Gap modes in a single-page D3 treemap
 - multi-archetype scenarios spanning production, downstream ammonia, and dedicated RE
 - geography filters across hydrogen clusters and cluster-based state rollups
 - annual timeline snapshots with phase-based recoloring
 - sidebar reskilling pathways with overlap, duration, cost, and bridging skills
+- `?lens=maritime` URL deep-link for sector-specific views
 - current-view and full-snapshot CSV exports
+- `/methodology/` and `/about/` static pages with shared atlas chrome
 
 ## What It Does
 
@@ -97,8 +99,10 @@ india-h2-jobs/
 |- score/           LLM scoring pipeline
 |- model/           Demand, cluster, timeline, pathway, and supply engines
 |- build/           Static site build and data sync pipeline
-|- web/             Frontend source of truth
+|- web/             Frontend source of truth (templates, chunks, CSS, JS template)
+|- web/_chunks/     Shared HTML includes (nav, footer) resolved at build time
 |- docs/            Generated publish output
+|- scripts/         QR generator, smoke tests, and utility scripts
 |- tests/           Pytest suite and Node parity harness
 ```
 
@@ -151,12 +155,17 @@ PLFS and NCVET remain enrichment layers rather than fully complete upstream join
 - [TESTING.md](TESTING.md): test layers and verification commands
 - [DATASOURCES.md](DATASOURCES.md): upstream source coverage and scraping notes
 - [DESIGN.md](DESIGN.md): UI system and visual language
+- [URL_FREEZE.md](URL_FREEZE.md): canonical URL snapshot for launch windows
+- [RUNBOOK.md](RUNBOOK.md): bus-factor recovery, build, deploy, and rollback procedures
 - [TODOS.md](TODOS.md): current backlog and follow-up work
 
 ## Release History
 
 | Version | Date | Scope |
 |---------|------|-------|
+| `v1.4.2.1` | 2026-05-11 | Build-time HTML chunk includes (`web/_chunks/`); shared nav/footer resolved at build time with `{{var}}` substitution |
+| `v1.4.2.0` | 2026-05-11 | WHS Rotterdam 2026 launch: `/methodology/` and `/about/` pages, `?lens=maritime`, freshness badge, low-sample tooltip, URL freeze, runbook, QR assets, smoke tests |
+| `v1.4.1.0` | 2026-03-31 | Focus-view default (~64 occupations), 3-state progressive disclosure, treemap keyboard nav, sidebar header accent, pathway CTA, skill pills, gap tab restyle |
 | `v1.4.0.0` | 2026-03-30 | Phase 3: geography filters, timeline phasing, pathways, and expanded exports |
 | `v1.3.0.0` | 2026-03-30 | Phase 2: multi-archetype scenarios, supply-gap mode, PLFS baseline, and gap sidebar |
 | `v1.2.0.0` | 2026-03-30 | Phase 1: scenario engine, archetypes, parity checks, and demand-mode treemap |
