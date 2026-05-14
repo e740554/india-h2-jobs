@@ -15,6 +15,7 @@ The current build ships:
 - 1,802 scored occupations from the National Career Service source data
 - a default focus view of ~64 high-relevance occupations (H2 Adjacency >= 5), expandable to 480 H2-sector roles and the full 1,802-occupation dataset
 - Atlas, Scenario, and Gap modes in a single-page D3 treemap
+- indicative PLFS 2023-24 subdivision-allocated supply estimates for Gap mode
 - multi-archetype scenarios spanning production, downstream ammonia, and dedicated RE
 - geography filters across hydrogen clusters and cluster-based state rollups
 - annual timeline snapshots with phase-based recoloring
@@ -54,6 +55,7 @@ Primary model/runtime assets:
 - `model/scenarios.json`: preset scenarios with `start_year` and `target_year`
 - `model/clusters.json`: hydrogen clusters and cluster-based state groupings
 - `model/pathways.json`: occupation-to-occupation reskilling pathway mappings
+- `model/plfs_supply.json`: PLFS 2023-24 NCO 2-digit subdivision supply shares and indicative headcounts
 - `model/compute.py`: core Python demand engine
 - `model/clusters.py`: cluster distribution helpers
 - `model/timeline.py`: annual snapshot helpers
@@ -144,7 +146,7 @@ Current production data is built primarily from:
 - cluster affinity mappings
 - pathway mappings
 
-PLFS and NCVET remain enrichment layers rather than fully complete upstream joins in the checked-in build. See [DATASOURCES.md](DATASOURCES.md).
+PLFS supply is checked in at NCO 2-digit subdivision level and allocated across occupations by model weights. Treat Gap mode as indicative, not occupation-observed. PLFS unit-level microdata integration remains a post-WHS rebuild. NCVET remains an enrichment layer rather than a fully complete upstream join. See [DATASOURCES.md](DATASOURCES.md).
 
 ## Documentation
 

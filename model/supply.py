@@ -83,6 +83,7 @@ def allocate_supply(supply_data: dict, occupations: list) -> list:
 
         total_headcount = subdiv_data.get("headcount", 0)
         sample_count = subdiv_data.get("sample_count")
+        source_statement = subdiv_data.get("source_statement") or "PLFS 2023-24"
 
         # Compute allocation weights (same formula as scenario engine)
         weights = []
@@ -100,7 +101,7 @@ def allocate_supply(supply_data: dict, occupations: list) -> list:
                 norm_weight = 1.0 / len(group_occs) if group_occs else 0
 
             occ["supply_estimate"] = round(total_headcount * norm_weight)
-            occ["supply_source"] = "PLFS 2023-24"
+            occ["supply_source"] = source_statement
             occ["supply_nco_subdivision"] = subdiv
             occ["supply_sample_count"] = sample_count
 

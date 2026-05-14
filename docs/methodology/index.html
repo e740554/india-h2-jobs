@@ -269,8 +269,8 @@
 
         <dt id="dim-formalization">Formalization Rate</dt>
         <dd>
-          Share of workers in the occupation employed under written contract with social-security coverage, per PLFS 2023-24. Used as a caveat indicator: low formalization means demand projections under-represent the actual workforce shape.
-          <span class="dd-source">Source: PLFS 2023-24 unit-record data, subdivision-level aggregation.</span>
+          Scored caveat indicator for likely contract and social-security coverage. It is not used to activate the gap KPI in this WHS build; the gap KPI uses PLFS subdivision supply coverage instead.
+          <span class="dd-source">Source: scored occupation model; not PLFS unit-level microdata.</span>
         </dd>
 
         <dt id="dim-scarcity-risk">Scarcity Risk</dt>
@@ -284,17 +284,17 @@
       <p>Per-dimension scores are produced by Claude (Anthropic) against the prompts checked into <a href="https://github.com/e740554/india-h2-jobs/tree/master/prompts"><code>prompts/</code></a>. Each prompt instructs the model to cite specific anchor language for the dimension. The founder reviews scores before merge and pins them at the commit hash they were generated against. Scores are not regenerated unless the prompt changes or new occupations are added; the policy is to <strong>pin, not refresh</strong>.</p>
 
       <h2 id="nco-extension">NCO extension policy</h2>
-      <p>The base NCO 2015 covers 1,802 occupations. For occupations that exist in the H₂ economy but lack a standard NCO code (for example, electrolyser-plant operator), the atlas adds H₂-frontier codes prefixed by subsector: <code>H2-MAR-001</code> for maritime, <code>H2-RFNBO-001</code> for renewable-fuels-of-non-biological-origin. Each frontier occupation cites a per-occupation anchor source (IMO, IRENA, EU RED III, etc.). Frontier codes are clearly flagged in the data and do not contaminate PLFS-derived supply numbers.</p>
+      <p>The base NCO 2015 covers 1,802 occupations. For occupations that exist in the H₂ economy but lack a standard NCO code (for example, electrolyser-plant operator), the atlas adds H₂-frontier codes prefixed by subsector: <code>H2-MAR-001</code> for maritime, <code>H2-RFNBO-001</code> for renewable-fuels-of-non-biological-origin. Each frontier occupation cites a per-occupation anchor source (IMO, IRENA, EU RED III, etc.). Frontier codes are clearly flagged in the data and only receive PLFS supply when a defensible NCO subdivision anchor exists.</p>
 
       <div class="doc-callout" role="note">
         <h3>Caveats and limitations</h3>
-        <p>PLFS sample sizes below 30 are reported but flagged as <em>indicative only</em> with an orange-dot marker in the sidebar. For H₂-frontier occupations, the published supply number is the best subdivision-allocated estimate; treat differences of less than a factor of two as noise.</p>
+        <p>PLFS 2023-24 Annual Report Table 25 reports worker distribution by NCO-2015 2-digit subdivision. The atlas allocates each subdivision total across checked-in occupations using the same H₂ adjacency plus transition-demand weighting used by the scenario engine. Treat the number as a subdivision-allocated estimate; indicative, not occupation-observed.</p>
         <p>Score reproducibility depends on prompt and model version. The model and prompt hash for each scoring pass are recorded in the repository commit history. A future scoring pass that produces different numbers should be treated as a separate dataset version, not a correction of the prior one.</p>
         <p>The atlas does not cover informal-sector work that falls outside both the NCO and the H₂-frontier extension list. This is a known coverage gap.</p>
       </div>
 
       <h2 id="sample-size">Sample-size threshold</h2>
-      <p>Supply estimates derived from PLFS 2023-24 unit-record data are aggregated to the subdivision level (the smallest unit where the survey design preserves national representativeness). Where the unweighted respondent count for an occupation falls below 30 in the supply universe, the atlas's gap mode returns the status <code>low_sample</code> with the tooltip "PLFS 2023-24 sample size &lt;30, indicative only", regardless of demand. The 30-respondent threshold is conservative for a workforce-planning instrument; users running policy decisions off these numbers should consult the PLFS unit file directly.</p>
+      <p>Supply estimates are not derived from unit-level PLFS microdata in this release. The checked-in <code>model/plfs_supply.json</code> uses the Table 25 rural+urban person share for each NCO subdivision and multiplies it by an indicative 2024 total-worker denominator. Gap mode is enabled only when H₂-ready occupations in the current view have subdivision supply coverage. Users running policy decisions off these numbers should treat them as directional and consult the PLFS unit files when occupation-observed estimates are required.</p>
 
       <h2 id="reproducibility">Reproducibility</h2>
       <p>All data, scoring code, prompts, and the build pipeline are in the public repository: <a href="https://github.com/e740554/india-h2-jobs">github.com/e740554/india-h2-jobs</a>. A clean checkout plus <code>python build/build.py</code> reproduces the site exactly. The dataset version and PLFS round are stamped on every page in the freshness badge. If a number on the atlas appears wrong, file an issue with the occupation code and the screenshot; we triage against the pinned scoring commit.</p>

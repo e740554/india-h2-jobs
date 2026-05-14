@@ -206,6 +206,32 @@ def test_state_resets_on_mode_switch_to_scenario():
     assert view_tier == "sector"
 
 
+def test_gap_supply_coverage_requires_h2_ready_supply():
+    occupations = [
+        {"id": "low", "supply_estimate": 10, "scores": {"h2_adjacency": 6.5}},
+        {"id": "ready-missing", "supply_estimate": None, "scores": {"h2_adjacency": 7.0}},
+    ]
+    result = _run_js("gap-supply-coverage", json.dumps(occupations))
+    assert result is False
+
+
+def test_gap_supply_coverage_enabled_when_h2_ready_has_supply():
+    occupations = [
+        {"id": "ready", "supply_estimate": 10, "scores": {"h2_adjacency": 7.0}},
+        {"id": "other-ready", "supply_estimate": 0, "scores": {"h2_adjacency": 8.0}},
+    ]
+    result = _run_js("gap-supply-coverage", json.dumps(occupations))
+    assert result is True
+
+
+def test_export_headers_include_supply_fields():
+    result = _run_js("export-headers")
+    assert "supply_estimate" in result
+    assert "supply_source" in result
+    assert "supply_nco_subdivision" in result
+    assert "supply_sample_count" in result
+
+
 def test_state_resets_on_mode_switch_to_atlas():
     """Returning to atlas mode resets viewTier to 'focus'."""
     view_tier = "sector"

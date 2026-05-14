@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.4.3.0] - 2026-05-14
+
+### Added
+- Checked in `model/plfs_supply.json` from PLFS 2023-24 Annual Report Table 25 NCO-2015 2-digit subdivision shares, with indicative headcounts derived from the PLFS all-age usual-status WPR and 2024 India population denominator.
+- Added supply-backed gap activation, supply coverage metadata, PLFS supply fields in generated occupation JSON, dev/public `plfs_supply.json` copies, and supply columns in H2-ready/current/snapshot CSV export paths.
+
+### Changed
+- Headline workforce gap now uses `supply_estimate` for H2-ready occupations rather than requiring `employment` coverage.
+- Gap and methodology copy now explicitly say the estimate is subdivision-allocated, indicative, and not occupation-observed. Unit-level PLFS microdata remains post-WHS.
+- Removed the shipped PLFS supply-input item from `TODOS.md`.
+
+### Tests
+- Added regression tests for checked-in PLFS supply coverage, H2-ready supply gating, supply-backed gap support, CSV supply fields, and zero-H2-ready null handling.
+- Verified with `python -m pytest`, JS syntax checks, and headless Chrome QA for Atlas, Scenario, Gap, CSV export, Methodology, and About.
+
 ## [1.4.2.1] - 2026-05-11
 
 ### Changed

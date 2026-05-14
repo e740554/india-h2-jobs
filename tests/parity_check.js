@@ -160,6 +160,10 @@ function run() {
     );
   } else if (command === 'full-snapshot-row-count') {
     output = countFullSnapshotRows(process.argv[3], process.argv[4]);
+  } else if (command === 'gap-supply-coverage') {
+    output = runtime.hasGapSupplyCoverage(parseJsonArg(process.argv[3]));
+  } else if (command === 'export-headers') {
+    output = runtime.EXPORT_HEADERS;
   } else if (command === 'parse-lens') {
     var lensWhitelist = { maritime: 'Shipping' };
     var raw = process.argv[3] || '';

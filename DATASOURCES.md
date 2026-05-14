@@ -57,6 +57,7 @@ Agriculture, Aerospace/Aviation, Apparel, Automotive, Beauty/Wellness, BFSI, Cap
 - URL: `https://www.mospi.gov.in/sites/default/files/publication_reports/AnnualReport_PLFS2023-24L2.pdf`
 - Statement 16/17: % distribution of workers by NCO-2015 occupation division/subdivision
 - Parse tables with `tabula-py` or `camelot`
+- WHS checked-in artifact: `model/plfs_supply.json` uses PLFS 2023-24 Annual Report Table 25, rural+urban person column, NCO-2015 2-digit subdivisions. Headcounts are indicative subdivision-allocated estimates, not occupation-observed PLFS unit-level estimates.
 
 **Option B — eSankhyiki API (programmatic):**
 - URL: `https://esankhyiki.mospi.gov.in/macroindicators?product=plfs`

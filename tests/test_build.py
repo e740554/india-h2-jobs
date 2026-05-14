@@ -1,5 +1,6 @@
 """Tests for build/build.py pipeline functions."""
 
+import csv
 import json
 import sys
 import os
@@ -17,6 +18,7 @@ from build.build import (
     compute_summary_metrics,
     compute_data_quality,
     sync_model_data,
+    write_h2_csv,
     H2_ADJACENCY_THRESHOLD,
 )
 
@@ -137,30 +139,31 @@ def _make_employed_occ(occ_id, employment, h2_adjacency):
     return {
         "id": occ_id,
         "employment": employment,
+        "supply_estimate": None,
         "scores": {"h2_adjacency": h2_adjacency},
     }
 
 
-def test_compute_workforce_gap_returns_none_when_employment_missing():
+def test_compute_workforce_gap_uses_supply_when_employment_missing():
+    occs = [_make_employed_occ("A", None, 8.0)]
+    occs[0]["supply_estimate"] = 100_000
+    assert compute_workforce_gap(occs) == 2_500_000 - 100_000
+
+
+def test_compute_workforce_gap_returns_none_when_h2_ready_supply_missing():
     occs = [_make_employed_occ("A", None, 8.0)]
     assert compute_workforce_gap(occs) is None
 
 
-def test_compute_workforce_gap_returns_full_target_when_no_eligible_occupations():
-    # No occupations meet the h2_adjacency threshold — eligible is empty.
-    # any(...for occ in []) is vacuously False, so None is NOT returned.
-    # The function returns the full 5MMT target as if the gap is 100%.
-    # NOTE: this is a known edge-case behavior. A dataset with zero H2-ready
-    # occupations would surface 2,500,000 in the UI as a real metric. In
-    # practice the production data always has scored H2-ready occupations,
-    # but this warrants a design review if the threshold changes.
+def test_compute_workforce_gap_returns_none_when_no_eligible_occupations():
+    # A zero-H2-ready slice should not surface a real gap KPI.
     occs = [_make_employed_occ("A", 1000, 5.0)]
-    result = compute_workforce_gap(occs)
-    assert result == 2_500_000
+    assert compute_workforce_gap(occs) is None
 
 
 def test_compute_workforce_gap_positive():
     occs = [_make_employed_occ("A", 100_000, 8.0)]
+    occs[0]["supply_estimate"] = 100_000
     gap = compute_workforce_gap(occs)
     assert gap == 2_500_000 - 100_000
 
@@ -168,6 +171,7 @@ def test_compute_workforce_gap_positive():
 def test_compute_workforce_gap_clamps_to_zero():
     # If workforce exceeds target, gap should be 0, not negative
     occs = [_make_employed_occ("A", 10_000_000, 8.0)]
+    occs[0]["supply_estimate"] = 10_000_000
     assert compute_workforce_gap(occs) == 0
 
 
@@ -222,6 +226,27 @@ def test_compute_data_quality_notes_when_incomplete():
     assert len(result["notes"]) > 0
 
 
+def test_compute_data_quality_reports_h2_ready_supply_coverage():
+    occs = [
+        {"employment": None, "median_wage_inr": None, "formal_sector_pct": None,
+         "source_ncs": True, "source_plfs": False, "source_ncvet": False,
+         "supply_estimate": 1000, "scores": {"h2_adjacency": 8.0}},
+        {"employment": None, "median_wage_inr": None, "formal_sector_pct": None,
+         "source_ncs": True, "source_plfs": False, "source_ncvet": False,
+         "supply_estimate": None, "scores": {"h2_adjacency": 7.0}},
+        {"employment": None, "median_wage_inr": None, "formal_sector_pct": None,
+         "source_ncs": True, "source_plfs": False, "source_ncvet": False,
+         "supply_estimate": None, "scores": {"h2_adjacency": 6.0}},
+    ]
+    result = compute_data_quality(occs)
+    assert result["h2_ready_supply_coverage"] == {
+        "count": 1,
+        "total": 2,
+        "pct": 50.0,
+    }
+    assert result["workforce_gap_supported"] is False
+
+
 # --- sync_model_data ---
 
 def test_sync_model_data_copies_files_to_docs_and_web(monkeypatch, tmp_path):
@@ -237,7 +262,7 @@ def test_sync_model_data_copies_files_to_docs_and_web(monkeypatch, tmp_path):
 
     # Write fake model JSON files
     sample_data = {"test": True}
-    for filename in ["archetypes.json", "scenarios.json", "clusters.json", "pathways.json"]:
+    for filename in ["archetypes.json", "scenarios.json", "clusters.json", "pathways.json", "plfs_supply.json"]:
         (model_dir / filename).write_text(json.dumps(sample_data), encoding="utf-8")
 
     # Patch module-level constants
@@ -247,7 +272,7 @@ def test_sync_model_data_copies_files_to_docs_and_web(monkeypatch, tmp_path):
 
     sync_model_data()
 
-    for filename in ["archetypes.json", "scenarios.json", "clusters.json", "pathways.json"]:
+    for filename in ["archetypes.json", "scenarios.json", "clusters.json", "pathways.json", "plfs_supply.json"]:
         docs_file = docs_dir / filename
         web_file = web_dir / filename
         assert docs_file.exists(), f"Expected {docs_file} to exist in docs/"
@@ -281,11 +306,53 @@ def test_sync_model_data_warns_on_missing_file(monkeypatch, tmp_path, capsys):
     assert "scenarios.json" in captured.out
     assert "clusters.json" in captured.out
     assert "pathways.json" in captured.out
+    assert "plfs_supply.json" in captured.out
     # archetypes.json should still be copied
     assert (docs_dir / "archetypes.json").exists()
     assert not (docs_dir / "scenarios.json").exists()
     assert not (docs_dir / "clusters.json").exists()
     assert not (docs_dir / "pathways.json").exists()
+    assert not (docs_dir / "plfs_supply.json").exists()
+
+
+def test_write_h2_csv_includes_supply_fields(monkeypatch, tmp_path):
+    import build.build as build_module
+
+    output_path = tmp_path / "h2-ready-occupations.csv"
+    monkeypatch.setattr(build_module, "OUTPUT_CSV_H2", str(output_path))
+
+    occs = [{
+        "id": "A",
+        "slug": "a",
+        "title": "Electrolyser Technician",
+        "sector": "Power",
+        "nco_code": "7411",
+        "employment": None,
+        "median_wage_inr": None,
+        "education_req": "",
+        "formal_sector_pct": None,
+        "supply_estimate": 12345,
+        "supply_source": "PLFS 2023-24 Annual Report Table 25",
+        "supply_nco_subdivision": "74",
+        "supply_sample_count": None,
+        "scores": {
+            "h2_adjacency": 8.0,
+            "transition_demand": 7.0,
+            "skill_transferability": 6.0,
+            "digital_automation_exposure": 4.0,
+            "formalization_rate": 5.0,
+            "scarcity_risk": 7.0,
+        },
+    }]
+
+    write_h2_csv(occs)
+
+    with open(output_path, encoding="utf-8") as f:
+        rows = list(csv.DictReader(f))
+
+    assert rows[0]["supply_estimate"] == "12345"
+    assert rows[0]["supply_nco_subdivision"] == "74"
+    assert rows[0]["supply_source"] == "PLFS 2023-24 Annual Report Table 25"
 
 
 # --- Design regression tests (DR-1, DR-2) ---

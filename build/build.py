@@ -30,6 +30,7 @@ MODEL_JSON_FILES = [
     "scenarios.json",
     "clusters.json",
     "pathways.json",
+    "plfs_supply.json",
 ]
 OCCUPATIONS_CSV = os.path.join(PROJECT_ROOT, "occupations.csv")
 SCORES_FILE = os.path.join(PROJECT_ROOT, "scores.json")
@@ -98,7 +99,7 @@ PAGE_VARS = {
         "footer_secondary": "",
     },
 }
-DATASET_VERSION = "1.4.0.0"
+DATASET_VERSION = "1.4.3.0"
 
 # H2-relevant NCS sectors (12 of 49)
 H2_SECTORS = [
@@ -214,17 +215,20 @@ def compute_upskill_paths(occupations: list[dict]) -> list[dict]:
 
 
 def compute_workforce_gap(occupations: list[dict]) -> int | None:
-    """Compute workforce gap only when employment coverage exists for all H2-ready occupations."""
+    """Compute indicative workforce gap from PLFS subdivision-allocated supply."""
     eligible = [
         occ for occ in occupations
         if occ.get("scores", {}).get("h2_adjacency") is not None
         and occ["scores"]["h2_adjacency"] >= H2_ADJACENCY_THRESHOLD
     ]
 
-    if any(occ.get("employment") is None for occ in eligible):
+    if not eligible:
         return None
 
-    h2_workforce = sum((occ.get("employment") or 0) for occ in eligible)
+    if any(occ.get("supply_estimate") is None for occ in eligible):
+        return None
+
+    h2_workforce = sum((occ.get("supply_estimate") or 0) for occ in eligible)
     gap = (NGHM_TARGET_MMT * LABOUR_INTENSITY) - h2_workforce
     return max(0, gap)
 
@@ -292,13 +296,16 @@ def compute_data_quality(occupations: list[dict]) -> dict:
         and occ["scores"]["h2_adjacency"] >= H2_ADJACENCY_THRESHOLD
     ]
     h2_ready_employment_count = count_present(h2_ready, "employment")
+    h2_ready_supply_count = count_present(h2_ready, "supply_estimate")
     workforce_gap_supported = compute_workforce_gap(occupations) is not None
 
     notes = []
     if labour_market_status != "complete":
         notes.append("Current build is a scored occupation atlas; labour-market joins are still incomplete.")
     if not workforce_gap_supported:
-        notes.append("Workforce gap by 2030 is hidden until every H2-ready occupation has employment coverage.")
+        notes.append("Workforce gap by 2030 is hidden until H2-ready occupations have PLFS subdivision supply coverage.")
+    else:
+        notes.append("Workforce gap uses PLFS subdivision-allocated supply estimates; indicative, not occupation-observed.")
 
     return {
         "labour_market_status": labour_market_status,
@@ -309,6 +316,11 @@ def compute_data_quality(occupations: list[dict]) -> dict:
             "count": h2_ready_employment_count,
             "total": len(h2_ready),
             "pct": pct(h2_ready_employment_count, len(h2_ready)),
+        },
+        "h2_ready_supply_coverage": {
+            "count": h2_ready_supply_count,
+            "total": len(h2_ready),
+            "pct": pct(h2_ready_supply_count, len(h2_ready)),
         },
         "notes": notes,
     }
@@ -324,6 +336,8 @@ def write_h2_csv(occupations: list[dict]):
 
     fields = ["id", "slug", "title", "sector", "nco_code", "employment",
               "median_wage_inr", "education_req", "formal_sector_pct",
+              "supply_estimate", "supply_source", "supply_nco_subdivision",
+              "supply_sample_count",
               "h2_adjacency", "transition_demand", "skill_transferability",
               "digital_automation_exposure", "formalization_rate", "scarcity_risk"]
 
@@ -331,8 +345,8 @@ def write_h2_csv(occupations: list[dict]):
         writer = csv.DictWriter(f, fieldnames=fields, extrasaction="ignore")
         writer.writeheader()
         for occ in h2_occs:
-            row = {k: occ.get(k) for k in fields[:9]}
-            for dim in fields[9:]:
+            row = {k: occ.get(k) for k in fields[:13]}
+            for dim in fields[13:]:
                 row[dim] = occ.get("scores", {}).get(dim)
             writer.writerow(row)
 

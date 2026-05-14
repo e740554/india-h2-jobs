@@ -46,6 +46,10 @@
       "median_wage_inr",
       "education_req",
       "formal_sector_pct",
+      "supply_estimate",
+      "supply_source",
+      "supply_nco_subdivision",
+      "supply_sample_count",
       "h2_adjacency",
       "transition_demand",
       "skill_transferability",
@@ -930,6 +934,22 @@
       return lookup;
     }
 
+    function hasGapSupplyCoverage(occupations) {
+      const items = occupations || [];
+      let h2ReadyCount = 0;
+      for (let i = 0; i < items.length; i += 1) {
+        const scores = items[i].scores || {};
+        if (scores.h2_adjacency == null || Number(scores.h2_adjacency) < 7.0) {
+          continue;
+        }
+        h2ReadyCount += 1;
+        if (items[i].supply_estimate == null) {
+          return false;
+        }
+      }
+      return h2ReadyCount > 0;
+    }
+
     function buildGapRecord(supply, demand, sampleCount) {
       if (supply == null) {
         return {
@@ -1056,6 +1076,10 @@
         median_wage_inr: occupation ? occupation.median_wage_inr : "",
         education_req: occupation ? occupation.education_req : "",
         formal_sector_pct: occupation ? occupation.formal_sector_pct : "",
+        supply_estimate: occupation ? occupation.supply_estimate : "",
+        supply_source: occupation ? occupation.supply_source : "",
+        supply_nco_subdivision: occupation ? occupation.supply_nco_subdivision : "",
+        supply_sample_count: occupation ? occupation.supply_sample_count : "",
         h2_adjacency: scores.h2_adjacency != null ? scores.h2_adjacency : "",
         transition_demand: scores.transition_demand != null ? scores.transition_demand : "",
         skill_transferability: scores.skill_transferability != null ? scores.skill_transferability : "",
@@ -1175,6 +1199,7 @@
       getPathwaysForOccupation: getPathwaysForOccupation,
       computeReskillableSupply: computeReskillableSupply,
       buildSupplyLookup: buildSupplyLookup,
+      hasGapSupplyCoverage: hasGapSupplyCoverage,
       buildGapRecord: buildGapRecord,
       getInboundPathwaySummary: getInboundPathwaySummary,
       dominantPhase: dominantPhase,
@@ -1517,9 +1542,9 @@
       status.dataset.state = "";
       return;
     }
-    const employmentCoverage = quality.coverage && quality.coverage.employment;
-    const text = employmentCoverage
-      ? "Employment coverage " + employmentCoverage.count + "/" + employmentCoverage.total + " in this view."
+    const supplyCoverage = quality.h2_ready_supply_coverage;
+    const text = supplyCoverage
+      ? "PLFS supply coverage " + supplyCoverage.count + "/" + supplyCoverage.total + " H2-ready occupations in this view."
       : "";
     const notes = (quality.notes || []).join(" ");
     status.textContent = [text, notes].filter(Boolean).join(" ");
@@ -2880,6 +2905,10 @@
       "median_wage_inr",
       "education_req",
       "formal_sector_pct",
+      "supply_estimate",
+      "supply_source",
+      "supply_nco_subdivision",
+      "supply_sample_count",
       "h2_adjacency",
       "transition_demand",
       "skill_transferability",
@@ -2902,6 +2931,10 @@
         median_wage_inr: occupation.median_wage_inr,
         education_req: occupation.education_req,
         formal_sector_pct: occupation.formal_sector_pct,
+        supply_estimate: occupation.supply_estimate,
+        supply_source: occupation.supply_source,
+        supply_nco_subdivision: occupation.supply_nco_subdivision,
+        supply_sample_count: occupation.supply_sample_count,
         h2_adjacency: scores.h2_adjacency,
         transition_demand: scores.transition_demand,
         skill_transferability: scores.skill_transferability,
@@ -3175,17 +3208,14 @@
 
     const gapButton = document.querySelector('.mode-btn[data-mode="gap"]');
     if (gapButton) {
-      let hasSupply = false;
       const occupations = (filteredData && filteredData.occupations) || [];
-      for (let i = 0; i < occupations.length; i += 1) {
-        if (occupations[i].supply_estimate != null) {
-          hasSupply = true;
-          break;
-        }
-      }
+      const hasSupply = Runtime.hasGapSupplyCoverage(occupations);
       if (!hasSupply) {
         gapButton.disabled = true;
         gapButton.classList.add("mode-btn-gated");
+      } else {
+        gapButton.disabled = false;
+        gapButton.classList.remove("mode-btn-gated");
       }
     }
   }

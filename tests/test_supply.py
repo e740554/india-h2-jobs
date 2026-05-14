@@ -55,6 +55,18 @@ class TestLoadSupply:
         assert result["72"]["headcount"] == 11500000
         assert result["31"]["pct"] == 1.1
 
+    def test_checked_in_plfs_supply_has_subdivision_coverage(self):
+        """Checked-in PLFS supply covers NCO 2-digit subdivisions used by H2 roles."""
+        result = load_supply()
+
+        assert "72" in result
+        assert "74" in result
+        assert result["72"]["pct"] == 1.58
+        assert result["74"]["source_statement"] == "PLFS 2023-24 Annual Report Table 25"
+        subdivision_rows = {k: v for k, v in result.items() if k.isdigit()}
+        assert len(subdivision_rows) == 40
+        assert round(sum(row["pct"] for row in subdivision_rows.values()), 2) == 99.99
+
 
 # ---------------------------------------------------------------------------
 # allocate_supply tests

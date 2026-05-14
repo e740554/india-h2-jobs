@@ -44,18 +44,6 @@
 
 ## Data
 
-### Add checked-in PLFS source-occupation supply input
-
-**What:** Provide the missing source labour supply input needed for richer gap-mode reskillable supply estimates.
-
-**Why:** The Phase 3 UI is complete, but `reskillable_supply` remains blank whenever upstream source-occupation labour data is absent.
-
-**Context:** The current build still reports no `model/plfs_supply.json` during asset generation.
-
-**Effort:** M  
-**Priority:** P2  
-**Depends on:** Data availability
-
 ### Automate MoSPI PLFS portal download
 
 **What:** Write a registered-download script for the MoSPI microdata portal so PLFS unit-level files can be refreshed without manual portal interaction.
