@@ -46,6 +46,7 @@ STATIC_PUBLIC_FILES = [
     "style.css",
     "hygoat-logo.svg",
 ]
+DATASET_VERSION = "1.4.3.0"
 
 # Pre-expanded blocks used as variable values in page templates.
 # Kept as module-level constants so they are written once, not copy-pasted.
@@ -67,8 +68,11 @@ _DOWNLOAD_BLOCK = """\
         </div>
       </div>"""
 
-_FOOTER_SECONDARY_ATLAS = """\
-    <div class="footer-row footer-row-secondary"><span id="footerVersion">Dataset v1.0</span> · <span id="footerDate">Last updated March 2026</span> · <a href="https://github.com/e740554/india-h2-jobs" title="View source on GitHub">GitHub</a> · MIT Licence</div>"""
+_FOOTER_SECONDARY_ATLAS = f"""\
+    <div class="footer-row footer-row-secondary"><span id="footerVersion">Dataset v{DATASET_VERSION}</span> &middot; <span id="footerDate">Last updated May 2026</span> &middot; <a href="https://github.com/e740554/india-h2-jobs" title="View source on GitHub">GitHub</a> &middot; MIT Licence</div>"""
+
+_FOOTER_SECONDARY_STATIC = f"""\
+    <div class="footer-row footer-row-secondary">Dataset v{DATASET_VERSION} &middot; Last updated May 2026 &middot; <a href="https://github.com/e740554/india-h2-jobs" title="View source on GitHub">GitHub</a> &middot; MIT Licence</div>"""
 
 PAGE_VARS = {
     "index.html": {
@@ -87,7 +91,7 @@ PAGE_VARS = {
         "aria_about": "",
         "mode_toggle_block": "",
         "download_block": "",
-        "footer_secondary": "",
+        "footer_secondary": _FOOTER_SECONDARY_STATIC,
     },
     "about/index.html": {
         "rel_root": "..",
@@ -96,10 +100,9 @@ PAGE_VARS = {
         "aria_about": 'aria-current="page"',
         "mode_toggle_block": "",
         "download_block": "",
-        "footer_secondary": "",
+        "footer_secondary": _FOOTER_SECONDARY_STATIC,
     },
 }
-DATASET_VERSION = "1.4.3.0"
 
 # H2-relevant NCS sectors (12 of 49)
 H2_SECTORS = [
@@ -561,7 +564,7 @@ def main():
     print(f"\nSummary metrics:")
     print(f"  H2-Ready Occupations: {metrics['h2_ready_occupations']}")
     if metrics["workforce_gap_2030"] is None:
-        print("  Workforce Gap by 2030: N/A (employment joins incomplete)")
+        print("  Workforce Gap by 2030: N/A (PLFS subdivision supply incomplete)")
     else:
         print(f"  Workforce Gap by 2030: {metrics['workforce_gap_2030']:,}")
     print(f"  Fast Upskill Paths: {metrics['fast_upskill_paths']}")

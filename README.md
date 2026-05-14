@@ -165,6 +165,7 @@ PLFS supply is checked in at NCO 2-digit subdivision level and allocated across 
 
 | Version | Date | Scope |
 |---------|------|-------|
+| `v1.4.3.0` | 2026-05-14 | PLFS 2023-24 Table 25 subdivision supply artifact, supply-backed indicative gap activation, supply CSV fields, and explicit non-unit-microdata caveats |
 | `v1.4.2.1` | 2026-05-11 | Build-time HTML chunk includes (`web/_chunks/`); shared nav/footer resolved at build time with `{{var}}` substitution |
 | `v1.4.2.0` | 2026-05-11 | WHS Rotterdam 2026 launch: `/methodology/` and `/about/` pages, `?lens=maritime`, freshness badge, low-sample tooltip, URL freeze, runbook, QR assets, smoke tests |
 | `v1.4.1.0` | 2026-03-31 | Focus-view default (~64 occupations), 3-state progressive disclosure, treemap keyboard nav, sidebar header accent, pathway CTA, skill pills, gap tab restyle |

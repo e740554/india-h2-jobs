@@ -11,6 +11,7 @@ All notable changes to this project will be documented in this file.
 ### Changed
 - Headline workforce gap now uses `supply_estimate` for H2-ready occupations rather than requiring `employment` coverage.
 - Gap and methodology copy now explicitly say the estimate is subdivision-allocated, indicative, and not occupation-observed. Unit-level PLFS microdata remains post-WHS.
+- Public documentation and collateral now surface `Dataset v1.4.3.0` alongside the PLFS 2023-24 caveat.
 - Removed the shipped PLFS supply-input item from `TODOS.md`.
 
 ### Tests

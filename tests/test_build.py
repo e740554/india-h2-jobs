@@ -447,6 +447,7 @@ def test_index_has_freshness_strings():
     path = os.path.join(DOCS_DIR, "index.html")
     content = open(path, "r", encoding="utf-8").read()
     assert "Last Updated" in content, "docs/index.html must contain 'Last Updated'"
+    assert "Dataset v1.4.3.0" in content, "docs/index.html must contain dataset version"
     assert "PLFS 2023-24" in content, "docs/index.html must contain 'PLFS 2023-24'"
 
 
@@ -455,7 +456,15 @@ def test_methodology_has_freshness_strings():
     path = os.path.join(DOCS_DIR, "methodology", "index.html")
     content = open(path, "r", encoding="utf-8").read()
     assert "Last Updated" in content, "docs/methodology/index.html must contain 'Last Updated'"
+    assert "Dataset v1.4.3.0" in content, "docs/methodology/index.html must contain dataset version"
     assert "PLFS 2023-24" in content, "docs/methodology/index.html must contain 'PLFS 2023-24'"
+
+
+def test_about_footer_has_dataset_version():
+    """Static pages without app JS must still expose the dataset version."""
+    path = os.path.join(DOCS_DIR, "about", "index.html")
+    content = open(path, "r", encoding="utf-8").read()
+    assert "Dataset v1.4.3.0" in content, "docs/about/index.html must contain dataset version"
 
 
 # --- Analytics snippet removal (telemetry out of WHS scope) ---
