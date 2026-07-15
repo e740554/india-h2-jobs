@@ -21,7 +21,7 @@ jobs:
         run: python -m pytest
       - name: Verify generated publish output
         run: |
-          python build/build.py --base-url ""
+          python build/build.py --base-url "/workforce-atlas"
           node --check web/main.js
           node --check docs/main.js
           git diff --exit-code -- docs web

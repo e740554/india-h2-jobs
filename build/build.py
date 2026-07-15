@@ -378,7 +378,12 @@ def write_h2_csv(occupations: list[dict]):
               "digital_automation_exposure", "formalization_rate", "scarcity_risk"]
 
     with open(OUTPUT_CSV_H2, "w", encoding="utf-8", newline="") as f:
-        writer = csv.DictWriter(f, fieldnames=fields, extrasaction="ignore")
+        writer = csv.DictWriter(
+            f,
+            fieldnames=fields,
+            extrasaction="ignore",
+            lineterminator="\n",
+        )
         writer.writeheader()
         for occ in h2_occs:
             row = {k: occ.get(k) for k in fields[:13]}

@@ -243,6 +243,23 @@ def test_browser_scroll_behavior_honours_reduced_motion():
     assert _run_js("scroll-behavior", "false") == "smooth"
 
 
+def test_asset_urls_resolve_relative_to_the_deployed_page():
+    """The same bundle must work on the canonical path and GitHub Pages mirror."""
+    canonical = _run_js(
+        "asset-url",
+        "occupations.json",
+        "https://hygoat.in/workforce-atlas/",
+    )
+    mirror = _run_js(
+        "asset-url",
+        "occupations.json",
+        "https://e740554.github.io/india-h2-jobs/",
+    )
+
+    assert canonical == "https://hygoat.in/workforce-atlas/occupations.json"
+    assert mirror == "https://e740554.github.io/india-h2-jobs/occupations.json"
+
+
 def test_gap_record_preserves_low_sample_warning_over_surplus_or_shortage():
     result = _run_js("gap-record", "100", "80", "29")
 

@@ -161,6 +161,13 @@
       return reducedMotion ? "auto" : "smooth";
     }
 
+    function resolveAssetUrl(filename, pageBaseUri) {
+      if (!pageBaseUri || typeof global.URL !== "function") {
+        return filename;
+      }
+      return new global.URL(filename, pageBaseUri).toString();
+    }
+
     function largestRemainderSplit(total, weights, keys) {
       if (!weights.length || total <= 0) {
         return weights.map(function () { return 0; });
@@ -1322,6 +1329,7 @@
       toRegionLabel: toRegionLabel,
       escapeCsvValue: escapeCsvValue,
       getScrollBehavior: getScrollBehavior,
+      resolveAssetUrl: resolveAssetUrl,
       buildExportRow: buildExportRow,
       buildViewRows: buildViewRows,
       buildFullSnapshotRows: buildFullSnapshotRows,
@@ -1483,8 +1491,7 @@
   let currentArchetypeBreakdown = Object.create(null);
 
   function getAssetUrl(filename) {
-    const base = BASE_URL || "";
-    return base ? base + "/" + filename : filename;
+    return Runtime.resolveAssetUrl(filename, document.baseURI);
   }
 
   async function loadJson(filename) {
@@ -2811,7 +2818,7 @@
     if (!existingMethodologyLink) {
       var methodologyLink = document.createElement("a");
       methodologyLink.className = "sidebar-methodology-link";
-      methodologyLink.href = BASE_URL ? BASE_URL + "/methodology/" : "methodology/";
+      methodologyLink.href = Runtime.resolveAssetUrl("methodology/", document.baseURI);
       methodologyLink.textContent = "How is this scored? \u2192 Methodology";
       var scoreBars = document.getElementById("scoreBars");
       if (scoreBars && scoreBars.parentNode) {

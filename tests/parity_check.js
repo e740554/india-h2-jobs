@@ -23,6 +23,7 @@ function loadRuntime() {
     exports: {},
     setTimeout,
     clearTimeout,
+    URL,
   };
   sandbox.globalThis = sandbox;
   vm.runInNewContext(source, sandbox, { filename: webTemplatePath });
@@ -168,6 +169,8 @@ function run() {
     output = runtime.escapeCsvValue(process.argv[3]);
   } else if (command === 'scroll-behavior') {
     output = runtime.getScrollBehavior(process.argv[3] === 'true');
+  } else if (command === 'asset-url') {
+    output = runtime.resolveAssetUrl(process.argv[3], process.argv[4]);
   } else if (command === 'pathways') {
     output = runtime.getPathwaysForOccupation(
       process.argv[3],

@@ -378,6 +378,8 @@ def test_write_h2_csv_includes_supply_fields(monkeypatch, tmp_path):
 
     write_h2_csv(occs)
 
+    assert b"\r\n" not in output_path.read_bytes()
+
     with open(output_path, encoding="utf-8") as f:
         rows = list(csv.DictReader(f))
 
@@ -453,6 +455,16 @@ def test_score_details_are_loaded_lazily_after_an_occupation_is_selected():
     assert "scoreDetailsPromise" in source
     assert "hydrateScoreDetails(occupation);" in source
     assert "loadScoreDetails()," not in source
+
+
+def test_ci_verifies_the_frozen_production_build():
+    workflow = open(
+        os.path.join(PROJECT_ROOT, ".github", "workflows", "test.yml"),
+        "r",
+        encoding="utf-8",
+    ).read()
+
+    assert 'python build/build.py --base-url "/workforce-atlas"' in workflow
 
 
 def test_methodology_page_has_stylesheet_link():
