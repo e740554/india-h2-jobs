@@ -37,3 +37,15 @@ def test_runbook_required_sections_present():
             f"RUNBOOK.md is missing required section: '{section}'. "
             f"Found sections: {sorted(headers)}"
         )
+
+
+def test_deploy_documentation_requires_live_asset_smoke_on_both_urls():
+    with open(RUNBOOK_FILE, "r", encoding="utf-8") as f:
+        runbook = f.read()
+    smoke_script = os.path.join(PROJECT_ROOT, "scripts", "smoke_prod.ps1")
+    with open(smoke_script, "r", encoding="utf-8") as f:
+        smoke = f.read()
+
+    assert "e740554.github.io/india-h2-jobs" in runbook
+    assert "occupations.json" in smoke
+    assert "main.js" in smoke

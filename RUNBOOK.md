@@ -27,8 +27,9 @@ pip install -r requirements.txt
 
 ## 2. Build for Production
 
-Generates `docs/` with the `/workforce-atlas` base URL so all asset paths resolve
-correctly under the `hygoat.in/workforce-atlas` custom domain.
+Generates the canonical `hygoat.in/workforce-atlas` publish bundle. Runtime
+assets resolve relative to the current page, so this same artifact also works
+on the GitHub Pages mirror at `e740554.github.io/india-h2-jobs/`.
 
 ```powershell
 python build/build.py --base-url "/workforce-atlas"
@@ -41,7 +42,7 @@ python build/build.py --base-url "/workforce-atlas"
 | `docs/methodology/index.html` | Methodology page |
 | `docs/about/index.html` | About page |
 | `docs/style.css` | Shared stylesheet |
-| `docs/main.js` | Client-side JS (with base URL injected) |
+| `docs/main.js` | Client-side JS (portable canonical/mirror asset loading) |
 | `docs/occupations.json` | H2-relevant occupations (~480) |
 | `docs/occupations-all.json` | All 1,802 occupations |
 | `docs/h2-ready-occupations.csv` | H2-ready CSV export |
@@ -73,8 +74,17 @@ git commit -m "build: regenerate docs/ for deploy"
 git push origin master
 ```
 
-**Propagation time:** GitHub Pages typically deploys within 1–2 minutes. The
-custom domain `hygoat.in` points to the GitHub Pages IPs via DNS CNAME/A record.
+Do not call the release deployed merely because the push succeeds. Confirm the
+matching GitHub Actions test and Pages runs are successful, then smoke both
+published surfaces and their JSON/JS assets:
+
+```powershell
+gh run list --repo e740554/india-h2-jobs --branch master --limit 2
+.\scripts\smoke_prod.ps1
+.\scripts\smoke_prod.ps1 -BaseUrl "https://e740554.github.io/india-h2-jobs"
+```
+
+The custom domain `hygoat.in` points to GitHub Pages infrastructure.
 
 ---
 
@@ -89,11 +99,9 @@ If a typo is spotted on /methodology/ or /about/ during the conference:
    git commit -m "hotfix: typo fix on methodology page"
    git push origin master
    ```
-3. GitHub Pages auto-deploys within ~2 minutes.
+3. Confirm the matching Actions and Pages runs succeed, then run both smoke commands from the deploy section.
 4. **Also edit the corresponding source in `web/`** (e.g., `web/methodology/index.html`)
    so the next build doesn't overwrite the fix.
-
-**Minute-by-minute:** 1 min edit → 1 min commit+push → ~2 min deploy = ~4 minutes total.
 
 ---
 
@@ -142,12 +150,13 @@ The DNS CNAME record points `hygoat.in` → GitHub Pages IPs.
 4. Check `scores.json` exists in repo root (the scoring data)
 5. If `build.py` errors with module imports, ensure you're running from repo root
 
-### Page shows 404
+### Page shows 404 or an empty atlas
 1. Verify GitHub Pages is serving from `docs/` directory on `master` branch:
    GitHub repo → Settings → Pages → Source: Deploy from a branch → `master` / `docs/`
-2. Check custom domain is configured: Settings → Pages → Custom domain: `hygoat.in`
-3. Verify DNS CNAME: `dig hygoat.in` should return GitHub Pages IPs
-4. Check `docs/.nojekyll` exists (prevents Jekyll processing)
+2. Confirm the deployed `main.js`, `occupations.json`, and `score-details.json` return HTTP 200 on both URLs with the smoke commands above.
+3. Check custom domain is configured: Settings → Pages → Custom domain: `hygoat.in`
+4. Verify DNS CNAME: `dig hygoat.in` should return GitHub Pages IPs
+5. Check `docs/.nojekyll` exists (prevents Jekyll processing)
 
 ### Lens parameter ignored (`?lens=maritime` does nothing)
 1. Verify the built `docs/main.js` contains the `LENS_WHITELIST` mapping:

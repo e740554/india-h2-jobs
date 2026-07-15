@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.4.3.1] - 2026-07-15
+
+### Fixed
+- Resolved published JSON and sidebar methodology URLs relative to the current page, so the same generated bundle works at both the canonical `hygoat.in/workforce-atlas/` path and the GitHub Pages mirror.
+- Made the H2-ready CSV writer emit LF line endings on every platform, eliminating a Linux CI generated-output mismatch.
+- Aligned CI's publish-output verification with the frozen `/workforce-atlas` production build.
+
+### Documentation and operations
+- Updated README, TESTING, and RUNBOOK deployment guidance to require successful Actions plus live canonical and mirror asset smoke checks before declaring a release deployed.
+- Extended `scripts/smoke_prod.ps1` to verify `occupations.json`, `score-details.json`, and `main.js` as well as the HTML routes.
+
+### Tests
+- Added regression coverage for page-relative asset resolution, production-build CI configuration, LF CSV output, and the required dual-URL asset smoke procedure.
+
 ## [1.4.3.0] - 2026-05-14
 
 ### Added

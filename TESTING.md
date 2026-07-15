@@ -19,7 +19,7 @@ python -m pytest tests/test_parity.py tests/test_ui_logic.py tests/test_csv_expo
 Rebuild generated assets and syntax-check the browser bundles:
 
 ```bash
-python build/build.py --base-url ""
+python build/build.py --base-url "/workforce-atlas"
 node --check web/main.js
 node --check docs/main.js
 ```
@@ -84,6 +84,13 @@ Add or extend tests whenever you change:
 - pathway/export logic
 - build output fields consumed by the frontend
 
-## CI
+## CI and deployment verification
 
-GitHub Actions runs `python -m pytest` on push and pull request.
+GitHub Actions runs `python -m pytest` plus a deterministic production build on
+push and pull request. A deployment is not complete until the relevant Actions
+run passes and both published URLs serve the page plus its runtime assets:
+
+```powershell
+.\scripts\smoke_prod.ps1
+.\scripts\smoke_prod.ps1 -BaseUrl "https://e740554.github.io/india-h2-jobs"
+```

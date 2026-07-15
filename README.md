@@ -78,7 +78,7 @@ python -m http.server 8080
 To regenerate the published/frontend assets:
 
 ```bash
-python build/build.py --base-url ""
+python build/build.py --base-url "/workforce-atlas"
 ```
 
 That rebuilds:
@@ -88,6 +88,10 @@ That rebuilds:
 - `docs/main.js`
 - `docs/style.css`
 - synced dev copies in `web/`
+
+The generated bundle resolves data and in-app documentation links relative to the
+current page. It therefore supports both the canonical URL and the GitHub Pages
+mirror without a separate publish artifact.
 
 For a full pipeline rebuild from raw data, see the source directories below plus [DATASOURCES.md](DATASOURCES.md).
 
@@ -165,6 +169,7 @@ PLFS supply is checked in at NCO 2-digit subdivision level and allocated across 
 
 | Version | Date | Scope |
 |---------|------|-------|
+| `v1.4.3.1` | 2026-07-15 | Portable canonical/mirror asset loading, deterministic CSV line endings, production-build CI parity, and dual-URL deployment smoke coverage |
 | `v1.4.3.0` | 2026-05-14 | PLFS 2023-24 Table 25 subdivision supply artifact, supply-backed indicative gap activation, supply CSV fields, and explicit non-unit-microdata caveats |
 | `v1.4.2.1` | 2026-05-11 | Build-time HTML chunk includes (`web/_chunks/`); shared nav/footer resolved at build time with `{{var}}` substitution |
 | `v1.4.2.0` | 2026-05-11 | WHS Rotterdam 2026 launch: `/methodology/` and `/about/` pages, `?lens=maritime`, freshness badge, low-sample tooltip, URL freeze, runbook, QR assets, smoke tests |
@@ -189,7 +194,7 @@ Current follow-up work is mainly dataset enrichment and UI polish rather than mi
 
 - Edit source files in `web/`, `model/`, `build/`, and the pipeline directories.
 - Do not hand-edit generated assets in `docs/`.
-- Rebuild with `python build/build.py --base-url ""` before opening a PR when published output changes.
+- Rebuild with `python build/build.py --base-url "/workforce-atlas"` before opening a PR when published output changes.
 - Keep README/spec/testing copy aligned with the checked-in dataset and runtime behavior.
 - Use the issue and PR templates for public contributions, and follow [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md).
 - Report security issues privately per [SECURITY.md](SECURITY.md), not through public issues.

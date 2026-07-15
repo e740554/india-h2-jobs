@@ -1,4 +1,4 @@
-# smoke_prod.ps1 — Production smoke test for India H2 Workforce Atlas
+﻿# smoke_prod.ps1 - Production smoke test for India H2 Workforce Atlas
 # Runs Sun May 17 morning per plan line 87. Do NOT run before URL freeze.
 #
 # Usage:
@@ -23,13 +23,13 @@ function Assert-Http200 {
     try {
         $response = Invoke-WebRequest -Uri $Url -UseBasicParsing -TimeoutSec 30
         if ($response.StatusCode -eq 200) {
-            Write-Host "[PASS] $Label — HTTP 200" -ForegroundColor Green
+            Write-Host "[PASS] $Label - HTTP 200" -ForegroundColor Green
         } else {
-            Write-Host "[FAIL] $Label — HTTP $($response.StatusCode)" -ForegroundColor Red
+            Write-Host "[FAIL] $Label - HTTP $($response.StatusCode)" -ForegroundColor Red
             $global:failures++
         }
     } catch {
-        Write-Host "[FAIL] $Label — $($_.Exception.Message)" -ForegroundColor Red
+        Write-Host "[FAIL] $Label - $($_.Exception.Message)" -ForegroundColor Red
         $global:failures++
     }
 }
@@ -39,7 +39,7 @@ function Assert-Content {
     try {
         $response = Invoke-WebRequest -Uri $Url -UseBasicParsing -TimeoutSec 30
         if ($response.StatusCode -ne 200) {
-            Write-Host "[FAIL] $Label — HTTP $($response.StatusCode) (expected 200)" -ForegroundColor Red
+            Write-Host "[FAIL] $Label - HTTP $($response.StatusCode) (expected 200)" -ForegroundColor Red
             $global:failures++
             return
         }
@@ -47,17 +47,17 @@ function Assert-Content {
         $allFound = $true
         foreach ($needle in $MustContain) {
             if ($body -notmatch [regex]::Escape($needle)) {
-                Write-Host "[FAIL] $Label — missing: '$needle'" -ForegroundColor Red
+                Write-Host "[FAIL] $Label - missing: '$needle'" -ForegroundColor Red
                 $allFound = $false
             }
         }
         if ($allFound) {
-            Write-Host "[PASS] $Label — all content markers found" -ForegroundColor Green
+            Write-Host "[PASS] $Label - all content markers found" -ForegroundColor Green
         } else {
             $global:failures++
         }
     } catch {
-        Write-Host "[FAIL] $Label — $($_.Exception.Message)" -ForegroundColor Red
+        Write-Host "[FAIL] $Label - $($_.Exception.Message)" -ForegroundColor Red
         $global:failures++
     }
 }
@@ -85,9 +85,24 @@ Assert-Content -Url "$BaseUrl" -Label "Atlas root" -MustContain @(
     "India H2 Workforce Atlas"
 )
 
-# 3. Methodology page content markers
+# 3. Runtime assets (an HTML 200 alone does not prove the atlas can render)
 Write-Host ""
-Write-Host "--- 3. Methodology page ---"
+Write-Host "--- 3. Runtime assets ---"
+Assert-Content -Url "$BaseUrl/occupations.json" -Label "occupations.json" -MustContain @(
+    "occupations",
+    "dataset_version"
+)
+Assert-Content -Url "$BaseUrl/score-details.json" -Label "score-details.json" -MustContain @(
+    "h2_adjacency"
+)
+Assert-Content -Url "$BaseUrl/main.js" -Label "main.js" -MustContain @(
+    "document.baseURI",
+    "resolveAssetUrl"
+)
+
+# 4. Methodology page content markers
+Write-Host ""
+Write-Host "--- 4. Methodology page ---"
 Assert-Content -Url "$BaseUrl/methodology/" -Label "Methodology" -MustContain @(
     "Mukta",
     "../style.css",
@@ -95,18 +110,18 @@ Assert-Content -Url "$BaseUrl/methodology/" -Label "Methodology" -MustContain @(
     "scored against the H"
 )
 
-# 4. About page content markers
+# 5. About page content markers
 Write-Host ""
-Write-Host "--- 4. About page ---"
+Write-Host "--- 5. About page ---"
 Assert-Content -Url "$BaseUrl/about/" -Label "About" -MustContain @(
     "Contact",
     "ekansh@ekavikalp.com",
     "../style.css"
 )
 
-# 5. Maritime lens page delivers content
+# 6. Maritime lens page delivers content
 Write-Host ""
-Write-Host "--- 5. Lens parameter validation ---"
+Write-Host "--- 6. Lens parameter validation ---"
 Assert-Content -Url "$BaseUrl/?lens=maritime" -Label "lens=maritime" -MustContain @(
     "India H2 Workforce Atlas"
 )

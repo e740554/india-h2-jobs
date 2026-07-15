@@ -1491,7 +1491,7 @@
   let currentArchetypeBreakdown = Object.create(null);
 
   function getAssetUrl(filename) {
-    return Runtime.resolveAssetUrl(filename, document.baseURI);
+    return Runtime.resolveAssetUrl(filename, document.baseURI || BASE_URL);
   }
 
   async function loadJson(filename) {
@@ -2818,7 +2818,7 @@
     if (!existingMethodologyLink) {
       var methodologyLink = document.createElement("a");
       methodologyLink.className = "sidebar-methodology-link";
-      methodologyLink.href = Runtime.resolveAssetUrl("methodology/", document.baseURI);
+      methodologyLink.href = Runtime.resolveAssetUrl("methodology/", document.baseURI || BASE_URL);
       methodologyLink.textContent = "How is this scored? \u2192 Methodology";
       var scoreBars = document.getElementById("scoreBars");
       if (scoreBars && scoreBars.parentNode) {
