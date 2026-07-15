@@ -106,6 +106,8 @@ PAGE_VARS = {
         "mode_toggle_block": _MODE_TOGGLE_BLOCK,
         "download_block": _DOWNLOAD_BLOCK,
         "footer_secondary": _FOOTER_SECONDARY_ATLAS,
+        "dataset_version": DATASET_VERSION,
+        "dataset_updated_label": DATASET_UPDATED_LABEL,
     },
     "methodology/index.html": {
         "rel_root": "..",

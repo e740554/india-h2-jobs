@@ -169,6 +169,7 @@ PLFS supply is checked in at NCO 2-digit subdivision level and allocated across 
 
 | Version | Date | Scope |
 |---------|------|-------|
+| `v1.4.3.2` | 2026-07-15 | Summary freshness badge bound to release metadata, preventing footer/badge version drift |
 | `v1.4.3.1` | 2026-07-15 | Portable canonical/mirror asset loading, deterministic CSV line endings, production-build CI parity, and dual-URL deployment smoke coverage |
 | `v1.4.3.0` | 2026-05-14 | PLFS 2023-24 Table 25 subdivision supply artifact, supply-backed indicative gap activation, supply CSV fields, and explicit non-unit-microdata caveats |
 | `v1.4.2.1` | 2026-05-11 | Build-time HTML chunk includes (`web/_chunks/`); shared nav/footer resolved at build time with `{{var}}` substitution |

@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.4.3.2] - 2026-07-15
+
+### Fixed
+- Bound the Atlas summary freshness badge to the same `VERSION` and changelog metadata as the footer and generated datasets, eliminating the stale `v1.4.3.0 / May 2026` label after the deployment hotfix.
+
+### Tests
+- Added a source-to-published regression test for the summary freshness badge.
+
 ## [1.4.3.1] - 2026-07-15
 
 ### Fixed

@@ -555,6 +555,20 @@ def test_index_has_freshness_strings():
     assert "PLFS 2023-24" in content, "docs/index.html must contain 'PLFS 2023-24'"
 
 
+def test_summary_freshness_badge_uses_release_metadata():
+    import build.build as build_module
+
+    source = open(os.path.join(WEB_DIR, "index.html"), encoding="utf-8").read()
+    published = open(os.path.join(DOCS_DIR, "index.html"), encoding="utf-8").read()
+
+    assert "{{dataset_version}}" in source
+    assert "{{dataset_updated_label}}" in source
+    assert (
+        f"Last Updated: {build_module.DATASET_UPDATED_LABEL} · "
+        f"Dataset v{build_module.DATASET_VERSION}"
+    ) in published
+
+
 def test_methodology_has_freshness_strings():
     """ER-15: Last Updated AND PLFS 2023-24 substrings in docs/methodology/index.html."""
     path = os.path.join(DOCS_DIR, "methodology", "index.html")
