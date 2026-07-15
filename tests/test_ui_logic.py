@@ -232,6 +232,67 @@ def test_export_headers_include_supply_fields():
     assert "supply_sample_count" in result
 
 
+def test_browser_csv_escape_neutralizes_spreadsheet_formula_cells():
+    result = _run_js("csv-escape", "=1+1")
+
+    assert result == "'=1+1"
+
+
+def test_browser_scroll_behavior_honours_reduced_motion():
+    assert _run_js("scroll-behavior", "true") == "auto"
+    assert _run_js("scroll-behavior", "false") == "smooth"
+
+
+def test_gap_record_preserves_low_sample_warning_over_surplus_or_shortage():
+    result = _run_js("gap-record", "100", "80", "29")
+
+    assert result == {
+        "supply": 100,
+        "demand": 80,
+        "gap": 20,
+        "gapPct": 25,
+        "gapStatus": "low_sample",
+    }
+
+
+def test_browser_demand_preserves_rounded_coefficient_total_across_occupations():
+    archetype = {
+        "id": "test",
+        "h2_output_mt_per_year": 1,
+        "coefficients": [
+            {"nco_group": "7212", "phase": "operations", "headcount_per_unit": 1},
+        ],
+    }
+    occupations = [
+        {"id": "A", "nco_code": "7212.0100", "scores": {"h2_adjacency": 1, "transition_demand": 0}},
+        {"id": "B", "nco_code": "7212.0200", "scores": {"h2_adjacency": 1, "transition_demand": 0}},
+    ]
+
+    result = _run_js("custom-demand-total", json.dumps({
+        "target_mt": 1,
+        "archetype": archetype,
+        "occupations": occupations,
+    }))
+
+    assert result == 1
+
+
+def test_browser_clustered_timeline_preserves_national_total_before_rounding():
+    records = [
+        {"occupation_id": "OCC-1", "archetype_id": "alkaline_1gw", "phase": "construction", "demand": 1, "cluster_id": "kutch"},
+        {"occupation_id": "OCC-1", "archetype_id": "alkaline_1gw", "phase": "construction", "demand": 1, "cluster_id": "vizag"},
+    ]
+    result = _run_js("custom-clustered-timeline-total", json.dumps({
+        "records": records,
+        "archetypes": [{"id": "alkaline_1gw", "construction_years": 3}],
+        "start_year": 2026,
+        "target_year": 2028,
+        "year": "2027",
+    }))
+
+    assert result == {"national": 1, "clustered": 1}
+
+
 def test_state_resets_on_mode_switch_to_atlas():
     """Returning to atlas mode resets viewTier to 'focus'."""
     view_tier = "sector"

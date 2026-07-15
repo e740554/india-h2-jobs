@@ -16,6 +16,7 @@ from model.compute import (
     load_scenarios,
 )
 from model.timeline import compute_timeline
+from model.pathways import get_pathways_for_occupation, load_pathways
 
 PROJECT_ROOT = os.path.join(os.path.dirname(__file__), "..")
 PARITY_SCRIPT = os.path.join(PROJECT_ROOT, "tests", "parity_check.js")
@@ -182,4 +183,14 @@ def test_timeline_parity_for_mixed_scenario():
     scenario_id = "nghm_5mt_2030_mix"
     py = _run_python_timeline_engine(scenario_id)
     js = _run_js("timeline", scenario_id)
+    assert py == js
+
+
+def test_pathway_lookup_parity_for_real_inbound_pathways():
+    pathways = load_pathways()
+    target_nco = pathways["pathways"][0]["target_nco"]
+
+    py = get_pathways_for_occupation(target_nco, pathways, direction="in")
+    js = _run_js("pathways", target_nco, "in")
+
     assert py == js

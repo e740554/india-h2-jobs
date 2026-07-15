@@ -14,6 +14,8 @@ Output fields per occupation:
 import json
 import os
 
+from model.compute import _largest_remainder_split
+
 
 def load_supply(path: str = None) -> dict:
     """Load PLFS supply data from plfs_supply.json.
@@ -92,15 +94,14 @@ def allocate_supply(supply_data: dict, occupations: list) -> list:
             w = (scores.get("h2_adjacency") or 0) + (scores.get("transition_demand") or 0)
             weights.append(w)
 
-        total_weight = sum(weights)
+        allocated_supply = _largest_remainder_split(
+            total_headcount,
+            weights,
+            [occ["id"] for occ in group_occs],
+        )
 
-        for occ, w in zip(group_occs, weights):
-            if total_weight > 0:
-                norm_weight = w / total_weight
-            else:
-                norm_weight = 1.0 / len(group_occs) if group_occs else 0
-
-            occ["supply_estimate"] = round(total_headcount * norm_weight)
+        for occ, supply_estimate in zip(group_occs, allocated_supply):
+            occ["supply_estimate"] = supply_estimate
             occ["supply_source"] = source_statement
             occ["supply_nco_subdivision"] = subdiv
             occ["supply_sample_count"] = sample_count

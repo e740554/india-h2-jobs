@@ -162,7 +162,7 @@ body {
   cursor: pointer;
   font-size: 0.85rem;
   font-family: inherit;
-  transition: all 0.2s;
+  transition: border-color var(--duration-fast) var(--ease-out), background-color var(--duration-fast) var(--ease-out), color var(--duration-fast) var(--ease-out), transform var(--duration-fast) var(--ease-out);
 }
 
 .btn-download:hover {
@@ -350,7 +350,7 @@ body {
   font-family: inherit;
   font-weight: 500;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: border-color var(--duration-fast) var(--ease-out), background-color var(--duration-fast) var(--ease-out), color var(--duration-fast) var(--ease-out), transform var(--duration-fast) var(--ease-out);
 }
 
 .btn-toggle:hover {
@@ -385,7 +385,7 @@ body {
   font-family: inherit;
   font-weight: 500;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: border-color var(--duration-fast) var(--ease-out), background-color var(--duration-fast) var(--ease-out), color var(--duration-fast) var(--ease-out), transform var(--duration-fast) var(--ease-out);
 }
 
 .pill:hover {
@@ -397,6 +397,24 @@ body {
   background: var(--accent);
   color: white;
   border-color: var(--accent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+.btn-download:active,
+.btn-toggle:active,
+.pill:active,
+.mode-btn:active {
+  transform: translateY(1px);
 }
 
 .atlas-main {
@@ -458,6 +476,9 @@ body {
   z-index: 50;
   max-width: 250px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  left: 0;
+  top: 0;
+  will-change: transform;
 }
 
 .treemap-empty {
@@ -959,7 +980,7 @@ body {
   font-family: inherit;
   font-weight: 500;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: background-color var(--duration-fast) var(--ease-out), color var(--duration-fast) var(--ease-out), box-shadow var(--duration-fast) var(--ease-out), transform var(--duration-fast) var(--ease-out);
 }
 
 .mode-btn.active {
@@ -1100,10 +1121,12 @@ body {
 }
 
 .csv-progress-fill {
-  width: 0;
+  width: 100%;
   height: 100%;
   background: linear-gradient(90deg, var(--color-hy) 0%, var(--color-goat) 100%);
-  transition: width 0.15s ease;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform var(--duration-fast) var(--ease-out);
 }
 
 .coeff-source {

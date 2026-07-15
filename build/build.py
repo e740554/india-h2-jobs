@@ -13,17 +13,40 @@ import argparse
 import csv
 import json
 import os
+import re
 import shutil
 import sys
-from datetime import date
+from datetime import datetime
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 from model.clusters import load_clusters, validate_cluster_affinities
-from model.compute import load_archetypes
+from model.compute import load_archetypes, sanitize_csv_value
 from model.pathways import load_pathways, validate_pathways
 from model.supply import allocate_supply, load_supply
 
 PROJECT_ROOT = os.path.join(os.path.dirname(__file__), "..")
+VERSION_FILE = os.path.join(PROJECT_ROOT, "VERSION")
+CHANGELOG_FILE = os.path.join(PROJECT_ROOT, "CHANGELOG.md")
+
+
+def load_release_metadata(version_file: str, changelog_file: str) -> tuple[str, str]:
+    """Load the canonical version and its published date from release sources."""
+    with open(version_file, encoding="utf-8") as f:
+        version = f.read().strip()
+    with open(changelog_file, encoding="utf-8") as f:
+        changelog = f.read()
+    match = re.search(
+        rf"^## \[{re.escape(version)}\] - (\d{{4}}-\d{{2}}-\d{{2}})$",
+        changelog,
+        flags=re.MULTILINE,
+    )
+    if not match:
+        raise ValueError(f"No release date found for VERSION {version} in {changelog_file}")
+    return version, match.group(1)
+
+
+DATASET_VERSION, DATASET_UPDATED = load_release_metadata(VERSION_FILE, CHANGELOG_FILE)
+DATASET_UPDATED_LABEL = datetime.strptime(DATASET_UPDATED, "%Y-%m-%d").strftime("%B %Y")
 MODEL_DIR = os.path.join(PROJECT_ROOT, "model")
 MODEL_JSON_FILES = [
     "archetypes.json",
@@ -39,15 +62,15 @@ WEB_DIR = os.path.join(PROJECT_ROOT, "web")
 CHUNKS_DIR = os.path.join(WEB_DIR, "_chunks")
 OUTPUT_JSON = os.path.join(DOCS_DIR, "occupations.json")
 OUTPUT_JSON_ALL = os.path.join(DOCS_DIR, "occupations-all.json")
+OUTPUT_SCORE_DETAILS = os.path.join(DOCS_DIR, "score-details.json")
 OUTPUT_CSV_H2 = os.path.join(DOCS_DIR, "h2-ready-occupations.csv")
 TEMPLATE_FILE = os.path.join(WEB_DIR, "main.js.template")
 STATIC_PUBLIC_FILES = [
     ".nojekyll",
     "style.css",
     "hygoat-logo.svg",
+    "vendor/d3.v7.9.0.min.js",
 ]
-DATASET_VERSION = "1.4.3.0"
-
 # Pre-expanded blocks used as variable values in page templates.
 # Kept as module-level constants so they are written once, not copy-pasted.
 _MODE_TOGGLE_BLOCK = """\
@@ -69,10 +92,10 @@ _DOWNLOAD_BLOCK = """\
       </div>"""
 
 _FOOTER_SECONDARY_ATLAS = f"""\
-    <div class="footer-row footer-row-secondary"><span id="footerVersion">Dataset v{DATASET_VERSION}</span> &middot; <span id="footerDate">Last updated May 2026</span> &middot; <a href="https://github.com/e740554/india-h2-jobs" title="View source on GitHub">GitHub</a> &middot; MIT Licence</div>"""
+    <div class="footer-row footer-row-secondary"><span id="footerVersion">Dataset v{DATASET_VERSION}</span> &middot; <span id="footerDate">Last updated {DATASET_UPDATED_LABEL}</span> &middot; <a href="https://github.com/e740554/india-h2-jobs" title="View source on GitHub">GitHub</a> &middot; MIT Licence</div>"""
 
 _FOOTER_SECONDARY_STATIC = f"""\
-    <div class="footer-row footer-row-secondary">Dataset v{DATASET_VERSION} &middot; Last updated May 2026 &middot; <a href="https://github.com/e740554/india-h2-jobs" title="View source on GitHub">GitHub</a> &middot; MIT Licence</div>"""
+    <div class="footer-row footer-row-secondary">Dataset v{DATASET_VERSION} &middot; Last updated {DATASET_UPDATED_LABEL} &middot; <a href="https://github.com/e740554/india-h2-jobs" title="View source on GitHub">GitHub</a> &middot; MIT Licence</div>"""
 
 PAGE_VARS = {
     "index.html": {
@@ -191,6 +214,16 @@ def merge_scores(occupations: list[dict], scores: dict) -> list[dict]:
         occ["scores"] = occ_scores
         occ["score_details"] = occ_score_details
     return occupations
+
+
+def extract_score_details(occupations: list[dict]) -> dict[str, dict]:
+    """Detach score rationales that are only needed after a user selects a card."""
+    details_by_occupation = {}
+    for occupation in occupations:
+        details = occupation.pop("score_details", {})
+        if details:
+            details_by_occupation[occupation["id"]] = details
+    return details_by_occupation
 
 
 def compute_upskill_paths(occupations: list[dict]) -> list[dict]:
@@ -351,7 +384,7 @@ def write_h2_csv(occupations: list[dict]):
             row = {k: occ.get(k) for k in fields[:13]}
             for dim in fields[13:]:
                 row[dim] = occ.get("scores", {}).get(dim)
-            writer.writerow(row)
+            writer.writerow({key: sanitize_csv_value(value) for key, value in row.items()})
 
     print(f"H2-ready CSV: {len(h2_occs)} occupations -> {OUTPUT_CSV_H2}")
 
@@ -475,7 +508,7 @@ def sync_public_artifacts():
             shutil.copy2(source_path, output_path)
             print(f"Copied static asset: {output_path}")
 
-    for docs_artifact in [OUTPUT_JSON, OUTPUT_JSON_ALL, OUTPUT_CSV_H2]:
+    for docs_artifact in [OUTPUT_JSON, OUTPUT_JSON_ALL, OUTPUT_SCORE_DETAILS, OUTPUT_CSV_H2]:
         web_output = os.path.join(WEB_DIR, os.path.basename(docs_artifact))
         shutil.copy2(docs_artifact, web_output)
         print(f"Copied dev data: {web_output}")
@@ -523,11 +556,12 @@ def main():
     h2_metrics = compute_summary_metrics(h2_occupations)
     h2_data_quality = compute_data_quality(h2_occupations)
     h2_scored = sum(1 for occ in h2_occupations if occ.get("scores"))
+    score_details = extract_score_details(occupations)
 
     # Build filtered output JSON (default view)
     output = {
         "dataset_version": DATASET_VERSION,
-        "last_updated": date.today().isoformat(),
+        "last_updated": DATASET_UPDATED,
         "total_occupations": len(h2_occupations),
         "total_all_occupations": len(occupations),
         "total_sectors": len(set(occ.get("sector", "Other") for occ in h2_occupations)),
@@ -545,7 +579,7 @@ def main():
     # Build full output JSON (for "Show All" toggle)
     output_all = {
         "dataset_version": DATASET_VERSION,
-        "last_updated": date.today().isoformat(),
+        "last_updated": DATASET_UPDATED,
         "total_occupations": len(occupations),
         "total_all_occupations": len(occupations),
         "total_sectors": len(set(occ.get("sector", "Other") for occ in occupations)),
@@ -559,6 +593,10 @@ def main():
     with open(OUTPUT_JSON_ALL, "w", encoding="utf-8") as f:
         json.dump(output_all, f, indent=2, ensure_ascii=False)
     print(f"Written: {OUTPUT_JSON_ALL} ({len(occupations)} all occupations)")
+
+    with open(OUTPUT_SCORE_DETAILS, "w", encoding="utf-8") as f:
+        json.dump(score_details, f, indent=2, ensure_ascii=False)
+    print(f"Written: {OUTPUT_SCORE_DETAILS} ({len(score_details)} score-detail records)")
 
     # Summary
     print(f"\nSummary metrics:")

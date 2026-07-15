@@ -110,3 +110,28 @@ def test_compute_timeline_preserves_cluster_dimension_when_present():
     )
     assert timeline["2030"]["kutch"]["OCC-1"]["operations"] == 25
     assert timeline["2030"]["vizag"]["OCC-1"]["operations"] == 15
+
+
+def test_clustered_timeline_preserves_national_total_before_rounding():
+    """Cluster buckets must not each round away a nationally whole contribution."""
+    records = [
+        _make_record(demand=1, cluster_id="kutch"),
+        _make_record(demand=1, cluster_id="vizag"),
+    ]
+    national = compute_timeline(
+        [{key: value for key, value in record.items() if key != "cluster_id"} for record in records],
+        2026,
+        2028,
+        _make_archetypes(),
+        end_year=2028,
+    )
+    clustered = compute_timeline(records, 2026, 2028, _make_archetypes(), end_year=2028)
+
+    national_total = national["2027"]["OCC-1"]["construction"]
+    clustered_total = sum(
+        cluster["OCC-1"]["construction"]
+        for cluster in clustered["2027"].values()
+    )
+
+    assert national_total == 1
+    assert clustered_total == national_total

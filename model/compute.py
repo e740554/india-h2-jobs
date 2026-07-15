@@ -17,6 +17,38 @@ import json
 import os
 
 
+def sanitize_csv_value(value):
+    """Prevent spreadsheet software from interpreting a text cell as a formula."""
+    if isinstance(value, str) and value.lstrip(" \t\r\n").startswith(("=", "+", "-", "@")):
+        return "'" + value
+    return value
+
+
+def _largest_remainder_split(total: int, weights: list[float], keys: list[str]) -> list[int]:
+    """Allocate an integer total proportionally while preserving its exact sum."""
+    if not weights:
+        return []
+    if total <= 0:
+        return [0] * len(weights)
+
+    total_weight = sum(weights)
+    if total_weight > 0:
+        raw = [total * weight / total_weight for weight in weights]
+    else:
+        raw = [total / len(weights)] * len(weights)
+
+    allocated = [int(value) for value in raw]
+    remainder = total - sum(allocated)
+    ranked = sorted(
+        range(len(weights)),
+        key=lambda index: (raw[index] - allocated[index], weights[index], keys[index]),
+        reverse=True,
+    )
+    for index in ranked[:remainder]:
+        allocated[index] += 1
+    return allocated
+
+
 def load_archetypes() -> list:
     """Load all archetypes from model/archetypes.json."""
     path = os.path.join(os.path.dirname(__file__), "archetypes.json")
@@ -103,20 +135,25 @@ def compute_demand_for_units(units: float, archetype: dict, occupations: list) -
 
         total_weight = sum(weights)
 
-        for occ, w in zip(group_occs, weights):
+        allocated_demands = _largest_remainder_split(
+            round(raw_demand),
+            weights,
+            [occ["id"] for occ in group_occs],
+        )
+
+        for occ, w, demand in zip(group_occs, weights, allocated_demands):
             if total_weight > 0:
                 norm_weight = w / total_weight
             else:
                 # Equal distribution when all weights are zero
                 norm_weight = 1.0 / len(group_occs)
 
-            occ_demand = raw_demand * norm_weight
             records.append({
                 "occupation_id": occ["id"],
                 "archetype_id": archetype_id,
                 "nco_group": nco_group,
                 "phase": phase,
-                "demand": round(occ_demand),
+                "demand": demand,
                 "allocation_weight": round(norm_weight, 6),
                 "source": source,
                 "source_type": source_type,
@@ -348,7 +385,7 @@ def export_demand_csv(demand_records: list, occupations: list, output_path: str)
             occ = occ_lookup.get(occ_id, {}) if occ_id else {}
             scores = occ.get("scores") or {}
 
-            writer.writerow({
+            row = {
                 "occupation_id": occ_id or "(unallocated)",
                 "title": occ.get("title", ""),
                 "sector": occ.get("sector", ""),
@@ -361,4 +398,5 @@ def export_demand_csv(demand_records: list, occupations: list, output_path: str)
                 "transition_demand": scores.get("transition_demand", ""),
                 "source": rec["source"],
                 "source_type": rec["source_type"],
-            })
+            }
+            writer.writerow({key: sanitize_csv_value(value) for key, value in row.items()})

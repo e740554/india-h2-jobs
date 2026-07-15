@@ -96,9 +96,9 @@
 
 ### /about/ institutional grounding (post-WHS)
 
-**What:** Expand `/about/` beyond the WHS-minimal scope (mailto + Advisory Circle) to include the institutional grounding a hostile credibility-instrument reader expects.
+**What:** Expand `/about/` beyond the WHS-minimal Contact-only scope to include the institutional grounding a hostile credibility-instrument reader expects.
 
-**Why:** The WHS launch ships a deliberately minimal `/about/` (chrome + Advisory Circle + mailto). DeepSeek V4 Pro outside voice flagged this as a credibility liability for a research-grade tool: a hostile labour economist looking for "who built this" finds only a mailto. Captured during /plan-design-review on 2026-05-11.
+**Why:** The WHS launch ships a deliberately minimal `/about/` (chrome + contact). DeepSeek V4 Pro outside voice flagged this as a credibility liability for a research-grade tool: a hostile labour economist looking for "who built this" finds only a mailto. Captured during /plan-design-review on 2026-05-11.
 
 **Context:** Three concrete additions:
 1. Institutional affiliation paragraph for Ekavikalp (India base, one-sentence org description).
@@ -131,8 +131,8 @@ Keep the rest of /about/ as shipped at WHS — minimal, no hero, single column. 
 
 **Why:** Synthetic codes are honest in the short term but are a long-term maintenance burden and a credibility ceiling on the atlas. Codification by the standards body would also make PLFS supply integration meaningful for these occupations in future PLFS waves. Captured from /plan-eng-review on 2026-05-11.
 
-**Context:** Likely requires advisor input post-WHS (labour economist, SSCGJ contact). Draft can be done internally; submission requires institutional channel. Coordinate with the advisory circle established at WHS.
+**Context:** Likely requires advisor input post-WHS (labour economist, SSCGJ contact). Draft can be done internally; submission requires an institutional channel. Coordinate with named advisors once they are engaged.
 
 **Effort:** M  
 **Priority:** P3  
-**Depends on:** Advisor input from advisory circle (post-WHS 2026)
+**Depends on:** Labour-economics or SSCGJ advisor input (post-WHS 2026)

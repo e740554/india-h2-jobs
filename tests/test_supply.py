@@ -169,6 +169,18 @@ class TestAllocateSupply:
         total_allocated = sum(occ["supply_estimate"] for occ in result)
         assert abs(total_allocated - 10000) <= 1
 
+    def test_allocate_supply_preserves_subdivision_total_exactly_after_rounding(self):
+        """A one-worker subdivision cannot disappear across equal-weight roles."""
+        supply = {"72": {"pct": 2.0, "headcount": 1}}
+        occs = [
+            _make_occupation("occ1", "7212", 1, 0),
+            _make_occupation("occ2", "7215", 1, 0),
+        ]
+
+        result = allocate_supply(supply, occs)
+
+        assert sum(occ["supply_estimate"] for occ in result) == 1
+
     def test_allocate_supply_sets_source_fields(self):
         """supply_source and supply_nco_subdivision set correctly on allocated occupations."""
         supply = {"72": {"pct": 2.3, "headcount": 5000}}

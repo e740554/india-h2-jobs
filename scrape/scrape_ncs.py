@@ -103,8 +103,8 @@ def fetch_html(url: str, ssl_ctx: ssl.SSLContext) -> str | None:
     return html
 
 
-def extract_rows(html: str, sector: str, page_num: int) -> list[dict]:
-    """Extract raw SharePoint rows from inline JSON."""
+def extract_rows(html: str, sector: str, page_num: int) -> list[dict] | None:
+    """Extract raw SharePoint rows, or ``None`` when the page is invalid."""
     match = LIST_DATA_RE.search(html)
     if not match:
         print(f"  [WARN] No WPQ2ListData found for sector: {sector} (page {page_num})")
@@ -112,13 +112,13 @@ def extract_rows(html: str, sector: str, page_num: int) -> list[dict]:
         debug_path = os.path.join(RAW_DIR, f"debug_{sector.replace('/', '_')}_page_{page_num}.html")
         with open(debug_path, "w", encoding="utf-8") as f:
             f.write(html)
-        return []
+        return None
 
     try:
         list_data = json.loads(match.group(1))
     except json.JSONDecodeError as e:
         print(f"  [ERROR] JSON parse failed for {sector}: {e}")
-        return []
+        return None
 
     return list_data.get("Row", [])
 
@@ -160,8 +160,8 @@ def normalize_rows(rows: list[dict], sector: str) -> list[dict]:
     return occupations
 
 
-def fetch_sector(sector: str, ssl_ctx: ssl.SSLContext) -> list[dict]:
-    """Fetch all occupations for a given sector, following SharePoint pagination."""
+def fetch_sector(sector: str, ssl_ctx: ssl.SSLContext) -> tuple[list[dict], bool]:
+    """Fetch one complete sector, discarding results if pagination is interrupted."""
     all_occupations = []
     seen_row_ids = set()
     cursor = None
@@ -170,11 +170,13 @@ def fetch_sector(sector: str, ssl_ctx: ssl.SSLContext) -> list[dict]:
         url = build_sector_url(sector, cursor)
         html = fetch_html(url, ssl_ctx)
         if html is None:
-            return all_occupations
+            return [], False
 
         rows = extract_rows(html, sector, page_num)
+        if rows is None:
+            return [], False
         if not rows:
-            break
+            return all_occupations, True
 
         page_occupations = normalize_rows(rows, sector)
         new_occupations = []
@@ -186,25 +188,27 @@ def fetch_sector(sector: str, ssl_ctx: ssl.SSLContext) -> list[dict]:
             new_occupations.append(occupation)
 
         if not new_occupations:
-            break
+            print(f"  [WARN] Repeated page while paginating {sector}")
+            return [], False
 
         all_occupations.extend(new_occupations)
         print(f"    Page {page_num}: {len(new_occupations)} occupations")
 
         if len(page_occupations) < SHAREPOINT_PAGE_SIZE:
-            break
+            return all_occupations, True
 
         next_cursor = next(
             (occupation.get("sp_id") for occupation in reversed(page_occupations) if occupation.get("sp_id")),
             None,
         )
         if not next_cursor or next_cursor == cursor:
-            break
+            print(f"  [WARN] Missing or repeated pagination cursor for {sector}")
+            return [], False
         cursor = next_cursor
     else:
         print(f"  [WARN] Reached pagination safety cap for {sector}")
 
-    return all_occupations
+    return [], False
 
 
 def main():
@@ -236,28 +240,34 @@ def main():
             continue
 
         occupations = []
+        complete = False
         for attempt in range(max_retries):
             if attempt > 0:
                 wait = DELAY * (attempt + 1)
                 print(f"  Retry {attempt}/{max_retries} after {wait}s...")
                 time.sleep(wait)
             print(f"[{i+1}/{len(SECTORS)}] Fetching: {sector}..." + (f" (attempt {attempt+1})" if attempt else ""))
-            occupations = fetch_sector(sector, ssl_ctx)
-            if occupations or attempt == max_retries - 1:
+            occupations, complete = fetch_sector(sector, ssl_ctx)
+            if complete:
                 break
+
+        if not complete:
+            print(f"  [ERROR] Skipping incomplete sector after {max_retries} attempts: {sector}")
+            continue
 
         print(f"  Found {len(occupations)} occupations")
 
+        if complete:
+            scraped_sectors.add(sector)
         if occupations:
             all_occupations.extend(occupations)
             total_new += len(occupations)
-            scraped_sectors.add(sector)
 
-            # Save after each sector (resume-safe)
-            with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
-                json.dump(all_occupations, f, indent=2, ensure_ascii=False)
-            with open(SECTORS_FILE, "w", encoding="utf-8") as f:
-                json.dump(sorted(scraped_sectors), f)
+        # Save only completed sectors, including a legitimately empty sector.
+        with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
+            json.dump(all_occupations, f, indent=2, ensure_ascii=False)
+        with open(SECTORS_FILE, "w", encoding="utf-8") as f:
+            json.dump(sorted(scraped_sectors), f)
 
         if i < len(SECTORS) - 1:
             time.sleep(DELAY)

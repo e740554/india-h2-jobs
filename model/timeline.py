@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from collections import defaultdict
 
-from model.compute import load_archetypes
+from model.compute import _largest_remainder_split, load_archetypes
 
 
 PHASES = ("construction", "commissioning", "operations")
@@ -99,6 +99,41 @@ def _round_snapshot(snapshot: dict[str, dict[str, float]]) -> dict[str, dict[str
     return rounded
 
 
+def _round_cluster_snapshot(
+    snapshot: dict[str, dict[str, dict[str, float]]],
+) -> dict[str, dict[str, dict[str, int]]]:
+    """Round each national occupation/phase total before preserving cluster shares."""
+    rounded = {cluster_id: {} for cluster_id in snapshot}
+    contributions = defaultdict(list)
+
+    for cluster_id, cluster_snapshot in snapshot.items():
+        for occ_id, phases in cluster_snapshot.items():
+            for phase in PHASES:
+                value = phases.get(phase, 0.0)
+                if value > 0:
+                    contributions[(occ_id, phase)].append((cluster_id, value))
+
+    for (occ_id, phase), items in contributions.items():
+        total = int(round(sum(value for _, value in items)))
+        allocations = _largest_remainder_split(
+            total,
+            [value for _, value in items],
+            [cluster_id for cluster_id, _ in items],
+        )
+        for (cluster_id, _), allocation in zip(items, allocations):
+            bucket = rounded[cluster_id].setdefault(
+                occ_id,
+                {**_empty_phase_bucket(), "total": 0},
+            )
+            bucket[phase] = allocation
+
+    for cluster_snapshot in rounded.values():
+        for bucket in cluster_snapshot.values():
+            bucket["total"] = sum(bucket[phase] for phase in PHASES)
+
+    return rounded
+
+
 def compute_timeline(
     demand_records: list[dict],
     start_year: int,
@@ -149,10 +184,7 @@ def compute_timeline(
     for year in years:
         year_key = str(year)
         if has_clusters:
-            finalized[year_key] = {
-                cluster_id: _round_snapshot(cluster_snapshot)
-                for cluster_id, cluster_snapshot in timeline[year_key].items()
-            }
+            finalized[year_key] = _round_cluster_snapshot(timeline[year_key])
         else:
             finalized[year_key] = _round_snapshot(timeline[year_key])
     return finalized

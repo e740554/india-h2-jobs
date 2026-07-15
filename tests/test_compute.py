@@ -341,6 +341,22 @@ def test_compute_demand_rounds_to_integers():
     result = compute_demand(1.0, arch, occs)
     # 1.0 / 0.14 * 1 = 7.142857... -> rounds to 7
     assert result[0]["demand"] == 7
+
+
+def test_compute_demand_preserves_rounded_coefficient_total_across_occupations():
+    """Weighted allocation must not lose a worker through per-role rounding."""
+    arch = _make_archetype(
+        h2_output=1.0,
+        coefficients=[_make_coefficient(nco_group="7212", headcount=1)],
+    )
+    occs = [
+        _make_occupation(occ_id="A", nco_code="7212.0100", h2_adjacency=1, transition_demand=0),
+        _make_occupation(occ_id="B", nco_code="7212.0200", h2_adjacency=1, transition_demand=0),
+    ]
+
+    result = compute_demand(1.0, arch, occs)
+
+    assert sum(record["demand"] for record in result) == 1
     assert isinstance(result[0]["demand"], int)
 
 
@@ -518,6 +534,23 @@ def test_export_demand_csv_includes_scores():
             rows = list(reader)
         assert rows[0]["h2_adjacency"] == "8.0"
         assert rows[0]["transition_demand"] == "6.0"
+    finally:
+        os.unlink(path)
+
+
+def test_export_demand_csv_neutralizes_spreadsheet_formula_cells():
+    records = [
+        _make_demand_record(occupation_id="NCS-7212.0100", source="=cmd()"),
+    ]
+    occs = [_make_occupation(occ_id="NCS-7212.0100", title="+malicious")]
+    with tempfile.NamedTemporaryFile(mode="w", suffix=".csv", delete=False) as f:
+        path = f.name
+    try:
+        export_demand_csv(records, occs, path)
+        with open(path, newline="") as f:
+            row = next(csv.DictReader(f))
+        assert row["title"] == "'+malicious"
+        assert row["source"] == "'=cmd()"
     finally:
         os.unlink(path)
 

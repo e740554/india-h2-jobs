@@ -37,6 +37,23 @@ def test_pct_full_coverage():
     assert pct(10, 10) == 100.0
 
 
+def test_load_release_metadata_uses_version_and_changelog(tmp_path):
+    import build.build as build_module
+
+    version_file = tmp_path / "VERSION"
+    changelog_file = tmp_path / "CHANGELOG.md"
+    version_file.write_text("9.8.7.6\n", encoding="utf-8")
+    changelog_file.write_text(
+        "# Changelog\n\n## [9.8.7.6] - 2026-07-15\n",
+        encoding="utf-8",
+    )
+
+    assert build_module.load_release_metadata(str(version_file), str(changelog_file)) == (
+        "9.8.7.6",
+        "2026-07-15",
+    )
+
+
 # --- count_present / count_true ---
 
 def test_count_present_ignores_none():
@@ -88,6 +105,20 @@ def test_merge_scores_missing_occupation_gets_empty_scores():
     scores = {}
     result = merge_scores(occs, scores)
     assert result[0]["scores"] == {}
+
+
+def test_extract_score_details_removes_click_only_rationales_from_initial_records():
+    import build.build as build_module
+
+    occupations = [
+        _make_occ("OCC001", score_details={"h2_adjacency": {"score": 8.0, "rationale": "Core role"}}),
+        _make_occ("OCC002", score_details={}),
+    ]
+
+    details = build_module.extract_score_details(occupations)
+
+    assert details == {"OCC001": {"h2_adjacency": {"score": 8.0, "rationale": "Core role"}}}
+    assert all("score_details" not in occupation for occupation in occupations)
 
 
 # --- compute_upskill_paths ---
@@ -355,6 +386,25 @@ def test_write_h2_csv_includes_supply_fields(monkeypatch, tmp_path):
     assert rows[0]["supply_source"] == "PLFS 2023-24 Annual Report Table 25"
 
 
+def test_write_h2_csv_neutralizes_spreadsheet_formula_cells(monkeypatch, tmp_path):
+    import build.build as build_module
+
+    output_path = tmp_path / "h2-ready-occupations.csv"
+    monkeypatch.setattr(build_module, "OUTPUT_CSV_H2", str(output_path))
+
+    write_h2_csv([{
+        "id": "=danger",
+        "title": "@danger",
+        "scores": {"h2_adjacency": 8.0},
+    }])
+
+    with open(output_path, encoding="utf-8", newline="") as f:
+        row = next(csv.DictReader(f))
+
+    assert row["id"] == "'=danger"
+    assert row["title"] == "'@danger"
+
+
 # --- Design regression tests (DR-1, DR-2) ---
 
 PROJECT_ROOT = os.path.join(os.path.dirname(__file__), "..")
@@ -362,6 +412,47 @@ DOCS_DIR = os.path.join(PROJECT_ROOT, "docs")
 WEB_DIR = os.path.join(PROJECT_ROOT, "web")
 
 ANALYTICS_SNIPPET_MARKER = "plausible.io/js/script.js"
+
+
+def test_index_uses_the_pinned_local_d3_bundle():
+    source_path = os.path.join(WEB_DIR, "index.html")
+    source = open(source_path, "r", encoding="utf-8").read()
+
+    assert 'src="vendor/d3.v7.9.0.min.js"' in source
+    assert os.path.exists(os.path.join(WEB_DIR, "vendor", "d3.v7.9.0.min.js"))
+
+
+def test_about_source_does_not_claim_an_advisory_circle():
+    source_path = os.path.join(WEB_DIR, "about", "index.html")
+    source = open(source_path, "r", encoding="utf-8").read().lower()
+
+    assert "advisory circle" not in source
+
+
+def test_motion_styles_limit_transitions_and_respect_reduced_motion():
+    source = open(os.path.join(WEB_DIR, "style.css"), "r", encoding="utf-8").read()
+
+    assert "transition: all" not in source
+    assert "@media (prefers-reduced-motion: reduce)" in source
+    assert "animation-duration: 0.01ms" in source
+
+
+def test_tooltip_motion_uses_animation_frame_transform_updates():
+    source = open(os.path.join(WEB_DIR, "main.js.template"), "r", encoding="utf-8").read()
+
+    assert "tooltip.style.left" not in source
+    assert "tooltip.style.top" not in source
+    assert 'tooltip.style.transform = "translate3d("' in source
+    assert "global.requestAnimationFrame" in source
+
+
+def test_score_details_are_loaded_lazily_after_an_occupation_is_selected():
+    source = open(os.path.join(WEB_DIR, "main.js.template"), "r", encoding="utf-8").read()
+
+    assert 'loadJson("score-details.json")' in source
+    assert "scoreDetailsPromise" in source
+    assert "hydrateScoreDetails(occupation);" in source
+    assert "loadScoreDetails()," not in source
 
 
 def test_methodology_page_has_stylesheet_link():

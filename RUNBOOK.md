@@ -14,18 +14,13 @@ cd india-h2-jobs
 
 **Requirements:**
 - Python 3.12+ (CI target: 3.12)
-- Node.js 18+ (for test harness `tests/parity_check.js`)
+- Node.js 22+ (for the test harness and generated-JS validation)
 - Git
 
 ```powershell
 python -m venv venv
 venv\Scripts\Activate.ps1
 pip install -r requirements.txt
-```
-
-Install the Playwright browser (if running browser tests):
-```powershell
-playwright install chromium
 ```
 
 ---
@@ -55,11 +50,14 @@ python build/build.py --base-url "/workforce-atlas"
 
 ## 3. Build for Local Preview
 
-No `--base-url` flag — asset paths are relative, suitable for opening directly.
+Use an HTTP server: the app fetches JSON data and will not load correctly from a
+`file://` URL.
+
+No `--base-url` flag keeps local asset paths relative.
 
 ```powershell
 python build/build.py
-start docs\index.html
+python -m http.server 8080 --directory docs
 ```
 
 ---

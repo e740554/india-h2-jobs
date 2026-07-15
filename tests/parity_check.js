@@ -164,6 +164,57 @@ function run() {
     output = runtime.hasGapSupplyCoverage(parseJsonArg(process.argv[3]));
   } else if (command === 'export-headers') {
     output = runtime.EXPORT_HEADERS;
+  } else if (command === 'csv-escape') {
+    output = runtime.escapeCsvValue(process.argv[3]);
+  } else if (command === 'scroll-behavior') {
+    output = runtime.getScrollBehavior(process.argv[3] === 'true');
+  } else if (command === 'pathways') {
+    output = runtime.getPathwaysForOccupation(
+      process.argv[3],
+      pathways,
+      process.argv[4] || 'both'
+    );
+  } else if (command === 'gap-record') {
+    output = runtime.buildGapRecord(
+      Number(process.argv[3]),
+      Number(process.argv[4]),
+      Number(process.argv[5])
+    );
+  } else if (command === 'custom-demand-total') {
+    const input = parseJsonArg(process.argv[3]);
+    const records = runtime.computeDemandRecords(
+      Number(input.target_mt || 0),
+      input.archetype || {},
+      input.occupations || []
+    );
+    output = records.reduce((total, record) => total + Number(record.demand || 0), 0);
+  } else if (command === 'custom-clustered-timeline-total') {
+    const input = parseJsonArg(process.argv[3]);
+    const clustered = runtime.computeTimeline(
+      input.records || [],
+      Number(input.start_year),
+      Number(input.target_year),
+      input.archetypes || [],
+      Number(input.target_year)
+    );
+    const national = runtime.computeTimeline(
+      (input.records || []).map(record => {
+        const copy = { ...record };
+        delete copy.cluster_id;
+        return copy;
+      }),
+      Number(input.start_year),
+      Number(input.target_year),
+      input.archetypes || [],
+      Number(input.target_year)
+    );
+    const year = String(input.year);
+    output = {
+      national: Number(national[year]['OCC-1'].construction || 0),
+      clustered: Object.keys(clustered[year]).reduce((total, clusterId) => {
+        return total + Number(clustered[year][clusterId]['OCC-1'].construction || 0);
+      }, 0),
+    };
   } else if (command === 'parse-lens') {
     var lensWhitelist = { maritime: 'Shipping' };
     var raw = process.argv[3] || '';
