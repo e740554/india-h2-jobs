@@ -118,6 +118,8 @@ PAGE_VARS = {
         "mode_toggle_block": "",
         "download_block": "",
         "footer_secondary": _FOOTER_SECONDARY_STATIC,
+        "dataset_version": DATASET_VERSION,
+        "dataset_updated_label": DATASET_UPDATED_LABEL,
     },
     "about/index.html": {
         "rel_root": "..",

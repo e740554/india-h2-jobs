@@ -202,6 +202,14 @@ Current follow-up work is mainly dataset enrichment and UI polish rather than mi
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for the contributor workflow.
 
+## Citing
+
+Suggested citation:
+
+> Ekavikalp Pvt Ltd (Sharma, E.). India H₂ Workforce Atlas, dataset v1.4.3.2, updated July 2026. https://hygoat.in/workforce-atlas
+
+Machine-readable citation metadata (BibTeX, CFF) is available in [CITATION.cff](CITATION.cff).
+
 ## License
 
 MIT. See [LICENSE](LICENSE).
