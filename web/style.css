@@ -247,6 +247,7 @@ body {
 
 .metric {
   text-align: center;
+  position: relative;
 }
 
 .metric-value {
@@ -268,20 +269,37 @@ body {
   font-weight: 500;
 }
 
+/* Real <button> with native chrome reset, not a bare span: the note it opens
+   is a role="tooltip" DOM node so assistive tech can actually read it. */
 .tooltip-trigger {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  padding: 0 0 0 1px;
+  font: inherit;
+  line-height: 1;
   cursor: help;
   color: var(--color-goat);
   font-weight: 700;
 }
 
-.tooltip-trigger:hover::after {
-  content: attr(data-tooltip);
+.tooltip-trigger:focus-visible {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+.tooltip-note {
   position: absolute;
+  left: 50%;
+  top: 100%;
+  transform: translateX(-50%);
   background: var(--nav-bg);
   color: var(--nav-text);
   padding: 12px;
   border-radius: 8px;
   font-size: 0.75rem;
+  width: max-content;
   max-width: 300px;
   z-index: 200;
   margin-top: 8px;
@@ -289,6 +307,11 @@ body {
   font-weight: 400;
   text-transform: none;
   letter-spacing: 0;
+  text-align: left;
+}
+
+.tooltip-note[hidden] {
+  display: none;
 }
 
 .controls-search {

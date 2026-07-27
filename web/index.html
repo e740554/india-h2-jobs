@@ -21,7 +21,11 @@
     </div>
     <div class="metric">
       <span class="metric-value" id="metricGap">--</span>
-      <span class="metric-label">Indicative Gap by 2030<span class="tooltip-trigger" data-tooltip="Uses PLFS 2023-24 Annual Report Table 25 NCO subdivision-allocated supply. Indicative, not occupation-observed.">*</span></span>
+      <!-- The note trigger sits OUTSIDE .metric-label on purpose: updateScenarioMetrics()
+           and restoreAtlasMetrics() rewrite that span's textContent on every mode switch,
+           which used to destroy the footnote marker. -->
+      <span class="metric-label">Indicative Gap by 2030</span><button type="button" class="tooltip-trigger" id="gapNoteTrigger" aria-describedby="gapNote"><span aria-hidden="true">*</span><span class="sr-only">About the indicative gap estimate</span></button>
+      <span class="tooltip-note" id="gapNote" role="tooltip" hidden>Uses PLFS 2023-24 Annual Report Table 25 NCO subdivision-allocated supply. Indicative, not occupation-observed.</span>
     </div>
     <div class="metric">
       <span class="metric-value" id="metricUpskill">--</span>

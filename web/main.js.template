@@ -2097,6 +2097,7 @@
     if (upskillLabel) {
       upskillLabel.textContent = savedMetricLabels.upskill;
     }
+    setGapNoteAvailable(true);
     updateSummary();
     const context = document.getElementById("scenarioContext");
     if (context) {
@@ -2322,6 +2323,9 @@
 
     metricH2Ready.textContent = Number(currentSnapshotSummary.occupationCount || 0).toLocaleString();
     metricGap.classList.remove("metric-value-muted");
+    // The PLFS supply note describes the atlas gap metric only; in scenario and
+    // gap modes this slot shows snapshot demand or shortage counts instead.
+    setGapNoteAvailable(false);
 
     if (metricH2Label) {
       metricH2Label.textContent = "Occupations in Demand";
@@ -3463,6 +3467,52 @@
     });
   }
 
+  function setGapNoteAvailable(available) {
+    const trigger = document.getElementById("gapNoteTrigger");
+    const note = document.getElementById("gapNote");
+    if (trigger) {
+      trigger.hidden = !available;
+    }
+    if (note && !available) {
+      note.hidden = true;
+    }
+  }
+
+  // W3C APG tooltip pattern: real DOM wired through aria-describedby, reachable
+  // by hover, focus, and tap, dismissible with Escape. CSS ::after content is
+  // not reliably exposed to assistive tech, which is why the note is a node.
+  function setupGapNote() {
+    const trigger = document.getElementById("gapNoteTrigger");
+    const note = document.getElementById("gapNote");
+    if (!trigger || !note) {
+      return;
+    }
+
+    function show() {
+      note.hidden = false;
+    }
+
+    function hide() {
+      note.hidden = true;
+    }
+
+    trigger.addEventListener("mouseenter", show);
+    trigger.addEventListener("mouseleave", hide);
+    trigger.addEventListener("focus", show);
+    trigger.addEventListener("blur", hide);
+    trigger.addEventListener("click", function () {
+      note.hidden = !note.hidden;
+    });
+    trigger.addEventListener("keydown", function (event) {
+      if (event.key === "Escape" && !note.hidden) {
+        event.stopPropagation();
+        hide();
+      }
+    });
+    note.addEventListener("mouseenter", show);
+    note.addEventListener("mouseleave", hide);
+  }
+
   function setupSearch() {
     const input = document.getElementById("occupationSearch");
     if (!input) {
@@ -4222,6 +4272,7 @@
       setupSectorToggle();
       setupSectorFilter();
       setupSearch();
+      setupGapNote();
       setupDownloads();
 
       var sidebarEl = document.getElementById("sidebar");
