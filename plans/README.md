@@ -15,6 +15,7 @@ self-contained and must stay within its stated scope.
 | 005 | Repair operator and public-copy drift | P2 | S | 003 | TODO |
 | 006 | Defer click-only score detail payloads | P2 | M | 001 | TODO |
 | 007 | Make high-frequency interaction motion crisp | P2 | M | 001 | TODO |
+| 010 | Briefing pack -- print-ready, citable one-pager | P1 | M | none | DONE |
 
 Status values: TODO | IN PROGRESS | DONE | BLOCKED (with reason) | REJECTED.
 
