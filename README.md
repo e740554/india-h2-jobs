@@ -181,6 +181,7 @@ Every coefficient the model multiplies by is published with its source, source t
 
 | Version | Date | Scope |
 |---------|------|-------|
+| `v1.4.5.0` | 2026-07-28 | Usability: occupation search by title/NCO code/sector filtering the render rather than the scope, search-aware empty states with pre-checked tier escalation, keyboard- and AT-reachable gap footnote, duplicated phase legend removed, tier-accurate loading copy, display tracking, touch hover gating |
 | `v1.4.4.0` | 2026-07-28 | Institutional credibility: `CITATION.cff` and methodology cite block, briefing print view, assumptions register export, state summary export with honest cluster-rollup labeling, NQR/NCVET join spike |
 | `v1.4.3.2` | 2026-07-15 | Summary freshness badge bound to release metadata, preventing footer/badge version drift |
 | `v1.4.3.1` | 2026-07-15 | Portable canonical/mirror asset loading, deterministic CSV line endings, production-build CI parity, and dual-URL deployment smoke coverage |
@@ -219,7 +220,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for the contributor workflow.
 
 Suggested citation:
 
-> Ekavikalp Pvt Ltd (Sharma, E.). India H₂ Workforce Atlas, dataset v1.4.4.0, updated July 2026. https://hygoat.in/workforce-atlas
+> Ekavikalp Pvt Ltd (Sharma, E.). India H₂ Workforce Atlas, dataset v1.4.5.0, updated July 2026. https://hygoat.in/workforce-atlas
 
 Machine-readable citation metadata (BibTeX, CFF) is available in [CITATION.cff](CITATION.cff). No DOI is minted yet; the `doi:` field is deliberately commented out rather than guessed.
 

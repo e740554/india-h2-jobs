@@ -2,6 +2,34 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.4.5.0] - 2026-07-28
+
+Usability release. The data model and runtime were mature; the interaction layer had not kept pace. Closes the largest gap -- there was no way to find a named occupation -- plus the accessibility and copy defects found alongside it.
+
+### Added
+- **Occupation search** on the Atlas page, matching title, NCO code, or sector. Tokenised AND matching, so a two-word query narrows rather than widens. Previously the only route to a specific role was visually scanning treemap cells, which are sized by composite score -- a low-scoring role is a near-invisible sliver in the 1,802-occupation tier.
+- **Search-aware empty states.** A miss takes precedence over the existing scenario copy, which is written around zero demand in a geography and would otherwise claim there is no workforce demand in All India on a failed find. From the focus tier the escalation offer is pre-checked against the sector dataset so the button is never a dead end; from the sector tier it reuses the existing async load path.
+
+### Changed
+- **Search filters the render, never the scope.** `getDisplayOccupations()` resolves tier, ghosts, and focus and still feeds the headline metrics; the new `getRenderedOccupations()` applies the query one layer later and feeds only the treemap and the filter indicator. Typing therefore never rewrites `#metricH2Ready` or `#metricUpskill`, which are national statistics rather than properties of a transient find.
+- Tier transitions run through a single shared `setViewTier()`, so the sector toggle's label and active state can no longer drift out of sync with the tier on screen.
+- The filter indicator has one source of truth, replacing two call sites that read different sources and disagreed in scenario mode. It mirrors into the existing `aria-live` region only around search activity.
+- Input is coalesced with `requestAnimationFrame` -- not a debounce, so no artificial latency is added, but a full SVG rebuild happens at most once per frame. No enter animation on re-render.
+- Loading copy no longer claims "1,802 occupations" when the default view is the ~64 focus set.
+- The sidebar empty state now orients a first-time visitor and surfaces the treemap's arrow-key navigation, which was otherwise undiscoverable. Phrased mode-neutrally, because cell area means composite H₂ relevance in atlas mode and modelled demand in scenario mode.
+- `.metric-value` takes negative tracking, completing a discipline `.metric-label` already applied in the converse direction for small uppercase text.
+- Four `:hover` rules gated behind `@media (hover: hover) and (pointer: fine)` so the state does not stick after a tap. The remaining ungated rules are noted for a follow-up sweep rather than silently half-fixed.
+
+### Fixed
+- **The gap-metric footnote is reachable by keyboard and assistive tech.** It was a hover-only `::after` on a non-focusable span, so the caveat that the figure is indicative rather than occupation-observed was invisible to anyone not using a mouse. Now follows the W3C APG tooltip pattern: a real button with an accessible name, a real `role="tooltip"` node wired through `aria-describedby`, and hover, focus, tap, and Escape handling.
+- The same footnote was being destroyed on the first entry into scenario mode and never returned, because its trigger lived inside `.metric-label`, whose `textContent` is rewritten on every mode switch. It is now a sibling, and is hidden in scenario and gap modes where that slot shows snapshot demand or shortage counts and the PLFS supply note does not apply.
+- Removed a duplicated phase legend that rendered the four swatches twice in the scenario bar. The banner's provenance caveat is untouched.
+
+### Tests
+- `tests/test_ui_logic.py`: search matching (token AND, case-insensitivity, NCO code and sector hits, empty-query passthrough, no-match) and `getEscalationTarget()` across all four tier and mode branches.
+- A source-level invariant test pinning the scope-vs-find split: `getDisplayOccupations()` must not read the query, `buildTreemap()` must render the filtered list, and the metric loop must count the unfiltered scope. Three assertions, because any one alone is defeatable by a refactor.
+- `tests/parity_check.js`: `search-match` and `escalation-target` commands.
+
 ## [1.4.4.0] - 2026-07-28
 
 Institutional-credibility release. Makes the atlas citable, printable, and inspectable for the people it is aimed at: skilling-programme planners at NSDC and MSDE, state skill missions, and ministry analysts who circulate documents rather than URLs.
