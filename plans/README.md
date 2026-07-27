@@ -1,8 +1,10 @@
 # Implementation Plans
 
-Generated against commit `273a4c1` on 2026-07-15. The active goal covers every
-vetted audit finding and the motion pass. Execute in this order; each plan is
-self-contained and must stay within its stated scope.
+Plans 001-007 were generated against commit `273a4c1` on 2026-07-15 (audit
+hardening and motion pass). Plans 008-012 were generated against commit
+`5e754d2` on 2026-07-27 (direction pass: make the atlas useful to skilling
+institutions -- NSDC, MSDE, state skill missions). Execute in this order;
+each plan is self-contained and must stay within its stated scope.
 
 ## Execution order and status
 
@@ -15,6 +17,11 @@ self-contained and must stay within its stated scope.
 | 005 | Repair operator and public-copy drift | P2 | S | 003 | TODO |
 | 006 | Defer click-only score detail payloads | P2 | M | 001 | TODO |
 | 007 | Make high-frequency interaction motion crisp | P2 | M | 001 | TODO |
+| 008 | Make the atlas citable (CITATION.cff, cite block, sync test) | P1 | S | none (soft: 003) | DONE |
+| 009 | Spike the NCVET/NQR qualification layer | P1 | M | none | TODO |
+| 010 | Briefing pack: print-ready one-pager from the live view | P1 | M | none (soft: 008) | TODO |
+| 011 | Assumptions register: export every coefficient with source | P2 | M | none (soft: 008) | TODO |
+| 012 | State views: honest labeling, state summary export, design note | P2 | M | none | TODO |
 
 Status values: TODO | IN PROGRESS | DONE | BLOCKED (with reason) | REJECTED.
 
@@ -27,6 +34,21 @@ Status values: TODO | IN PROGRESS | DONE | BLOCKED (with reason) | REJECTED.
   `docs/` artifacts.
 - Plan 007 preserves the dashboard's crisp, institutional character; it must
   not add decorative motion to frequent controls.
+- Plan 008 is standalone and cheapest; do it first among the direction plans.
+  Plan 003 (reproducible releases) strengthens DOI-per-release later but does
+  not block 008.
+- Plan 009 is a spike: data + feasibility report only, no runtime or UI
+  integration. The integration plan gets scoped from its report.
+- Plan 010 reuses Plan 008's citation sentence if 008 landed first; otherwise
+  it composes the same sentence itself. Plan 009's qualification data is a
+  future enrichment of the briefing table, not a dependency.
+- Plan 011's override feature is design-note-only; if it is ever built, Plan
+  010's briefing sheet must watermark user-modified runs.
+- Plan 012's full state layer (Option C in its design note) depends on the
+  `TODOS.md` unit-level PLFS rebuild; only the labeling + export slice is
+  buildable now.
+- Plans 002 and 006/007 touch `web/main.js.template`; so do 010 and 012.
+  Avoid executing them concurrently on the same branch.
 
 ## Findings considered and rejected
 
@@ -39,3 +61,12 @@ Status values: TODO | IN PROGRESS | DONE | BLOCKED (with reason) | REJECTED.
   limits the fix to coalescing high-frequency updates.
 - Founder-owned uncommitted deletion of the Phase 3 design document is outside
   this backlog; do not restore, stage, or remove it.
+- (2026-07-27 direction pass) MNRE skilling-proposal alignment as a repo
+  feature: rejected as a separate plan -- it is a founder/business action;
+  the repo-side enabler is the Plan 010 briefing pack.
+- (2026-07-27 direction pass) Adding non-cluster states to the geography
+  dropdown: rejected -- they would show zero demand and mislead; Plan 012's
+  design note covers the correct path.
+- (2026-07-27 direction pass) In-UI coefficient override sliders: deferred to
+  a design note (Plan 011 Step 4) -- misattribution risk needs the watermark
+  design settled before any build.

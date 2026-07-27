@@ -1,0 +1,25 @@
+cff-version: 1.2.0
+message: "If you use this software or dataset, please cite it as below."
+title: "India H2 Workforce Atlas"
+type: software
+version: 1.4.3.2
+date-released: 2026-07-15
+url: "https://hygoat.in/workforce-atlas"
+repository-code: "https://github.com/e740554/india-h2-jobs"
+license: MIT
+authors:
+  - name: "Ekavikalp Pvt Ltd"
+  - family-names: "Sharma"
+    given-names: "Ekansh"
+# doi: pending -- founder mints via Zenodo GitHub integration on next tagged release
+preferred-citation:
+  type: dataset
+  title: "India H2 Workforce Atlas"
+  version: 1.4.3.2
+  date-released: 2026-07-15
+  url: "https://hygoat.in/workforce-atlas"
+  repository-code: "https://github.com/e740554/india-h2-jobs"
+  authors:
+    - name: "Ekavikalp Pvt Ltd"
+    - family-names: "Sharma"
+      given-names: "Ekansh"
