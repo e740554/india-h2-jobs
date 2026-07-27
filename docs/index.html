@@ -49,7 +49,11 @@
     </div>
     <div class="metric">
       <span class="metric-value" id="metricGap">--</span>
-      <span class="metric-label">Indicative Gap by 2030<span class="tooltip-trigger" data-tooltip="Uses PLFS 2023-24 Annual Report Table 25 NCO subdivision-allocated supply. Indicative, not occupation-observed.">*</span></span>
+      <!-- The note trigger sits OUTSIDE .metric-label on purpose: updateScenarioMetrics()
+           and restoreAtlasMetrics() rewrite that span's textContent on every mode switch,
+           which used to destroy the footnote marker. -->
+      <span class="metric-label">Indicative Gap by 2030</span><button type="button" class="tooltip-trigger" id="gapNoteTrigger" aria-describedby="gapNote"><span aria-hidden="true">*</span><span class="sr-only">About the indicative gap estimate</span></button>
+      <span class="tooltip-note" id="gapNote" role="tooltip" hidden>Uses PLFS 2023-24 Annual Report Table 25 NCO subdivision-allocated supply. Indicative, not occupation-observed.</span>
     </div>
     <div class="metric">
       <span class="metric-value" id="metricUpskill">--</span>
@@ -62,6 +66,11 @@
   <p class="atlas-subtitle">India's 1,802 occupations scored against the H₂ economy.</p>
 
   <div class="controls">
+    <div class="controls-search">
+      <label class="sr-only" for="occupationSearch">Search occupations</label>
+      <input type="search" id="occupationSearch" class="search-input" autocomplete="off" spellcheck="false"
+             placeholder="Search occupations, NCO code, or sector">
+    </div>
     <span class="controls-label">Colour by:</span>
     <div class="pills" id="dimensionPills">
       <button class="pill active" data-dim="h2_adjacency">H2 Adjacency</button>
@@ -102,12 +111,6 @@
     <div class="scenario-context-bar" id="scenarioContext"></div>
     <div class="scenario-context-bar" id="stateRollupCaveat" hidden></div>
     <div class="scenario-context-bar sr-only" id="summaryAnnouncer" aria-live="polite"></div>
-    <div class="phase-legend">
-      <span class="phase-legend-item"><span class="legend-swatch" style="background:#3b82f6"></span>Construction</span>
-      <span class="phase-legend-item"><span class="legend-swatch" style="background:#8b5cf6"></span>Commissioning</span>
-      <span class="phase-legend-item"><span class="legend-swatch" style="background:#0d9488"></span>Operations</span>
-      <span class="phase-legend-item"><span class="legend-swatch" style="background:#6b7280"></span>Mixed</span>
-    </div>
     <div class="scenario-ghost-toggle">
       <label><input type="checkbox" id="showGhosts"> Show unmapped occupations</label>
     </div>
@@ -121,7 +124,7 @@
     <div class="treemap-container" id="treemapContainer">
       <div id="treemap">
         <div id="slowLoad" class="treemap-empty" style="display:flex; align-items:center; justify-content:center; color:var(--text-muted);">
-          Loading 1,802 occupations…
+          Loading occupations…
         </div>
       </div>
       <div id="tooltip" class="tooltip"></div>
@@ -129,7 +132,10 @@
     <aside class="sidebar" id="sidebar">
       <!-- verified sidebar-aligned per plan line 12: sector-select sits in sidebar, not .controls-right -->
       <select id="sectorFilter" class="scenario-select" style="display:none" aria-label="Filter by sector"></select>
-      <div class="sidebar-empty">Click an occupation to see details</div>
+      <div class="sidebar-empty">
+        <p>Select a cell to see that occupation's scores, wage and employment data, and upskilling pathways.</p>
+        <p>Use the arrow keys to move between cells. The legend below the treemap explains the colours.</p>
+      </div>
       <div class="sidebar-content" id="sidebarContent" style="display:none">
         <div class="sidebar-header" id="sidebarHeader">
           <h2 id="sbTitle"></h2>

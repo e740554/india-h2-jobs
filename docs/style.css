@@ -247,6 +247,7 @@ body {
 
 .metric {
   text-align: center;
+  position: relative;
 }
 
 .metric-value {
@@ -254,6 +255,9 @@ body {
   font-size: 2rem;
   font-weight: 700;
   color: var(--accent);
+  /* Large display type needs negative tracking; .metric-label takes the
+     converse (+0.05em) because it is small and uppercase. */
+  letter-spacing: -0.02em;
 }
 
 .metric-value-muted {
@@ -268,20 +272,37 @@ body {
   font-weight: 500;
 }
 
+/* Real <button> with native chrome reset, not a bare span: the note it opens
+   is a role="tooltip" DOM node so assistive tech can actually read it. */
 .tooltip-trigger {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  padding: 0 0 0 1px;
+  font: inherit;
+  line-height: 1;
   cursor: help;
   color: var(--color-goat);
   font-weight: 700;
 }
 
-.tooltip-trigger:hover::after {
-  content: attr(data-tooltip);
+.tooltip-trigger:focus-visible {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+.tooltip-note {
   position: absolute;
+  left: 50%;
+  top: 100%;
+  transform: translateX(-50%);
   background: var(--nav-bg);
   color: var(--nav-text);
   padding: 12px;
   border-radius: 8px;
   font-size: 0.75rem;
+  width: max-content;
   max-width: 300px;
   z-index: 200;
   margin-top: 8px;
@@ -289,6 +310,38 @@ body {
   font-weight: 400;
   text-transform: none;
   letter-spacing: 0;
+  text-align: left;
+}
+
+.tooltip-note[hidden] {
+  display: none;
+}
+
+.controls-search {
+  display: flex;
+  align-items: center;
+}
+
+.search-input {
+  width: 260px;
+  max-width: 100%;
+  padding: 6px 14px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-full);
+  background: transparent;
+  color: var(--text);
+  font-family: inherit;
+  font-size: 0.8rem;
+}
+
+.search-input::placeholder {
+  color: var(--text-muted);
+}
+
+.search-input:focus-visible {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+  border-color: var(--accent);
 }
 
 .controls {
@@ -353,9 +406,12 @@ body {
   transition: border-color var(--duration-fast) var(--ease-out), background-color var(--duration-fast) var(--ease-out), color var(--duration-fast) var(--ease-out), transform var(--duration-fast) var(--ease-out);
 }
 
-.btn-toggle:hover {
-  border-color: var(--accent);
-  color: var(--accent);
+/* Gated so the hover state does not stick after a tap on touch devices. */
+@media (hover: hover) and (pointer: fine) {
+  .btn-toggle:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
 }
 
 .btn-toggle.active {
@@ -388,9 +444,11 @@ body {
   transition: border-color var(--duration-fast) var(--ease-out), background-color var(--duration-fast) var(--ease-out), color var(--duration-fast) var(--ease-out), transform var(--duration-fast) var(--ease-out);
 }
 
-.pill:hover {
-  border-color: var(--accent);
-  color: var(--accent);
+@media (hover: hover) and (pointer: fine) {
+  .pill:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
 }
 
 .pill.active {
@@ -443,8 +501,10 @@ body {
   transition: opacity 0.2s;
 }
 
-#treemap rect:hover {
-  opacity: 0.85;
+@media (hover: hover) and (pointer: fine) {
+  #treemap rect:hover {
+    opacity: 0.85;
+  }
 }
 
 #treemap svg:focus-visible {
@@ -514,8 +574,20 @@ body {
   padding: 4px 0;
 }
 
-.treemap-empty-action:hover {
-  color: var(--color-goat-dark);
+@media (hover: hover) and (pointer: fine) {
+  .treemap-empty-action:hover {
+    color: var(--color-goat-dark);
+  }
+}
+
+.treemap-empty-action:focus-visible {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}
+
+.treemap-empty-action:disabled {
+  opacity: 0.7;
+  cursor: wait;
 }
 
 .sidebar {
@@ -575,6 +647,16 @@ body {
   text-align: center;
   padding: 48px 16px;
   font-size: 0.9rem;
+}
+
+.sidebar-empty p {
+  line-height: 1.5;
+  max-width: 34ch;
+  margin: 0 auto;
+}
+
+.sidebar-empty p + p {
+  margin-top: 10px;
 }
 
 .sidebar h2 {
@@ -1074,22 +1156,6 @@ body {
   line-height: 1.45;
 }
 
-.phase-legend {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  padding: 0 24px 10px;
-}
-
-.phase-legend-item {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  color: var(--text-muted);
-  font-size: 0.76rem;
-  font-weight: 600;
-}
-
 .scenario-ghost-toggle {
   padding: 0 24px 8px;
   font-size: 0.8rem;
@@ -1401,6 +1467,14 @@ body {
     padding: 12px 16px;
   }
 
+  .controls-search {
+    width: 100%;
+  }
+
+  .search-input {
+    width: 100%;
+  }
+
   .data-status {
     padding: 10px 16px;
   }
@@ -1435,7 +1509,6 @@ body {
   }
 
   .scenario-context-bar,
-  .phase-legend,
   .csv-progress {
     padding-left: 16px;
     padding-right: 16px;
