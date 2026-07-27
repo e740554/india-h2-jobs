@@ -1111,22 +1111,6 @@ body {
   line-height: 1.45;
 }
 
-.phase-legend {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  padding: 0 24px 10px;
-}
-
-.phase-legend-item {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  color: var(--text-muted);
-  font-size: 0.76rem;
-  font-weight: 600;
-}
-
 .scenario-ghost-toggle {
   padding: 0 24px 8px;
   font-size: 0.8rem;
@@ -1480,7 +1464,6 @@ body {
   }
 
   .scenario-context-bar,
-  .phase-legend,
   .csv-progress {
     padding-left: 16px;
     padding-right: 16px;
