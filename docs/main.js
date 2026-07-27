@@ -1291,6 +1291,97 @@
       return rows;
     }
 
+    function buildBriefingModel(input) {
+      const opts = input || {};
+      const scenario = opts.scenario || {};
+      const datasetVersion = opts.datasetVersion || "";
+      const datasetUpdatedLabel = opts.datasetUpdatedLabel || "";
+      const regionLabel = opts.regionLabel || "All India (National)";
+      const year = opts.year != null ? opts.year : "";
+      const mode = opts.mode || "atlas";
+      const modeLabel = mode === "gap" ? "Gap" : (mode === "scenario" ? "Scenario" : "Atlas");
+      const scenarioLabel = scenario.label || scenario.id || "";
+
+      const subtitleParts = [];
+      if (scenarioLabel) {
+        subtitleParts.push(scenarioLabel);
+      }
+      subtitleParts.push(regionLabel);
+      subtitleParts.push(String(year));
+      subtitleParts.push(modeLabel + " mode");
+
+      const generatedLine =
+        "Dataset v" + datasetVersion + ", updated " + datasetUpdatedLabel + ". Indicative research estimates.";
+
+      const citationLine =
+        "Ekavikalp Pvt Ltd (Sharma, E.). India H2 Workforce Atlas, dataset v" + datasetVersion +
+        ", updated " + datasetUpdatedLabel + ". https://hygoat.in/workforce-atlas";
+
+      const DEMAND_LIMIT = 15;
+      const rawDemandRows = (opts.demandRows || []).slice().sort(function (left, right) {
+        return Number(right.demand || 0) - Number(left.demand || 0);
+      });
+      const demandRows = rawDemandRows.slice(0, DEMAND_LIMIT).map(function (row) {
+        const total = Number(row.demand || 0);
+        return {
+          title: row.title || "",
+          nco_code: row.nco_code || "",
+          demand: total,
+          phase_dominant: dominantPhase({
+            construction: row.construction,
+            commissioning: row.commissioning,
+            operations: row.operations,
+            total: total,
+          }),
+        };
+      });
+      const demandOmittedCount = Math.max(0, rawDemandRows.length - DEMAND_LIMIT);
+
+      const phaseTotalsInput = opts.phaseTotals || {};
+      const phaseTotals = PHASES.map(function (phase) {
+        return { phase: phase, headcount: Number(phaseTotalsInput[phase] || 0) };
+      });
+
+      let gapSummary = null;
+      if (mode === "gap" && opts.gapSummary) {
+        gapSummary = {
+          supply_total: Number(opts.gapSummary.supply_total || 0),
+          demand_total: Number(opts.gapSummary.demand_total || 0),
+          gap_total: Number(opts.gapSummary.gap_total || 0),
+          caveat: "Supply estimates are PLFS 2023-24 subdivision-allocated estimates; indicative, not occupation-observed.",
+        };
+      }
+
+      const PATHWAY_LIMIT = 5;
+      const rawPathways = (opts.pathways || []).slice().sort(function (left, right) {
+        if (Number(right.skill_overlap || 0) !== Number(left.skill_overlap || 0)) {
+          return Number(right.skill_overlap || 0) - Number(left.skill_overlap || 0);
+        }
+        return Number(left.reskill_months || 0) - Number(right.reskill_months || 0);
+      });
+      const pathwayHighlights = rawPathways.slice(0, PATHWAY_LIMIT).map(function (pathway) {
+        return {
+          source_title: pathway.source_title || "",
+          target_title: pathway.target_title || "",
+          months: Number(pathway.reskill_months || 0),
+          overlap: Number(pathway.skill_overlap || 0),
+        };
+      });
+
+      return {
+        title: "India H2 Workforce Atlas -- Briefing",
+        subtitle: subtitleParts.join(" · "),
+        generatedLine: generatedLine,
+        citationLine: citationLine,
+        demandRows: demandRows,
+        demandOmittedCount: demandOmittedCount,
+        phaseTotals: phaseTotals,
+        gapSummary: gapSummary,
+        pathwayHighlights: pathwayHighlights,
+        methodologyUrl: resolveAssetUrl("methodology/", opts.pageBaseUri),
+      };
+    }
+
     return {
       PHASES: PHASES,
       PHASE_COLOURS: PHASE_COLOURS,
@@ -1333,6 +1424,7 @@
       buildExportRow: buildExportRow,
       buildViewRows: buildViewRows,
       buildFullSnapshotRows: buildFullSnapshotRows,
+      buildBriefingModel: buildBriefingModel,
     };
   }
 
@@ -3162,6 +3254,248 @@
     }
   }
 
+  function collectBriefingDemandRows(occupations) {
+    if (!demandResults) {
+      return [];
+    }
+    return occupations.map(function (occupation) {
+      const record = demandResults[occupation.id] || { demand: 0, phases: {} };
+      const phases = record.phases || {};
+      return {
+        title: occupation.title,
+        nco_code: occupation.nco_code,
+        demand: Number(record.demand || 0),
+        construction: Number(phases.construction || 0),
+        commissioning: Number(phases.commissioning || 0),
+        operations: Number(phases.operations || 0),
+      };
+    });
+  }
+
+  function collectBriefingGapSummary(occupations) {
+    if (!gapMode || !gapResults) {
+      return null;
+    }
+    let supplyTotal = 0;
+    let demandTotal = 0;
+    let gapTotal = 0;
+    for (let i = 0; i < occupations.length; i += 1) {
+      const record = gapResults[occupations[i].id];
+      if (!record) {
+        continue;
+      }
+      demandTotal += Number(record.demand || 0);
+      if (record.supply != null) {
+        supplyTotal += Number(record.supply || 0);
+        gapTotal += Number(record.gap || 0);
+      }
+    }
+    return { supply_total: supplyTotal, demand_total: demandTotal, gap_total: gapTotal };
+  }
+
+  function collectBriefingPathways(occupations) {
+    const seen = Object.create(null);
+    const results = [];
+    for (let i = 0; i < occupations.length; i += 1) {
+      const ncoCode = occupations[i].nco_code;
+      if (!ncoCode) {
+        continue;
+      }
+      const matches = Runtime.getPathwaysForOccupation(ncoCode, pathwayData, "both");
+      for (let j = 0; j < matches.length; j += 1) {
+        const pathway = matches[j];
+        const key = String(pathway.source_nco) + "::" + String(pathway.target_nco);
+        if (!seen[key]) {
+          seen[key] = true;
+          results.push(pathway);
+        }
+      }
+    }
+    return results;
+  }
+
+  function collectBriefingInput() {
+    const occupations = getDisplayOccupations();
+    const scenario = getActiveScenario();
+    const updated = data && data.last_updated ? new Date(data.last_updated) : null;
+    const datasetUpdatedLabel = updated
+      ? updated.toLocaleDateString("en-US", { month: "long", year: "numeric" })
+      : "";
+
+    return {
+      scenario: scenario ? { id: scenario.id, label: scenario.name } : {},
+      datasetVersion: (data && data.dataset_version) || "",
+      datasetUpdatedLabel: datasetUpdatedLabel,
+      regionLabel: Runtime.toRegionLabel(selectedRegionValue, clustersData),
+      year: selectedYear,
+      mode: activeMode,
+      pageBaseUri: document.baseURI || BASE_URL,
+      demandRows: collectBriefingDemandRows(occupations),
+      phaseTotals: currentSnapshotSummary.byPhase || {},
+      gapSummary: collectBriefingGapSummary(occupations),
+      pathways: collectBriefingPathways(occupations),
+    };
+  }
+
+  function appendBriefingRow(tbody, cells) {
+    const tr = document.createElement("tr");
+    for (let i = 0; i < cells.length; i += 1) {
+      const td = document.createElement("td");
+      td.textContent = cells[i];
+      tr.appendChild(td);
+    }
+    tbody.appendChild(tr);
+  }
+
+  function appendBriefingTableHead(table, labels) {
+    const thead = document.createElement("thead");
+    const row = document.createElement("tr");
+    labels.forEach(function (label) {
+      const th = document.createElement("th");
+      th.textContent = label;
+      row.appendChild(th);
+    });
+    thead.appendChild(row);
+    table.appendChild(thead);
+  }
+
+  function renderBriefingSheet(model) {
+    const sheet = document.getElementById("briefingSheet");
+    if (!sheet) {
+      return;
+    }
+    sheet.textContent = "";
+
+    const heading = document.createElement("h1");
+    heading.textContent = model.title;
+    sheet.appendChild(heading);
+
+    const subtitle = document.createElement("p");
+    subtitle.className = "briefing-subtitle";
+    subtitle.textContent = model.subtitle;
+    sheet.appendChild(subtitle);
+
+    const generated = document.createElement("p");
+    generated.className = "briefing-generated";
+    generated.textContent = model.generatedLine;
+    sheet.appendChild(generated);
+
+    const demandTable = document.createElement("table");
+    demandTable.className = "briefing-table briefing-demand-table";
+    const demandCaption = document.createElement("caption");
+    demandCaption.textContent = model.demandOmittedCount > 0
+      ? "Top " + model.demandRows.length + " occupations by demand (" + model.demandOmittedCount + " more not shown)"
+      : "Occupations by demand";
+    demandTable.appendChild(demandCaption);
+    appendBriefingTableHead(demandTable, ["Occupation", "NCO code", "Demand", "Dominant phase"]);
+    const demandBody = document.createElement("tbody");
+    model.demandRows.forEach(function (row) {
+      appendBriefingRow(demandBody, [row.title, row.nco_code, row.demand.toLocaleString(), row.phase_dominant]);
+    });
+    demandTable.appendChild(demandBody);
+    sheet.appendChild(demandTable);
+
+    const phaseTable = document.createElement("table");
+    phaseTable.className = "briefing-table briefing-phase-table";
+    const phaseCaption = document.createElement("caption");
+    phaseCaption.textContent = "Phase totals";
+    phaseTable.appendChild(phaseCaption);
+    appendBriefingTableHead(phaseTable, ["Phase", "Headcount"]);
+    const phaseBody = document.createElement("tbody");
+    model.phaseTotals.forEach(function (entry) {
+      appendBriefingRow(phaseBody, [entry.phase, entry.headcount.toLocaleString()]);
+    });
+    phaseTable.appendChild(phaseBody);
+    sheet.appendChild(phaseTable);
+
+    if (model.gapSummary) {
+      const gapHeading = document.createElement("h2");
+      gapHeading.textContent = "Gap summary";
+      sheet.appendChild(gapHeading);
+
+      const dl = document.createElement("dl");
+      dl.className = "briefing-gap-summary";
+      [
+        ["Total supply", model.gapSummary.supply_total.toLocaleString()],
+        ["Total demand", model.gapSummary.demand_total.toLocaleString()],
+        ["Total gap", model.gapSummary.gap_total.toLocaleString()],
+        ["Caveat", model.gapSummary.caveat],
+      ].forEach(function (entry) {
+        const dt = document.createElement("dt");
+        dt.textContent = entry[0];
+        const dd = document.createElement("dd");
+        dd.textContent = entry[1];
+        dl.appendChild(dt);
+        dl.appendChild(dd);
+      });
+      sheet.appendChild(dl);
+    }
+
+    if (model.pathwayHighlights.length) {
+      const pathwayTable = document.createElement("table");
+      pathwayTable.className = "briefing-table briefing-pathways-table";
+      const pathwayCaption = document.createElement("caption");
+      pathwayCaption.textContent = "Top reskilling pathways";
+      pathwayTable.appendChild(pathwayCaption);
+      appendBriefingTableHead(pathwayTable, ["From", "To", "Months", "Skill overlap"]);
+      const pathwayBody = document.createElement("tbody");
+      model.pathwayHighlights.forEach(function (pathway) {
+        appendBriefingRow(pathwayBody, [
+          pathway.source_title,
+          pathway.target_title,
+          pathway.months,
+          Math.round(pathway.overlap * 100) + "%",
+        ]);
+      });
+      pathwayTable.appendChild(pathwayBody);
+      sheet.appendChild(pathwayTable);
+    }
+
+    const citation = document.createElement("p");
+    citation.className = "briefing-citation";
+    citation.textContent = model.citationLine;
+    sheet.appendChild(citation);
+
+    const methodology = document.createElement("p");
+    methodology.className = "briefing-methodology";
+    const methodologyLink = document.createElement("a");
+    methodologyLink.href = model.methodologyUrl;
+    methodologyLink.textContent = "Full methodology";
+    methodology.appendChild(methodologyLink);
+    sheet.appendChild(methodology);
+  }
+
+  let briefingAfterPrintHandler = null;
+
+  function hideBriefing() {
+    const sheet = document.getElementById("briefingSheet");
+    if (!sheet) {
+      return;
+    }
+    sheet.hidden = true;
+    sheet.setAttribute("aria-hidden", "true");
+    if (briefingAfterPrintHandler) {
+      global.removeEventListener("afterprint", briefingAfterPrintHandler);
+      briefingAfterPrintHandler = null;
+    }
+  }
+
+  function showBriefing() {
+    const sheet = document.getElementById("briefingSheet");
+    if (!sheet) {
+      return;
+    }
+    const model = Runtime.buildBriefingModel(collectBriefingInput());
+    renderBriefingSheet(model);
+    sheet.hidden = false;
+    sheet.setAttribute("aria-hidden", "false");
+    briefingAfterPrintHandler = function () {
+      hideBriefing();
+    };
+    global.addEventListener("afterprint", briefingAfterPrintHandler, { once: true });
+    global.print();
+  }
+
   function setupDownloads() {
     const button = document.getElementById("downloadBtn");
     const menu = document.getElementById("downloadMenu");
@@ -3235,6 +3569,12 @@
       }));
       const csv = await serializeRowsChunked(payload.rows, payload.headers, null);
       downloadCsvText(csv, "h2-ready-occupations.csv");
+    });
+
+    document.getElementById("dlBriefing").addEventListener("click", function (event) {
+      event.preventDefault();
+      menu.classList.remove("open");
+      showBriefing();
     });
   }
 

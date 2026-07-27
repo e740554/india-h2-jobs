@@ -1487,3 +1487,101 @@ body {
     padding: 24px;
   }
 }
+
+/* Briefing pack print view. #briefingSheet stays hidden on screen (the
+   `hidden` attribute does the work); this block governs its appearance in
+   the browser's print/print-to-PDF output only. */
+@media print {
+  body > *:not(#briefingSheet) {
+    display: none !important;
+  }
+
+  #briefingSheet {
+    display: block !important;
+  }
+
+  html,
+  body {
+    background: #ffffff;
+    color: #000000;
+  }
+
+  #briefingSheet {
+    margin: 0;
+    padding: 0;
+    font-family: 'Mukta', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    color: #000000;
+    background: #ffffff;
+  }
+
+  #briefingSheet h1 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 0 0 var(--space-2);
+  }
+
+  #briefingSheet h2 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin: var(--space-5) 0 var(--space-2);
+  }
+
+  #briefingSheet .briefing-subtitle {
+    font-size: 1rem;
+    font-weight: 500;
+    margin: 0 0 var(--space-1);
+  }
+
+  #briefingSheet .briefing-generated {
+    font-size: 0.8rem;
+    color: #000000;
+    margin: 0 0 var(--space-5);
+  }
+
+  #briefingSheet .briefing-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0 0 var(--space-5);
+    font-size: 0.85rem;
+    page-break-inside: avoid;
+  }
+
+  #briefingSheet .briefing-table caption {
+    text-align: left;
+    font-weight: 600;
+    margin-bottom: var(--space-2);
+    caption-side: top;
+  }
+
+  #briefingSheet .briefing-table th,
+  #briefingSheet .briefing-table td {
+    border: 1px solid #000000;
+    padding: var(--space-1) var(--space-2);
+    text-align: left;
+  }
+
+  #briefingSheet .briefing-gap-summary {
+    page-break-inside: avoid;
+    margin: 0 0 var(--space-5);
+  }
+
+  #briefingSheet .briefing-gap-summary dt {
+    font-weight: 600;
+    margin-top: var(--space-2);
+  }
+
+  #briefingSheet .briefing-gap-summary dd {
+    margin: 0;
+  }
+
+  #briefingSheet .briefing-citation,
+  #briefingSheet .briefing-methodology {
+    font-size: 0.8rem;
+    margin: var(--space-2) 0 0;
+  }
+
+  @page {
+    size: A4 portrait;
+    margin: 18mm;
+  }
+}

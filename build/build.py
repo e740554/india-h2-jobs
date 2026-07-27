@@ -88,6 +88,7 @@ _DOWNLOAD_BLOCK = """\
           <a href="#" id="dlSnapshot">Full Scenario Snapshot (CSV)</a>
           <a href="#" id="dlFull">All Scored Occupations (CSV)</a>
           <a href="#" id="dlH2">H2-Ready Occupations (CSV)</a>
+          <a href="#" id="dlBriefing">Briefing (print)</a>
         </div>
       </div>"""
 
