@@ -90,52 +90,74 @@ Agriculture, Aerospace/Aviation, Apparel, Automotive, Beauty/Wellness, BFSI, Cap
 
 - **URL:** https://nqr.gov.in
 - **Platform:** Laravel (server-rendered HTML + jQuery AJAX)
-- **robots.txt:** `User-agent: * allow: /` — ✅ Fully open to crawling
+- **robots.txt:** `User-agent: * allow: /` — ✅ Fully open to crawling (confirmed live, 2026-07-27)
 - **What:** Qualification profiles with NOS tables (code, title, NSQF level, mandatory/optional, hours, credits)
+- **Does NOT carry an NCO-2015 code anywhere.** Confirmed by grepping all 295
+  scraped detail pages for the whole-word token `NCO`: zero matches. NQR
+  identifies qualifications by its own NQR code (e.g. `2022/HYC/HSSCI/06782`)
+  and NOS codes (e.g. `HYC/N6401`) only. See
+  `plans/009-spike-report.md` for the full join-coverage analysis.
 
-### URL Structure
+### URL Structure (observed reality — corrects the pattern below)
+
+Actual scraping flow found by the 2026-07-27 spike (`scrape/scrape_nqr.py`):
 
 | Pattern | Purpose | Method |
 |---------|---------|--------|
-| `nqr.gov.in/qualificationfile` | Qualification search (sector grid + filters) | GET |
-| `nqr.gov.in/qualifications/{id}` | **Detail page** — NOS table (server-rendered HTML) | GET |
-| `nqr.gov.in/filter-duration` | AJAX — filtered qualification listings | POST (needs CSRF `_token`) |
+| `nqr.gov.in/qualifications-search/{sector_id}` | Sector listing page — sets session cookie, embeds `<meta name="csrf-token">` | GET |
+| `nqr.gov.in/filter-duration` | AJAX — returns **every** qualification id for the sector as hidden `getQualificationIds` inputs (tagged with a `get_count` total), regardless of the `limit`/`offset` sent — no pagination needed to build the id list | POST (needs CSRF `_token` + the session cookie from the GET above) |
+| `nqr.gov.in/qualifications/{id}` | Detail page — NOS table + qualification metadata (server-rendered HTML), plain GET, no session needed | GET |
 
-### Qualification Detail Page Fields
+(`nqr.gov.in/qualificationfile` from the original spec is a search-UI page;
+it does not carry the CSRF token used by the sector page's AJAX flow.)
 
-| Column | Description |
-|--------|-------------|
-| NOS/Module | NOS title |
-| NOS Code | e.g., `MSRVVP/AVK01` |
-| Mandatory/Optional | Whether NOS is required |
-| Estimated Hours | Duration |
-| NOS Credit | Credit value |
-| Level | NSQF level |
+### Qualification Detail Page Fields (as scraped)
 
-### Key Sectors for H2 (sector IDs)
+| Field | Description | Quirk observed |
+|-------|--------------|-----------------|
+| Title | `<h1>` | — |
+| NQR Code | e.g. `2022/HYC/HSSCI/06782` | — |
+| Sector | e.g. `Hydrocarbon` | — |
+| NSQF level (qualification + per-NOS-row) | e.g. `3`, or `5.5` | **Half-levels are real** (96/295 scraped qualifications, 33%) — do not parse as integer-only |
+| Notional Hours (min/max), Theory/Practical delivery hours | e.g. `330`/`330`, `90`/`150` | — |
+| NOS/Module, NOS Code, Mandatory/Optional, Estimated Hours, NOS Credit, Level | one row per module | 2/295 qualifications render no NOS table at all (genuine gap, not a parse failure) |
 
-| ID | Sector |
-|----|--------|
-| 18 | Hydrocarbon |
-| 35 | Power |
-| 8 | Chemicals & Petrochemicals |
-| 12 | Environmental Science |
-| 7 | Capital Goods & Manufacturing |
-| 51 | Water Supply/Sewerage/Waste |
+### Key Sectors for H2 (sector IDs) — all 6 confirmed live, 2026-07-27
 
-Total: 59 sectors
+| ID | Sector | Qualifications scraped |
+|----|--------|------------------------|
+| 18 | Hydrocarbon | 76 |
+| 35 | Power | 22 |
+| 8 | Chemicals & Petrochemicals | 20 |
+| 12 | Environmental Science | 64 |
+| 7 | Capital Goods & Manufacturing | 107 |
+| 51 | Water Supply, Sewerage, Waste Management & Remediation activities | 6 |
 
-### Bonus: Pre-built NCO Mapping
+Total: 59 sectors (confirmed). 295 unique qualifications across these 6, no
+id overlap between sectors.
 
-`ncvet.gov.in/wp-content/uploads/2025/05/Report-on-Mapping-of-Qualifications-with-NCO-Codes.pdf` — official NCO-2015 → qualification mapping. Could replace or validate hand-built crosswalk.
+### Official NCO Mapping PDF — NOT a per-qualification crosswalk
 
-### Scraping Strategy
+`ncvet.gov.in/wp-content/uploads/2025/05/Report-on-Mapping-of-Qualifications-with-NCO-Codes.pdf`
+downloads fine (58 pages) but, despite its title, is a **policy/process
+report** about the 2023 NCO-mapping committee's work (methodology, findings,
+recommendations) — not a queryable qualification→NCO-code table. A full-text
+search for NCO-2015-shaped strings across all 58 pages found exactly 2
+unique codes, both illustrative examples in prose. The one real table it
+contains (Annexure VII) is an awarding-body-level aggregate (45 bodies,
+e.g. "DGT: 463 total qualifications, 0 without an NCO code"), not a
+per-qualification lookup. See `plans/009-spike-report.md` §2.
 
-1. GET sector page → extract CSRF `_token`
-2. POST to `/filter-duration` with `sectorId` → get qualification IDs
-3. GET `/qualifications/{id}` → parse NOS table from server-rendered HTML
+### Scraping Strategy (as implemented)
 
-- **Raw data saved to:** `scrape/raw/ncvet/`
+1. GET `qualifications-search/{sector_id}` → extract CSRF `_token`, keep the session cookie
+2. POST to `/filter-duration` with `sectorId` (+ empty filter fields + the token) → response embeds every qualification id for the sector
+3. GET `/qualifications/{id}` → parse title/sector/NSQF level/hours + NOS table from server-rendered HTML (plain GET, new cookie jar not required)
+
+1.5s delay between requests; resume-tolerant (cached detail pages under
+`scrape/raw/ncvet/detail/` are reused, not refetched).
+
+- **Raw data saved to:** `scrape/raw/ncvet/` (gitignored, same as `scrape/raw/ncs/` and `scrape/raw/plfs/`)
 
 ---
 
@@ -143,9 +165,12 @@ Total: 59 sectors
 
 - PLFS uses NCO-2015 4-digit codes
 - NCS uses NCO-2015 codes (available as lookup values in list data)
-- NCVET uses its own NOS codes, linked to qualifications
-- Hand-built crosswalk: `build/nco_ncs_crosswalk.csv`
-- Official NCO mapping PDF from NCVET may reduce manual crosswalk work
+- NCVET uses its own NOS codes, linked to qualifications, with **no NCO-2015
+  code anywhere** in the qualification data or the official mapping PDF
+  (confirmed 2026-07-27; see `plans/009-spike-report.md`)
+- There is no hand-built NCO/NCS crosswalk file in this repo. (An earlier
+  version of this document referenced `build/nco_ncs_crosswalk.csv`; `git
+  log` shows that path was never committed. Corrected here.)
 
 ## Data Licensing
 

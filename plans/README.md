@@ -18,7 +18,7 @@ each plan is self-contained and must stay within its stated scope.
 | 006 | Defer click-only score detail payloads | P2 | M | 001 | TODO |
 | 007 | Make high-frequency interaction motion crisp | P2 | M | 001 | TODO |
 | 008 | Make the atlas citable (CITATION.cff, cite block, sync test) | P1 | S | none (soft: 003) | DONE |
-| 009 | Spike the NCVET/NQR qualification layer | P1 | M | none | TODO |
+| 009 | Spike the NCVET/NQR qualification layer | P1 | M | none | DONE |
 | 010 | Briefing pack -- print-ready, citable one-pager | P1 | M | none (soft: 008) | DONE |
 | 011 | Assumptions register: export every coefficient with source | P2 | M | none (soft: 008) | TODO |
 | 012 | State views: honest labeling, state summary export, design note | P2 | M | none | TODO |
@@ -70,3 +70,10 @@ Status values: TODO | IN PROGRESS | DONE | BLOCKED (with reason) | REJECTED.
 - (2026-07-27 direction pass) In-UI coefficient override sliders: deferred to
   a design note (Plan 011 Step 4) -- misattribution risk needs the watermark
   design settled before any build.
+- (2026-07-27, Plan 009 spike) Full NQR/NCVET integration (`source_ncvet:
+  true` + per-occupation qualifications block): not scoped as a follow-up.
+  Neither NQR nor the official NCVET NCO-mapping PDF carries an NCO-2015
+  code, and no crosswalk file exists in this repo -- there is no join key to
+  integrate on. See `plans/009-spike-report.md`. The one promising thread
+  (title-matching the 8 `model/pathways.json` targets against scraped NQR
+  qualifications) is narrow enough to revisit later without a full plan.
