@@ -42,7 +42,7 @@ python -m pytest
 - Keep Python and browser runtime behavior aligned when changing shared model logic.
 - Add or extend tests when you change archetypes, scenarios, rounding, cluster distribution, timeline behavior, pathways, exports, or build fields consumed by the UI.
 - Update public-facing docs when shipped behavior changes. That usually means some combination of `README.md`, `TESTING.md`, `CHANGELOG.md`, `TODOS.md`, and the Phase specs under `docs/superpowers/specs/`.
-- Commit regenerated `docs/` output when the GitHub Pages site changes.
+- Commit regenerated `docs/` output when the GitHub Pages site changes, and regenerate it with `--base-url "/workforce-atlas"`. CI rebuilds with that base URL and asserts `git diff --exit-code -- docs web`, so a committed local-preview build (`--base-url ""`) turns the Tests workflow red until it is rebuilt.
 - Do not commit ignored local-dev artifacts from `web/`.
 
 ## Pull Requests
@@ -50,7 +50,7 @@ python -m pytest
 Before opening a PR, make sure you have:
 
 - run `python -m pytest` and confirmed it passes
-- rebuilt with `python build/build.py --base-url ""` when publish output changed
+- rebuilt with `python build/build.py --base-url "/workforce-atlas"` when publish output changed, and confirmed `git diff --exit-code -- docs web` is clean afterwards
 - verified current dataset claims still match generated output
 - included `docs/` changes when the published site changed
 - kept methodology, README, testing notes, and changelog references aligned with actual behavior

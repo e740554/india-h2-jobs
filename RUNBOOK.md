@@ -35,6 +35,14 @@ on the GitHub Pages mirror at `e740554.github.io/india-h2-jobs/`.
 python build/build.py --base-url "/workforce-atlas"
 ```
 
+> **This is the only build that may be committed.** CI re-runs it and then
+> asserts `git diff --exit-code -- docs web`, so committing the output of any
+> other `--base-url` value turns the Tests workflow red on every subsequent
+> push until it is rebuilt. See section 3 for local preview.
+>
+> On Git Bash for Windows, MSYS rewrites `/workforce-atlas` into a Windows path.
+> Use PowerShell, or prefix with `MSYS_NO_PATHCONV=1`.
+
 **Expected output paths:**
 | File | Purpose |
 |------|---------|
@@ -65,7 +73,17 @@ away from the shipped build.
    same two fields under `preferred-citation`. They must match `VERSION` and the
    changelog date exactly.
 4. Update the suggested citation line and the release history table in `README.md`.
-5. Rebuild, then run `python -m pytest`.
+5. Rebuild with the production base URL, then run the full gate:
+
+   ```powershell
+   python build/build.py --base-url "/workforce-atlas"
+   python -m pytest
+   node --check web/main.js
+   node --check docs/main.js
+   git diff --exit-code -- docs web   # must be clean once docs/ is staged
+   ```
+
+   The last command is the exact assertion CI makes. Run it before pushing.
 
 Note: `python -m pytest` regenerates `assets/qr-workforce-atlas.svg` via
 `tests/test_qr.py`. If the local QR library version differs from the one that
@@ -85,6 +103,10 @@ No `--base-url` flag keeps local asset paths relative.
 python build/build.py
 python -m http.server 8080 --directory docs
 ```
+
+**Do not commit this build.** It writes `BASE_URL = ""` into `docs/main.js`,
+which fails CI's publish-output check. Before staging anything in `docs/`,
+re-run the production build from section 2.
 
 ---
 
