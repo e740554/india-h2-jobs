@@ -86,6 +86,7 @@ _DOWNLOAD_BLOCK = """\
         <div class="dropdown-menu" id="downloadMenu">
           <a href="#" id="dlView">Current View Snapshot (CSV)</a>
           <a href="#" id="dlSnapshot">Full Scenario Snapshot (CSV)</a>
+          <a href="#" id="dlStateSummary">State Summary (CSV)</a>
           <a href="#" id="dlFull">All Scored Occupations (CSV)</a>
           <a href="#" id="dlH2">H2-Ready Occupations (CSV)</a>
         </div>

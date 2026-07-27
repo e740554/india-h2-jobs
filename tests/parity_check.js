@@ -142,6 +142,81 @@ function parseJsonArg(raw) {
   return raw ? JSON.parse(raw) : {};
 }
 
+// Fixture: 3 clusters (2 in Gujarat, 1 in Odisha) with a mix of occupations,
+// including an __unallocated__ bucket that must be excluded from totals.
+function buildStateSummaryFixture() {
+  const clustersFixture = {
+    clusters: [
+      { id: 'c1', name: 'Cluster One', state: 'Gujarat' },
+      { id: 'c2', name: 'Cluster Two', state: 'Gujarat' },
+      { id: 'c3', name: 'Cluster Three', state: 'Odisha' },
+    ],
+    states: [
+      { id: 'GJ', name: 'Gujarat' },
+      { id: 'OD', name: 'Odisha' },
+    ],
+  };
+  const yearSnapshot = {
+    c1: {
+      'OCC-1': { construction: 10, commissioning: 5, operations: 5, total: 20 },
+      'OCC-2': { construction: 1, commissioning: 1, operations: 1, total: 3 },
+      __unallocated__: { construction: 100, commissioning: 0, operations: 0, total: 100 },
+    },
+    c2: {
+      'OCC-1': { construction: 5, commissioning: 0, operations: 0, total: 5 },
+    },
+    c3: {
+      'OCC-3': { construction: 2, commissioning: 2, operations: 2, total: 6 },
+    },
+  };
+  const occupationIndex = {
+    'OCC-1': { id: 'OCC-1', title: 'Electrician' },
+    'OCC-2': { id: 'OCC-2', title: 'Welder' },
+    'OCC-3': { id: 'OCC-3', title: 'Technician' },
+  };
+  return { clustersFixture, yearSnapshot, occupationIndex };
+}
+
+function runStateSummaryFixture() {
+  const fixture = buildStateSummaryFixture();
+  const rows = runtime.buildStateSummaryRows(fixture.yearSnapshot, fixture.clustersFixture, fixture.occupationIndex);
+  const gujaratRow = rows.find(row => row.state === 'Gujarat');
+  const gujaratRegionTotal = runtime.summariseSnapshot(
+    runtime.aggregateRegionSnapshot(fixture.yearSnapshot, runtime.STATE_PREFIX + 'Gujarat', fixture.clustersFixture)
+  ).totalDemand;
+  return {
+    rows: rows,
+    headers: runtime.STATE_SUMMARY_HEADERS,
+    gujaratRowTotal: gujaratRow ? gujaratRow.demand_total : null,
+    gujaratRegionTotal: gujaratRegionTotal,
+  };
+}
+
+// Cross-checks buildStateSummaryRows against the real cluster/state data and a
+// real scenario timeline: every state row's demand_total must equal what
+// selecting that state in the UI (aggregateRegionSnapshot + summariseSnapshot)
+// would show on screen. The hand-authored fixture above cannot catch a
+// rounding/reconciliation divergence because its totals are hand-consistent
+// by construction; this check runs against production data instead.
+function runStateSummaryRealCheck(scenarioId) {
+  const pipeline = getScenarioPipeline(scenarioId);
+  const yearKey = String(pipeline.scenario.target_year);
+  const yearSnapshot = pipeline.timeline[yearKey] || {};
+  const occupationIndex = runtime.buildOccupationIndex(occupations);
+  const rows = runtime.buildStateSummaryRows(yearSnapshot, clusters, occupationIndex);
+  const stateRows = rows.filter(row => row.state !== '_note');
+  const mismatches = [];
+  for (const row of stateRows) {
+    const regionTotal = runtime.summariseSnapshot(
+      runtime.aggregateRegionSnapshot(yearSnapshot, runtime.STATE_PREFIX + row.state, clusters)
+    ).totalDemand;
+    if (regionTotal !== row.demand_total) {
+      mismatches.push({ state: row.state, rowTotal: row.demand_total, regionTotal: regionTotal });
+    }
+  }
+  return { stateCount: stateRows.length, mismatches: mismatches };
+}
+
 function run() {
   const command = process.argv[2] || 'demand';
   let output;
@@ -161,6 +236,10 @@ function run() {
     );
   } else if (command === 'full-snapshot-row-count') {
     output = countFullSnapshotRows(process.argv[3], process.argv[4]);
+  } else if (command === 'state-summary-fixture') {
+    output = runStateSummaryFixture();
+  } else if (command === 'state-summary-real-check') {
+    output = runStateSummaryRealCheck(process.argv[3] || 'nghm_5mt_2030_mix');
   } else if (command === 'gap-supply-coverage') {
     output = runtime.hasGapSupplyCoverage(parseJsonArg(process.argv[3]));
   } else if (command === 'export-headers') {
