@@ -18,6 +18,14 @@ After 2026-05-15 EOD, `python build/build.py --base-url "/workforce-atlas"` must
 ## Redirects (post-freeze)
 None.
 
+## Post-freeze public artifacts
+Paths added after the WHS window closed. Not part of the print/QR freeze, but
+they are linked from published pages and should not move without a redirect.
+
+| URL | Purpose | Appears in | Added |
+|-----|---------|------------|-------|
+| https://hygoat.in/workforce-atlas/assumptions-register.csv | Every model coefficient with its source | `/methodology/` "Assumptions register" section | 2026-07-28 (v1.4.4.0) |
+
 ## Pre-launch content decisions
 - **2026-05-11 (Task 5):** Advisory Circle section removed from `/about/` per founder decision. Empty state ("We're building a panel…") signaled incompleteness; better to ship a clean /about/ with just Contact. Advisory Circle content (HTML, CSS, commented-out template) preserved in git history and can be restored post-WHS when advisors are confirmed.
 - **2026-05-11:** RFNBO lens (`?lens=rfnbo`) removed from URL freeze and lens whitelist per founder. No sector mapping for RFNBO at WHS.

@@ -66,6 +66,23 @@ node --check docs/main.js
 - `tests/test_csv_export.py`
 - cover runtime-only helpers such as `dominantPhase()`, cluster suggestion logic, and full-snapshot CSV row generation
 
+### Briefing and state summary tests
+
+- `tests/test_briefing.py` and `tests/briefing_check.js`
+- `tests/test_state_summary.py`
+- load the browser runtime in Node the same way `tests/parity_check.js` does, then cover the pure presentation builders: briefing model shape, demand-row truncation with an honest omitted count, gap-mode gating, dataset version in the citation line, per-state aggregation across clusters, deterministic ordering, and the caveat row that travels inside the state summary CSV
+- these builders are presentation logic, not shared model math. They live in the JS runtime only and deliberately have no Python mirror or parity entry
+
+### Release metadata tests
+
+- `tests/test_citation.py`
+- asserts `CITATION.cff` carries the same `version` as the `VERSION` file and the same `date-released` as that version's `CHANGELOG.md` heading. It fails by design after a version bump until `CITATION.cff` is updated, which makes citation drift impossible
+
+### Assumptions register tests
+
+- `tests/test_assumptions_register.py`
+- checks the exact header, that every archetype `headcount_per_unit` appears exactly once, that each pathway contributes three rows, that no `source_type` cell is empty, and that two consecutive builds produce byte-identical output
+
 ## Conventions
 
 - Test files live in `tests/test_<module>.py`

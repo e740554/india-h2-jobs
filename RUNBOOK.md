@@ -45,7 +45,32 @@ python build/build.py --base-url "/workforce-atlas"
 | `docs/main.js` | Client-side JS (portable canonical/mirror asset loading) |
 | `docs/occupations.json` | H2-relevant occupations (~480) |
 | `docs/occupations-all.json` | All 1,802 occupations |
+| `docs/score-details.json` | Per-occupation score breakdown, fetched on click |
 | `docs/h2-ready-occupations.csv` | H2-ready CSV export |
+| `docs/assumptions-register.csv` | Every model coefficient with source, source type, and confidence |
+| `docs/archetypes.json`, `scenarios.json`, `clusters.json`, `pathways.json`, `plfs_supply.json` | Published copies of the `model/` inputs |
+
+---
+
+## 2b. Release Checklist (version bump)
+
+Run this before building a release. `tests/test_citation.py` fails until every
+step is done, which is intentional -- it stops citation metadata from drifting
+away from the shipped build.
+
+1. Update `VERSION` to the new `vX.Y.Z.W` value.
+2. Add a `## [X.Y.Z.W] - YYYY-MM-DD` heading and entry to `CHANGELOG.md`. The
+   build reads the release date from this heading, so the format is load-bearing.
+3. Update `CITATION.cff`: both the top-level `version` / `date-released` and the
+   same two fields under `preferred-citation`. They must match `VERSION` and the
+   changelog date exactly.
+4. Update the suggested citation line and the release history table in `README.md`.
+5. Rebuild, then run `python -m pytest`.
+
+Note: `python -m pytest` regenerates `assets/qr-workforce-atlas.svg` via
+`tests/test_qr.py`. If the local QR library version differs from the one that
+produced the committed asset, the run leaves a spurious whitespace-only diff.
+Check `git status` and discard that file unless the QR content actually changed.
 
 ---
 

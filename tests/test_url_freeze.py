@@ -28,7 +28,12 @@ def _url_to_docs_path(url):
     path = path.rstrip("/") or "/"
     if path == "/":
         return os.path.join(DOCS_DIR, "index.html")
-    return os.path.join(DOCS_DIR, path.lstrip("/"), "index.html")
+    relative = path.lstrip("/")
+    # A frozen URL ending in a filename (assumptions-register.csv) is a published
+    # artifact, not a page directory. Only directory-style URLs get index.html.
+    if os.path.splitext(relative)[1]:
+        return os.path.join(DOCS_DIR, relative)
+    return os.path.join(DOCS_DIR, relative, "index.html")
 
 
 def test_url_freeze_file_exists():

@@ -21,8 +21,11 @@ The current build ships:
 - annual timeline snapshots with phase-based recoloring
 - sidebar reskilling pathways with overlap, duration, cost, and bridging skills
 - `?lens=maritime` URL deep-link for sector-specific views
-- current-view and full-snapshot CSV exports
+- current-view, full-snapshot, and per-state summary CSV exports
+- a print-ready briefing one-pager generated from the current view
+- a published assumptions register listing every model coefficient with its source
 - `/methodology/` and `/about/` static pages with shared atlas chrome
+- machine-readable citation metadata in `CITATION.cff` and a "How to cite" block on `/methodology/`
 
 ## What It Does
 
@@ -33,7 +36,7 @@ The current build ships:
 5. Distributes demand across hydrogen clusters and state rollups.
 6. Generates year-by-year workforce snapshots from `start_year` to `target_year + 5`.
 7. Shows inbound and outbound reskilling pathways for occupations in the sidebar.
-8. Exports structured CSVs for downstream policy and planning analysis.
+8. Exports structured CSVs for downstream policy and planning analysis, plus a print-ready briefing sheet for the current view.
 
 ## Core Data And Runtime Model
 
@@ -83,10 +86,15 @@ python build/build.py --base-url "/workforce-atlas"
 
 That rebuilds:
 
-- `docs/occupations.json`
-- `docs/occupations-all.json`
+- `docs/index.html`, `docs/methodology/index.html`, `docs/about/index.html`
 - `docs/main.js`
 - `docs/style.css`
+- `docs/occupations.json`
+- `docs/occupations-all.json`
+- `docs/score-details.json`
+- `docs/h2-ready-occupations.csv`
+- `docs/assumptions-register.csv`
+- published copies of the `model/*.json` inputs
 - synced dev copies in `web/`
 
 The generated bundle resolves data and in-app documentation links relative to the
@@ -150,7 +158,11 @@ Current production data is built primarily from:
 - cluster affinity mappings
 - pathway mappings
 
-PLFS supply is checked in at NCO 2-digit subdivision level and allocated across occupations by model weights. Treat Gap mode as indicative, not occupation-observed. PLFS unit-level microdata integration remains a post-WHS rebuild. NCVET remains an enrichment layer rather than a fully complete upstream join. See [DATASOURCES.md](DATASOURCES.md).
+PLFS supply is checked in at NCO 2-digit subdivision level and allocated across occupations by model weights. Treat Gap mode as indicative, not occupation-observed. PLFS unit-level microdata integration remains a post-WHS rebuild.
+
+NCVET/NQR is not integrated. A 2026-07 spike scraped 295 H2-relevant qualifications from the National Qualifications Register and found no join key: neither the NQR qualification records nor the official NCVET mapping PDF carries an NCO-2015 code, and no crosswalk exists in this repo. See [DATASOURCES.md](DATASOURCES.md) and `plans/009-spike-report.md`.
+
+Every coefficient the model multiplies by is published with its source, source type, and confidence in `docs/assumptions-register.csv`, regenerated on every build.
 
 ## Documentation
 
@@ -169,6 +181,7 @@ PLFS supply is checked in at NCO 2-digit subdivision level and allocated across 
 
 | Version | Date | Scope |
 |---------|------|-------|
+| `v1.4.4.0` | 2026-07-28 | Institutional credibility: `CITATION.cff` and methodology cite block, briefing print view, assumptions register export, state summary export with honest cluster-rollup labeling, NQR/NCVET join spike |
 | `v1.4.3.2` | 2026-07-15 | Summary freshness badge bound to release metadata, preventing footer/badge version drift |
 | `v1.4.3.1` | 2026-07-15 | Portable canonical/mirror asset loading, deterministic CSV line endings, production-build CI parity, and dual-URL deployment smoke coverage |
 | `v1.4.3.0` | 2026-05-14 | PLFS 2023-24 Table 25 subdivision supply artifact, supply-backed indicative gap activation, supply CSV fields, and explicit non-unit-microdata caveats |
@@ -206,9 +219,11 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for the contributor workflow.
 
 Suggested citation:
 
-> Ekavikalp Pvt Ltd (Sharma, E.). India H₂ Workforce Atlas, dataset v1.4.3.2, updated July 2026. https://hygoat.in/workforce-atlas
+> Ekavikalp Pvt Ltd (Sharma, E.). India H₂ Workforce Atlas, dataset v1.4.4.0, updated July 2026. https://hygoat.in/workforce-atlas
 
-Machine-readable citation metadata (BibTeX, CFF) is available in [CITATION.cff](CITATION.cff).
+Machine-readable citation metadata (BibTeX, CFF) is available in [CITATION.cff](CITATION.cff). No DOI is minted yet; the `doi:` field is deliberately commented out rather than guessed.
+
+The atlas is an indicative research tool, not an official government forecast. Every coefficient behind a published number is listed with its source in [`docs/assumptions-register.csv`](docs/assumptions-register.csv).
 
 ## License
 

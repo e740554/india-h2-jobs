@@ -62,7 +62,7 @@
 
 **Why:** Subdivision-level is sufficient for WHS demo narrative but unit-level is the correct long-term architecture — it enables state-level supply analysis, occupation-code granularity, and meaningful integration of future PLFS waves. Captured from /plan-eng-review on 2026-05-11 (DeepSeek peer review reversal of ER-1).
 
-**Context:** Existing ~1,802 legacy occupations are the only beneficiaries until NCO-2015 extension is codified (separate TODO). Pair with the "Automate MoSPI PLFS portal download" TODO so the rebuild ships with scripted refresh from day one.
+**Context:** Existing ~1,802 legacy occupations are the only beneficiaries until NCO-2015 extension is codified (separate TODO). Pair with the "Automate MoSPI PLFS portal download" TODO so the rebuild ships with scripted refresh from day one. This item is also the stated dependency for Option C (a supply-anchored true state layer) in `plans/012-state-layer-design-note.md`; until it lands, state views stay a cluster rollup with an explicit caveat.
 
 **Effort:** L (4-8 person-days)  
 **Priority:** P2  
@@ -122,6 +122,20 @@ Keep the rest of /about/ as shipped at WHS — minimal, no hero, single column. 
 **Effort:** XS
 **Priority:** P3
 **Depends on:** None.
+
+## Publication
+
+### Mint a Zenodo DOI for the atlas
+
+**What:** Enable the Zenodo GitHub integration, cut a tagged release, then uncomment the `doi:` line in `CITATION.cff` and add the DOI to the `/methodology/` cite block and the README citing section.
+
+**Why:** v1.4.4.0 shipped every part of the citation chain except the identifier. Institutional readers citing the atlas in an official document or paper currently have to reference a URL, which is weaker than a DOI and breaks if the path ever moves. The infrastructure is already in place and the insertion point is marked.
+
+**Context:** Founder-owned -- requires the Zenodo account and a tagged release. Deliberately left un-minted rather than guessed during plan 008. Once minted, `tests/test_citation.py` should be extended to assert the DOI is present and well-formed.
+
+**Effort:** S  
+**Priority:** P2  
+**Depends on:** A tagged release; founder Zenodo account
 
 ## Standards
 

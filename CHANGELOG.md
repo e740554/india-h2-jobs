@@ -2,6 +2,34 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.4.4.0] - 2026-07-28
+
+Institutional-credibility release. Makes the atlas citable, printable, and inspectable for the people it is aimed at: skilling-programme planners at NSDC and MSDE, state skill missions, and ministry analysts who circulate documents rather than URLs.
+
+### Added
+- **`CITATION.cff` plus a "How to cite" section on `/methodology/`**: CFF 1.2.0 metadata with a `preferred-citation` dataset entry, and a suggested citation sentence on the methodology page that resolves the live dataset version and update label at build time. The `doi:` line ships commented out -- a DOI is minted from a tagged release via Zenodo, never invented.
+- **Briefing pack print view**: a `Briefing (print)` entry in the download menu renders the current view (scenario, geography, year, mode) as a print-ready one-pager -- top demand occupations with an explicit omitted-count line, phase totals, gap summary when in Gap mode, pathway highlights, dataset version stamp, and the citation sentence. Print-to-PDF through the browser; zero new dependencies.
+- **Assumptions register** (`docs/assumptions-register.csv`, 252 rows): every number the model multiplies by -- archetype staffing coefficients, cluster affinity shares, pathway reskill months/cost/overlap, and scenario targets -- exported with `source`, `source_type`, `confidence`, and `notes` per row. Written deterministically at build time and linked from `/methodology/` with instructions for challenging a specific row by `component` + `item_id` + `parameter`.
+- **State summary CSV export**: one row per state holding at least one mapped hydrogen cluster, with cluster count, cluster ids, demand totals by phase, and top occupation, ordered by demand. A `_note` row travels inside the file so the cluster-rollup caveat survives the download.
+- **`@media print` rules** in the stylesheet for the briefing sheet.
+
+### Changed
+- **State views now state their own semantics at the point of use.** Selecting a state renders a caveat: the total sums the mapped hydrogen clusters in that state only and is not a statewide employment estimate. States with no mapped cluster stay out of the dropdown by design rather than reporting a misleading zero.
+- `DATASOURCES.md` NCVET section rewritten against observed reality: the real nqr.gov.in request flow, NSQF half-levels, and the finding that the official NCVET NCO-mapping PDF is not a crosswalk.
+
+### Investigated
+- **NCVET/NQR qualification layer spike.** Scraped 295 H2-relevant qualifications across 6 sectors from nqr.gov.in and measured how well they join to the atlas's NCO-2015 codes. They do not: neither the NQR qualification pages nor the official NCVET mapping PDF carries an NCO-2015 code, and no crosswalk file exists in this repo. Full integration is therefore not scoped as a follow-up. Analysis, scrape statistics, and the one narrow remaining thread are in `plans/009-spike-report.md`.
+
+### Tests
+- `tests/test_citation.py`: `CITATION.cff` version and release date stay locked to `VERSION` and the matching `CHANGELOG.md` heading, so citation metadata cannot drift from the shipped build.
+- `tests/test_briefing.py` + `tests/briefing_check.js`: briefing model shape, truncation honesty, gap-mode gating, and dataset version in the citation line.
+- `tests/test_assumptions_register.py`: exact header, one row per archetype coefficient, three rows per pathway, no empty `source_type`, and byte-identical output across two builds.
+- `tests/test_state_summary.py`: state aggregation across multiple clusters, deterministic ordering, and the caveat row.
+
+### Documentation
+- README, `TESTING.md`, and `RUNBOOK.md` updated for the new exports, the full generated-artifact list, and the release-time `CITATION.cff` bump step.
+- `URL_FREEZE.md` records the assumptions register as a public artifact path added after the WHS freeze window.
+
 ## [1.4.3.2] - 2026-07-15
 
 ### Fixed
