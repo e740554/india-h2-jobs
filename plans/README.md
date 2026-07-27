@@ -20,7 +20,7 @@ each plan is self-contained and must stay within its stated scope.
 | 008 | Make the atlas citable (CITATION.cff, cite block, sync test) | P1 | S | none (soft: 003) | DONE |
 | 009 | Spike the NCVET/NQR qualification layer | P1 | M | none | DONE |
 | 010 | Briefing pack -- print-ready, citable one-pager | P1 | M | none (soft: 008) | DONE |
-| 011 | Assumptions register: export every coefficient with source | P2 | M | none (soft: 008) | TODO |
+| 011 | Assumptions register: export every coefficient with source | P2 | M | none (soft: 008) | DONE |
 | 012 | State views: honest labeling, state summary export, design note | P2 | M | none | TODO |
 
 Status values: TODO | IN PROGRESS | DONE | BLOCKED (with reason) | REJECTED.
