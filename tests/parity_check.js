@@ -297,6 +297,11 @@ function run() {
         return total + Number(clustered[year][clusterId]['OCC-1'].construction || 0);
       }, 0),
     };
+  } else if (command === 'search-match') {
+    const input = parseJsonArg(process.argv[3]);
+    output = runtime.filterBySearch(input.occupations || [], input.query).map(occupation => occupation.id);
+  } else if (command === 'escalation-target') {
+    output = runtime.getEscalationTarget(parseJsonArg(process.argv[3]));
   } else if (command === 'parse-lens') {
     var lensWhitelist = { maritime: 'Shipping' };
     var raw = process.argv[3] || '';

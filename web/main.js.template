@@ -1495,6 +1495,66 @@
       return rows;
     }
 
+    // --- Occupation search -------------------------------------------------
+    // Tokenised AND matching: every whitespace-separated token must appear in
+    // title, NCO code, or sector. "welder chemical" narrows, it does not widen.
+
+    function searchTokens(query) {
+      return String(query == null ? "" : query)
+        .toLowerCase()
+        .split(/\s+/)
+        .filter(function (token) { return token.length > 0; });
+    }
+
+    function matchesSearch(occupation, query) {
+      var tokens = searchTokens(query);
+      if (!tokens.length) {
+        return true;
+      }
+      if (!occupation) {
+        return false;
+      }
+      var haystack = [occupation.title, occupation.nco_code, occupation.sector]
+        .map(function (field) { return field == null ? "" : String(field); })
+        .join(" ")
+        .toLowerCase();
+      for (var i = 0; i < tokens.length; i += 1) {
+        if (haystack.indexOf(tokens[i]) === -1) {
+          return false;
+        }
+      }
+      return true;
+    }
+
+    function filterBySearch(occupations, query) {
+      var list = occupations || [];
+      if (!searchTokens(query).length) {
+        return list;
+      }
+      return list.filter(function (occupation) {
+        return matchesSearch(occupation, query);
+      });
+    }
+
+    // Which view tier, if any, a failed search should offer to escalate to.
+    // focus -> sector is pre-checked against the already-loaded sector data so
+    // the button is only offered when it will actually succeed; sector -> all
+    // cannot be pre-checked without loading the full dataset.
+    function getEscalationTarget(state) {
+      var input = state || {};
+      var query = String(input.query == null ? "" : input.query).trim();
+      if (!query || input.scenarioMode) {
+        return null;
+      }
+      if (input.viewTier === "focus") {
+        return filterBySearch(input.higherTierOccupations || [], query).length > 0 ? "sector" : null;
+      }
+      if (input.viewTier === "sector") {
+        return "all";
+      }
+      return null;
+    }
+
     return {
       PHASES: PHASES,
       PHASE_COLOURS: PHASE_COLOURS,
@@ -1540,6 +1600,9 @@
       buildBriefingModel: buildBriefingModel,
       buildStateSummaryRows: buildStateSummaryRows,
       STATE_SUMMARY_HEADERS: STATE_SUMMARY_HEADERS,
+      matchesSearch: matchesSearch,
+      filterBySearch: filterBySearch,
+      getEscalationTarget: getEscalationTarget,
     };
   }
 
@@ -1578,6 +1641,9 @@
   let selectedOccupation = null;
   let activeSidebarTab = "overview";
   let viewTier = "focus";
+  let searchQuery = "";
+  let searchRenderFrame = null;
+  let searchWasAnnounced = false;
 
   let activeMode = "atlas";
   let scenarioMode = false;
@@ -1936,34 +2002,72 @@
     }
     metricUpskill.textContent = fastUpskillCount.toLocaleString();
 
-    const indicator = document.getElementById("filterIndicator");
-    if (indicator) {
-      var displayCount = displayOccs.length;
-      var sectorSet = Object.create(null);
-      for (var j = 0; j < displayOccs.length; j++) {
-        sectorSet[displayOccs[j].sector || "Other"] = true;
-      }
-      var sectorCount = Object.keys(sectorSet).length;
-      if (!scenarioMode && viewTier === "focus") {
-        indicator.textContent =
-          "Showing " + displayCount.toLocaleString() + " high-relevance occupations across " + sectorCount + " sectors";
-      } else if (!scenarioMode && viewTier === "all") {
-        indicator.textContent =
-          "Showing " + displayCount.toLocaleString() + " occupations across " + sectorCount + " sectors";
-      } else {
-        var total = data.total_all_occupations || displayCount;
-        var sectors = data.total_sectors || sectorCount;
-        indicator.textContent =
-          "Showing " + displayCount.toLocaleString() + " of " + total.toLocaleString() +
-          " occupations across " + sectors + " sectors";
-      }
-    }
+    updateFilterIndicator();
 
     document.getElementById("footerVersion").textContent = "Dataset v" + data.dataset_version;
     const updated = new Date(data.last_updated);
     document.getElementById("footerDate").textContent =
       "Last updated " + updated.toLocaleDateString("en-US", { month: "long", year: "numeric" });
     updateDataStatus();
+  }
+
+  // Single source of truth for the "Showing N ..." string. Both the atlas and
+  // scenario paths route through here so the count beside the treemap always
+  // describes the cells actually drawn, search included.
+  function updateFilterIndicator() {
+    const indicator = document.getElementById("filterIndicator");
+    if (!indicator || !data) {
+      return;
+    }
+    const query = searchQuery.trim();
+    const displayOccs = getDisplayOccupations();
+    const renderedOccs = query ? Runtime.filterBySearch(displayOccs, query) : displayOccs;
+    let text;
+
+    if (query) {
+      const suffix = ' matching "' + query + '"';
+      if (scenarioMode) {
+        text = "Showing " + renderedOccs.length.toLocaleString() + " occupations in " +
+          Runtime.toRegionLabel(selectedRegionValue, clustersData) + suffix;
+      } else {
+        text = "Showing " + renderedOccs.length.toLocaleString() + " of " +
+          displayOccs.length.toLocaleString() + " occupations" + suffix;
+      }
+    } else if (scenarioMode) {
+      text = "Showing " + Number(currentSnapshotSummary.occupationCount || 0).toLocaleString() +
+        " occupations in " + Runtime.toRegionLabel(selectedRegionValue, clustersData);
+    } else {
+      const sectorSet = Object.create(null);
+      for (let j = 0; j < displayOccs.length; j += 1) {
+        sectorSet[displayOccs[j].sector || "Other"] = true;
+      }
+      const sectorCount = Object.keys(sectorSet).length;
+      const displayCount = displayOccs.length;
+      if (viewTier === "focus") {
+        text = "Showing " + displayCount.toLocaleString() +
+          " high-relevance occupations across " + sectorCount + " sectors";
+      } else if (viewTier === "all") {
+        text = "Showing " + displayCount.toLocaleString() +
+          " occupations across " + sectorCount + " sectors";
+      } else {
+        const total = data.total_all_occupations || displayCount;
+        const sectors = data.total_sectors || sectorCount;
+        text = "Showing " + displayCount.toLocaleString() + " of " + total.toLocaleString() +
+          " occupations across " + sectors + " sectors";
+      }
+    }
+
+    indicator.textContent = text;
+
+    // Mirror into the live region only around search activity, so routine
+    // rebuilds do not fight announceScenarioContext() over the same node.
+    if (query || searchWasAnnounced) {
+      const announcer = document.getElementById("summaryAnnouncer");
+      if (announcer) {
+        announcer.textContent = text;
+      }
+      searchWasAnnounced = !!query;
+    }
   }
 
   function saveMetricLabels() {
@@ -2282,13 +2386,7 @@
       }
     }
 
-    const indicator = document.getElementById("filterIndicator");
-    if (indicator) {
-      indicator.textContent =
-        "Showing " + Number(currentSnapshotSummary.occupationCount || 0).toLocaleString() +
-        " occupations in " + Runtime.toRegionLabel(selectedRegionValue, clustersData);
-    }
-
+    updateFilterIndicator();
     updateDownloadAvailability(scenario);
   }
 
@@ -2327,7 +2425,105 @@
     }
   }
 
+  function clearSearch() {
+    const input = document.getElementById("occupationSearch");
+    if (input) {
+      input.value = "";
+    }
+    searchQuery = "";
+    buildTreemap();
+    updateFilterIndicator();
+    if (input) {
+      input.focus();
+    }
+  }
+
+  function appendEmptyAction(empty, label, handler) {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "treemap-empty-action";
+    button.textContent = label;
+    button.addEventListener("click", function () {
+      handler(button);
+    });
+    empty.appendChild(button);
+    return button;
+  }
+
+  // Search misses take precedence over every other empty-state message: the
+  // scenario copy below is written around zero demand in a geography and reads
+  // as nonsense ("No workforce demand in All India") on a failed find.
+  function renderSearchEmpty(container) {
+    const query = searchQuery.trim();
+    const empty = document.createElement("div");
+    empty.className = "treemap-empty";
+
+    const title = document.createElement("h3");
+    title.textContent = 'No occupations match "' + query + '" in this view.';
+    empty.appendChild(title);
+
+    if (scenarioMode) {
+      const note = document.createElement("p");
+      note.textContent =
+        "Scenario mode is also filtering to occupations with modelled demand in " +
+        Runtime.toRegionLabel(selectedRegionValue, clustersData) + ".";
+      empty.appendChild(note);
+      appendEmptyAction(empty, "Clear search", function () {
+        clearSearch();
+      });
+      container.appendChild(empty);
+      return;
+    }
+
+    const target = Runtime.getEscalationTarget({
+      viewTier: viewTier,
+      scenarioMode: scenarioMode,
+      query: query,
+      higherTierOccupations: (filteredData && filteredData.occupations) || [],
+    });
+
+    if (target === "sector") {
+      const sectorCount = ((filteredData && filteredData.occupations) || []).length;
+      const note = document.createElement("p");
+      note.textContent = "The focus view covers high-relevance occupations only.";
+      empty.appendChild(note);
+      appendEmptyAction(empty, "Search all " + sectorCount.toLocaleString() + " H2 roles", function (button) {
+        button.disabled = true;
+        setViewTier("sector");
+      });
+    } else if (target === "all") {
+      const allCount = (data && data.total_all_occupations) || 0;
+      const note = document.createElement("p");
+      note.textContent = "This view covers H2-sector occupations only.";
+      empty.appendChild(note);
+      appendEmptyAction(
+        empty,
+        allCount ? "Search all " + allCount.toLocaleString() + " occupations" : "Search all occupations",
+        function (button) {
+          button.disabled = true;
+          button.textContent = "Loading all sectors...";
+          setViewTier("all").then(function (loaded) {
+            if (!loaded && button.isConnected) {
+              button.textContent = "Could not load all sectors. Try again.";
+              button.disabled = false;
+            }
+          });
+        }
+      );
+    } else {
+      appendEmptyAction(empty, "Clear search", function () {
+        clearSearch();
+      });
+    }
+
+    container.appendChild(empty);
+  }
+
   function renderTreemapEmpty(container) {
+    if (searchQuery.trim()) {
+      renderSearchEmpty(container);
+      return;
+    }
     const scenario = getActiveScenario();
     const regionLabel = Runtime.toRegionLabel(selectedRegionValue, clustersData);
     const clusterLookup = Runtime.buildClusterLookup(clustersData);
@@ -2395,11 +2591,19 @@
     return occupations;
   }
 
+  // Scope vs. find. getDisplayOccupations() resolves the SCOPE (tier + ghosts +
+  // focus) and feeds the headline metrics, which must keep describing that
+  // scope. Search is applied one layer later, so typing never rewrites the
+  // Atlas's national statistics -- only what is drawn.
+  function getRenderedOccupations() {
+    return Runtime.filterBySearch(getDisplayOccupations(), searchQuery);
+  }
+
   function buildTreemap() {
     const container = document.getElementById("treemap");
     container.textContent = "";
 
-    const displayOccupations = getDisplayOccupations();
+    const displayOccupations = getRenderedOccupations();
     const width = container.clientWidth || 900;
     const height = container.clientHeight || 500;
 
@@ -3187,6 +3391,61 @@
     });
   }
 
+  // The single transition path between view tiers. Both #toggleSectors and the
+  // search empty-state escalation button call this, so the toggle's label and
+  // .active state can never drift out of sync with the tier on screen.
+  // Returns false only when loading the full dataset failed.
+  async function setViewTier(tier) {
+    const button = document.getElementById("toggleSectors");
+    let loaded = true;
+
+    if (tier === "sector") {
+      viewTier = "sector";
+      data = filteredData;
+      if (button) {
+        button.textContent = "Show All 49 Sectors";
+        button.classList.remove("active");
+      }
+    } else if (tier === "all") {
+      const originalLabel = button ? button.textContent : "";
+      if (button) {
+        button.disabled = true;
+        button.textContent = "Loading all sectors...";
+      }
+      try {
+        data = await loadAllData();
+        viewTier = "all";
+        if (button) {
+          button.textContent = "Show Focus View";
+          button.classList.add("active");
+        }
+      } catch (error) {
+        console.error("Failed to load all sectors:", error);
+        loaded = false;
+        if (button) {
+          button.textContent = originalLabel;
+        }
+      } finally {
+        if (button) {
+          button.disabled = false;
+        }
+      }
+    } else {
+      viewTier = "focus";
+      data = filteredData;
+      if (button) {
+        button.textContent = "Show All H2 Sectors";
+        button.classList.remove("active");
+      }
+    }
+
+    refreshOccupationIndex();
+    updateSummary();
+    buildTreemap();
+    refreshSelectedOccupation(true);
+    return loaded;
+  }
+
   function setupSectorToggle() {
     const button = document.getElementById("toggleSectors");
     if (!button) {
@@ -3195,35 +3454,54 @@
     button.textContent = "Show All H2 Sectors";
     button.addEventListener("click", async function () {
       if (viewTier === "focus") {
-        viewTier = "sector";
-        data = filteredData;
-        button.textContent = "Show All 49 Sectors";
-        button.classList.remove("active");
+        await setViewTier("sector");
       } else if (viewTier === "sector") {
-        const originalLabel = button.textContent;
-        button.disabled = true;
-        button.textContent = "Loading all sectors...";
-        try {
-          data = await loadAllData();
-          viewTier = "all";
-          button.textContent = "Show Focus View";
-          button.classList.add("active");
-        } catch (error) {
-          console.error("Failed to load all sectors:", error);
-          button.textContent = originalLabel;
-        } finally {
-          button.disabled = false;
-        }
+        await setViewTier("all");
       } else {
-        viewTier = "focus";
-        data = filteredData;
-        button.textContent = "Show All H2 Sectors";
-        button.classList.remove("active");
+        await setViewTier("focus");
       }
-      refreshOccupationIndex();
-      updateSummary();
-      buildTreemap();
-      refreshSelectedOccupation(true);
+    });
+  }
+
+  function setupSearch() {
+    const input = document.getElementById("occupationSearch");
+    if (!input) {
+      return;
+    }
+
+    // rAF coalescing, not a debounce: no artificial delay is introduced, but
+    // buildTreemap() rebuilds the whole SVG (up to 1,802 nodes), so redundant
+    // intermediate frames are dropped rather than rendered.
+    function scheduleRender() {
+      if (searchRenderFrame !== null) {
+        return;
+      }
+      const schedule = typeof global.requestAnimationFrame === "function"
+        ? global.requestAnimationFrame
+        : function (callback) { return global.setTimeout(callback, 0); };
+      searchRenderFrame = schedule(function () {
+        searchRenderFrame = null;
+        buildTreemap();
+        updateFilterIndicator();
+      });
+    }
+
+    // Driven from "input" because Chrome's native clear affordance and its
+    // built-in Escape-clears behaviour both fire input, not keydown.
+    input.addEventListener("input", function () {
+      searchQuery = input.value;
+      scheduleRender();
+    });
+
+    // Firefox renders no clear affordance for type="search", so this is the
+    // only way to clear there.
+    input.addEventListener("keydown", function (event) {
+      if (event.key === "Escape" && input.value) {
+        event.preventDefault();
+        input.value = "";
+        searchQuery = "";
+        scheduleRender();
+      }
     });
   }
 
@@ -3892,6 +4170,7 @@
     showGhosts.addEventListener("change", function () {
       if (scenarioMode) {
         buildTreemap();
+        updateFilterIndicator();
       }
     });
 
@@ -3942,6 +4221,7 @@
       setupSidebarTabs();
       setupSectorToggle();
       setupSectorFilter();
+      setupSearch();
       setupDownloads();
 
       var sidebarEl = document.getElementById("sidebar");

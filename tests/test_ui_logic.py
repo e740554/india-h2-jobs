@@ -319,6 +319,149 @@ def test_state_resets_on_mode_switch_to_atlas():
     assert view_tier == "focus"
 
 
+# --- Occupation search ---
+
+_SEARCH_FIXTURE = [
+    {"id": "welder", "title": "Gas Welder", "nco_code": "7212.0100", "sector": "Chemicals"},
+    {"id": "fitter", "title": "Pipe Fitter", "nco_code": "7126.0300", "sector": "Construction"},
+    {"id": "chemist", "title": "Industrial Chemist", "nco_code": "2113.0100", "sector": "Chemicals"},
+]
+
+
+def _search(query, occupations=None):
+    return _run_js("search-match", json.dumps({
+        "occupations": _SEARCH_FIXTURE if occupations is None else occupations,
+        "query": query,
+    }))
+
+
+def test_search_matches_title_substring_case_insensitively():
+    assert _search("WELD") == ["welder"]
+
+
+def test_search_matches_nco_code():
+    assert _search("7126") == ["fitter"]
+
+
+def test_search_matches_sector():
+    assert _search("chemicals") == ["welder", "chemist"]
+
+
+def test_search_tokens_are_anded_not_ored():
+    """'welder chemical' must narrow to the gas welder, not widen to every chemicals role."""
+    assert _search("welder chemical") == ["welder"]
+
+
+def test_search_empty_query_passes_everything_through():
+    assert _search("") == ["welder", "fitter", "chemist"]
+    assert _search("   ") == ["welder", "fitter", "chemist"]
+
+
+def test_search_no_match_returns_empty():
+    assert _search("astronaut") == []
+
+
+def _template_source():
+    path = os.path.join(PROJECT_ROOT, "web", "main.js.template")
+    with open(path, "r", encoding="utf-8") as f:
+        return f.read()
+
+
+def _function_body(source, name):
+    """Return the source text of a top-level `function name(` declaration."""
+    start = source.index("function " + name + "(")
+    depth = 0
+    seen_brace = False
+    for index in range(start, len(source)):
+        char = source[index]
+        if char == "{":
+            depth += 1
+            seen_brace = True
+        elif char == "}":
+            depth -= 1
+            if seen_brace and depth == 0:
+                return source[start:index + 1]
+    raise AssertionError(f"Unbalanced braces while extracting {name}()")
+
+
+def test_display_occupations_is_independent_of_search():
+    """The load-bearing invariant: search filters the render, never the scope.
+
+    getDisplayOccupations() feeds #metricH2Ready and #metricUpskill, so if search
+    leaked into it, typing a query would silently rewrite the Atlas's headline
+    national statistics. Three assertions, because any one alone is defeatable
+    by a refactor that moves the filtering elsewhere.
+    """
+    source = _template_source()
+
+    scope = _function_body(source, "getDisplayOccupations")
+    assert "searchQuery" not in scope, "getDisplayOccupations() must not read searchQuery"
+    assert "filterBySearch" not in scope, "getDisplayOccupations() must not apply the search filter"
+
+    render = _function_body(source, "buildTreemap")
+    assert "getRenderedOccupations()" in render, "buildTreemap() must render the search-filtered list"
+
+    summary = _function_body(source, "updateSummary")
+    assert "getDisplayOccupations()" in summary, "updateSummary() metrics must count the unfiltered scope"
+    assert "getRenderedOccupations" not in summary, "updateSummary() metrics must not count the search results"
+
+
+def _escalation(**state):
+    return _run_js("escalation-target", json.dumps(state))
+
+
+def test_escalation_offers_sector_tier_when_the_query_matches_there():
+    assert _escalation(
+        viewTier="focus",
+        scenarioMode=False,
+        query="chemist",
+        higherTierOccupations=_SEARCH_FIXTURE,
+    ) == "sector"
+
+
+def test_escalation_is_withheld_when_the_higher_tier_would_also_be_empty():
+    """No dead-end button: a miss in the sector data means no escalation offer."""
+    assert _escalation(
+        viewTier="focus",
+        scenarioMode=False,
+        query="astronaut",
+        higherTierOccupations=_SEARCH_FIXTURE,
+    ) is None
+
+
+def test_escalation_offers_all_occupations_from_the_sector_tier():
+    """Sector -> all cannot be pre-checked without loading, so the offer is generic."""
+    assert _escalation(
+        viewTier="sector",
+        scenarioMode=False,
+        query="astronaut",
+        higherTierOccupations=[],
+    ) == "all"
+
+
+def test_escalation_returns_null_from_the_all_tier():
+    assert _escalation(viewTier="all", scenarioMode=False, query="astronaut") is None
+
+
+def test_escalation_returns_null_in_scenario_mode():
+    """getDisplayOccupations() ignores viewTier in scenario mode, so escalation is meaningless."""
+    assert _escalation(
+        viewTier="focus",
+        scenarioMode=True,
+        query="chemist",
+        higherTierOccupations=_SEARCH_FIXTURE,
+    ) is None
+
+
+def test_escalation_returns_null_without_a_query():
+    assert _escalation(
+        viewTier="focus",
+        scenarioMode=False,
+        query="",
+        higherTierOccupations=_SEARCH_FIXTURE,
+    ) is None
+
+
 # --- DR-3: URL parameter handling for ?lens=* ---
 
 def test_parse_lens_maritime():
