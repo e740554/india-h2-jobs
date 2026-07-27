@@ -78,6 +78,13 @@ node --check docs/main.js
 - `tests/test_citation.py`
 - asserts `CITATION.cff` carries the same `version` as the `VERSION` file and the same `date-released` as that version's `CHANGELOG.md` heading. It fails by design after a version bump until `CITATION.cff` is updated, which makes citation drift impossible
 
+### QR asset tests
+
+- `tests/test_qr.py`
+- split deliberately into two kinds. Generation tests run `scripts/generate_qr.py --output-dir <tmp_path>` and assert both assets are produced; asset tests read `assets/` read-only and check the committed SVG viewBox, the PNG minimum size, and that the committed QR still encodes the Atlas root URL in `URL_FREEZE.md`
+- a test run must never rewrite the checked-in assets, and one test asserts exactly that. Regenerate them deliberately with `python scripts/generate_qr.py` when the frozen URL changes
+- the drift check compares SVG path geometry, not raw bytes: `qrcode` versions differ in attribute spacing, which would otherwise make the comparison flaky
+
 ### Assumptions register tests
 
 - `tests/test_assumptions_register.py`

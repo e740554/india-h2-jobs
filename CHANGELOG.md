@@ -25,6 +25,8 @@ Institutional-credibility release. Makes the atlas citable, printable, and inspe
 - `tests/test_briefing.py` + `tests/briefing_check.js`: briefing model shape, truncation honesty, gap-mode gating, and dataset version in the citation line.
 - `tests/test_assumptions_register.py`: exact header, one row per archetype coefficient, three rows per pathway, no empty `source_type`, and byte-identical output across two builds.
 - `tests/test_state_summary.py`: state aggregation across multiple clusters, deterministic ordering, and the caveat row.
+- `tests/test_qr.py` no longer rewrites the checked-in QR assets. It previously shelled out to `scripts/generate_qr.py` with no output override, so every `python -m pytest` run overwrote `assets/qr-workforce-atlas.svg` and left a spurious whitespace-only diff whenever the local `qrcode` version formatted SVG attributes differently. `scripts/generate_qr.py` now takes `--output-dir`, generation tests write to a pytest `tmp_path`, and a regression guard asserts `assets/` is untouched by a test run.
+- Added a QR drift guard: the committed SVG's path geometry must match a freshly generated one, so changing the Atlas root URL in `URL_FREEZE.md` without regenerating the QR now fails the build instead of silently shipping a stale conference QR code. Geometry is compared rather than raw bytes, which makes it immune to `qrcode` attribute-formatting differences.
 
 ### Documentation
 - README, `TESTING.md`, and `RUNBOOK.md` updated for the new exports, the full generated-artifact list, and the release-time `CITATION.cff` bump step.

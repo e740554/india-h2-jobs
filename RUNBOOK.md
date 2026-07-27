@@ -85,10 +85,16 @@ away from the shipped build.
 
    The last command is the exact assertion CI makes. Run it before pushing.
 
-Note: `python -m pytest` regenerates `assets/qr-workforce-atlas.svg` via
-`tests/test_qr.py`. If the local QR library version differs from the one that
-produced the committed asset, the run leaves a spurious whitespace-only diff.
-Check `git status` and discard that file unless the QR content actually changed.
+Note: the QR assets are not part of a version bump. They are regenerated only
+when the Atlas root URL in `URL_FREEZE.md` changes:
+
+```powershell
+python scripts/generate_qr.py
+```
+
+`tests/test_qr.py` fails if the committed QR stops matching the frozen URL, so
+a forgotten regeneration cannot reach print. The test suite itself generates
+into a temporary directory and never rewrites `assets/`.
 
 ---
 
