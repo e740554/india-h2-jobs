@@ -20,7 +20,7 @@ from datetime import datetime
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 from model.clusters import load_clusters, validate_cluster_affinities
-from model.compute import load_archetypes, sanitize_csv_value
+from model.compute import load_archetypes, load_scenarios, sanitize_csv_value
 from model.pathways import load_pathways, validate_pathways
 from model.supply import allocate_supply, load_supply
 
@@ -399,6 +399,153 @@ def write_h2_csv(occupations: list[dict]):
     print(f"H2-ready CSV: {len(h2_occs)} occupations -> {OUTPUT_CSV_H2}")
 
 
+ASSUMPTIONS_CSV_FIELDS = [
+    "component", "item_id", "item_label", "parameter", "value", "unit",
+    "phase", "source", "source_type", "confidence", "notes",
+]
+
+# Archetype top-level fields the demand math actually divides/multiplies by.
+# h2_input_mt_per_unit and construction_years are not in the original plan's
+# enumerated list but model/compute.py and model/timeline.py both use them;
+# they carry the same "described in the archetype's own text" source semantics
+# as h2_output_mt_per_year and capacity_mw, so they get the same treatment.
+ARCHETYPE_TOP_LEVEL_FIELDS = [
+    ("h2_output_mt_per_year", "MT H2/year"),
+    ("capacity_mw", "MW"),
+    ("h2_input_mt_per_unit", "MT H2/unit/year"),
+    ("construction_years", "years"),
+]
+
+PATHWAY_FIELDS = [
+    ("reskill_months", "months"),
+    ("reskill_cost_inr", "INR"),
+    ("skill_overlap", "fraction"),
+]
+
+# scenario.production/downstream/upstream link fields: also not in the
+# original plan list, but compute_multi_archetype_demand() uses them and
+# their basis is stated in the scenario's own description (e.g. "50%
+# conversion to ammonia"), so source_type is modeled_choice -- the prose is
+# restated in notes, never promoted into source as if it were a citation.
+SCENARIO_LINK_FIELDS = {
+    "production": ("share", "fraction"),
+    "downstream": ("conversion_share", "fraction"),
+    "upstream": ("re_ratio_gw_per_gw_electrolyser", "GW RE/GW electrolyser"),
+}
+
+
+def write_assumptions_register(output_dir: str) -> str:
+    """Emit assumptions-register.csv: every coefficient the model uses, with its source.
+
+    One row per number the demand/timeline/pathway math actually reads from
+    model/archetypes.json, model/clusters.json, model/pathways.json, and
+    model/scenarios.json. Sorted by (component, item_id, parameter, phase)
+    for determinism; phase is included in the sort/uniqueness key because
+    the same (archetype, nco_group) pair carries separate construction/
+    commissioning/operations coefficient rows.
+    """
+    archetypes = load_archetypes()
+    clusters_data = load_clusters()
+    pathways_data = load_pathways()
+    scenarios = load_scenarios()
+
+    archetype_names = {a.get("id", ""): a.get("name", a.get("id", "")) for a in archetypes}
+    rows = []
+
+    for arch in archetypes:
+        arch_id = arch.get("id", "")
+        arch_name = archetype_names.get(arch_id, arch_id)
+        notes = arch.get("description", "")
+        caveats = arch.get("caveats", "")
+        if caveats:
+            notes = f"{notes} Caveats: {caveats}" if notes else caveats
+        for field, unit in ARCHETYPE_TOP_LEVEL_FIELDS:
+            if arch.get(field) is None:
+                continue
+            rows.append({
+                "component": "archetype", "item_id": arch_id, "item_label": arch_name,
+                "parameter": field, "value": arch[field], "unit": unit, "phase": "",
+                "source": "", "source_type": "archetype_specification",
+                "confidence": "", "notes": notes,
+            })
+
+        for coeff in arch.get("coefficients", []):
+            rows.append({
+                "component": "staffing_coefficient",
+                "item_id": f"{arch_id}:{coeff['nco_group']}",
+                "item_label": f"{arch_name}: {coeff.get('nco_group_title', coeff['nco_group'])}",
+                "parameter": "headcount_per_unit", "value": coeff["headcount_per_unit"],
+                "unit": "workers/unit", "phase": coeff.get("phase", ""),
+                "source": coeff.get("source", ""), "source_type": coeff.get("source_type", ""),
+                "confidence": "", "notes": coeff.get("notes", ""),
+            })
+
+    for cluster in clusters_data.get("clusters", []):
+        cluster_id = cluster.get("id", "")
+        cluster_name = cluster.get("name", cluster_id)
+        affinity = cluster.get("archetype_affinity", {})
+        for arch_id, arch_name in archetype_names.items():
+            if arch_id not in affinity:
+                continue
+            rows.append({
+                "component": "cluster_affinity", "item_id": f"{cluster_id}:{arch_id}",
+                "item_label": f"{cluster_name} -> {arch_name}", "parameter": "affinity_share",
+                "value": affinity[arch_id], "unit": "fraction", "phase": "",
+                "source": "internal HyGOAT modeling", "source_type": "modeled_choice",
+                "confidence": "", "notes": "",
+            })
+
+    for pathway in pathways_data.get("pathways", []):
+        item_id = f"{pathway['source_nco']}->{pathway['target_nco']}"
+        item_label = f"{pathway.get('source_title', '')} -> {pathway.get('target_title', '')}"
+        bridging = ", ".join(pathway.get("bridging_skills", []))
+        notes = f"Training: {pathway.get('training_type', '')} via {pathway.get('training_provider', '')}. Bridging skills: {bridging}"
+        for field, unit in PATHWAY_FIELDS:
+            rows.append({
+                "component": "pathway", "item_id": item_id, "item_label": item_label,
+                "parameter": field, "value": pathway[field], "unit": unit, "phase": "",
+                "source": pathway.get("source", ""), "source_type": pathway.get("source_type", ""),
+                "confidence": pathway.get("confidence", ""), "notes": notes,
+            })
+
+    for scenario in scenarios:
+        scenario_id = scenario.get("id", "")
+        scenario_name = scenario.get("name", scenario_id)
+        scenario_desc = scenario.get("description", "")
+        rows.append({
+            "component": "scenario", "item_id": scenario_id, "item_label": scenario_name,
+            "parameter": "target_mt", "value": scenario.get("target_mt"),
+            "unit": "MT H2/year", "phase": "",
+            "source": scenario_desc, "source_type": "policy_target",
+            "confidence": "", "notes": "",
+        })
+        for link_key, (field, unit) in SCENARIO_LINK_FIELDS.items():
+            for link in scenario.get(link_key, []):
+                arch_id = link.get("archetype_id", "")
+                if field not in link:
+                    continue
+                rows.append({
+                    "component": "scenario_composition", "item_id": f"{scenario_id}:{arch_id}",
+                    "item_label": f"{scenario_name} -> {archetype_names.get(arch_id, arch_id)}",
+                    "parameter": field, "value": link[field], "unit": unit, "phase": "",
+                    "source": "internal HyGOAT modeling (scenario composition choice)",
+                    "source_type": "modeled_choice", "confidence": "", "notes": scenario_desc,
+                })
+
+    rows.sort(key=lambda r: (r["component"], r["item_id"], r["parameter"], r["phase"]))
+
+    os.makedirs(output_dir, exist_ok=True)
+    output_path = os.path.join(output_dir, "assumptions-register.csv")
+    with open(output_path, "w", encoding="utf-8", newline="") as f:
+        writer = csv.DictWriter(f, fieldnames=ASSUMPTIONS_CSV_FIELDS, lineterminator="\n")
+        writer.writeheader()
+        for row in rows:
+            writer.writerow({key: sanitize_csv_value(row.get(key, "")) for key in ASSUMPTIONS_CSV_FIELDS})
+
+    print(f"Assumptions register: {len(rows)} rows -> {output_path}")
+    return output_path
+
+
 def inject_base_url(base_url: str):
     """Generate web/dev and docs/public JS assets from template with BASE_URL injected."""
     if not os.path.exists(TEMPLATE_FILE):
@@ -619,6 +766,9 @@ def main():
 
     # Write H2 CSV
     write_h2_csv(occupations)
+
+    # Write assumptions register (every model coefficient + its source)
+    write_assumptions_register(DOCS_DIR)
 
     # Generate JS
     inject_base_url(args.base_url)
