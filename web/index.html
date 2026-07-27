@@ -96,7 +96,7 @@
     <div class="treemap-container" id="treemapContainer">
       <div id="treemap">
         <div id="slowLoad" class="treemap-empty" style="display:flex; align-items:center; justify-content:center; color:var(--text-muted);">
-          Loading 1,802 occupations…
+          Loading occupations…
         </div>
       </div>
       <div id="tooltip" class="tooltip"></div>
@@ -104,7 +104,10 @@
     <aside class="sidebar" id="sidebar">
       <!-- verified sidebar-aligned per plan line 12: sector-select sits in sidebar, not .controls-right -->
       <select id="sectorFilter" class="scenario-select" style="display:none" aria-label="Filter by sector"></select>
-      <div class="sidebar-empty">Click an occupation to see details</div>
+      <div class="sidebar-empty">
+        <p>Select a cell to see that occupation's scores, wage and employment data, and upskilling pathways.</p>
+        <p>Use the arrow keys to move between cells. The legend below the treemap explains the colours.</p>
+      </div>
       <div class="sidebar-content" id="sidebarContent" style="display:none">
         <div class="sidebar-header" id="sidebarHeader">
           <h2 id="sbTitle"></h2>
