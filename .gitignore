@@ -13,6 +13,7 @@ CLAUDE.md
 web/main.js
 web/occupations.json
 web/occupations-all.json
+web/score-details.json
 web/h2-ready-occupations.csv
 /occupations.json
 /occupations-all.json
@@ -20,3 +21,10 @@ web/h2-ready-occupations.csv
 parse/parsed_occupations.json
 
 .gstack/
+# WHS 2026 collateral (LaTeX build artifacts and sources)
+collateral/
+# Mukta font binaries. Open source (SIL OFL 1.1, (c) Ek Type) so they could be
+# committed, but nothing tracked in this repo consumes them: the site loads
+# Mukta from the Google Fonts CDN (web/style.css) and the only local consumers
+# are the .tex files under the ignored collateral/. See RUNBOOK section 9.
+assets/fonts/

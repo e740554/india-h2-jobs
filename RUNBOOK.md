@@ -216,3 +216,23 @@ The DNS CNAME record points `hygoat.in` → GitHub Pages IPs.
    `{ maritime: 'Shipping' }`
 2. Check that `docs/occupations.json` contains occupations in the Shipping sector
 3. Verify the sector filter is in the sidebar (`<select id="sectorFilter">` inside `<aside class="sidebar">`)
+
+---
+
+## 9. Assets Not In The Repository
+
+A clean clone builds and deploys the atlas with no extra downloads. Only the
+LaTeX collateral needs assets that are deliberately not tracked.
+
+| Asset | Where it lives | How to restore |
+|-------|----------------|----------------|
+| `collateral/` (one-pager, white paper `.tex`) | Founder machine | Founder-owned; not required for the site |
+| `assets/fonts/Mukta-*.ttf` | Google Fonts | Download the Mukta family from fonts.google.com and unzip the six weights (Light, Regular, Medium, SemiBold, Bold, ExtraBold) into `assets/fonts/` |
+
+Mukta is licensed SIL OFL 1.1 (copyright Girish Dalvi, Ek Type), so it is free
+to redistribute. It is ignored rather than committed because nothing tracked in
+this repo reads it: the site pulls Mukta from the Google Fonts CDN
+(`web/style.css`), and the only local consumers are the `.tex` files under the
+ignored `collateral/`. If a tracked file ever needs the fonts locally, commit
+them together with the upstream `OFL.txt` -- the OFL requires the licence text
+to travel with the font binaries.
